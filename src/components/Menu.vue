@@ -25,7 +25,7 @@
             }
         },
         mounted() {
-            var the = this;
+            let the = this;
             the.$http.get("/queryMenu").then(function (res) {
                 console.log(res);
                 the.defaultSelect = res.data.defaultSelectList;
