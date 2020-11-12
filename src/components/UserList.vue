@@ -14,21 +14,21 @@
                 width="180">
         </el-table-column>
         <el-table-column
-                prop="date"
+                prop="createTime"
                 label="创建日期"
                 width="180">
         </el-table-column>
         <el-table-column
                 prop="pass"
-                label="姓名"
+                label="密码"
                 width="180">
         </el-table-column>
         <el-table-column
-                prop="address"
+                prop="updateUser"
                 label="修改人">
         </el-table-column>
         <el-table-column
-                prop="date"
+                prop="updateTime"
                 label="修改时间"
                 width="180">
         </el-table-column>
@@ -51,7 +51,10 @@
             let the = this;
             the.$http.post("/findPage",{
                 pageNum: 0,
-                pageSize: 2
+                pageSize: 10,
+                params:{
+                    id: "666666"
+                }
             }).then(function (res) {
                 console.log(res);
                 the.userArr = res.data.content;
