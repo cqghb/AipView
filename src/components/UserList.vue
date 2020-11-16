@@ -1,17 +1,18 @@
 <template>
     <div>
+        <!-- 条件哈讯 -->
         <el-row class="row">
             <el-col :span="24">
-                <el-form :inline="true" :model="user">
+                <el-form :inline="true" :model="params">
                     <el-form-item label="ID">
-                        <el-input v-model="user.id"
+                        <el-input v-model="params.id"
                                   placeholder="请输入内容"
                                   prefix-icon="el-icon-search"
                                   maxlength="6"
                                   clearable></el-input>
                     </el-form-item>
                     <el-form-item label="姓名">
-                        <el-input v-model="user.name"
+                        <el-input v-model="params.name"
                                   placeholder="请输入内容"
                                   prefix-icon="el-icon-search"
                                   clearable></el-input>
@@ -22,13 +23,16 @@
                 </el-form>
             </el-col>
         </el-row>
+        <!-- 操作区 -->
         <el-row class="row">
             <el-col :span="24">
-                <el-button type="primary" icon="el-icon-plus">新增</el-button>
+                <el-button icon="el-icon-more" @click="showUserInfo">详情</el-button>
+                <el-button type="primary" icon="el-icon-plus" @click="addUser">新增</el-button>
                 <el-button type="warning" icon="el-icon-edit">修改</el-button>
                 <el-button type="danger" icon="el-icon-delete">删除</el-button>
             </el-col>
         </el-row>
+        <!-- 列表 -->
         <el-row class="row">
             <el-col :span="24">
                 <el-table
@@ -49,13 +53,18 @@
                             width="180">
                     </el-table-column>
                     <el-table-column
-                            prop="createTime"
-                            label="创建日期"
+                            prop="pass"
+                            label="密码"
                             width="180">
                     </el-table-column>
                     <el-table-column
-                            prop="pass"
-                            label="密码"
+                            prop="createUser"
+                            label="创建人"
+                            width="180">
+                    </el-table-column>
+                    <el-table-column
+                            prop="createTime"
+                            label="创建日期"
                             width="180">
                     </el-table-column>
                     <el-table-column
@@ -79,6 +88,64 @@
                 </el-pagination>
             </el-col>
         </el-row>
+        <!-- 对话框 -->
+        <el-dialog :title="winTitle" :visible.sync="winShow">
+            <el-form ref="user" :model="user" label-width="80px">
+                <el-form-item label="ID">
+                    <el-input v-model="user.id"
+                              clearable
+                              :readonly="readonly"></el-input>
+                </el-form-item>
+                <el-form-item label="姓名">
+                    <el-input v-model="user.name"
+                              clearable
+                              :readonly="readonly"></el-input>
+                </el-form-item>
+                <el-form-item label="密码">
+                    <el-input v-model="user.pass"
+                              clearable
+                              :readonly="readonly"></el-input>
+                </el-form-item>
+                <el-form-item label="创建人">
+                    <el-input v-model="user.createUser"
+                              clearable
+                              :readonly="readonly"></el-input>
+                </el-form-item>
+                <el-form-item label="创建人">
+                    <el-input v-model="user.createUser"
+                              clearable
+                              :readonly="readonly"></el-input>
+                </el-form-item>
+                <el-form-item label="创建时间">
+                    <el-date-picker
+                            v-model="user.createTime"
+                            type="datetime"
+                            :readonly="readonly"
+                            clearable
+                            placeholder="选择日期时间">
+                    </el-date-picker>
+                </el-form-item>
+                <el-form-item label="修改人">
+                    <el-input v-model="user.updateUser"
+                              clearable
+                              :readonly="readonly"></el-input>
+                </el-form-item>
+                <el-form-item label="修改时间">
+                    <el-date-picker
+                            v-model="user.updateTime"
+                            type="datetime"
+                            :readonly="readonly"
+                            clearable
+                            placeholder="选择日期时间">
+                    </el-date-picker>
+                </el-form-item>
+
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button v-if="winTitle!='用户详情'" @click="winShow = false">取 消</el-button>
+                <el-button type="primary" @click="winShow = false">确 定</el-button>
+            </div>
+        </el-dialog>
     </div>
 </template>
 
@@ -87,12 +154,15 @@
         name: "UserList",
         data(){
             return{
-                user:{
+                params:{
                     id:"",
                     name:"",
                 },
                 loading: true,
-
+                winShow: false,
+                winTitle: "用户详情",
+                readonly: true,
+                user:{},
                 userArr:[],
                 pageSize: 1,
                 pageSizeArr:[1,10, 20, 30, 40],
@@ -123,8 +193,8 @@
                     currentPage: the.currentPage,
                     pageSize: the.pageSize,
                     params:{
-                        id: the.user.id,
-                        name: the.user.name
+                        id: the.params.id,
+                        name: the.params.name
                     }
                 }).then(function (res) {
                     console.log(res);
@@ -133,6 +203,17 @@
                     the.currentPage = res.data.currentPage;
                     the.loading = false;
                 })
+            },
+            showUserInfo(){
+                let the = this;
+                the.winTitle = "用户详情";
+                the.winShow = true;
+            },
+            addUser(){
+                let the = this;
+                the.winTitle = "新增用户";
+                the.winShow = true;
+                the.readonly = false;
             }
         },
         mounted() {
