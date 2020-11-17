@@ -41,7 +41,12 @@
                         v-loading="loading"
                         element-loading-text="数据加载中"
                         element-loading-background="rgba(0, 0, 0, 0.8)"
+                        @selection-change="handleSelectionChange"
                         style="width: 100%">
+                    <el-table-column
+                            type="selection"
+                            width="55">
+                    </el-table-column>
                     <el-table-column
                             prop="id"
                             label="ID"
@@ -89,7 +94,9 @@
             </el-col>
         </el-row>
         <!-- 对话框 -->
-        <el-dialog :title="winTitle" :visible.sync="winShow">
+        <el-dialog :title="winTitle"
+                   :close-on-click-modal="false"
+                   :visible.sync="winShow">
             <el-form ref="user" :model="user" label-width="80px">
                 <el-form-item label="ID">
                     <el-input v-model="user.id"
@@ -162,6 +169,7 @@
                 winShow: false,
                 winTitle: "用户详情",
                 readonly: true,
+                selectedArr: [],// 选中的数据
                 user:{},
                 userArr:[],
                 pageSize: 1,
@@ -206,6 +214,16 @@
             },
             showUserInfo(){
                 let the = this;
+                let num = the.selectedArr.length;
+                if(num==0){
+                    alert("请选择一条数据");
+                    return;
+                }
+                if(num>1){
+                    alert("请不要多选");
+                    return;
+                }
+                the.user = the.selectedArr[0];
                 the.winTitle = "用户详情";
                 the.winShow = true;
             },
@@ -214,6 +232,12 @@
                 the.winTitle = "新增用户";
                 the.winShow = true;
                 the.readonly = false;
+            },
+            handleSelectionChange(val){
+                console.log(val)
+                let the = this;
+                the.selectedArr = val;
+
             }
         },
         mounted() {
