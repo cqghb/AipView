@@ -27,9 +27,9 @@
         <el-row class="row">
             <el-col :span="24">
                 <el-button icon="el-icon-more" @click="showUserInfo">详情</el-button>
-                <el-button type="primary" icon="el-icon-plus" @click="addUser">新增</el-button>
+                <el-button type="primary" icon="el-icon-plus" @click="shouwWinAddUser">新增</el-button>
                 <el-button type="warning" icon="el-icon-edit">修改</el-button>
-                <el-button type="danger" icon="el-icon-delete">删除</el-button>
+                <el-button type="danger" icon="el-icon-delete" @click="deleteUser">删除</el-button>
             </el-col>
         </el-row>
         <!-- 列表 -->
@@ -118,11 +118,6 @@
                               clearable
                               :readonly="readonly"></el-input>
                 </el-form-item>
-                <el-form-item label="创建人">
-                    <el-input v-model="user.createUser"
-                              clearable
-                              :readonly="readonly"></el-input>
-                </el-form-item>
                 <el-form-item label="创建时间">
                     <el-date-picker
                             v-model="user.createTime"
@@ -150,7 +145,7 @@
             </el-form>
             <div slot="footer" class="dialog-footer">
                 <el-button v-if="winTitle!='用户详情'" @click="winShow = false">取 消</el-button>
-                <el-button type="primary" @click="winShow = false">确 定</el-button>
+                <el-button type="primary" @click="addUser">确 定</el-button>
             </div>
         </el-dialog>
     </div>
@@ -165,10 +160,13 @@
                     id:"",
                     name:"",
                 },
-                loading: true,
-                winShow: false,
+                loading: true,// 表格加载效果
+                flagDetail: true,// 详情窗口标记
+                flagAdd: true,// 新增窗口标记
+                flagUpdate: true,// 修改窗口标记
+                winShow: false,// 弹出窗是否显示
                 winTitle: "用户详情",
-                readonly: true,
+                readonly: true,// 表单输入框只读
                 selectedArr: [],// 选中的数据
                 user:{},
                 userArr:[],
@@ -178,24 +176,42 @@
                 totalSize: 1
             }
         },methods:{
-            query(){
+            query(){// 条件查询
                 let the = this;
                 the.loading = true;
                 the.queryUserList();
             },
-            handleSizeChange(val){
+            handleSizeChange(val){// 每页显示数据条数变化触发函数
                 let the = this;
                 the.loading = true;
                 this.pageSize = val;
                 the.queryUserList();
             },
-            handleCurrentChange(val){
+            handleCurrentChange(val){// 当前页发生变化触发函数
                 let the = this;
                 the.loading = true;
                 this.currentPage = val;
                 the.queryUserList();
             },
-            queryUserList(){
+            addUser(){
+                let the = this;
+                let createUser = JSON.parse(localStorage.getItem("user")).id;
+                the.$http.post("/insertUser",{
+                    id: the.user.id,
+                    name: the.user.name,
+                    pass: the.user.pass,
+                    createUser: createUser
+                }).then(function (res) {
+                    console.log(res);
+                    the.winShow = false;
+                    // 添加成功刷新表格数据
+                    the.loading = true;
+                    the.queryUserList();
+
+                });
+
+            },
+            queryUserList(){// 获取用户列表
                 let the = this;
                 the.$http.post("/findPage",{
                     currentPage: the.currentPage,
@@ -205,29 +221,20 @@
                         name: the.params.name
                     }
                 }).then(function (res) {
-                    console.log(res);
                     the.userArr = res.data.content;
                     the.totalSize = res.data.totalPages;
                     the.currentPage = res.data.currentPage;
                     the.loading = false;
-                })
+                });
             },
-            showUserInfo(){
+            showUserInfo(){// 显示用户详细信息
                 let the = this;
-                let num = the.selectedArr.length;
-                if(num==0){
-                    alert("请选择一条数据");
-                    return;
-                }
-                if(num>1){
-                    alert("请不要多选");
-                    return;
-                }
+                the.commonCheck();
                 the.user = the.selectedArr[0];
                 the.winTitle = "用户详情";
                 the.winShow = true;
             },
-            addUser(){
+            shouwWinAddUser(){// 打开新增用户的窗口
                 let the = this;
                 the.winTitle = "新增用户";
                 the.winShow = true;
@@ -238,6 +245,42 @@
                 let the = this;
                 the.selectedArr = val;
 
+            },
+            deleteUser(){// 删除用户
+                let the = this;
+                the.commonCheck();
+                let id = the.selectedArr[0].id;
+                if(id){
+                    the.$http.post("/deleteUser",{
+                        id: id
+                    }).then(function (res) {
+                        // 删除成功刷新表格数据
+                        the.loading = true;
+                        the.queryUserList();
+                    });
+                }
+
+            },
+            commonCheck(){// 公共检查
+                let the = this;
+                let num = the.selectedArr.length;
+                if(num==0){
+                    the.showMsg("请选择一条数据");
+                    return;
+                }
+                if(num>1){
+                    the.showMsg("请不要多选");
+                    return;
+                }
+            },
+            showMsg(msg){// 警告消息
+                let the = this;
+                the.$message({
+                    showClose: true,
+                    center: true,
+                    message: msg,
+                    type: 'warning'
+                });
             }
         },
         mounted() {

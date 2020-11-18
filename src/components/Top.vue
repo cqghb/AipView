@@ -33,6 +33,8 @@
             }).then(function (res) {
                 console.log(res);
                 the.userName = res.data.name;
+                // 把查得的用户信息放入本地缓存中
+                localStorage.setItem("user",JSON.stringify(res.data));
 
             })
         }
