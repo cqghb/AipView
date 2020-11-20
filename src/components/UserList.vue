@@ -94,7 +94,7 @@
             </el-col>
         </el-row>
         <!-- 对话框 -->
-        <el-dialog :title="winTitle"
+        <!--<el-dialog :title="winTitle"
                    :close-on-click-modal="false"
                    :visible.sync="winShow">
             <el-form ref="user" :model="user" label-width="80px">
@@ -147,25 +147,35 @@
                 <el-button v-if="winTitle!='用户详情'" @click="winShow = false">取 消</el-button>
                 <el-button type="primary" @click="addUser">确 定</el-button>
             </div>
-        </el-dialog>
+        </el-dialog>-->
+        <simple-detail-win winTitle="用户详情"
+                           :winShow="winShow"
+                           :dataArr="dataArr"
+                           @closeWin="updateWinShow"></simple-detail-win>
     </div>
 </template>
 
 <script>
+    import SimpleDetailWin from "@/components/common/SimpleDetailWin";
+
     export default {
         name: "UserList",
+        components:{
+            "simple-detail-win": SimpleDetailWin
+        },
         data(){
             return{
                 params:{
                     id:"",
                     name:"",
                 },
+                dataArr:[],
                 loading: true,// 表格加载效果
                 flagDetail: true,// 详情窗口标记
                 flagAdd: true,// 新增窗口标记
                 flagUpdate: true,// 修改窗口标记
                 winShow: false,// 弹出窗是否显示
-                winTitle: "用户详情",
+                // winTitle: "用户详情",
                 readonly: true,// 表单输入框只读
                 selectedArr: [],// 选中的数据
                 user:{},
@@ -229,10 +239,29 @@
             },
             showUserInfo(){// 显示用户详细信息
                 let the = this;
-                the.commonCheck();
-                the.user = the.selectedArr[0];
-                the.winTitle = "用户详情";
                 the.winShow = true;
+                // return the.$router.push({ path: "/simpleDetailPage" })
+                the.commonCheck();
+                let params = the.selectedArr[0];
+                let obj = {
+                    id: 1,
+                    fieldName: "ID",
+                    fieldValue: params.id
+                }
+                let obj2 = {
+                    id: 2,
+                    fieldName: "姓名",
+                    fieldValue: params.name
+                }
+                the.dataArr.push(obj);
+                the.dataArr.push(obj2);
+
+            },
+            updateWinShow(val){
+                let the = this;
+                the.winShow = val;
+                the.dataArr = [];
+
             },
             shouwWinAddUser(){// 打开新增用户的窗口
                 let the = this;

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import UserList from '@/components/UserList'
+import SimpleDetailPage from '@/components/common/SimpleDetailPage'
 
 
 Vue.use(Router)
@@ -17,6 +18,11 @@ export default new Router({
       path: '/userList',
       name: 'UserList',
       component: UserList
+    },
+    {
+      path: '/simpleDetailPage',
+      name: 'SimpleDetailPage',
+      component: SimpleDetailPage
     }
   ]
 })
