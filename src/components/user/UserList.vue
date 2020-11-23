@@ -30,6 +30,7 @@
                 <el-button type="primary" icon="el-icon-plus" @click="shouwWinAddUser">新增</el-button>
                 <el-button type="warning" icon="el-icon-edit">修改</el-button>
                 <el-button type="danger" icon="el-icon-delete" @click="deleteUser">删除</el-button>
+
             </el-col>
         </el-row>
         <!-- 列表 -->
@@ -37,6 +38,8 @@
             <el-col :span="24">
                 <el-table
                         :data="userArr"
+                        ref="multipleTable"
+                        @row-click="handelClickRow"
                         border
                         v-loading="loading"
                         element-loading-text="数据加载中"
@@ -93,65 +96,10 @@
                 </el-pagination>
             </el-col>
         </el-row>
-        <!-- 对话框 -->
-        <!--<el-dialog :title="winTitle"
-                   :close-on-click-modal="false"
-                   :visible.sync="winShow">
-            <el-form ref="user" :model="user" label-width="80px">
-                <el-form-item label="ID">
-                    <el-input v-model="user.id"
-                              clearable
-                              :readonly="readonly"></el-input>
-                </el-form-item>
-                <el-form-item label="姓名">
-                    <el-input v-model="user.name"
-                              clearable
-                              :readonly="readonly"></el-input>
-                </el-form-item>
-                <el-form-item label="密码">
-                    <el-input v-model="user.pass"
-                              clearable
-                              :readonly="readonly"></el-input>
-                </el-form-item>
-                <el-form-item label="创建人">
-                    <el-input v-model="user.createUser"
-                              clearable
-                              :readonly="readonly"></el-input>
-                </el-form-item>
-                <el-form-item label="创建时间">
-                    <el-date-picker
-                            v-model="user.createTime"
-                            type="datetime"
-                            :readonly="readonly"
-                            clearable
-                            placeholder="选择日期时间">
-                    </el-date-picker>
-                </el-form-item>
-                <el-form-item label="修改人">
-                    <el-input v-model="user.updateUser"
-                              clearable
-                              :readonly="readonly"></el-input>
-                </el-form-item>
-                <el-form-item label="修改时间">
-                    <el-date-picker
-                            v-model="user.updateTime"
-                            type="datetime"
-                            :readonly="readonly"
-                            clearable
-                            placeholder="选择日期时间">
-                    </el-date-picker>
-                </el-form-item>
-
-            </el-form>
-            <div slot="footer" class="dialog-footer">
-                <el-button v-if="winTitle!='用户详情'" @click="winShow = false">取 消</el-button>
-                <el-button type="primary" @click="addUser">确 定</el-button>
-            </div>
-        </el-dialog>-->
-        <simple-detail-win winTitle="用户详情"
-                           :winShow="winShow"
-                           :dataArr="dataArr"
-                           @closeWin="updateWinShow"></simple-detail-win>
+        <!--
+        // demo 留着不删
+        <el-button type="danger" icon="el-icon-delete" @click="detailDemo">详情页测试</el-button>
+        <router-view></router-view>-->
     </div>
 </template>
 
@@ -169,14 +117,16 @@
                     id:"",
                     name:"",
                 },
-                dataArr:[],
+                dataArr:[
+                    { name: "id", fieldName: "ID", value: "" },
+                    { name: "name", fieldName: "姓名", value: "" },
+                    { name: "pass", fieldName: "密码", value: "" },
+                    { name: "createUser", fieldName: "创建人", value: "" },
+                    { name: "createTime", fieldName: "创建时间", value: "" },
+                    { name: "updateUser", fieldName: "修改人", value: "" },
+                    { name: "updateTime", fieldName: "修改时间", value: "" }
+                ],
                 loading: true,// 表格加载效果
-                flagDetail: true,// 详情窗口标记
-                flagAdd: true,// 新增窗口标记
-                flagUpdate: true,// 修改窗口标记
-                winShow: false,// 弹出窗是否显示
-                // winTitle: "用户详情",
-                readonly: true,// 表单输入框只读
                 selectedArr: [],// 选中的数据
                 user:{},
                 userArr:[],
@@ -202,6 +152,10 @@
                 the.loading = true;
                 this.currentPage = val;
                 the.queryUserList();
+            },
+            handelClickRow(row){
+                let the = this;
+                the.$refs.multipleTable.toggleRowSelection(row);
             },
             addUser(){
                 let the = this;
@@ -237,25 +191,21 @@
                     the.loading = false;
                 });
             },
+            // detailDemo(){// demo 留着不删
+            //     let the = this;
+            //     return the.$router.push({ path: "/simpleDetailPage" });
+            // },
             showUserInfo(){// 显示用户详细信息
                 let the = this;
-                the.winShow = true;
-                // return the.$router.push({ path: "/simpleDetailPage" })
                 the.commonCheck();
                 let params = the.selectedArr[0];
-                let obj = {
-                    id: 1,
-                    fieldName: "ID",
-                    fieldValue: params.id
-                }
-                let obj2 = {
-                    id: 2,
-                    fieldName: "姓名",
-                    fieldValue: params.name
-                }
-                the.dataArr.push(obj);
-                the.dataArr.push(obj2);
-
+                let id = params.id;
+                return the.$router.push({
+                    path: "/userDetail",
+                    query: {
+                        id: id
+                    }
+                });
             },
             updateWinShow(val){
                 let the = this;
@@ -295,11 +245,11 @@
                 let num = the.selectedArr.length;
                 if(num==0){
                     the.showMsg("请选择一条数据");
-                    return;
+                    return false;
                 }
                 if(num>1){
                     the.showMsg("请不要多选");
-                    return;
+                    return false;
                 }
             },
             showMsg(msg){// 警告消息

@@ -1,4 +1,4 @@
-<template>
+<template xmlns="http://www.w3.org/1999/html">
     <div>
         <el-dialog :title="winTitle"
                    :close-on-click-modal="clickModal"
@@ -6,28 +6,14 @@
                    :visible.sync="winShow"
                    :destroy-on-close="true"
                    center>
-            <el-row :gutter="20" v-for="item in dataArr" v-bind:key="item.id">
-                <el-col :span="6">{{ item.fieldName }}:</el-col>
-                <el-col :span="18">{{ item.fieldValue }}</el-col>
+            <el-row  :gutter="20" v-for="item in dataArr" v-bind:key="item.id">
+                <el-col :span="6">
+                    {{ item.fieldName }}:
+                </el-col>
+                <el-col :span="18">
+                    {{ item.fieldValue }}
+                </el-col>
             </el-row>
-<!--            <el-form ref="user" :model="user" label-width="80px">-->
-<!--                <el-form-item label="ID">-->
-<!--                    <el-input v-model="user.id"-->
-<!--                              clearable-->
-<!--                              :readonly="readonly"></el-input>-->
-<!--                </el-form-item>-->
-<!--                -->
-<!--                <el-form-item label="创建时间">-->
-<!--                    <el-date-picker-->
-<!--                            v-model="user.createTime"-->
-<!--                            type="datetime"-->
-<!--                            :readonly="readonly"-->
-<!--                            clearable-->
-<!--                            placeholder="选择日期时间">-->
-<!--                    </el-date-picker>-->
-<!--                </el-form-item>-->
-
-<!--            </el-form>-->
             <div slot="footer" class="dialog-footer">
                 <el-button @click="clickHandle">关闭</el-button>
             </div>
@@ -56,6 +42,14 @@
                 type: Array,
                 require: true,
                 default: []
+            },
+            url:{
+                type: String,
+                require: true
+            },
+            queryParam:{
+                type: Object,
+                require: true
             }
         },
         data(){
@@ -68,10 +62,29 @@
                 let the = this;
                 the.$emit("closeWin", false);
 
+            },
+            queryInfo(){
+                let the = this;
+                the.$http.post("/queryUserById", {
+                    id: the.queryParam.id
+                }).then(function (res) {
+                    console.log(res);
+                    // for(let item in params){
+                    //     for(let i=0;i< the.dataArr.length; i++){
+                    //         let name = the.dataArr[i].name;
+                    //         if(name==item){
+                    //             the.dataArr[i].value = params[item];
+                    //             break;
+                    //         }
+                    //     }
+                    //
+                    // }
+                });
             }
         },
         mounted() {
-
+            let the = this;
+            the.queryInfo();
         }
 
     }
