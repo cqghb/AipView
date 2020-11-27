@@ -91,10 +91,9 @@
                 type: String,
                 require: true
             },
-            queryFieldList:{// 查询字段
-                type: Array,
-                require: false,
-                default: []
+            formSize:{
+                type: String,
+                require: false
             },
             operationButtonList:{// 操作按钮
                 type: Array,
@@ -105,72 +104,22 @@
                 type: Array,
                 require: false,
                 default: []
+            },
+            searchForm:{
+                type:Array,
+                default:[]
+            },
+            searchHandle:{
+                type:Array,
+                default:()=>[]
+            },
+            searchData:{
+                type:Object,
+                default:{}
             }
         },
         data(){
-            let sexs=[{label:'男',value:'M'},{label:'女',value:'F'}]
-            let sexProps={label:'label',value:'value'}
-            let intersts=[{label:'羽毛球',value:'badminton'},{label:'篮球',value:'basketball'}]
-            let interstProps={label:'label',value:'value'}
             return {
-                searchData:{
-                    id: "",
-                    name: ""
-                },
-                formSize: "",
-                searchForm:[
-                    {
-                        type: "Input",
-                        label: "ID",
-                        prop: "id",
-                        width: "180px",
-                        placeholder: "请输入ID...",
-                        size:""// size: medium / small / mini
-                    },
-                    {
-                        type: "Input",
-                        label: "姓名",
-                        prop: "name",
-                        width: "180px",
-                        placeholder: "请输入姓名...",
-                        size:""// size: medium / small / mini
-                    },
-                    // {
-                    //     type: "Select",
-                    //     label: "性别",
-                    //     prop: "sex",
-                    //     width: "180px",
-                    //     options: sexs,
-                    //     props: sexProps,
-                    //     placeholder: "请选择性别...",
-                    //     change:row=>{
-                    //        console.log(row);
-                    //     }
-                    // }
-                    // {type:'Checkbox',label:'爱好',width:'180px',prop:'interst',checkboxs:intersts,props:interstProps}
-                ],
-                searchHandle:[
-                    {
-                        label:"查询",
-                        type:"primary",
-                        size: "",
-                        handle:()=>{
-                            let the = this;
-                            the.loading = true;
-                            the.queryList();
-                        }
-                    },
-                    {
-                        label:"重置",
-                        type:"primary",
-                        size: "",
-                        handle:()=>{
-                            let the = this;
-                            the.searchData.id= "";
-                            the.searchData.name= "";
-                        }
-                    }
-                ],
                 dataArr:[],// 表格数据
                 loading: true,
                 params: {},
