@@ -5,15 +5,30 @@ import App from './App'
 import router from './router'
 // 引入elementUI组件
 import ElementUI from 'element-ui'
-import Axios from 'axios'
+import axios from 'axios'
 // 引入
 import 'element-ui/lib/theme-chalk/index.css'
 
 // axios 配置
-var $http = Axios.create({
+var $http = axios.create({
   baseURL: '/p',
   timeout: '3000'
-})
+});
+// 统一处理后台的响应
+$http.interceptors.response.use(responde => {
+      console.log("后台响应数据: ", responde);
+      let res = responde.data;
+      let resCode = res.code;
+      let resMsg = res.msg;
+      if("999999" == resCode){
+        alert("交易失败: " + resMsg);
+        return false;
+      }
+      return res;
+    },
+    error => {
+      return Promise.reject(error);
+    });
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)

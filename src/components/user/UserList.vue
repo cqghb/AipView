@@ -52,7 +52,7 @@
                         prop: "id",
                         width: "180px",
                         placeholder: "请输入ID...",
-                        size:""// size: medium / small / mini
+                        size:""
                     },
                     {
                         type: "Input",
@@ -60,7 +60,7 @@
                         prop: "name",
                         width: "180px",
                         placeholder: "请输入姓名...",
-                        size:""// size: medium / small / mini
+                        size:""
                     },
                     // {
                     //     type: "Select",
@@ -202,7 +202,7 @@
         },
         mounted() {
             let the = this;
-            // the.queryUserList();
+            
         }
     }
 </script>

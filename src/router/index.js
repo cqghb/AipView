@@ -5,10 +5,6 @@ import UserList from '@/components/user/UserList'
 import SimpleDetailPage from '@/components/common/SimpleDetailPage'
 import UserDetail from '@/components/user/UserDetail'
 
-// const originalPush = Router.prototype.push
-// Router.prototype.push = function push(location) {
-//   return originalPush.call(this, location).catch(err => err)
-// }
 Vue.use(Router)
 
 export default new Router({

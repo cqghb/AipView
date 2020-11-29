@@ -31,11 +31,11 @@
                 id: "666666",
                 pass: "123456"
             }).then(function (res) {
-                console.log(res);
+                console.log("登录用户信息: ",res);
+                // 把查得的用户
                 the.userName = res.data.name;
-                // 把查得的用户信息放入本地缓存中
+                // 信息放入本地缓存中
                 localStorage.setItem("user",JSON.stringify(res.data));
-
             })
         }
     }
