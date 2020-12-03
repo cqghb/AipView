@@ -28,6 +28,7 @@
 <script>
     import SimpleDetailWin from "@/components/common/SimpleDetailWin";
     import BaseTable from "@/components/common/BaseTable";
+    import util from "@/components/utils/util";
 
     export default {
         name: "UserList",
@@ -100,10 +101,50 @@
                 ],
                 formSize: "",
                 operationButtonList:[
-                    { type: "", icon: "el-icon-more", text: "详情"},
-                    { type: "primary", icon: "el-icon-plus", text: "新增"},
-                    { type: "warning", icon: "el-icon-edit", text: "修改"},
-                    { type: "danger", icon: "el-icon-delet", text: "删除"},
+                    {
+                        type: "",
+                        icon: "el-icon-more",
+                        text: "详情",
+                        handle:()=>{
+                            let the = this;
+                            the.commonCheck();
+                            let params = the.$refs.userTable.selectedDataArr[0];
+                            let id = params.id;
+                            return the.$router.push({
+                                path: "/userDetail",
+                                name: "UserDetail",
+                                params: {
+                                    id: id,
+                                    id2: "1",
+                                    id3: "2"
+                                }
+                            });
+                        }
+                    },
+                    {
+                        type: "primary",
+                        icon: "el-icon-plus",
+                        text: "新增",
+                        handle:()=>{
+                            let the = this;
+                        }
+                    },
+                    {
+                        type: "warning",
+                        icon: "el-icon-edit",
+                        text: "修改",
+                        handle:()=>{
+                            let the = this;
+                        }
+                    },
+                    {
+                        type: "danger",
+                        icon: "el-icon-delet",
+                        text: "删除",
+                        handle:()=>{
+                            let the = this;
+                        }
+                    },
                 ],
                 tableColumnList:[
                     { prop: "id", label: "ID", width: 180 },
@@ -136,7 +177,7 @@
             },
             showUserInfo(){// 显示用户详细信息
                 let the = this;
-                // the.commonCheck();
+                the.commonCheck();
                 // let params = the.selectedArr[0];
                 // let id = params.id;
                 // return the.$router.push({
@@ -180,29 +221,20 @@
             },
             commonCheck(){// 公共检查
                 let the = this;
-                let num = the.selectedArr.length;
+                let num = the.$refs.userTable.selectedDataArr.length;
                 if(num==0){
-                    the.showMsg("请选择一条数据");
+                    util.showMsg("请选择一条数据");
                     return false;
                 }
                 if(num>1){
-                    the.showMsg("请不要多选");
+                    util.showMsg("请不要多选");
                     return false;
                 }
-            },
-            showMsg(msg){// 警告消息
-                let the = this;
-                the.$message({
-                    showClose: true,
-                    center: true,
-                    message: msg,
-                    type: 'warning'
-                });
             }
         },
         mounted() {
             let the = this;
-            
+
         }
     }
 </script>

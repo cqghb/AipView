@@ -8,6 +8,7 @@ import ElementUI from 'element-ui'
 import axios from 'axios'
 // 引入
 import 'element-ui/lib/theme-chalk/index.css'
+import util from './components/utils/util'
 
 // axios 配置
 var $http = axios.create({
@@ -21,7 +22,7 @@ $http.interceptors.response.use(responde => {
       let resCode = res.code;
       let resMsg = res.msg;
       if("999999" == resCode){
-        alert("交易失败: " + resMsg);
+        util.showMsg("交易失败: " + resMsg,"error");
         return false;
       }
       return res;
@@ -35,9 +36,10 @@ Vue.use(ElementUI)
 Vue.prototype.$http = $http
 
 /* eslint-disable no-new */
-new Vue({
+let vue = new Vue({
   el: '#app',
   router,
   components: { App },
   template: '<App/>'
-})
+});
+export default vue;

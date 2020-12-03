@@ -33,7 +33,7 @@
                            :key="index"
                            :icon="item.icon"
                            :type="item.type"
-                           @click="">
+                           @click="item.handle()">
                     {{ item.text }}
                 </el-button>
             </el-col>

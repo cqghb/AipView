@@ -31,9 +31,8 @@
         },
         created: function () {
             let the = this;
-            let id = the.$route.query.id;
+            let id = the.$route.params.id;
             the.id = id;
-            console.log("dffdff",the.id)
         },
         mounted() {
             let the = this;
