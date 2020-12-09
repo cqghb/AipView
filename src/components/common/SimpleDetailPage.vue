@@ -25,60 +25,29 @@
             "bread-crumbs": BreadCrumbs
         },
         props:{
-            dataArr:{
+            infoArr:{
                 type: Array,
                 require: true,
                 default: []
-            },
-            id:{
-                type: String
-            },
-            uri:{
-                type: String
             }
         },
         data(){
             return{
-                infoArr:[]
+
             }
         },
         methods:{
             back(){
                 this.$router.go(-1);
             },
-            queryInfo(id){
-                let the = this;
-                the.infoArr = the.dataArr;
-                console.log("ths.id",the.infoArr);
-                the.$http.post(the.uri, {
-                    id: the.id
-                }).then(function (res) {
-                    let info = res.data;
-                    for(let item in info){
-                        for(let i=0;i< the.infoArr.length; i++){
-                            let name = the.infoArr[i].name;
-                            if(name==item){
-                                the.infoArr[i].fieldValue = info[item];
 
-                                break;
-                            }
-                        }
-
-                    }
-
-                    console.log("userInfo",the.infoArr);
-                });
-            },
         },
         created: function () {
             let the = this;
-            console.log("dffdff",the.id)
-            the.queryInfo(the.id);
+
         },
         mounted() {
             let the = this;
-            // console.log("dffdff",the.id)
-            // the.queryInfo(the.id);
         }
     }
 </script>

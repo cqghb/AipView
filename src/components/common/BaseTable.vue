@@ -159,6 +159,7 @@
             queryList(){// 查询数据
                 let the = this;
                 let uri = the.uri;
+                console.log("searchData",the.searchData);
                 the.$http.post(uri,{
                     currentPage: the.page.currentPage,
                     pageSize: the.page.pageSize,
