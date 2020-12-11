@@ -120,9 +120,11 @@
             "bread-crumbs": BreadCrumbs
         },
         data(){
+            return {
 
+            };
         },
-        methods(){
+        methods: {
 
         },
         mounted() {

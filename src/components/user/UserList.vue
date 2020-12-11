@@ -85,7 +85,7 @@
                         handle:()=>{
                             let the = this;
                             the.loading = true;
-                            the.$refs.userTable.queryList();
+                            the.$refs.userTable.queryList();// 调子组件的方法
                         }
                     },
                     {
@@ -107,18 +107,7 @@
                         text: "详情",
                         handle:()=>{
                             let the = this;
-                            the.commonCheck();
-                            let params = the.$refs.userTable.selectedDataArr[0];
-                            let id = params.id;
-                            return the.$router.push({
-                                path: "/userDetail",
-                                name: "UserDetail",
-                                params: {
-                                    id: id,
-                                    id2: "1",
-                                    id3: "2"
-                                }
-                            });
+                            the.showUserInfo();
                         }
                     },
                     {
@@ -135,6 +124,7 @@
                         text: "修改",
                         handle:()=>{
                             let the = this;
+                            the.updateWinShow();
                         }
                     },
                     {
@@ -156,7 +146,8 @@
                     { prop: "updateTime", label: "修改时间", width: 180 }
                 ]
             }
-        },methods:{
+        },
+        methods:{
             addUser(){
                 let the = this;
                 // let createUser = JSON.parse(localStorage.getItem("user")).id;
@@ -178,28 +169,33 @@
             showUserInfo(){// 显示用户详细信息
                 let the = this;
                 the.commonCheck();
-                // let params = the.selectedArr[0];
-                // let id = params.id;
-                // return the.$router.push({
-                //     path: "/userDetail",
-                //     query: {
-                //         id: id
-                //     }
-                // });
+                let params = the.$refs.userTable.selectedDataArr[0];
+                let id = params.id;
+                return the.$router.push({
+                    path: "/userDetail",
+                    name: "UserDetail",
+                    params: {
+                        id: id,
+                        id2: "1",
+                        id3: "2"
+                    }
+                });
             },
-            updateWinShow(val){
+            updateWinShow(){
                 let the = this;
-                // the.winShow = val;
-                // the.dataArr = [];
+                the.commonCheck();
+                let params = the.$refs.userTable.selectedDataArr[0];
+                let id = params.id;
+                return the.$router.push({
+                    path: "/userUpdate",
+                    name: "UserUpdate",
+                    params: {
+                        id: id
+                    }
+                });
 
             },
-            shouwWinAddUser(){// 打开新增用户的窗口
-                let the = this;
-                // the.winTitle = "新增用户";
-                // the.winShow = true;
-                // the.readonly = false;
-            },
-            handleSelectionChange(val){
+            dleSelectionChange(val){
                 let the = this;
                 // the.selectedArr = val;
 

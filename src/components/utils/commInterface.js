@@ -11,24 +11,17 @@ const msgConstant = require("@/components/constant/msgConstant");
 
 /**
  * 通过主键获取用户信息
+ * 通过回调函数把异步请求的数据返回
  * @param uri 请求地址
  * @param params 查询条件
  */
-export function getUserById(uri, params, infoArr) {
+export function getUserById(uri, params, callback) {
     console.log('params',params);
-    console.log('util',util);
+    console.log('uri',uri);
     util.$http.post(uri, params).then(function (res) {
         if(!util.empty(uri)){
             let info = res.data;
-            for(let item in info){
-                for(let i=0;i< infoArr.length; i++){
-                    let name = infoArr[i].name;
-                    if(name==item){
-                        infoArr[i].fieldValue = info[item];
-                        break;
-                    }
-                }
-            }
+            return callback(info);
         } else {
             util.showMsg(msgConstant.msgCommon.URL_NOT_NULL,componentConstant.MessageProperties.ERROR);
         }

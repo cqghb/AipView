@@ -1,6 +1,7 @@
 <template>
     <div>
-        <simple-detail-page :infoArr="infoArr"></simple-detail-page>
+        <!-- 当info数据拿到之后再渲染子组件 -->
+        <simple-detail-page v-if="toRender" :fieldList="fieldList" :info="info"></simple-detail-page>
     </div>
 </template>
 
@@ -16,7 +17,7 @@
         },
         data(){
             return {
-                infoArr:[
+                fieldList:[
                     { name: "id", fieldName: "ID", fieldValue: "" },
                     { name: "name", fieldName: "姓名", fieldValue: "" },
                     { name: "pass", fieldName: "密码", fieldValue: "" },
@@ -24,8 +25,9 @@
                     { name: "createTime", fieldName: "创建时间", fieldValue: "" },
                     { name: "updateUser", fieldName: "修改人", fieldValue: "" },
                     { name: "updateTime", fieldName: "修改时间", fieldValue: "" }
-
-                ]
+                ],
+                info:{},
+                toRender: false
             };
         },
         methods:{
@@ -36,9 +38,14 @@
                     {
                         id: id
                     },
-                    the.infoArr
+                    the.dealRes
                 );
             },
+            dealRes(res){
+                let the = this;
+                the.info = res;
+                the.toRender = true;
+            }
         },
         created: function () {
             let the = this;

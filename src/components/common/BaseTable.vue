@@ -1,5 +1,6 @@
 <template>
     <div>
+        <bread-crumbs></bread-crumbs>
         <!-- 条件查询 start -->
         <el-row class="row">
             <el-col :span="24">
@@ -81,10 +82,12 @@
 
 <script>
     import SearchForm from "@/components/common/SearchForm";
+    import BreadCrumbs from "@/components/common/BreadCrumbs";
     export default {
         name: "BaseTable",
         components:{
-            "search-form": SearchForm
+            "search-form": SearchForm,
+            "bread-crumbs": BreadCrumbs
         },
         props:{
             uri:{// 数据请求地址

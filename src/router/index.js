@@ -3,8 +3,13 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import UserList from '@/components/user/UserList'
 import SimpleDetailPage from '@/components/common/SimpleDetailPage'
+import UserUpdate from '@/components/user/UserUpdate'
 import UserDetail from '@/components/user/UserDetail'
 
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 Vue.use(Router)
 
 export default new Router({
@@ -21,9 +26,12 @@ export default new Router({
       path: "/userList",
       name: "UserList",
       component: UserList,
-      meta: {
-        title: "用户管理"
-      }
+      meta: [
+        {
+          name: "用户列表",
+          path: "/userList"
+        }
+      ]
       // ,// demo 留着不删
       // children:[
       //   {
@@ -48,6 +56,21 @@ export default new Router({
         {
           name: "用户详情",
           path: "/userDetail"
+        }
+      ]
+    },
+    {
+      path: "/userUpdate",
+      name: "UserUpdate",
+      component: UserUpdate,
+      meta: [
+        {
+          name: "用户列表",
+          path: "/userList"
+        },
+        {
+          name: "用户修改",
+          path: "/userUpdate"
         }
       ]
     },

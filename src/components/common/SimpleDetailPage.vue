@@ -2,7 +2,7 @@
     <div>
         <bread-crumbs></bread-crumbs>
         <div class="detail-body">
-            <el-row class="ha-ha" :gutter="24" v-for="(item,index) in infoArr" v-bind:key="index">
+            <el-row class="ha-ha" :gutter="24" v-for="(item,index) in fieldList" v-bind:key="index">
                 <el-col :span="3" :offset="9">{{ item.fieldName }}:</el-col>
                 <el-col :span="12">{{ item.fieldValue }}</el-col>
             </el-row>
@@ -12,8 +12,6 @@
                 </el-col>
             </el-row>
         </div>
-
-
     </div>
 </template>
 
@@ -25,29 +23,55 @@
             "bread-crumbs": BreadCrumbs
         },
         props:{
-            infoArr:{
+            fieldList:{
                 type: Array,
                 require: true,
                 default: []
+            },
+            info:{
+                type:Object,
+                default:{}
             }
         },
         data(){
             return{
-
+                fieldListTem:[],
             }
         },
         methods:{
             back(){
                 this.$router.go(-1);
             },
-
+            dealDate(){
+                let the = this;
+                the.fieldListTem = the.fieldList;
+                for(let item in the.info){
+                    for(let i=0;i< the.fieldListTem.length; i++){
+                        let name = the.fieldListTem[i].name;
+                        if(name==item){
+                            the.fieldListTem[i].fieldValue = the.info[item];
+                            break;
+                        }
+                    }
+                }
+            }
         },
         created: function () {
-            let the = this;
 
         },
         mounted() {
             let the = this;
+            the.dealDate();
+        },
+        watch:{
+            // "fieldListTem": {
+            //     handler(val, oldVal) {
+            //         console.log("val", val)
+            //         console.log("oldVal", oldVal)
+            //
+            //     },
+            //     deep: true
+            // }
         }
     }
 </script>
