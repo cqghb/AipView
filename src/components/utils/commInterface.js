@@ -4,7 +4,7 @@
 // import * as componentConstant from '@/components/constant/componentConstant';
 // import * as msgConstant from '@/components/constant/msgConstant';
 
-// const vue = require("vue");
+const main = require("@/main.js");
 const util = require("@/components/utils/util");
 const componentConstant = require("@/components/constant/componentConstant");
 const msgConstant = require("@/components/constant/msgConstant");
@@ -26,5 +26,44 @@ export function getUserById(uri, params, callback) {
             util.showMsg(msgConstant.msgCommon.URL_NOT_NULL,componentConstant.MessageProperties.ERROR);
         }
 
+    });
+}
+
+/**
+ * 转到用户列表页
+ * @returns {Promise<Route>}
+ */
+export function goToUserList() {
+    return main.default.$router.push({
+        path: "/userList",
+        name: "UserList"
+    });
+}
+
+/**
+ * 跳转到用户详情页面
+ * @param id 用户主键
+ * @returns {Promise<Route>}
+ */
+export function goToUserDetail(id) {
+    return main.default.$router.push({
+        path: "/userDetail",
+        name: "UserDetail",
+        params: {
+            id: id,
+            id2: "1",
+            id3: "2"
+        }
+    });
+}
+
+/**
+ * 跳转到用户新增页面
+ * @returns {Promise<Route>}
+ */
+export function goToUserAdd() {
+    return main.default.$router.push({
+        path: "/userAdd",
+        name: "UserAdd"
     });
 }

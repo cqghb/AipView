@@ -1,7 +1,6 @@
 <template>
-    <div class="userUpdate">
+    <div>
         <update-form labelWidth="80px"
-                     v-if="toRender"
                      :formData="formData"
                      :formFieldList="formFieldList"
                      :size="formSize"
@@ -11,14 +10,12 @@
 
 <script>
     import UpdateForm from "@/components/common/UpdateForm";
-    import * as CommInterface from '@/components/utils/commInterface';
-    import * as SystemConstant from '@/components/constant/systemConstant';
-    import * as ComponentConstant from '@/components/constant/componentConstant';
-    import * as BusinessConstant from '@/components/constant/businessConstant';
     import util from "@/components/utils/util";
-
+    import * as CommInterface from '@/components/utils/commInterface';
+    import * as ComponentConstant from '@/components/constant/componentConstant';
+    import * as SystemConstant from '@/components/constant/systemConstant';
     export default {
-        name: "UserUpdate",
+        name: "UserAdd",
         components:{
             "update-form": UpdateForm
         },
@@ -58,12 +55,12 @@
                 formSize: "",
                 btnHandle:[
                     {
-                        label:"修改",
+                        label:"新增",
                         type:"primary",
                         size: "",
                         handle:()=>{
                             let the = this;
-                            the.updateUser();
+                            the.addUser();
                         }
                     },
                     {
@@ -77,54 +74,33 @@
                             the.formData.pass = "";
                         }
                     }
-                ],
-                toRender: false
-            }
+                ]
+            };
         },
-        methods: {
-            queryInfo(id){// 查询需回显的数据
-                let the = this;
-                CommInterface.getUserById(
-                    SystemConstant.consUserManage.QUERY_USER_BY_ID,
-                    {
-                        id: id
-                    },
-                    the.dealRes
-                );
-            },
-            dealRes(res){// 对回显数据预处理
-                let the = this;
-                the.formData = res;
-                the.toRender = true;
-            },
-            updateUser(){// 修改用户
+        methods:{
+            addUser(){
                 let the = this;
                 let user = JSON.parse(localStorage.getItem("user"));
-                the.formData.updateUser = user.id;
-                console.log("修改的数据", the.formData);
+                the.formData.createUser = user.id;
+                console.log("新增的数据", the.formData);
                 CommInterface.getUserById(
-                    SystemConstant.consUserManage.UPDATE_USER_BY_ID,
+                    SystemConstant.consUserManage.ADD_USER,
                     the.formData,
                     function (res) {
-                        console.log("修改结果 ",res);
+                        console.log("新增结果 ",res);
                         if(res>0){
-                            util.showMsg("修改成功", ComponentConstant.MessageProperties.SUCCESS);
+                            util.showMsg("新增成功", ComponentConstant.MessageProperties.SUCCESS);
                             CommInterface.goToUserList();
                         } else {
-                            util.showMsg("修改失败", ComponentConstant.MessageProperties.ERROR);
+                            util.showMsg("新增失败", ComponentConstant.MessageProperties.ERROR);
                         }
-
                     }
                 );
-            },
-
-        },
-        mounted() {
+            }
         },
         created() {
-            let the = this;
-            let id = the.$route.params.id;
-            the.queryInfo(id);
+        },
+        mounted() {
         }
     }
 </script>

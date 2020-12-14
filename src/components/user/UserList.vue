@@ -29,6 +29,8 @@
     import SimpleDetailWin from "@/components/common/SimpleDetailWin";
     import BaseTable from "@/components/common/BaseTable";
     import util from "@/components/utils/util";
+    import * as CommInterface from '@/components/utils/commInterface';
+    import * as ComponentConstant from '@/components/constant/componentConstant';
 
     export default {
         name: "UserList",
@@ -116,6 +118,7 @@
                         text: "新增",
                         handle:()=>{
                             let the = this;
+                            the.addUser();
                         }
                     },
                     {
@@ -133,6 +136,7 @@
                         text: "删除",
                         handle:()=>{
                             let the = this;
+                            the.deleteUser();
                         }
                     },
                 ],
@@ -150,36 +154,14 @@
         methods:{
             addUser(){
                 let the = this;
-                // let createUser = JSON.parse(localStorage.getItem("user")).id;
-                // the.$http.post("/insertUser",{
-                //     id: the.user.id,
-                //     name: the.user.name,
-                //     pass: the.user.pass,
-                //     createUser: createUser
-                // }).then(function (res) {
-                //     console.log(res);
-                //     the.winShow = false;
-                //     // 添加成功刷新表格数据
-                //     the.loading = true;
-                //     the.queryUserList();
-                //
-                // });
-
+                CommInterface.goToUserAdd();
             },
             showUserInfo(){// 显示用户详细信息
                 let the = this;
                 the.commonCheck();
                 let params = the.$refs.userTable.selectedDataArr[0];
                 let id = params.id;
-                return the.$router.push({
-                    path: "/userDetail",
-                    name: "UserDetail",
-                    params: {
-                        id: id,
-                        id2: "1",
-                        id3: "2"
-                    }
-                });
+                CommInterface.goToUserDetail(id);
             },
             updateWinShow(){
                 let the = this;
@@ -203,16 +185,24 @@
             deleteUser(){// 删除用户
                 let the = this;
                 the.commonCheck();
-                // let id = the.selectedArr[0].id;
-                // if(id){
-                //     the.$http.post("/deleteUser",{
-                //         id: id
-                //     }).then(function (res) {
-                //         // 删除成功刷新表格数据
-                //         the.loading = true;
-                //         the.queryUserList();
-                //     });
-                // }
+                let params = the.$refs.userTable.selectedDataArr[0];
+                let id = params.id;
+                if(id){
+                    the.$http.post("/deleteUser",{
+                        id: id
+                    }).then(function (res) {
+                        console.log("jjjjjj", res);
+                        if(res.data > 0){
+                            util.showMsg("删除成功", ComponentConstant.MessageProperties.SUCCESS);
+                            // 删除成功刷新表格数据
+                            the.$refs.userTable.loading = true;
+                            the.$refs.userTable.queryList();
+                        } else {
+                            util.showMsg("删除失败", ComponentConstant.MessageProperties.ERROR);
+                        }
+
+                    });
+                }
 
             },
             commonCheck(){// 公共检查

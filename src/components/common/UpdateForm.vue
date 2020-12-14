@@ -77,14 +77,15 @@
                                  @change="item.change && item.change(formData[item.prop])"
                                  :step="item.step"></el-input-number>
             </el-form-item>
-            <el-form-item v-for="item in buttonArr"
-                          :key="item.label">
-                <el-button :type="item.type"
+            <div class="updateFormBtn">
+                <el-button v-for="item in buttonArr"
+                           :type="item.type"
                            :size="item.size || size"
+                           :key="item.label"
                            @click="item.handle()">
                     {{item.label}}
                 </el-button>
-            </el-form-item>
+            </div>
         </el-form>
     </div>
 </template>
@@ -135,5 +136,7 @@
 </script>
 
 <style scoped>
-
+.updateFormBtn{
+    text-align: center;
+}
 </style>

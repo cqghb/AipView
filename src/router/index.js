@@ -5,6 +5,7 @@ import UserList from '@/components/user/UserList'
 import SimpleDetailPage from '@/components/common/SimpleDetailPage'
 import UserUpdate from '@/components/user/UserUpdate'
 import UserDetail from '@/components/user/UserDetail'
+import UserAdd from '@/components/user/UserAdd'
 
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {
@@ -71,6 +72,21 @@ export default new Router({
         {
           name: "用户修改",
           path: "/userUpdate"
+        }
+      ]
+    },
+    {
+      path: "/userAdd",
+      name: "UserAdd",
+      component: UserAdd,
+      meta: [
+        {
+          name: "用户列表",
+          path: "/userList"
+        },
+        {
+          name: "新增用户",
+          path: "/userAdd"
         }
       ]
     },
