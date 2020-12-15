@@ -28,7 +28,7 @@
         mounted() {
             var the = this;
             the.$http.post("/login",{
-                id: "666666",
+                name: "组件",
                 pass: "123456"
             }).then(function (res) {
                 console.log("登录用户信息: ",res);

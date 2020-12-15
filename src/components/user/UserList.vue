@@ -136,7 +136,10 @@
                         text: "删除",
                         handle:()=>{
                             let the = this;
-                            the.deleteUser();
+                            util.confirm("", "", "", "", "",function () {// 确认
+                                the.deleteUser();
+                            },null);
+
                         }
                     },
                 ],
@@ -148,7 +151,8 @@
                     { prop: "createTime", label: "创建时间", width: 180 },
                     { prop: "updateUser", label: "修改人", width: 180 },
                     { prop: "updateTime", label: "修改时间", width: 180 }
-                ]
+                ],
+                selectedData: false
             }
         },
         methods:{
@@ -159,9 +163,12 @@
             showUserInfo(){// 显示用户详细信息
                 let the = this;
                 the.commonCheck();
-                let params = the.$refs.userTable.selectedDataArr[0];
-                let id = params.id;
-                CommInterface.goToUserDetail(id);
+                if(the.selectedData){
+                    let params = the.$refs.userTable.selectedDataArr[0];
+                    let id = params.id;
+                    CommInterface.goToUserDetail(id);
+                }
+
             },
             updateWinShow(){
                 let the = this;
@@ -210,11 +217,12 @@
                 let num = the.$refs.userTable.selectedDataArr.length;
                 if(num==0){
                     util.showMsg("请选择一条数据");
-                    return false;
                 }
                 if(num>1){
                     util.showMsg("请不要多选");
-                    return false;
+                }
+                if(1==num){
+                    the.selectedData = true;
                 }
             }
         },

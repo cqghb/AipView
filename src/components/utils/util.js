@@ -23,7 +23,7 @@ $http.interceptors.response.use(responde => {
     });
 
 /**
- * 定义一个弹出框
+ * 消息提示
  * @param msg 显示消息
  * @param type 弹出框类型[success | warning | info | error]
  */
@@ -51,10 +51,61 @@ let empty = function(obj){
         return false;
     }
 };
+/**
+ * 确认框
+ * @param msg 提示消息
+ * @param type 消息类型[success, error, info, warning]
+ * @param title 标题
+ * @param btnTextOk 确认按钮显示文字
+ * @param btnTextNo 取消按钮显示文字
+ * @param callbackOk 确认按钮回调函数
+ * @param callbackNo 取消按钮回调函数
+ */
+let confirm = function(msg, type, title, btnTextOk, btnTextNo, callbackOk, callbackNo) {
+    // 设置默认值
+    if(!type){
+        type = "warning";
+    }
+    msg = !msg ? "是否确定删除?" : msg;
+    type = !type ? "warning" : type;
+    title = !title ? "提示" : title;
+    btnTextOk = !btnTextOk ? "确定" : btnTextOk;
+    btnTextNo = !btnTextNo ? "取消" : btnTextNo;
 
+    eUI.MessageBox.confirm(msg, title,{
+        confirmButtonText: btnTextOk,
+        cancelButtonText: btnTextNo,
+        type: type,
+        center: true,// 内容居中显示
+        callback: action => {
+            if("confirm"==action){
+                callbackOk();
+            } else {
+                if(typeof callbackNo === "function"){
+                    callbackNo();
+                } else {
+                    showMsg("您已取消");
+                }
+            }
+        }
+    });
+    // }); // 用这种方法，当不选择数据删除时，catch也会执行，callback 却不会
+    // .then(()=>{// 确认
+    //     console.log("12");
+    //     callbackOk();
+    // }).catch(()=>{// 取消
+    //     console.log("34");
+    //     if(typeof callbackNo === "function"){
+    //         callbackNo();
+    //     } else {
+    //         showMsg("您已取消");
+    //     }
+    // });
+};
 
 module.exports = {
     showMsg: showMsg,
     empty: empty,
+    confirm: confirm,
     $http: $http
 };
