@@ -21,7 +21,7 @@
         methods:{
             getBreadctumb(){
                 let the = this;
-                let matched = the.$route.matched[0].meta;
+                let matched = the.$route.matched[1].meta;
                 the.breadList = matched;
             }
         },

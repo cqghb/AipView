@@ -2,6 +2,11 @@
 
 > A Vue.js project
 
+## 遗留问题
++ 登录页面太丑
++ 面包屑不见了
+
+
 ## Build Setup
 
 ``` bash
