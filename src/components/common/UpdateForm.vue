@@ -3,8 +3,8 @@
         <bread-crumbs></bread-crumbs>
         <base-form :formData="formData"
                    :formFieldList="formFieldList"
-                   :size="formSize"
-                   :buttonArr="btnHandle"></base-form>
+                   :size="size"
+                   :buttonArr="buttonArr"></base-form>
     </div>
 </template>
 
