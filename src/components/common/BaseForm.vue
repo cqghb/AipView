@@ -72,8 +72,6 @@
                                  :min="item.min"
                                  :max="item.max"
                                  :value="item.value"
-                                 :step-strictly="itme.stepStrictly"
-                                 :controls-position="itme.controlsPosition"
                                  @change="item.change && item.change(formData[item.prop])"
                                  :step="item.step"></el-input-number>
             </el-form-item>
@@ -125,6 +123,8 @@
 
         },
         mounted() {
+			let the = this;
+			
         },
         created() {
         }

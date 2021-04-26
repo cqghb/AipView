@@ -24,7 +24,8 @@
                 formData:{
                     id: "",
                     name: "",
-                    pass: ""
+                    pass: "",
+					age: ""
                 },
                 formFieldList:[
                     {
@@ -50,7 +51,22 @@
                         width: "180px",
                         placeholder: "请输入密码...",
                         size: ""
-                    }
+                    },
+					{
+					    type: "Number",
+					    label: "年龄",
+					    prop: "age",
+					    width: "180px",
+					    //stepStrictly: true,
+						step: 2,
+					    //controlsPosition: "right",
+					    min: 1,
+					    max: 100,
+						change: function(v){
+							console.log("当前值",v)
+						}
+					    
+					}
                 ],
                 formSize: "",
                 btnHandle:[
