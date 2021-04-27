@@ -14,6 +14,9 @@
     import * as CommInterface from '@/components/utils/commInterface';
     import * as ComponentConstant from '@/components/constant/componentConstant';
     import * as SystemConstant from '@/components/constant/systemConstant';
+	let sexs=[{label:'男',value:'M'},{label:'女',value:'F'}];
+	let likeArr=[{label:'羽毛球',value:'badminton'},{label:'篮球',value:'basketball'}];
+	let interstProps={label:'label',value:'value'};
     export default {
         name: "UserAdd",
         components:{
@@ -25,6 +28,9 @@
                     id: "",
                     name: "",
                     pass: "",
+					sex: "",
+					likes:[],					
+					brithDay: "",
 					age: ""
                 },
                 formFieldList:[
@@ -52,6 +58,30 @@
                         placeholder: "请输入密码...",
                         size: ""
                     },
+					{
+					    type: "Radio",
+					    label: "性别",
+					    prop: "sex",
+						radios: sexs,
+					    size: "",
+						change: function(v){
+							console.log("您选择的是:",v);
+						}
+					},
+					{
+					    type: "Checkbox",
+					    label: "爱好",
+					    prop: "likes",
+						checkboxs: likeArr,
+						props: interstProps,
+					    size: ""
+					},
+					{
+					    type: "Date",
+					    label: "出生日期",
+					    prop: "brithDay",
+					    size: ""
+					},
 					{
 					    type: "Number",
 					    label: "年龄",
