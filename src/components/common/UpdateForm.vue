@@ -49,9 +49,11 @@
 
         },
         mounted() {
-			
+			console.log('userbase-mounted')
         },
         created() {
+			console.log('userbase-createdd')
+			console.log('formFieldList',this.formFieldList);
         }
     }
 </script>

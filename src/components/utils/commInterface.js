@@ -8,6 +8,7 @@ const main = require("@/main.js");
 const util = require("@/components/utils/util");
 const componentConstant = require("@/components/constant/componentConstant");
 const msgConstant = require("@/components/constant/msgConstant");
+const systemConstant = require("@/components/constant/systemConstant");
 
 /**
  * 通过主键获取用户信息
@@ -65,5 +66,18 @@ export function goToUserAdd() {
     return main.default.$router.push({
         path: "/userAdd",
         name: "UserAdd"
+    });
+}
+/**
+ * 查询码值数据
+ * @param {Object} params 查询条件
+ * @param {Object} callback 回调函数，处理响应数据
+ */
+export function getCodeType(param, callback) {
+    util.$http.get(systemConstant.consCodeManage.SEARCH_CODEKEY_VALUE, {
+		params: {"codeType": param}
+	}).then(function (res) {
+		let info = res;
+		return callback(info);
     });
 }

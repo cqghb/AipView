@@ -12,11 +12,14 @@
     import UpdateForm from "@/components/common/UpdateForm";
     import util from "@/components/utils/util";
     import * as CommInterface from '@/components/utils/commInterface';
+    import * as businessConstant from '@/components/constant/businessConstant';
     import * as ComponentConstant from '@/components/constant/componentConstant';
     import * as SystemConstant from '@/components/constant/systemConstant';
-	let sexs=[{label:'男',value:'M'},{label:'女',value:'F'}];
-	let likeArr=[{label:'羽毛球',value:'badminton'},{label:'篮球',value:'basketball'}];
-	let interstProps={label:'label',value:'value'};
+	let sexs = [{label:'男',value:'M'},{label:'女',value:'F'}];
+	let likeArr = [{label:'羽毛球',value:'badminton'},{label:'篮球',value:'basketball'}];
+	//let eduArr = [{label:'小学',value:'1'},{label:'中学',value:'2'}];
+	let interstProps = {label:'label',value:'value'};
+	
     export default {
         name: "UserAdd",
         components:{
@@ -31,8 +34,14 @@
 					sex: "",
 					likes:[],					
 					brithDay: "",
-					age: ""
+					age: "",
+					qq: "",
+					weChat: "",
+					email: "",
+					education: ""
+					
                 },
+				eduArr: [],
                 formFieldList:[
                     {
                         type: "Input",
@@ -73,7 +82,7 @@
 					    label: "爱好",
 					    prop: "likes",
 						checkboxs: likeArr,
-						props: interstProps,
+						//props: interstProps,
 					    size: ""
 					},
 					{
@@ -96,6 +105,41 @@
 							console.log("当前值",v)
 						}
 					    
+					},
+					{
+					    type: "Input",
+					    label: "qq号",
+					    prop: "qq",
+					    width: "180px",
+					    placeholder: "请输入qq号...",
+					    size: ""
+					},
+					{
+					    type: "Input",
+					    label: "微信号",
+					    prop: "weChat",
+					    width: "180px",
+					    placeholder: "请输入微信号...",
+					    size: ""
+					},
+					{
+					    type: "Input",
+					    label: "电子邮件",
+					    prop: "email",
+					    width: "180px",
+					    placeholder: "请输入电子邮件...",
+					    size: ""
+					},
+					{
+					    type: "Select",
+					    label: "学历",
+					    prop: "education",
+					    width: "180px",
+						options: this.eduArr,
+					    size: "",
+						change: function(v){
+							console.log("当前值",v);
+						}
 					}
                 ],
                 formSize: "",
@@ -142,11 +186,30 @@
                         }
                     }
                 );
-            }
+            },
+			searchEduOptions(){
+				let the = this;
+				CommInterface.getCodeType(
+				    businessConstant.CODE_TYPE.EDUCATION,
+				    function (res) {
+				        console.log("学历信息查询结果: ",res);
+						let retCode = res.code;
+						let retMsg = res.msg;
+				        if(SystemConstant.common.RET_CODE == retCode){
+				            the.formFieldList[10].options = res.data;
+				        } else {
+				            util.showMsg("学历备选项查询失败", ComponentConstant.MessageProperties.ERROR);
+				        }
+				    }
+				);
+			}
         },
         created() {
+			
         },
         mounted() {
+			let the = this;
+			the.searchEduOptions();
         }
     }
 </script>

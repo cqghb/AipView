@@ -14,6 +14,7 @@
                            v-model="formData[item.prop]"
                            :size="item.size"
                            @change="item.change(formData[item.prop])">
+					<!-- el-option 使用的是双向绑定来动态改变可选项 -->
                     <el-option v-for="op in item.options"
                                :label="op.label"
                                :value="op.value"
