@@ -15,10 +15,9 @@
     import * as businessConstant from '@/components/constant/businessConstant';
     import * as ComponentConstant from '@/components/constant/componentConstant';
     import * as SystemConstant from '@/components/constant/systemConstant';
-	let sexs = [{label:'男',value:'M'},{label:'女',value:'F'}];
-	let likeArr = [{label:'羽毛球',value:'badminton'},{label:'篮球',value:'basketball'}];
-	//let eduArr = [{label:'小学',value:'1'},{label:'中学',value:'2'}];
-	let interstProps = {label:'label',value:'value'};
+	//let sexs = [{label:'男',value:'M'},{label:'女',value:'F'}];
+	//let likeArr = [{label:'羽毛球',value:'badminton'},{label:'篮球',value:'basketball'}];
+	//let interstProps = {label:'label',value:'value'};
 	
     export default {
         name: "UserAdd",
@@ -41,7 +40,6 @@
 					education: ""
 					
                 },
-				eduArr: [],
                 formFieldList:[
                     {
                         type: "Input",
@@ -71,7 +69,7 @@
 					    type: "Radio",
 					    label: "性别",
 					    prop: "sex",
-						radios: sexs,
+						radios: [],
 					    size: "",
 						change: function(v){
 							console.log("您选择的是:",v);
@@ -81,9 +79,11 @@
 					    type: "Checkbox",
 					    label: "爱好",
 					    prop: "likes",
-						checkboxs: likeArr,
-						//props: interstProps,
-					    size: ""
+						checkboxs: [],
+					    size: "",
+						change: function(v){
+							console.log("您选择的爱好是:",v);
+						}
 					},
 					{
 					    type: "Date",
@@ -135,7 +135,7 @@
 					    label: "学历",
 					    prop: "education",
 					    width: "180px",
-						options: this.eduArr,
+						options: [],
 					    size: "",
 						change: function(v){
 							console.log("当前值",v);
@@ -187,18 +187,50 @@
                     }
                 );
             },
-			searchEduOptions(){
+			searchEduOptions(){//学历查询
 				let the = this;
 				CommInterface.getCodeType(
 				    businessConstant.CODE_TYPE.EDUCATION,
 				    function (res) {
-				        console.log("学历信息查询结果: ",res);
+				        console.log("学历备选项查询结果: ",res);
 						let retCode = res.code;
 						let retMsg = res.msg;
 				        if(SystemConstant.common.RET_CODE == retCode){
 				            the.formFieldList[10].options = res.data;
 				        } else {
 				            util.showMsg("学历备选项查询失败", ComponentConstant.MessageProperties.ERROR);
+				        }
+				    }
+				);
+			},
+			searchLikesOptions(){// 查询爱好
+				let the = this;
+				CommInterface.getCodeType(
+				    businessConstant.CODE_TYPE.LIKES,
+				    function (res) {
+				        console.log("爱好备选项查询结果: ",res);
+						let retCode = res.code;
+						let retMsg = res.msg;
+				        if(SystemConstant.common.RET_CODE == retCode){
+				            the.formFieldList[4].checkboxs = res.data;
+				        } else {
+				            util.showMsg("爱好备选项查询失败", ComponentConstant.MessageProperties.ERROR);
+				        }
+				    }
+				);
+			},
+			searchSexOptions(){// 查询性别
+				let the = this;
+				CommInterface.getCodeType(
+				    businessConstant.CODE_TYPE.SEX,
+				    function (res) {
+				        console.log("性别备选项查询结果: ",res);
+						let retCode = res.code;
+						let retMsg = res.msg;
+				        if(SystemConstant.common.RET_CODE == retCode){
+				            the.formFieldList[3].radios = res.data;
+				        } else {
+				            util.showMsg("性别备选项查询失败", ComponentConstant.MessageProperties.ERROR);
 				        }
 				    }
 				);
@@ -210,6 +242,8 @@
         mounted() {
 			let the = this;
 			the.searchEduOptions();
+			the.searchLikesOptions();
+			the.searchSexOptions();
         }
     }
 </script>

@@ -44,7 +44,8 @@
                 </el-radio-group>
                 <!-- 复选框 -->
                 <el-checkbox-group v-if="item.type==='Checkbox'"
-                                   v-model="formData[item.prop]" >
+                                   v-model="formData[item.prop]"
+								   @change="item.change && item.change(formData[item.prop])">
                     <el-checkbox v-for="ch in item.checkboxs"
                                  :label="ch.value"
                                  :size="item.size"
