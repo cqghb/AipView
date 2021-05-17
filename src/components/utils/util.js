@@ -1,5 +1,6 @@
 const eUI = require("element-ui");
 const axios = require("axios");
+const componentConstant = require("@/components/constant/componentConstant");
 
 // axios 配置
 let $http = axios.create({
@@ -102,10 +103,33 @@ let confirm = function(msg, type, title, btnTextOk, btnTextNo, callbackOk, callb
     //     }
     // });
 };
-
+/**
+ * 确定框
+ * @param {Object} message 消息
+ * @param {Object} title 标题
+ * @param {Object} type 类型
+ * @param {Object} callback 回调函数
+ */
+let alert = function(message, title, type, callback){
+	let messageTmp = !message ? "消息" : message;
+	let titleTmp = !title ? "提示" : title;
+	let typeTmp = !type ? componentConstant.MessageProperties.SUCCESS : type;
+	eUI.MessageBox.alert(messageTmp, {
+		title: titleTmp,
+		type: typeTmp,
+		callback: function(action, instance) {// 暂时不知道 action 为什么默认为confirm
+			if(typeof callback === "function"){
+				callback();
+			} 
+		},
+		showClose: false
+		
+	});
+};
 module.exports = {
     showMsg: showMsg,
     empty: empty,
     confirm: confirm,
-    $http: $http
+    $http: $http,
+    alert: alert
 };

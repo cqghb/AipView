@@ -43,14 +43,6 @@
                 formFieldList:[
                     {
                         type: "Input",
-                        label: "ID",
-                        prop: "id",
-                        width: "180px",
-                        placeholder: "请输入ID...",
-                        size: ""
-                    },
-                    {
-                        type: "Input",
                         label: "姓名",
                         prop: "name",
                         width: "180px",
@@ -179,8 +171,10 @@
                     function (res) {
                         console.log("新增结果 ",res);
                         if(res>0){
-                            util.showMsg("新增成功", ComponentConstant.MessageProperties.SUCCESS);
-                            CommInterface.goToUserList();
+                            util.alert("新增成功, 用户号是: " + res, null, null, function(){
+								CommInterface.goToUserList();
+							});
+                            
                         } else {
                             util.showMsg("新增失败", ComponentConstant.MessageProperties.ERROR);
                         }
@@ -196,7 +190,7 @@
 						let retCode = res.code;
 						let retMsg = res.msg;
 				        if(SystemConstant.common.RET_CODE == retCode){
-				            the.formFieldList[10].options = res.data;
+				            the.formFieldList[9].options = res.data;
 				        } else {
 				            util.showMsg("学历备选项查询失败", ComponentConstant.MessageProperties.ERROR);
 				        }
@@ -212,7 +206,7 @@
 						let retCode = res.code;
 						let retMsg = res.msg;
 				        if(SystemConstant.common.RET_CODE == retCode){
-				            the.formFieldList[4].checkboxs = res.data;
+				            the.formFieldList[3].checkboxs = res.data;
 				        } else {
 				            util.showMsg("爱好备选项查询失败", ComponentConstant.MessageProperties.ERROR);
 				        }
@@ -228,7 +222,7 @@
 						let retCode = res.code;
 						let retMsg = res.msg;
 				        if(SystemConstant.common.RET_CODE == retCode){
-				            the.formFieldList[3].radios = res.data;
+				            the.formFieldList[2].radios = res.data;
 				        } else {
 				            util.showMsg("性别备选项查询失败", ComponentConstant.MessageProperties.ERROR);
 				        }
