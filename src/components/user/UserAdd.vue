@@ -25,6 +25,7 @@
             "update-form": UpdateForm
         },
         data(){
+			let self = this;
             return {
                 formData:{
                     id: "",
@@ -88,9 +89,7 @@
 					    label: "年龄",
 					    prop: "age",
 					    width: "180px",
-					    //stepStrictly: true,
 						step: 2,
-					    //controlsPosition: "right",
 					    min: 1,
 					    max: 100,
 						change: function(v){
@@ -132,6 +131,64 @@
 						change: function(v){
 							console.log("当前值",v);
 						}
+					},
+					{
+					    type: "Upload",
+					    label: "头像",
+					    action: "education",
+					    multiple: false,
+						data: {
+							fileType: "1"// 表示上传的是头像
+						},
+						fileType: "1",// 上传文件类型 1标识图片，2标识文件
+						num: 1,// 表示此控件可以上传文件的个数
+						name: "files",
+					    showFileList: false,
+						// 此处是单文件上传不会触发次时间
+						// onPreview: function(file){// 点击文件列表中已上传的文件时的钩子
+						// 	let the = this;
+						// 	console.log("点击文件列表中已上传的文件时的钩子",file);
+						// 	
+						// },
+						// onRemove: function(file, fileList){// 文件列表移除文件时的钩子
+						// 	let the = this;
+						// 	console.log("文件列表移除文件时的钩子");
+						// },
+						onSuccess: function(res, file, fileList){// 文件上传成功时的钩子
+							let the = this;
+							console.log("文件上传成功时的钩子");
+						},
+						onErrors: function(err, file, fileList){// 文件上传失败时的钩子
+							let the = this;
+							console.log("文件上传失败时的钩子");
+						},
+						onChange: function(file, fileList){// 文件状态改变时的钩子，添加文件、上传成功和上传失败时都会被调用
+							let the = this;
+							console.log("文件状态改变时的钩子1", file);
+							console.log("文件状态改变时的钩子2", fileList);
+							console.log("aaa", the);
+							self.onPreview(file);
+						},
+						beforeUpload: function(file){// 上传文件之前的钩子，参数为上传的文件，若返回 false 或者返回 Promise 且被 reject，则停止上传。
+							let the = this;
+							console.log("上传文件之前的钩子");
+						},
+						beforeRemove: function(file, fileLis){// 删除文件之前的钩子，参数为上传的文件和文件列表，若返回 false 或者返回 Promise 且被 reject，则停止删除。
+							let the = this;
+							console.log("删除文件之前的钩子");
+						},
+						listType: "picture-card",
+						autoUpload: false,
+						disabled: false,
+						// limit: 1,
+						onExceed: function(files, fileList){// 文件超出个数限制时的钩子
+							let the = this;
+							console.log("文件超出个数限制时的钩子",files);
+							console.log("文件超出个数限制时的钩子",fileList);
+						},
+						dialogImageUrl: '',
+						dialogVisible: false,
+						tip: "只能上传jpg/png文件，且不超过500kb"
 					}
                 ],
                 formSize: "",
@@ -228,6 +285,12 @@
 				        }
 				    }
 				);
+			},
+			onPreview(file){
+				let the = this;
+				the.formFieldList[10].dialogImageUrl = file.url;
+				the.formFieldList[10].dialogVisible = true;
+				
 			}
         },
         created() {
