@@ -1,10 +1,12 @@
 <template>
     <div>
-        <update-form labelWidth="80px"
-                     :formData="formData"
-                     :formFieldList="formFieldList"
-                     :size="formSize"
-                     :buttonArr="btnHandle"></update-form>
+        <update-form
+					labelWidth="80px"
+					ref="updateForm"
+                    :formData="formData"
+                    :formFieldList="formFieldList"
+                    :size="formSize"
+                    :buttonArr="btnHandle"></update-form>
     </div>
 </template>
 
@@ -41,6 +43,7 @@
 					education: ""
 					
                 },
+				headPortraitUrl: "",// 头像地址
                 formFieldList:[
                     {
                         type: "Input",
@@ -135,7 +138,7 @@
 					{
 					    type: "Upload",
 					    label: "头像",
-					    action: "education",
+					    action: "http://localhost:8080/p/file/uploadFile",
 					    multiple: false,
 						data: {
 							fileType: "1"// 表示上传的是头像
@@ -156,11 +159,14 @@
 						// },
 						onSuccess: function(res, file, fileList){// 文件上传成功时的钩子
 							let the = this;
-							console.log("文件上传成功时的钩子");
+							console.log("文件上传成功时的钩子",res);
+							self.headPortraitUrl = res.data;
+							console.log("headPortraitUrl=",self.headPortraitUrl);
+							self.addUser();
 						},
 						onErrors: function(err, file, fileList){// 文件上传失败时的钩子
 							let the = this;
-							console.log("文件上传失败时的钩子");
+							console.log("文件上传失败时的钩子",err);
 						},
 						onChange: function(file, fileList){// 文件状态改变时的钩子，添加文件、上传成功和上传失败时都会被调用
 							let the = this;
@@ -199,7 +205,9 @@
                         size: "",
                         handle:()=>{
                             let the = this;
-                            the.addUser();
+							console.log('self.$refs=',self.$refs.updateForm.$refs.baseForm.$refs.upload);
+							self.$refs.updateForm.$refs.baseForm.$refs.upload[0].submit();
+                            //the.addUser();
                         }
                     },
                     {
@@ -221,6 +229,7 @@
                 let the = this;
                 let user = JSON.parse(localStorage.getItem("user"));
                 the.formData.createUser = user.id;
+                the.formData.headPortraitUrl = the.headPortraitUrl;
                 console.log("新增的数据", the.formData);
                 CommInterface.getUserById(
                     SystemConstant.consUserManage.ADD_USER,

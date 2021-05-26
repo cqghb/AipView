@@ -1,6 +1,8 @@
 <template>
     <div>
-        <el-form label-position="left" :label-width="labelWidth">
+        <el-form  
+		label-position="left" 
+		:label-width="labelWidth">
             <el-form-item 
 						v-for="(item, index) in formFieldList"
 						:key="index"
@@ -102,15 +104,16 @@
 						:name="item.name"
 						:show-file-list="item.showFileList"
 						:on-preview="item.onPreview && item.onPreview"
-						@on-remove="item.onRemove && item.onRemove"
-						@on-success="item.onSuccess && item.onSuccess"
-						@on-error="item.onErrors && item.onErrors"
-						@on-progress="item.onProgress && item.onProgress"
+						:on-remove="item.onRemove && item.onRemove"
+						:on-success="item.onSuccess && item.onSuccess"
+						:on-error="item.onErrors && item.onErrors"
+						:on-progress="item.onProgress && item.onProgress"
 						:on-change="item.onChange && item.onChange"
-						@before-upload="item.beforeUpload && item.beforeUpload"
-						@before-remove="item.beforeRemove && item.beforeRemove"
+						:before-upload="item.beforeUpload && item.beforeUpload"
+						:before-remove="item.beforeRemove && item.beforeRemove"
 						:list-type="item.listType"
 						:auto-upload="item.autoUpload"
+						:file-list="item.fileList"
 						:disabled="item.disabled"
 						:limit="item.limit"
 						:on-exceed="item.onExceed && item.onExceed"
@@ -123,18 +126,6 @@
 								<i v-else class="el-icon-plus avatar-uploader-icon"></i>
 							</div>
 							<!-- 可以传多张 -->
-							<div v-else>
-								<i class="el-icon-plus"></i>
-							</div>
-							
-						</div>
-						<!-- 非照片的 文件预览-->
-						<div v-else>
-							<!-- 只能传一文件的 -->
-							<div v-if="item.num==1">
-								
-							</div>
-							<!-- 可以传多个文件的 -->
 							<div v-else>
 								<i class="el-icon-plus"></i>
 							</div>
@@ -227,14 +218,14 @@
 	.avatar-uploader-icon {
 		font-size: 28px;
 		color: #8c939d;
-		width: 178px;
-		height: 178px;
-		line-height: 178px;
+		width: 148px;
+		height: 148px;
+		line-height: 148px;
 		text-align: center;
 	}
 	.avatar {
-		width: 178px;
-		height: 178px;
+		width: 148px;
+		height: 148px;
 		display: block;
 		border-radius: 4px;
 	}

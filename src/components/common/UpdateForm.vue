@@ -1,10 +1,12 @@
 <template>
     <div class="UpdateForm">
         <bread-crumbs></bread-crumbs>
-        <base-form :formData="formData"
-                   :formFieldList="formFieldList"
-                   :size="size"
-                   :buttonArr="buttonArr"></base-form>
+        <base-form 
+					:formData="formData"
+					ref="baseForm"
+					:formFieldList="formFieldList"
+					:size="size"
+					:buttonArr="buttonArr"></base-form>
     </div>
 </template>
 
