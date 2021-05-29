@@ -129,8 +129,8 @@
                 selectedDataArr: [],// 选中的数据
                 page:{// 分页参数
                     currentPage: 1,// 当前页
-                    pageSizeArr:[1, 10, 20, 30, 40],// 可选每页显示数据条数
-                    pageSize: 1,// 当前每页显示条数
+                    pageSizeArr:[5, 10, 20, 30, 40],// 可选每页显示数据条数
+                    pageSize: 5,// 当前每页显示条数
                     totalSize: 1// 总页数
                 }
             };
@@ -163,13 +163,14 @@
                 let the = this;
                 let uri = the.uri;
                 console.log("searchData",the.searchData);
+                console.log("page",the.page);
                 the.$http.post(uri,{
                     currentPage: the.page.currentPage,
                     pageSize: the.page.pageSize,
                     params: the.searchData
                 }).then(function (res) {
                     the.dataArr = res.data.content;
-                    the.page.totalSize = res.data.totalPages;
+                    the.page.totalSize = res.data.totalSize;
                     the.page.currentPage = res.data.currentPage;
                     the.loading = false;
                 });
