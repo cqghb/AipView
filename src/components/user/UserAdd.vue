@@ -54,7 +54,7 @@
                         size: ""
                     },
                     {
-                        type: "Input",
+                        type: "Password",
                         label: "密码",
                         prop: "pass",
                         width: "180px",

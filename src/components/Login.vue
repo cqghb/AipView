@@ -26,21 +26,21 @@
         data(){
             return {
                 formData:{
-                    name: "组件",
+                    id: "666666",
                     pass: "123456"
                 },
                 formFieldList:[
                     {
                         type: "Input",
-                        label: "姓名: ",
-                        prop: "name",
+                        label: "用户编号",
+                        prop: "id",
                         width: "180px",
-                        placeholder: "请输入姓名...",
+                        placeholder: "请输入用户编号...",
                         size: ""
                     },
                     {
-                        type: "Input",
-                        label: "密码: ",
+                        type: "Password",
+                        label: "密码",
                         prop: "pass",
                         width: "180px",
                         placeholder: "请输入密码...",
@@ -64,7 +64,7 @@
                         size: "",
                         handle:()=>{
                             let the = this;
-                            the.formData.name = "";
+                            the.formData.id = "";
                             the.formData.pass = "";
                         }
                     }
@@ -74,8 +74,9 @@
         methods:{
             login(){
                 let the = this;
+				console.log("登录信息",the.formData);
                 the.$http.post("/login",{
-                    name: the.formData.name,
+                    id: the.formData.id,
                     pass: the.formData.pass
                 }).then(function (res) {
                     console.log("登录用户信息: ",res);

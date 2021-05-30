@@ -13,6 +13,14 @@
                         v-model="formData[item.prop]"
                         :size="item.size"
                         clearable></el-input>
+				<!-- 密码框 -->
+				<el-input 
+						v-if="item.type==='Password'"
+						v-model="formData[item.prop]"
+						:type="item.type"
+						:size="item.size"
+						show-password
+						clearable></el-input>
                 <!-- 下拉框 -->
                 <el-select 
 						v-if="item.type==='Select'"
