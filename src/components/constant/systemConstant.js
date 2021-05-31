@@ -18,5 +18,14 @@ export const consCodeManage = {
  * 公共常量
  */
 export const common = {
-    RET_CODE: "000000" // 成功码值
+    RET_CODE: "000000", // 成功码值
+    YYYY_MM_DD_HH_mm_ss: "YYYY-MM-DD HH:mm:ss" // 日期格式
+};
+/**
+ * 数据类型
+ */
+export const dataType = {
+    DATE: "Date", // 日期
+    TEXT: "Text", // 文本
+    NUMBER: "Number" // 数字
 };

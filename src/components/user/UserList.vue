@@ -148,9 +148,10 @@
                     { prop: "name", label: "姓名", width: 180 },
                     { prop: "pass", label: "密码", width: 180 },
                     { prop: "createUser", label: "创建人", width: 180 },
-                    { prop: "createTime", label: "创建时间", width: 180 },
+                    // { prop: "createTime", label: "创建时间", width: 180, type:"Date" },
+                    { prop: "createTime", label: "创建时间", width: 180, type:"Date", format:"formatDate" },
                     { prop: "updateUser", label: "修改人", width: 180 },
-                    { prop: "updateTime", label: "修改时间", width: 180 }
+                    { prop: "updateTime", label: "修改时间", width: 180, type:"Date", format:"formatDate" }
                 ],
                 selectedData: false
             }

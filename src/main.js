@@ -11,11 +11,13 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 import * as util from '@/components/utils/util';
 
+import moment from 'moment';
+
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 
 Vue.prototype.$http = util.$http;
-
+Vue.prototype.$moment = moment;
 /* eslint-disable no-new */
 let vue = new Vue({
   el: '#app',

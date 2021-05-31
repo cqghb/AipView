@@ -63,6 +63,9 @@
                                      :prop="item.prop"
                                      :label="item.label"
                                      :width="item.width">
+						<template slot-scope="scope">
+							{{ test1(scope,item)}}
+						</template>
                     </el-table-column>
                 </el-table>
                 <el-pagination
@@ -83,6 +86,9 @@
 <script>
     import SearchForm from "@/components/common/SearchForm";
     import BreadCrumbs from "@/components/common/BreadCrumbs";
+	import tableDataFormatStrateg from "@/components/utils/table-data-format-strategy";
+	
+    import * as SystemConstant from '@/components/constant/systemConstant';
     export default {
         name: "BaseTable",
         components:{
@@ -136,6 +142,21 @@
             };
         },
         methods:{
+			test1(sp,item){
+				console.log("sp:", sp);
+				console.log("tableDataFormatStrateg:", tableDataFormatStrateg);
+				let the = this;
+				return tableDataFormatStrateg.tableDataFormat.prototype.format(sp.row, item);
+				// let columnType = item.type;
+				// let columnProp = sp.column.property;
+				// console.log('columnType=',columnType);
+				// console.log('columnProp=',columnProp);
+				// if("Date"==columnType){
+				// 	return the.$moment(sp.row[columnProp]).format(SystemConstant.common.YYYY_MM_DD_HH_mm_ss);
+				// }else{
+				// 	return sp.row[columnProp];
+				// }
+			},
             clearParams(){// 清空条件输入框
                 let the = this;
             },
