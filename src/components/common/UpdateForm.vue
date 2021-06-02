@@ -5,6 +5,7 @@
 					:formData="formData"
 					ref="baseForm"
 					:formFieldList="formFieldList"
+					:baseFromModel="baseFromModel"
 					:size="size"
 					:buttonArr="buttonArr"></base-form>
     </div>
@@ -36,7 +37,11 @@
             buttonArr:{// 动作按钮
                 type:Array,
                 default:[]
-            }
+            },
+			baseFromModel:{// 表单绑定对象
+				type:Object,
+				default: ()=>{}
+			}
         },
         components:{
             "bread-crumbs": BreadCrumbs,

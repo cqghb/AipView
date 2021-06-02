@@ -5,6 +5,7 @@
 					ref="updateForm"
                     :formData="formData"
                     :formFieldList="formFieldList"
+					:baseFromModel="formData"
                     :size="formSize"
                     :buttonArr="btnHandle"></update-form>
     </div>
@@ -205,7 +206,6 @@
                         size: "",
                         handle:()=>{
                             let the = this;
-							console.log('self.$refs=',self.$refs.updateForm.$refs.baseForm.$refs.upload);
 							self.$refs.updateForm.$refs.baseForm.$refs.upload[0].submit();
                             //the.addUser();
                         }
@@ -216,9 +216,7 @@
                         size: "",
                         handle:()=>{
                             let the = this;
-                            the.formData.id = "";
-                            the.formData.name = "";
-                            the.formData.pass = "";
+                            the.$refs.updateForm.$refs.baseForm.$refs.defaultMyForm.resetFields();
                         }
                     }
                 ]
