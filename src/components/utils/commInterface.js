@@ -68,6 +68,27 @@ export function goToUserAdd() {
         name: "UserAdd"
     });
 }
+
+/**
+ * 跳转到登录页面
+ * @returns {Promise<Route>}
+ */
+export function goToLogin() {
+    return main.default.$router.push({
+        path: "/",
+        name: "Login"
+    });
+}
+/**
+ * 跳转到登录页面
+ * @returns {Promise<Route>}
+ */
+export function goToRegister() {
+    return main.default.$router.push({
+        path: "/register",
+        name: "register"
+    });
+}
 /**
  * 查询码值数据
  * @param {Object} params 查询条件

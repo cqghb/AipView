@@ -238,7 +238,9 @@
                         console.log("新增结果 ",res);
                         if(res>0){
                             util.alert("新增成功, 用户号是: " + res, null, null, function(){
-								CommInterface.goToUserList();
+								// 使用这种方式返回，是为了简荣芳用户注册后返回登录页面
+								the.$router.go(-1);
+								//CommInterface.goToUserList();
 							});
                             
                         } else {

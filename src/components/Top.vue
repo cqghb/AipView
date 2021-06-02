@@ -1,18 +1,23 @@
 <template>
     <el-header style="text-align: right; font-size: 12px">
-        <el-dropdown>
-            <i class="el-icon-setting" style="margin-right: 15px"></i>
+        <el-dropdown @command="handleCommand">
+            <span class="el-dropdown-link">
+				<i class="el-icon-setting el-icon--right"></i>
+				<span>{{ userName }}</span>
+			</span>
             <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>查看</el-dropdown-item>
+                <el-dropdown-item command="">查看</el-dropdown-item>
                 <el-dropdown-item>新增</el-dropdown-item>
                 <el-dropdown-item>删除</el-dropdown-item>
+                <el-dropdown-item command="signOut">退出</el-dropdown-item>
             </el-dropdown-menu>
         </el-dropdown>
-        <span>{{ userName }}</span>
+        
     </el-header>
 </template>
 
 <script>
+	import * as CommInterface from '@/components/utils/commInterface';
     export default {
         name: "Top",
         data(){
@@ -23,7 +28,12 @@
         methods:{
             hello(){
                 alert("1");
-            }
+            },
+			handleCommand(command){
+				if("signOut"==command){// 退出系统
+					CommInterface.goToLogin();
+				}
+			}
         },
         mounted() {
             var the = this;

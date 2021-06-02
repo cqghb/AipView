@@ -1,11 +1,14 @@
 <template>
     <div>
-        <el-form  
-		label-position="left" 
+        <el-form label-position="left"
+		:model="baseFromModel"
+		ref="defaultMyForm"
+		:rules="rules"
 		:label-width="labelWidth">
             <el-form-item 
 						v-for="(item, index) in formFieldList"
 						:key="index"
+						:prop="item.prop"
 						:label="item.label">
                 <!-- 输入框 -->
                 <el-input 
@@ -181,7 +184,16 @@
             buttonArr:{// 动作按钮
                 type:Array,
                 default:[]
-            }
+            },
+			rules:{// 表单验证规则
+				type:Object,
+				require: false,
+				default: ()=>{}
+			},
+			baseFromModel:{// 表单绑定对象
+				type:Object,
+				default: ()=>{}
+			}
         },
         data(){
             return {

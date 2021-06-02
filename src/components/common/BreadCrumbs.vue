@@ -21,8 +21,14 @@
         methods:{
             getBreadctumb(){
                 let the = this;
-                let matched = the.$route.matched[1].meta;
-                the.breadList = matched;
+				console.log(the.$route);
+                let matched = the.$route.matched[1];
+				// 为了兼容用户注册页面
+				if(!matched){
+					matched = the.$route.matched[0];
+				}
+                let meta = matched.meta;
+                the.breadList = meta;
             }
         },
         mounted() {

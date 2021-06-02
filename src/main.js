@@ -25,4 +25,18 @@ let vue = new Vue({
   components: { App },
   template: '<App/>'
 });
+router.beforeEach((to, from, next)=>{
+	// console.log("to",to);
+	// console.log("from",from);
+	// console.log("next",next);
+	// let routerName = from.name;
+	// if("Login"==routerName){
+	// 	// let tempMeta = [
+	// 	// 	{name:"用户注册", path: "/userAdd"}
+	// 	// ];
+	// 	to.meta.slice(0,2);// 把原来的两个全部删除
+	// 	to.meta.unshift({name:"用户注册", path: "/userAdd"});
+	// }
+	next();
+});
 export default vue;
