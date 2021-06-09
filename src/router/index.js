@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Login from '@/components/Login'
+import PasswordReset from '@/components/PasswordReset'
 import Home from '@/components/Home'
 import UserList from '@/components/user/UserList'
 import SimpleDetailPage from '@/components/common/SimpleDetailPage'
@@ -119,6 +120,19 @@ export default new Router({
 				}, {
 					name: "用户注册",
 					path: "/register"
+				}
+
+			]
+		}, {
+			path: "/passwordReset",
+			name: "passwordReset",
+			component: PasswordReset,
+			meta: [{
+					name: "登录",
+					path: "/"
+				}, {
+					name: "密码重置",
+					path: "/passwordReset"
 				}
 
 			]

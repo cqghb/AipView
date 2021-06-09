@@ -17,7 +17,6 @@
 </template>
 
 <script>
-    // import UpdateForm from "@/components/common/UpdateForm";
     import * as CommInterface from '@/components/utils/commInterface';
     import BaseForm from "@/components/common/BaseForm";
 
@@ -75,8 +74,7 @@
 					    size: "",
 					    handle:()=>{
 					        let the = this;
-					        the.formData.id = "";
-					        the.formData.pass = "";
+					        CommInterface.goToPassReset();
 					    }
 					},{
 					    label:"注册",

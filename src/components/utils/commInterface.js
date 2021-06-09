@@ -17,8 +17,6 @@ const systemConstant = require("@/components/constant/systemConstant");
  * @param params 查询条件
  */
 export function getUserById(uri, params, callback) {
-    console.log('params',params);
-    console.log('uri',uri);
     util.$http.post(uri, params).then(function (res) {
         if(!util.empty(uri)){
             let info = res.data;
@@ -90,6 +88,16 @@ export function goToRegister() {
     });
 }
 /**
+ * 跳转到重置密码页面
+ * @returns {Promise<Route>}
+ */
+export function goToPassReset() {
+    return main.default.$router.push({
+        path: "/passwordReset",
+        name: "passwordReset"
+    });
+}
+/**
  * 查询码值数据
  * @param {Object} params 查询条件
  * @param {Object} callback 回调函数，处理响应数据
@@ -99,6 +107,18 @@ export function getCodeType(param, callback) {
 		params: {"codeType": param}
 	}).then(function (res) {
 		let info = res;
+		return callback(info);
+    });
+}
+/**
+ * 修改密码
+ * @param {Object} params 密码信息
+ * @param {Object} callback 回调函数
+ */
+export function resetPass(params, callback) {
+    util.$http.post(systemConstant.consUserManage.RESET_PASS, params)
+	.then(function (res) {
+		let info = res.data;
 		return callback(info);
     });
 }

@@ -15,6 +15,7 @@
 						v-if="item.type==='Input'"
                         v-model="formData[item.prop]"
                         :size="item.size"
+						:placeholder="item.placeholder"
                         clearable></el-input>
 				<!-- 密码框 -->
 				<el-input 
@@ -22,6 +23,7 @@
 						v-model="formData[item.prop]"
 						:type="item.type"
 						:size="item.size"
+						:placeholder="item.placeholder"
 						show-password
 						clearable></el-input>
                 <!-- 下拉框 -->
@@ -29,6 +31,7 @@
 						v-if="item.type==='Select'"
 						v-model="formData[item.prop]"
 						:size="item.size"
+						:placeholder="item.placeholder"
 						@change="item.change(formData[item.prop])">
 					<!-- el-option 使用的是双向绑定来动态改变可选项 -->
                     <el-option 
@@ -80,11 +83,13 @@
                 <el-date-picker 
 							v-if="item.type==='Date'"
 							v-model="formData[item.prop]"
+							:placeholder="item.placeholder"
 							:size="item.size"></el-date-picker>
                 <!-- 时间 -->
                 <el-time-select 
 							v-if="item.type==='Time'"
 							v-model="formData[item.prop]"
+							:placeholder="item.placeholder"
 							:size="item.size"></el-time-select><!-- size medium / small / mini -->
                 <!-- 日期时间 -->
                 <el-date-picker 
@@ -92,6 +97,7 @@
 							type='datetime'
 							v-model="formData[item.prop]"
 							:size="item.size"
+							:placeholder="item.placeholder"
 							:change="item.change && item.change(formData[item.prop])"
 							:disabled="item.disable"></el-date-picker>
                 <!-- 数字输入框 -->
@@ -101,6 +107,7 @@
 							:label="item.label"
 							:min="item.min"
 							:max="item.max"
+							:placeholder="item.placeholder"
 							:value="item.value"
 							@change="item.change && item.change(formData[item.prop])"
 							:step="item.step"></el-input-number>
