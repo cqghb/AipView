@@ -50,11 +50,13 @@
 				}
 			};
 			return {
+				count: 20,// 20秒钟倒计时
 				formData: {
 					id: "",
 					phoneEmail: "",
 					pass: "",
-					pass2: ""
+					pass2: "",
+					verificationCode: ""
 				},
 				formFieldList: [{
 						type: "Input",
@@ -86,6 +88,40 @@
 						width: "180px",
 						placeholder: "请再次输入新密码...",
 						size: ""
+					},
+					{
+						type: "Input",
+						label: "验证码",
+						prop: "verificationCode",
+						width: "180px",
+						placeholder: "请输入验证码...",
+						size: "",
+						btnArr:[// 输入框后面的按钮
+							{
+								label: "发送验证码",
+								id: "sendVerCodeBtn",
+								type: "primary",
+								ref: "verCodeBtn",
+								size: "50px",
+								disable: false,
+								handle: (me) => {
+									let the = this;
+									//the.resetPass();
+									console.log("1111",the.$refs.passReset.$refs.verCodeBtn);
+									the.formFieldList[4].btnArr[0].disable = true;
+									var countDown = setInterval(() => {
+									        if (the.count < 1) {
+												the.formFieldList[4].btnArr[0].label = "发送验证码";
+												clearInterval(countDown);
+												the.formFieldList[4].btnArr[0].disable = false;
+									        } else {
+												the.formFieldList[4].btnArr[0].label = the.count-- + 's后重发'
+									        }
+									      }, 1000);
+									    
+								}
+							}
+						]
 					}
 				],
 				rules: {
@@ -124,7 +160,12 @@
 							validator: validatePass2,
 							trigger: 'blur'
 						}
-					]
+					],
+					verificationCode: [{
+						required: true,
+						message: '请输入验证码',
+						trigger: 'blur'
+					}]
 				},
 				formSize: "",
 				btnHandle: [{
@@ -171,4 +212,5 @@
 </script>
 
 <style>
+	
 </style>

@@ -17,6 +17,12 @@
                         :size="item.size"
 						:placeholder="item.placeholder"
                         clearable></el-input>
+						<el-button v-for="(btn, index) in item.btnArr" 
+							:size="btn.size || size"
+							:key="btn.id"
+							:disabled="btn.disable"
+							:ref="btn.ref"
+							@click="btn.handle()">{{btn.label}}</el-button>
 				<!-- 密码框 -->
 				<el-input 
 						v-if="item.type==='Password'"
