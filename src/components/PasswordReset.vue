@@ -20,6 +20,7 @@
 	import BaseForm from "@/components/common/BaseForm";
 	import util from "@/components/utils/util";
 	import * as ComponentConstant from '@/components/constant/componentConstant';
+	import * as SystemConstant from '@/components/constant/systemConstant';
 	
 	export default {
 		name: "PasswordReset",
@@ -53,7 +54,7 @@
 				count: 20,// 20秒钟倒计时
 				formData: {
 					id: "",
-					phoneEmail: "",
+					phoneEmail: "467814383@qq.com",
 					pass: "",
 					pass2: "",
 					verificationCode: ""
@@ -106,19 +107,7 @@
 								disable: false,
 								handle: (me) => {
 									let the = this;
-									//the.resetPass();
-									console.log("1111",the.$refs.passReset.$refs.verCodeBtn);
-									the.formFieldList[4].btnArr[0].disable = true;
-									var countDown = setInterval(() => {
-									        if (the.count < 1) {
-												the.formFieldList[4].btnArr[0].label = "发送验证码";
-												clearInterval(countDown);
-												the.formFieldList[4].btnArr[0].disable = false;
-									        } else {
-												the.formFieldList[4].btnArr[0].label = the.count-- + 's后重发'
-									        }
-									      }, 1000);
-									    
+									the.sendVerificationCode();
 								}
 							}
 						]
@@ -202,6 +191,23 @@
 							}
 						);
 					}
+				});
+			},
+			sendVerificationCode(){// 发送验证码
+				let the = this;
+				console.log("1111",the.$refs.passReset.$refs.verCodeBtn);
+				the.formFieldList[4].btnArr[0].disable = true;
+				var countDown = setInterval(() => {
+				        if (the.count < 1) {
+							the.formFieldList[4].btnArr[0].label = "发送验证码";
+							clearInterval(countDown);
+							the.formFieldList[4].btnArr[0].disable = false;
+				        } else {
+							the.formFieldList[4].btnArr[0].label = the.count-- + 's后重发'
+				        }
+				      }, 1000);
+				CommInterface.baseSendGet(SystemConstant.consVerCode.SEND_VERIFICATION_CODE,{phoneEmail: the.formData.phoneEmail},function(info){
+					the.formData.verificationCode = info;
 				});
 			}
 		},

@@ -15,6 +15,14 @@ export const consUserManage = {
 export const consCodeManage = {
     SEARCH_CODEKEY_VALUE: "/searchCodeKeyValue" // 码值查询
 };
+
+/**
+ * 发送验证码
+ */
+export const consVerCode = {
+    SEND_VERIFICATION_CODE: "/sendVerificationCode" // 发送验证码
+};
+
 /**
  * 公共常量
  */
