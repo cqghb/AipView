@@ -14,6 +14,7 @@ module.exports = {
       '/p':{
         target: 'http://127.0.0.1:8081',// 目标地址
         changeOrigin: true,// 是否允许跨域
+		withCredentials: true,
         pathRewrite:{
           '^/p': '/server'// 浏览器地址栏显示
         }

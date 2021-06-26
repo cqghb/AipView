@@ -1,19 +1,29 @@
 const eUI = require("element-ui");
 const axios = require("axios");
 const componentConstant = require("@/components/constant/componentConstant");
-
+axios.defaults.withCredentials = true;// 允许跨域携带cookie
 // axios 配置
 let $http = axios.create({
     baseURL: '/p',
     timeout: '3000'
 });
+// 处理请求前的配置
+$http.interceptors.request.use(
+    (config) => {
+        return config;
+    },
+    (err) => {
+        return Promise.reject(err);
+    }
+);
+
 // 统一处理后台的响应
 $http.interceptors.response.use(responde => {
         console.log("后台响应数据: ", responde);
         let res = responde.data;
         let resCode = res.code;
         let resMsg = res.msg;
-        if("999999" == resCode){
+        if("000000" != resCode){
             showMsg("交易失败: " + resMsg,"error");
             return false;
         }
