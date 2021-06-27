@@ -1,6 +1,7 @@
 const eUI = require("element-ui");
 const axios = require("axios");
 const componentConstant = require("@/components/constant/componentConstant");
+const commInterface = require("@/components/utils/commInterface");
 axios.defaults.withCredentials = true;// 允许跨域携带cookie
 // axios 配置
 let $http = axios.create({
@@ -24,7 +25,23 @@ $http.interceptors.response.use(responde => {
         let resCode = res.code;
         let resMsg = res.msg;
         if("000000" != resCode){
-            showMsg("交易失败: " + resMsg,"error");
+			if("000001" == resCode){
+				// 如果登录信息失效则直接进入登录页面
+				showMsg(resMsg, null);
+				commInterface.goToLogin();
+			} else if("000002" == resCode){
+				// 如果没有注册，则提示是否需要注册
+				confirm(resMsg, componentConstant.MessageProperties.ERROR, null, "去注册", "不了", function(){
+					commInterface.goToRegister();
+				}, function(){
+					// 不注册算了
+					showMsg("很遗憾！", null);
+				});
+				
+			} else {
+				showMsg("交易失败: " + resMsg, componentConstant.MessageProperties.ERROR);
+			}
+            
             return false;
         }
         return res;

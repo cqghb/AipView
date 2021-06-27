@@ -78,7 +78,7 @@ export function goToLogin() {
     });
 }
 /**
- * 跳转到登录页面
+ * 跳转到注册页面
  * @returns {Promise<Route>}
  */
 export function goToRegister() {

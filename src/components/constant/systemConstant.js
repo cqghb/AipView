@@ -13,14 +13,14 @@ export const consUserManage = {
  * 码值管理
  */
 export const consCodeManage = {
-    SEARCH_CODEKEY_VALUE: "/searchCodeKeyValue" // 码值查询
+    SEARCH_CODEKEY_VALUE: "/codeValue/searchCodeKeyValue" // 码值查询
 };
 
 /**
  * 发送验证码
  */
 export const consVerCode = {
-    SEND_VERIFICATION_CODE: "/sendVerificationCode" // 发送验证码
+    SEND_VERIFICATION_CODE: "/mail/sendVerificationCode" // 发送验证码
 };
 
 /**

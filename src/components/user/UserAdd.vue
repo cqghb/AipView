@@ -206,8 +206,13 @@
                         size: "",
                         handle:()=>{
                             let the = this;
-							self.$refs.updateForm.$refs.baseForm.$refs.upload[0].submit();
-                            //the.addUser();
+							console.log(self.$refs.updateForm.$refs.baseForm.$refs.upload[0]);
+							// 头像是可选项
+							if(self.$refs.updateForm.$refs.baseForm.$refs.upload[0].fileList.length==0){
+								the.addUser();
+							}else{
+								self.$refs.updateForm.$refs.baseForm.$refs.upload[0].submit();
+							}
                         }
                     },
                     {
