@@ -102,7 +102,7 @@
                 let user = JSON.parse(localStorage.getItem("user"));
                 the.formData.updateUser = user.id;
                 console.log("修改的数据", the.formData);
-                CommInterface.getUserById(
+                CommInterface.sendPost(
                     SystemConstant.consUserManage.UPDATE_USER_BY_ID,
                     the.formData,
                     function (res) {

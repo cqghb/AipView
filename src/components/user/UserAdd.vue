@@ -240,7 +240,7 @@
                 the.formData.headPortraitUrl = the.headPortraitUrl;
                 console.log("新增的数据", the.formData);
 				the.$refs.updateForm.$refs.baseForm.$refs.defaultMyForm.validate((valid) => {
-					CommInterface.getUserById(
+					CommInterface.sendPost(
 					    SystemConstant.consUserManage.ADD_USER,
 					    the.formData,
 					    function (res) {

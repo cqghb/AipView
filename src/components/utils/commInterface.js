@@ -16,7 +16,7 @@ const systemConstant = require("@/components/constant/systemConstant");
  * @param uri 请求地址
  * @param params 查询条件
  */
-export function getUserById(uri, params, callback) {
+export function sendPost(uri, params, callback) {
     util.$http.post(uri, params).then(function (res) {
         if(!util.empty(uri)){
             let info = res.data;

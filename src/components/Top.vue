@@ -17,7 +17,8 @@
 </template>
 
 <script>
-	import * as CommInterface from '@/components/utils/commInterface';
+	import * as commInterface from '@/components/utils/commInterface';
+	import * as systemConstant from '@/components/constant/systemConstant';
     export default {
         name: "Top",
         data(){
@@ -31,7 +32,14 @@
             },
 			handleCommand(command){
 				if("signOut"==command){// 退出系统
-					CommInterface.goToLogin();
+					commInterface.sendPost(
+						systemConstant.consUserManage.SIGN_OUT,
+						null,
+						function(res){
+							commInterface.goToLogin();
+						}
+					);
+					
 				}
 			}
         },

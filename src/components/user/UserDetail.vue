@@ -33,7 +33,7 @@
         methods:{
             queryInfo(id){
                 let the = this;
-                CommInterface.getUserById(
+                CommInterface.sendPost(
                     SystemConstant.consUserManage.QUERY_USER_BY_ID,
                     {
                         id: id
