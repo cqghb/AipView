@@ -7,6 +7,7 @@
                     :formFieldList="formFieldList"
 					:baseFromModel="formData"
                     :size="formSize"
+					:rules="rules"
                     :buttonArr="btnHandle"></update-form>
     </div>
 </template>
@@ -31,9 +32,7 @@
 			let self = this;
             return {
                 formData:{
-                    id: "",
                     name: "",
-                    pass: "",
 					sex: "",
 					likes:[],					
 					brithDay: "",
@@ -45,6 +44,20 @@
 					
                 },
 				headPortraitUrl: "",// 头像地址
+				rules:{
+					name:[
+						{ required: true, message: '请输入姓名', trigger: 'blur' }
+					],
+					sex:[
+						{ required: true, message: '请选择性别', trigger: 'blur' }
+					],
+					likes:[
+						{ required: true, message: '请选择爱好', trigger: 'blur' }
+					],
+					brithDay:[
+						{ required: true, message: '请选择出生日期', trigger: 'blur' }
+					]
+				},
                 formFieldList:[
                     {
                         type: "Input",
@@ -52,14 +65,6 @@
                         prop: "name",
                         width: "180px",
                         placeholder: "请输入姓名...",
-                        size: ""
-                    },
-                    {
-                        type: "Password",
-                        label: "密码",
-                        prop: "pass",
-                        width: "180px",
-                        placeholder: "请输入密码...",
                         size: ""
                     },
 					{
@@ -234,23 +239,25 @@
                 the.formData.createUser = user.id;
                 the.formData.headPortraitUrl = the.headPortraitUrl;
                 console.log("新增的数据", the.formData);
-                CommInterface.getUserById(
-                    SystemConstant.consUserManage.ADD_USER,
-                    the.formData,
-                    function (res) {
-                        console.log("新增结果 ",res);
-                        if(res>0){
-                            util.alert("新增成功, 用户号是: " + res, null, null, function(){
-								// 使用这种方式返回，是为了简荣芳用户注册后返回登录页面
-								the.$router.go(-1);
-								//CommInterface.goToUserList();
-							});
-                            
-                        } else {
-                            util.showMsg("新增失败", ComponentConstant.MessageProperties.ERROR);
-                        }
-                    }
-                );
+				the.$refs.updateForm.$refs.baseForm.$refs.defaultMyForm.validate((valid) => {
+					CommInterface.getUserById(
+					    SystemConstant.consUserManage.ADD_USER,
+					    the.formData,
+					    function (res) {
+					        console.log("新增结果 ",res);
+					        if(res>0){
+					            util.alert("新增成功, 用户号是: " + res, null, null, function(){
+									// 使用这种方式返回，是为了简荣芳用户注册后返回登录页面
+									the.$router.go(-1);
+									//CommInterface.goToUserList();
+								});
+					            
+					        } else {
+					            util.showMsg("新增失败", ComponentConstant.MessageProperties.ERROR);
+					        }
+					    }
+					);
+				})
             },
 			searchEduOptions(){//学历查询
 				let the = this;
@@ -261,7 +268,7 @@
 						let retCode = res.code;
 						let retMsg = res.msg;
 				        if(SystemConstant.common.RET_CODE == retCode){
-				            the.formFieldList[9].options = res.data;
+				            the.formFieldList[8].options = res.data;
 				        } else {
 				            util.showMsg("学历备选项查询失败", ComponentConstant.MessageProperties.ERROR);
 				        }
@@ -277,7 +284,7 @@
 						let retCode = res.code;
 						let retMsg = res.msg;
 				        if(SystemConstant.common.RET_CODE == retCode){
-				            the.formFieldList[3].checkboxs = res.data;
+				            the.formFieldList[2].checkboxs = res.data;
 				        } else {
 				            util.showMsg("爱好备选项查询失败", ComponentConstant.MessageProperties.ERROR);
 				        }
@@ -293,7 +300,7 @@
 						let retCode = res.code;
 						let retMsg = res.msg;
 				        if(SystemConstant.common.RET_CODE == retCode){
-				            the.formFieldList[2].radios = res.data;
+				            the.formFieldList[1].radios = res.data;
 				        } else {
 				            util.showMsg("性别备选项查询失败", ComponentConstant.MessageProperties.ERROR);
 				        }
@@ -302,8 +309,8 @@
 			},
 			onPreview(file){
 				let the = this;
-				the.formFieldList[10].dialogImageUrl = file.url;
-				the.formFieldList[10].dialogVisible = true;
+				the.formFieldList[9].dialogImageUrl = file.url;
+				the.formFieldList[9].dialogVisible = true;
 				
 			}
         },

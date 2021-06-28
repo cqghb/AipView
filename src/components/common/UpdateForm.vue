@@ -7,6 +7,7 @@
 					:formFieldList="formFieldList"
 					:baseFromModel="baseFromModel"
 					:size="size"
+					:rules="rules"
 					:buttonArr="buttonArr"></base-form>
     </div>
 </template>
@@ -38,6 +39,11 @@
                 type:Array,
                 default:[]
             },
+			rules:{// 表单验证规则
+				type:Object,
+				require: false,
+				default: ()=>{}
+			},
 			baseFromModel:{// 表单绑定对象
 				type:Object,
 				default: ()=>{}
