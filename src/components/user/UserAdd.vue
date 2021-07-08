@@ -58,8 +58,8 @@
 						{ required: true, message: '请选择出生日期', trigger: 'blur' }
 					]
 				},
-                formFieldList:[
-                    {
+                formFieldList:{
+                    name: {
                         type: "Input",
                         label: "姓名",
                         prop: "name",
@@ -67,7 +67,7 @@
                         placeholder: "请输入姓名...",
                         size: ""
                     },
-					{
+					sex: {
 					    type: "Radio",
 					    label: "性别",
 					    prop: "sex",
@@ -77,7 +77,7 @@
 							console.log("您选择的是:",v);
 						}
 					},
-					{
+					likes: {
 					    type: "Checkbox",
 					    label: "爱好",
 					    prop: "likes",
@@ -87,13 +87,13 @@
 							console.log("您选择的爱好是:",v);
 						}
 					},
-					{
+					brithDay: {
 					    type: "Date",
 					    label: "出生日期",
 					    prop: "brithDay",
 					    size: ""
 					},
-					{
+					age:{
 					    type: "Number",
 					    label: "年龄",
 					    prop: "age",
@@ -106,7 +106,7 @@
 						}
 					    
 					},
-					{
+					qq:{
 					    type: "Input",
 					    label: "qq号",
 					    prop: "qq",
@@ -114,7 +114,7 @@
 					    placeholder: "请输入qq号...",
 					    size: ""
 					},
-					{
+					weChat: {
 					    type: "Input",
 					    label: "微信号",
 					    prop: "weChat",
@@ -122,7 +122,7 @@
 					    placeholder: "请输入微信号...",
 					    size: ""
 					},
-					{
+					email: {
 					    type: "Input",
 					    label: "电子邮件",
 					    prop: "email",
@@ -130,7 +130,7 @@
 					    placeholder: "请输入电子邮件...",
 					    size: ""
 					},
-					{
+					education: {
 					    type: "Select",
 					    label: "学历",
 					    prop: "education",
@@ -141,7 +141,7 @@
 							console.log("当前值",v);
 						}
 					},
-					{
+					files: {
 					    type: "Upload",
 					    label: "头像",
 					    action: "http://localhost:8080/p/file/uploadFile",
@@ -202,7 +202,7 @@
 						dialogVisible: false,
 						tip: "只能上传jpg/png文件，且不超过500kb"
 					}
-                ],
+                },
                 formSize: "",
                 btnHandle:[
                     {
@@ -211,9 +211,8 @@
                         size: "",
                         handle:()=>{
                             let the = this;
-							console.log(self.$refs.updateForm.$refs.baseForm.$refs.upload[0]);
 							// 头像是可选项
-							if(self.$refs.updateForm.$refs.baseForm.$refs.upload[0].fileList.length==0){
+							if(self.$refs.updateForm.$refs.baseForm.$refs.upload[0].uploadFiles.length==0){
 								the.addUser();
 							}else{
 								self.$refs.updateForm.$refs.baseForm.$refs.upload[0].submit();
@@ -240,23 +239,25 @@
                 the.formData.headPortraitUrl = the.headPortraitUrl;
                 console.log("新增的数据", the.formData);
 				the.$refs.updateForm.$refs.baseForm.$refs.defaultMyForm.validate((valid) => {
-					CommInterface.sendPost(
-					    SystemConstant.consUserManage.ADD_USER,
-					    the.formData,
-					    function (res) {
-					        console.log("新增结果 ",res);
-					        if(res>0){
-					            util.alert("新增成功, 用户号是: " + res, null, null, function(){
-									// 使用这种方式返回，是为了简荣芳用户注册后返回登录页面
-									the.$router.go(-1);
-									//CommInterface.goToUserList();
-								});
-					            
-					        } else {
-					            util.showMsg("新增失败", ComponentConstant.MessageProperties.ERROR);
-					        }
-					    }
-					);
+					if(valid){
+						CommInterface.sendPost(
+						    SystemConstant.consUserManage.ADD_USER,
+						    the.formData,
+						    function (res) {
+						        console.log("新增结果 ",res);
+						        if(res>0){
+						            util.alert("新增成功, 用户号是: " + res, null, null, function(){
+										// 使用这种方式返回，是为了简荣芳用户注册后返回登录页面
+										the.$router.go(-1);
+										//CommInterface.goToUserList();
+									});
+						            
+						        } else {
+						            util.showMsg("新增失败", ComponentConstant.MessageProperties.ERROR);
+						        }
+						    }
+						);
+					}
 				})
             },
 			searchEduOptions(){//学历查询
@@ -268,7 +269,7 @@
 						let retCode = res.code;
 						let retMsg = res.msg;
 				        if(SystemConstant.common.RET_CODE == retCode){
-				            the.formFieldList[8].options = res.data;
+				            the.formFieldList.education.options = res.data;
 				        } else {
 				            util.showMsg("学历备选项查询失败", ComponentConstant.MessageProperties.ERROR);
 				        }
@@ -284,7 +285,7 @@
 						let retCode = res.code;
 						let retMsg = res.msg;
 				        if(SystemConstant.common.RET_CODE == retCode){
-				            the.formFieldList[2].checkboxs = res.data;
+				            the.formFieldList.likes.checkboxs = res.data;
 				        } else {
 				            util.showMsg("爱好备选项查询失败", ComponentConstant.MessageProperties.ERROR);
 				        }
@@ -300,7 +301,7 @@
 						let retCode = res.code;
 						let retMsg = res.msg;
 				        if(SystemConstant.common.RET_CODE == retCode){
-				            the.formFieldList[1].radios = res.data;
+				            the.formFieldList.sex.radios = res.data;
 				        } else {
 				            util.showMsg("性别备选项查询失败", ComponentConstant.MessageProperties.ERROR);
 				        }
@@ -309,8 +310,8 @@
 			},
 			onPreview(file){
 				let the = this;
-				the.formFieldList[9].dialogImageUrl = file.url;
-				the.formFieldList[9].dialogVisible = true;
+				the.formFieldList.files.dialogImageUrl = file.url;
+				the.formFieldList.files.dialogVisible = true;
 				
 			}
         },

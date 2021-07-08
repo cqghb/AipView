@@ -31,8 +31,8 @@
                     id: "666666",
                     pass: "123456"
                 },
-                formFieldList:[
-                    {
+                formFieldList:{
+                    id: {
                         type: "Input",
                         label: "用户编号",
                         prop: "id",
@@ -40,7 +40,7 @@
                         placeholder: "请输入用户编号...",
                         size: ""
                     },
-                    {
+                    pass: {
                         type: "Password",
                         label: "密码",
                         prop: "pass",
@@ -48,7 +48,7 @@
                         placeholder: "请输入密码...",
                         size: ""
                     }
-                ],
+                },
 				rules:{
 					id:[
 						{ required: true, message: '请输入用户编号', trigger: 'blur' }

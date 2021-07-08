@@ -28,7 +28,7 @@
                 default:""
             },
             formFieldList:{// 表单字段
-                type:Array,
+                type: Object,
                 default:[]
             },
             formData:{// 表单绑定对象
