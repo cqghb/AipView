@@ -4,12 +4,23 @@
         <!-- 条件查询 start -->
         <el-row class="row">
             <el-col :span="24">
-                <search-form
+                <!--
+				这个组件不要了
+				 <search-form
                         labelWidth="80px"
                         :searchData="searchData"
                         :searchForm="searchForm"
                         :size="formSize"
-                        :searchHandle="searchHandle"></search-form>
+                        :searchHandle="searchHandle"></search-form> -->
+				<base-form
+							:formData="searchData"
+							:ref="searchFormRef"
+							:formFieldList="searchForm"
+							:baseFromModel="searchData"
+							:size="formSize"
+							:myInline="true"
+							:rules="rules"
+							:buttonArr="searchHandle"></base-form>
                 <!--<el-form :inline="true" :model="params">
                     <el-form-item v-for="(item, index) in queryFieldList" :label="item.label" :key="index">
                         <el-input v-model="item.name"
@@ -84,22 +95,28 @@
 </template>
 
 <script>
-    import SearchForm from "@/components/common/SearchForm";
+    // import SearchForm from "@/components/common/SearchForm";
     import BreadCrumbs from "@/components/common/BreadCrumbs";
+	import BaseForm from "@/components/common/BaseForm";
 	import tableDataFormatStrateg from "@/components/utils/table-data-format-strategy";
 	
     import * as SystemConstant from '@/components/constant/systemConstant';
     export default {
         name: "BaseTable",
         components:{
-            "search-form": SearchForm,
-            "bread-crumbs": BreadCrumbs
+            // "search-form": SearchForm,
+            "bread-crumbs": BreadCrumbs,
+			"base-form": BaseForm
         },
         props:{
             uri:{// 数据请求地址
                 type: String,
                 require: true
             },
+			searchFormRef:{
+				type: String,
+				required: false
+			},
             formSize:{
                 type: String,
                 require: false
@@ -107,16 +124,17 @@
             operationButtonList:{// 操作按钮
                 type: Array,
                 require: false,
-                default: []
+                default: ()=>[]
             },
             tableColumnList:{// 表头
                 type: Array,
                 require: false,
-                default: []
+                default: ()=>[]
             },
             searchForm:{
-                type:Array,
-                default:[]
+                type: Object,
+				require: false,
+                default: ()=>{}
             },
             searchHandle:{
                 type:Array,
@@ -124,8 +142,13 @@
             },
             searchData:{
                 type:Object,
-                default:{}
-            }
+                default: ()=>{}
+            },
+			rules:{// 表单验证规则
+				type: Object,
+				require: false,
+				default: ()=>{}
+			},
         },
         data(){
             return {
@@ -143,8 +166,8 @@
         },
         methods:{
 			test1(sp,item){
-				console.log("sp:", sp);
-				console.log("tableDataFormatStrateg:", tableDataFormatStrateg);
+				// console.log("sp:", sp);
+				// console.log("tableDataFormatStrateg:", tableDataFormatStrateg);
 				let the = this;
 				return tableDataFormatStrateg.tableDataFormat.prototype.format(sp.row, item);
 				// let columnType = item.type;

@@ -84,7 +84,7 @@
         methods: {
             queryInfo(id){// 查询需回显的数据
                 let the = this;
-                CommInterface.getUserById(
+                CommInterface.baseSendGet(
                     SystemConstant.consUserManage.QUERY_USER_BY_ID,
                     {
                         id: id

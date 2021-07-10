@@ -2,6 +2,7 @@
     <div>
         <el-form label-position="left"
 		:model="baseFromModel"
+		:inline="myInline"
 		ref="defaultMyForm"
 		:rules="rules"
 		:label-width="labelWidth">
@@ -160,14 +161,17 @@
 					<img width="100%" :src="item.dialogImageUrl" alt="" />
 				 </el-dialog>
             </el-form-item>
+			<el-form-item>
+				<el-button v-for="item in buttonArr"
+				           :type="item.type"
+				           :size="item.size || size"
+				           :key="item.label"
+				           @click="item.handle()">
+				    {{item.label}}
+				</el-button>
+			</el-form-item>
             <div class="updateFormBtn">
-                <el-button v-for="item in buttonArr"
-                           :type="item.type"
-                           :size="item.size || size"
-                           :key="item.label"
-                           @click="item.handle()">
-                    {{item.label}}
-                </el-button>
+                
             </div>
         </el-form>
     </div>
@@ -188,7 +192,7 @@
             },
             formFieldList:{// 表单字段
                 type:Object,
-                default:[]
+                default:()=>{}
             },
             formData:{// 表单绑定对象
                 type:Object,
@@ -206,6 +210,11 @@
 			baseFromModel:{// 表单绑定对象
 				type:Object,
 				default: ()=>{}
+			},
+			myInline: {
+				type: Boolean,
+				required: false,
+				default: false
 			}
         },
         data(){

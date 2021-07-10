@@ -21,6 +21,7 @@
                     :searchData="searchData"
                     :searchForm="searchForm"
                     :formSize="formSize"
+					searchFormRef="searchUserForm"
                     :searchHandle="searchHandle"></base-table>
     </div>
 </template>
@@ -48,8 +49,8 @@
                     id: "",
                     name: ""
                 },
-                searchForm:[
-                    {
+                searchForm:{
+                    id: {
                         type: "Input",
                         label: "ID",
                         prop: "id",
@@ -57,7 +58,7 @@
                         placeholder: "请输入ID...",
                         size:""
                     },
-                    {
+                    name: {
                         type: "Input",
                         label: "姓名",
                         prop: "name",
@@ -78,7 +79,7 @@
                     //     }
                     // }
                     // {type:'Checkbox',label:'爱好',width:'180px',prop:'interst',checkboxs:intersts,props:interstProps}
-                ],
+                },
                 searchHandle:[
                     {
                         label:"查询",

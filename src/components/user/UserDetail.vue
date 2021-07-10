@@ -20,7 +20,15 @@
                 fieldList:[
                     { name: "id", fieldName: "ID", fieldValue: "" },
                     { name: "name", fieldName: "姓名", fieldValue: "" },
-                    { name: "pass", fieldName: "密码", fieldValue: "" },
+                    // { name: "pass", fieldName: "密码", fieldValue: "" }, // 密码不让看了
+                    { name: "age", fieldName: "年龄", fieldValue: "" },
+                    { name: "sex", fieldName: "性别", fieldValue: "" },
+                    { name: "birthday", fieldName: "生日", fieldValue: "" },
+                    { name: "qq", fieldName: "qq号", fieldValue: "" },
+                    { name: "weChat", fieldName: "微信号", fieldValue: "" },
+                    { name: "email", fieldName: "邮箱", fieldValue: "" },
+                    { name: "education", fieldName: "学历", fieldValue: "" },
+                    // { name: "pass", fieldName: "密码", fieldValue: "" },
                     { name: "createUser", fieldName: "创建人", fieldValue: "" },
                     { name: "createTime", fieldName: "创建时间", fieldValue: "" },
                     { name: "updateUser", fieldName: "修改人", fieldValue: "" },

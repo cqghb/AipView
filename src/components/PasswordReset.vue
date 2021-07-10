@@ -59,7 +59,8 @@
 					pass2: "",
 					verificationCode: ""
 				},
-				formFieldList: [{
+				formFieldList: {
+					id: {
 						type: "Input",
 						label: "用户编号",
 						prop: "id",
@@ -67,7 +68,7 @@
 						placeholder: "请输入用户编号...",
 						size: ""
 					},
-					{
+					phoneEmail: {
 						type: "Input",
 						label: "手机号/电子邮件",
 						prop: "phoneEmail",
@@ -75,14 +76,15 @@
 						placeholder: "请输入手机号或者电子邮件...",
 						size: ""
 					},
-					{
+					pass: {
 						type: "Password",
 						label: "新密码",
 						prop: "pass",
 						width: "180px",
 						placeholder: "请输入新密码...",
 						size: ""
-					}, {
+					}, 
+					pass2: {
 						type: "Password",
 						label: "确认密码",
 						prop: "pass2",
@@ -90,7 +92,7 @@
 						placeholder: "请再次输入新密码...",
 						size: ""
 					},
-					{
+					verificationCode: {
 						type: "Input",
 						label: "验证码",
 						prop: "verificationCode",
@@ -112,7 +114,7 @@
 							}
 						]
 					}
-				],
+				},
 				rules: {
 					id: [{
 						required: true,
@@ -182,7 +184,7 @@
 							    console.log("密码修改结果: ",res);
 							    if(res>0){
 							        util.alert("密码修改成功!", null, null, function(){
-										// 使用这种方式返回，是为了简荣芳用户注册后返回登录页面
+										// 使用这种方式返回，是为了修改密码后返回登录页面
 										the.$router.go(-1);
 									});
 							    } else {
@@ -196,14 +198,14 @@
 			sendVerificationCode(){// 发送验证码
 				let the = this;
 				console.log("1111",the.$refs.passReset.$refs.verCodeBtn);
-				the.formFieldList[4].btnArr[0].disable = true;
+				the.formFieldList.verificationCode.btnArr[0].disable = true;
 				var countDown = setInterval(() => {
 				        if (the.count < 1) {
-							the.formFieldList[4].btnArr[0].label = "发送验证码";
+							the.formFieldList.verificationCode.btnArr[0].label = "发送验证码";
 							clearInterval(countDown);
-							the.formFieldList[4].btnArr[0].disable = false;
+							the.formFieldList.verificationCode.btnArr[0].disable = false;
 				        } else {
-							the.formFieldList[4].btnArr[0].label = the.count-- + 's后重发'
+							the.formFieldList.verificationCode.btnArr[0].label = the.count-- + 's后重发'
 				        }
 				      }, 1000);
 				CommInterface.baseSendGet(SystemConstant.consVerCode.SEND_VERIFICATION_CODE,{phoneEmail: the.formData.phoneEmail},function(info){
