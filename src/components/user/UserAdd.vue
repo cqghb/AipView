@@ -34,7 +34,7 @@
                 formData:{
                     name: "",
 					sex: "",
-					likes:[],					
+					likes:[],
 					brithDay: "",
 					age: "",
 					qq: "",

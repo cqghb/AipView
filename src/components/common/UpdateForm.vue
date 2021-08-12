@@ -29,7 +29,7 @@
             },
             formFieldList:{// 表单字段
                 type: Object,
-                default:[]
+                default:()=>{}
             },
             formData:{// 表单绑定对象
                 type:Object,

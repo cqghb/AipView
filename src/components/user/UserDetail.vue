@@ -18,21 +18,21 @@
         data(){
             return {
                 fieldList:[
-                    { name: "id", fieldName: "ID", fieldValue: "" },
-                    { name: "name", fieldName: "姓名", fieldValue: "" },
+                    { name: "id", fieldName: "ID", type: "text", fieldValue: "" },
+                    { name: "name", fieldName: "姓名", type: "text", fieldValue: "" },
                     // { name: "pass", fieldName: "密码", fieldValue: "" }, // 密码不让看了
-                    { name: "age", fieldName: "年龄", fieldValue: "" },
-                    { name: "sex", fieldName: "性别", fieldValue: "" },
-                    { name: "birthday", fieldName: "生日", fieldValue: "" },
-                    { name: "qq", fieldName: "qq号", fieldValue: "" },
-                    { name: "weChat", fieldName: "微信号", fieldValue: "" },
-                    { name: "email", fieldName: "邮箱", fieldValue: "" },
-                    { name: "education", fieldName: "学历", fieldValue: "" },
-                    // { name: "pass", fieldName: "密码", fieldValue: "" },
-                    { name: "createUser", fieldName: "创建人", fieldValue: "" },
-                    { name: "createTime", fieldName: "创建时间", fieldValue: "" },
-                    { name: "updateUser", fieldName: "修改人", fieldValue: "" },
-                    { name: "updateTime", fieldName: "修改时间", fieldValue: "" }
+                    { name: "age", fieldName: "年龄", type: "text", fieldValue: "" },
+                    { name: "sex", fieldName: "性别", type: "text", fieldValue: "" },
+                    { name: "birthday", fieldName: "生日", type: "text", fieldValue: "" },
+                    { name: "qq", fieldName: "qq号", type: "text", fieldValue: "" },
+                    { name: "weChat", fieldName: "微信号", type: "text", fieldValue: "" },
+                    { name: "email", fieldName: "邮箱", type: "text", fieldValue: "" },
+                    { name: "education", fieldName: "学历", type: "text", fieldValue: "" },
+                    { name: "headPortraitUrl", fieldName: "头像", type: "image", fieldValue: "" },
+                    { name: "createUser", fieldName: "创建人", type: "text", fieldValue: "" },
+                    { name: "createTime", fieldName: "创建时间", type: "text", fieldValue: "" },
+                    { name: "updateUser", fieldName: "修改人", type: "text", fieldValue: "" },
+                    { name: "updateTime", fieldName: "修改时间", type: "text", fieldValue: "" }
                 ],
                 info:{},
                 toRender: false

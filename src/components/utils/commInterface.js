@@ -102,13 +102,30 @@ export function goToPassReset() {
  * @param {Object} params 查询条件
  * @param {Object} callback 回调函数，处理响应数据
  */
-export function getCodeType(param, callback) {
+// export getCodeType = await function getCodeType(param, callback) {
+export const getCodeType = (param, callback) => {
     util.$http.get(systemConstant.consCodeManage.SEARCH_CODEKEY_VALUE, {
 		params: {"codeType": param}
 	}).then(function (res) {
 		let info = res;
+		//console.log(222);
 		return callback(info);
     });
+	//console.log(333);
+}
+
+export const getCodeType2 = (param) => {
+	return new Promise((resolve, reject) => {
+		util.$http.get(systemConstant.consCodeManage.SEARCH_CODEKEY_VALUE, {
+			params: {"codeType": param}
+		}).then(function (res) {
+			let info = res;
+			resolve(info);
+		}).catch(function (error) {
+			console.log(error);
+			reject(error);
+		});
+	});
 }
 /**
  * 修改密码
@@ -134,3 +151,16 @@ export function baseSendGet(uri, param, callback) {
 		return callback(info);
     });
 }
+// module.exports = {
+// 	sendPost,
+// 	goToUserList,
+// 	goToUserDetail,
+// 	goToUserAdd,
+// 	goToLogin,
+// 	goToRegister,
+// 	goToPassReset,
+// 	getCodeType,
+// 	getCodeType2,
+// 	resetPass,
+// 	baseSendGet
+// }

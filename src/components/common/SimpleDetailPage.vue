@@ -4,7 +4,21 @@
         <div class="detail-body">
             <el-row class="ha-ha" :gutter="24" v-for="(item,index) in fieldList" v-bind:key="index">
                 <el-col :span="3" :offset="9">{{ item.fieldName }}:</el-col>
-                <el-col :span="12">{{ item.fieldValue }}</el-col>
+                <!-- <el-col :span="12">{{ item.fieldValue | codeChangeValue(item.type)}}</el-col> -->
+				<el-col :span="12" v-if="'image'==item.type">
+					<el-image 
+					    style="width: 100px; height: 100px"
+					    :src="item.fieldValue">
+							<div slot="placeholder" class="image-slot">
+								加载中 <span class="dot">...</span>
+							</div>
+							<div slot="error" class="image-slot">
+								<i class="el-icon-picture-outline">图片加载失败</i>
+							</div>
+					</el-image>
+				</el-col>
+				<el-col :span="12" v-else>{{ item.fieldValue }}</el-col>
+				
             </el-row>
             <el-row class="ha-ha" :gutter="24">
                 <el-col :offset="10" :span="14">

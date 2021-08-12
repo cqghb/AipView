@@ -16,6 +16,7 @@
     import * as ComponentConstant from '@/components/constant/componentConstant';
     import * as BusinessConstant from '@/components/constant/businessConstant';
     import util from "@/components/utils/util";
+	import * as businessConstant from '@/components/constant/businessConstant';
 
     export default {
         name: "UserUpdate",
@@ -27,10 +28,17 @@
                 formData:{
                     id: "",
                     name: "",
-                    pass: ""
+                    sex: "",
+                    likes:[1],
+                    birthday: "",
+                    age: "",
+                    qq: "",
+                    weChat: "",
+                    email: "",
+                    education: ""
                 },
-                formFieldList:[
-                    {
+                formFieldList:{
+                    id: {
                         type: "Input",
                         label: "ID",
                         prop: "id",
@@ -38,7 +46,7 @@
                         placeholder: "请输入ID...",
                         size: ""
                     },
-                    {
+                    name: {
                         type: "Input",
                         label: "姓名",
                         prop: "name",
@@ -46,15 +54,81 @@
                         placeholder: "请输入姓名...",
                         size: ""
                     },
-                    {
-                        type: "Input",
-                        label: "密码",
-                        prop: "pass",
-                        width: "180px",
-                        placeholder: "请输入密码...",
+                    sex: {
+                        type: "Radio",
+                        label: "性别",
+                        prop: "sex",
+                    	radios: [],
+                        size: "",
+                    	change: function(v){
+                    		console.log("您选择的是:",v);
+                    	}
+                    },
+                    likes: {
+                        type: "Checkbox",
+                        label: "爱好",
+                        prop: "likes",
+                    	checkboxs: [],
+                        size: "",
+                    	change: function(v){
+                    		console.log("您选择的爱好是:",v);
+                    	}
+                    },
+                    birthday: {
+                        type: "Date",
+                        label: "出生日期",
+                        prop: "birthday",
                         size: ""
+                    },
+                    age:{
+                        type: "Number",
+                        label: "年龄",
+                        prop: "age",
+                        width: "180px",
+                    	step: 2,
+                        min: 1,
+                        max: 100,
+                    	change: function(v){
+                    		console.log("当前值",v)
+                    	}
+                        
+                    },
+                    qq:{
+                        type: "Input",
+                        label: "qq号",
+                        prop: "qq",
+                        width: "180px",
+                        placeholder: "请输入qq号...",
+                        size: ""
+                    },
+                    weChat: {
+                        type: "Input",
+                        label: "微信号",
+                        prop: "weChat",
+                        width: "180px",
+                        placeholder: "请输入微信号...",
+                        size: ""
+                    },
+                    email: {
+                        type: "Input",
+                        label: "电子邮件",
+                        prop: "email",
+                        width: "180px",
+                        placeholder: "请输入电子邮件...",
+                        size: ""
+                    },
+                    education: {
+                        type: "Select",
+                        label: "学历",
+                        prop: "education",
+                        width: "180px",
+                    	options: [],
+                        size: "",
+                    	change: function(v){
+                    		console.log("当前值",v);
+                    	}
                     }
-                ],
+                },
                 formSize: "",
                 btnHandle:[
                     {
@@ -84,7 +158,7 @@
         methods: {
             queryInfo(id){// 查询需回显的数据
                 let the = this;
-                CommInterface.baseSendGet(
+                CommInterface.sendPost(
                     SystemConstant.consUserManage.QUERY_USER_BY_ID,
                     {
                         id: id
@@ -117,7 +191,54 @@
                     }
                 );
             },
-
+			searchEduOptions(){//学历查询
+				let the = this;
+				CommInterface.getCodeType(
+				    businessConstant.CODE_TYPE.EDUCATION,
+				    function (res) {
+				        console.log("学历备选项查询结果: ",res);
+						let retCode = res.code;
+						let retMsg = res.msg;
+				        if(SystemConstant.common.RET_CODE == retCode){
+				            the.formFieldList.education.options = res.data;
+				        } else {
+				            util.showMsg("学历备选项查询失败", ComponentConstant.MessageProperties.ERROR);
+				        }
+				    }
+				);
+			},
+			searchLikesOptions(){// 查询爱好
+				let the = this;
+				CommInterface.getCodeType(
+				    businessConstant.CODE_TYPE.LIKES,
+				    function (res) {
+				        console.log("爱好备选项查询结果: ",res);
+						let retCode = res.code;
+						let retMsg = res.msg;
+				        if(SystemConstant.common.RET_CODE == retCode){
+				            the.formFieldList.likes.checkboxs = res.data;
+				        } else {
+				            util.showMsg("爱好备选项查询失败", ComponentConstant.MessageProperties.ERROR);
+				        }
+				    }
+				);
+			},
+			searchSexOptions(){// 查询性别
+				let the = this;
+				CommInterface.getCodeType(
+				    businessConstant.CODE_TYPE.SEX,
+				    function (res) {
+				        console.log("性别备选项查询结果: ",res);
+						let retCode = res.code;
+						let retMsg = res.msg;
+				        if(SystemConstant.common.RET_CODE == retCode){
+				            the.formFieldList.sex.radios = res.data;
+				        } else {
+				            util.showMsg("性别备选项查询失败", ComponentConstant.MessageProperties.ERROR);
+				        }
+				    }
+				);
+			}
         },
         mounted() {
         },
@@ -125,6 +246,9 @@
             let the = this;
             let id = the.$route.params.id;
             the.queryInfo(id);
+			the.searchEduOptions();
+			the.searchLikesOptions();
+			the.searchSexOptions();
         }
     }
 </script>
