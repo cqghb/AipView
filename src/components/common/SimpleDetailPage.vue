@@ -31,6 +31,8 @@
 
 <script>
     import BreadCrumbs from "@/components/common/BreadCrumbs";
+	import * as CommInterface from '@/components/utils/commInterface';
+	
     export default {
         name: "SimpleDetailPage",
         components:{
@@ -63,7 +65,31 @@
                     for(let i=0;i< the.fieldListTem.length; i++){
                         let name = the.fieldListTem[i].name;
                         if(name==item){
-                            the.fieldListTem[i].fieldValue = the.info[item];
+							let trans = the.fieldListTem[i].transformation;
+							let code1 = the.info[item];
+							
+							if(trans){
+								// 需要转换的
+								CommInterface.getCodeType(trans,function(res){
+									console.log("aaaaa=",res);
+									let codeArr = res.data;
+									let newValue = "";
+									for(let n=0;n<codeArr.length;n++){
+										let code = codeArr[n].value;
+										let name = codeArr[n].label;
+										if(code1==code){
+											newValue = name;
+											break;
+										}
+									}
+									newValue = newValue ? newValue : code1;
+									the.fieldListTem[i].fieldValue = newValue;
+								});
+							} else {
+								// 不需要转换的
+								the.fieldListTem[i].fieldValue = code1;
+							}
+                            
                             break;
                         }
                     }

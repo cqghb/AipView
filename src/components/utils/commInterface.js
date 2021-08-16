@@ -103,17 +103,16 @@ export function goToPassReset() {
  * @param {Object} callback 回调函数，处理响应数据
  */
 // export getCodeType = await function getCodeType(param, callback) {
-export const getCodeType = (param, callback) => {
+export function getCodeType(param, callback) {
     util.$http.get(systemConstant.consCodeManage.SEARCH_CODEKEY_VALUE, {
 		params: {"codeType": param}
 	}).then(function (res) {
+		console.log("码值转换响应值: ", res);
 		let info = res;
-		//console.log(222);
 		return callback(info);
     });
 	//console.log(333);
 }
-
 export const getCodeType2 = (param) => {
 	return new Promise((resolve, reject) => {
 		util.$http.get(systemConstant.consCodeManage.SEARCH_CODEKEY_VALUE, {
