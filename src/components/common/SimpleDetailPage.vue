@@ -4,7 +4,7 @@
         <div class="detail-body">
             <el-row class="ha-ha" :gutter="24" v-for="(item,index) in fieldList" v-bind:key="index">
                 <el-col :span="3" :offset="9">{{ item.fieldName }}:</el-col>
-                <!-- <el-col :span="12">{{ item.fieldValue | codeChangeValue(item.type)}}</el-col> -->
+                <!-- <el-col :span="12">{{ item.fieldValue | dataFormatFilter(item.type)}}</el-col> -->
 				<el-col :span="12" v-if="'image'==item.type">
 					<el-image 
 					    style="width: 100px; height: 100px"
@@ -17,7 +17,8 @@
 							</div>
 					</el-image>
 				</el-col>
-				<el-col :span="12" v-else>{{ item.fieldValue }}</el-col>
+				<!-- <el-col :span="12" v-else>{{ item.fieldValue }}</el-col> -->
+				<el-col :span="12" v-else>{{ item.fieldValue | dataFormatFilter(item.type, item.name, item.format)}}</el-col>
 				
             </el-row>
             <el-row class="ha-ha" :gutter="24">

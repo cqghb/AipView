@@ -29,7 +29,9 @@ export const consVerCode = {
  */
 export const common = {
     RET_CODE: "000000", // 成功码值
-    YYYY_MM_DD_HH_mm_ss: "YYYY-MM-DD HH:mm:ss" // 日期格式
+    FORMAT_DATE: "formatDate", // 成功码值
+    YYYY_MM_DD_HH_mm_ss: "YYYY-MM-DD HH:mm:ss", // 日期格式
+    YYYY_MM_DD: "YYYY-MM-DD" // 日期格式
 };
 /**
  * 数据类型

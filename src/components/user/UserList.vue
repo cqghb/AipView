@@ -32,6 +32,7 @@
     import util from "@/components/utils/util";
     import * as CommInterface from '@/components/utils/commInterface';
     import * as ComponentConstant from '@/components/constant/componentConstant';
+	import * as SystemConstant from '@/components/constant/systemConstant';
 
     export default {
         name: "UserList",
@@ -150,9 +151,9 @@
                     { prop: "pass", label: "密码", width: 180 },
                     { prop: "createUser", label: "创建人", width: 180 },
                     // { prop: "createTime", label: "创建时间", width: 180, type:"Date" },
-                    { prop: "createTime", label: "创建时间", width: 180, type:"Date", format:"formatDate" },
+                    { prop: "createTime", label: "创建时间", width: 180, type:SystemConstant.dataType.DATE, formatDate: SystemConstant.common.FORMAT_DATE },
                     { prop: "updateUser", label: "修改人", width: 180 },
-                    { prop: "updateTime", label: "修改时间", width: 180, type:"Date", format:"formatDate" }
+                    { prop: "updateTime", label: "修改时间", width: 180, type:SystemConstant.dataType.DATE, formatDate:SystemConstant.common.FORMAT_DATE }
                 ],
                 selectedData: false
             }
