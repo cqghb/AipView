@@ -60,6 +60,7 @@
                         {{ra.label}}
                     </el-radio>
                 </el-radio-group>
+				
                 <!-- 单选按钮 -->
                 <el-radio-group 
 							v-if="item.type==='RadioButton'"
