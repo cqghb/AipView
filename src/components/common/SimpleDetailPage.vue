@@ -17,6 +17,18 @@
 							</div>
 					</el-image>
 				</el-col>
+				<el-col v-else-if="'array'==item.type">
+					<el-row :gutter="24">
+						<el-col :span="12" :offset="12" v-for="(item2,index2) in item.fieldValue" v-bind:key="index2">
+							<div class="grid-content bg-purple">{{ item2 }}</div>
+						</el-col>
+						
+					  <!-- <el-col :span="6" v-for="items in item.fieldValue">
+						  <div class="grid-content bg-purple">{{ items }}</div>
+					  </el-col> -->
+					  
+					</el-row>
+				</el-col>
 				<!-- <el-col :span="12" v-else>{{ item.fieldValue }}</el-col> -->
 				<el-col :span="12" v-else>{{ item.fieldValue | dataFormatFilter(item.type, item.name, item.format)}}</el-col>
 				
@@ -65,26 +77,44 @@
                 for(let item in the.info){
                     for(let i=0;i< the.fieldListTem.length; i++){
                         let name = the.fieldListTem[i].name;
+                        
                         if(name==item){
 							let trans = the.fieldListTem[i].transformation;
 							let code1 = the.info[item];
 							
 							if(trans){
+								let type = the.fieldListTem[i].type;
+								let params = [];
+								if('text'==type){// 单个码
+									params.push(code1);
+								} else if('array'==type){
+									params = code1;
+								}
+								
 								// 需要转换的
-								CommInterface.getCodeType(trans,function(res){
-									console.log("aaaaa=",res);
+								CommInterface.getCodeType(trans, params, function(res){
 									let codeArr = res.data;
 									let newValue = "";
-									for(let n=0;n<codeArr.length;n++){
-										let code = codeArr[n].value;
-										let name = codeArr[n].label;
-										if(code1==code){
-											newValue = name;
-											break;
+									if('text'==type){// 单个码转换
+										for(let n=0; n<codeArr.length; n++){
+											let code = codeArr[n].value;
+											let name = codeArr[n].label;
+											if(code1==code){
+												newValue = name;
+												break;
+											}
 										}
+										newValue = newValue ? newValue : code1;
+										the.fieldListTem[i].fieldValue = newValue;
+									} else if('array'==type){// 多个码需要转换
+										console.log('eeeee',codeArr);
+										let listTemp = [];
+										for(let n=0; n<codeArr.length; n++){
+											listTemp.push(codeArr[n].label);
+										}
+										the.fieldListTem[i].fieldValue = listTemp;
 									}
-									newValue = newValue ? newValue : code1;
-									the.fieldListTem[i].fieldValue = newValue;
+									
 								});
 							} else {
 								// 不需要转换的
@@ -127,4 +157,11 @@
     .ha-ha {
         line-height: 36px;
     }
+	.bg-purple {
+	    background: #d3dce6;
+    }
+	.grid-content {
+	    border-radius: 4px;
+	    min-height: 36px;
+	}
 </style>

@@ -22,6 +22,7 @@
                     { name: "name", fieldName: "姓名", type: "text", fieldValue: "" },
                     // { name: "pass", fieldName: "密码", fieldValue: "" }, // 密码不让看了
                     { name: "age", fieldName: "年龄", type: "text", fieldValue: "" },
+                    { name: "likes", fieldName: "爱好", type: "array", fieldValue: [], transformation:"likes" },
                     { name: "sex", fieldName: "性别", type: "text", fieldValue: "", transformation:"sex" },
                     { name: "birthday", fieldName: "生日", type: SystemConstant.dataType.DATE, fieldValue: "", format: SystemConstant.common.YYYY_MM_DD, formatDate:SystemConstant.common.FORMAT_DATE },
                     { name: "qq", fieldName: "qq号", type: "text", fieldValue: "" },

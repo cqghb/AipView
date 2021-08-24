@@ -195,6 +195,7 @@
 				let the = this;
 				CommInterface.getCodeType(
 				    businessConstant.CODE_TYPE.EDUCATION,
+					[],
 				    function (res) {
 				        console.log("学历备选项查询结果: ",res);
 						let retCode = res.code;
@@ -211,6 +212,7 @@
 				let the = this;
 				CommInterface.getCodeType(
 				    businessConstant.CODE_TYPE.LIKES,
+					[],
 				    function (res) {
 				        console.log("爱好备选项查询结果: ",res);
 						let retCode = res.code;
@@ -227,6 +229,7 @@
 				let the = this;
 				CommInterface.getCodeType(
 				    businessConstant.CODE_TYPE.SEX,
+					[],
 				    function (res) {
 				        console.log("性别备选项查询结果: ",res);
 						let retCode = res.code;
