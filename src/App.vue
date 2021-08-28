@@ -19,19 +19,23 @@
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  /*text-align: center;*/
-  color: #2c3e50;
-  /*margin-top: 60px;*/
-}
+	html, body {
+	    margin: 0px;
+		height:100%;
+	}
+	#app {
+	  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+	  -webkit-font-smoothing: antialiased;
+	  -moz-osx-font-smoothing: grayscale;
+	  /*text-align: center;*/
+	  color: #2c3e50;
+	  /*margin-top: 60px;*/
+	}
 
-.el-header {
-  background-color: #B3C0D1;
-  color: #333;
-  line-height: 60px;
-}
+	.el-header {
+	  background-color: #B3C0D1;
+	  color: #333;
+	  line-height: 60px;
+	}
 
 </style>

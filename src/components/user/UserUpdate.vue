@@ -44,6 +44,7 @@
                         prop: "id",
                         width: "180px",
                         placeholder: "请输入ID...",
+						readonly: true,
                         size: ""
                     },
                     name: {

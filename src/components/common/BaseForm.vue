@@ -16,6 +16,7 @@
 						v-if="item.type==='Input'"
                         v-model="formData[item.prop]"
                         :size="item.size"
+						:readonly="item.readonly"
 						:placeholder="item.placeholder"
                         clearable></el-input>
 						<el-button v-for="(btn, index) in item.btnArr" 
