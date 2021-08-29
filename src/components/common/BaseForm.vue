@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-form label-position="left"
+        <el-form label-position="right"
 		:model="baseFromModel"
 		:inline="myInline"
 		ref="defaultMyForm"
