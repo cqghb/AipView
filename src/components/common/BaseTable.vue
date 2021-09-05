@@ -64,6 +64,9 @@
                         element-loading-text="数据加载中"
                         element-loading-background="rgba(0, 0, 0, 0.8)"
                         @selection-change="handleSelectionChange"
+						row-key="id"
+						:load="load"
+						:tree-props="{children: children, hasChildren: 'hasChildren'}"
                         style="width: 100%">
                     <el-table-column
                             type="selection"
@@ -161,7 +164,8 @@
                     pageSizeArr:[5, 10, 20, 30, 40],// 可选每页显示数据条数
                     pageSize: 5,// 当前每页显示条数
                     totalSize: 1// 总页数
-                }
+                },
+				children: 'childrenList'// 树形表格子节点的节点名称
             };
         },
         methods:{
@@ -218,7 +222,10 @@
                     the.page.currentPage = res.data.currentPage;
                     the.loading = false;
                 });
-            }
+            },
+			load(){
+				
+			}
         },
         created: function () {
             let the = this;
