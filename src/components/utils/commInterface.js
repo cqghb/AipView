@@ -153,16 +153,15 @@ export function baseSendGet(uri, param, callback) {
 		return callback(info);
     });
 }
-// module.exports = {
-// 	sendPost,
-// 	goToUserList,
-// 	goToUserDetail,
-// 	goToUserAdd,
-// 	goToLogin,
-// 	goToRegister,
-// 	goToPassReset,
-// 	getCodeType,
-// 	getCodeType2,
-// 	resetPass,
-// 	baseSendGet
-// }
+
+/**
+ * 跳转到菜单新增页面
+ * @returns {Promise<Route>}
+ */
+export function goToMenuAdd(params) {
+    return main.default.$router.push({
+        path: "/menuAdd",
+        name: "MenuAdd",
+		params: params
+    });
+}

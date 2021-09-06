@@ -16,7 +16,6 @@
     import * as ComponentConstant from '@/components/constant/componentConstant';
     import * as BusinessConstant from '@/components/constant/businessConstant';
     import util from "@/components/utils/util";
-	import * as businessConstant from '@/components/constant/businessConstant';
 
     export default {
         name: "UserUpdate",
@@ -195,7 +194,7 @@
 			searchEduOptions(){//学历查询
 				let the = this;
 				CommInterface.getCodeType(
-				    businessConstant.CODE_TYPE.EDUCATION,
+				    BusinessConstant.CODE_TYPE.EDUCATION,
 					[],
 				    function (res) {
 				        console.log("学历备选项查询结果: ",res);
@@ -212,7 +211,7 @@
 			searchLikesOptions(){// 查询爱好
 				let the = this;
 				CommInterface.getCodeType(
-				    businessConstant.CODE_TYPE.LIKES,
+				    BusinessConstant.CODE_TYPE.LIKES,
 					[],
 				    function (res) {
 				        console.log("爱好备选项查询结果: ",res);
@@ -229,7 +228,7 @@
 			searchSexOptions(){// 查询性别
 				let the = this;
 				CommInterface.getCodeType(
-				    businessConstant.CODE_TYPE.SEX,
+				    BusinessConstant.CODE_TYPE.SEX,
 					[],
 				    function (res) {
 				        console.log("性别备选项查询结果: ",res);

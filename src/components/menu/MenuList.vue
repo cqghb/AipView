@@ -16,6 +16,7 @@
 <script>
 	import BaseTable from "@/components/common/BaseTable";
 	import * as SystemConstant from '@/components/constant/systemConstant';
+	import * as CommInterface from '@/components/utils/commInterface';
 	
 	export default {
 		name: "MenuList",
@@ -96,7 +97,7 @@
 						text: "新增",
 						handle:()=>{
 							let the = this;
-							the.addUser();
+							the.addMenu();
 						}
 					},
 					{
@@ -139,7 +140,17 @@
 			
 		},
 		methods:{
-			
+			addMenu(){
+			    let the = this;
+				let param = {
+					parentNode:""
+				};
+				let selectItem = the.$refs.menuTable.selectedDataArr[0];
+				if(selectItem){
+					param.parentNode = selectItem.id;
+				}
+			    CommInterface.goToMenuAdd(param);
+			},
 		},
 		mounted() {
 			
