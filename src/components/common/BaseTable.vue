@@ -1,6 +1,6 @@
 <template>
     <div>
-        <bread-crumbs></bread-crumbs>
+        <bread-crumbs v-if="crumbs"></bread-crumbs>
         <!-- 条件查询 start -->
         <el-row class="row">
             <el-col :span="24">
@@ -78,7 +78,10 @@
                                      :label="item.label"
                                      :width="item.width">
 						<template slot-scope="scope">
-							{{ test1(scope,item)}}
+							<!-- 是否显示成图标 -->
+							<i v-if="item.showIcon" :class="test1(scope,item)"></i>
+							<span v-else>{{ test1(scope,item)}}</span>
+							
 						</template>
                     </el-table-column>
                 </el-table>
@@ -102,6 +105,8 @@
     import BreadCrumbs from "@/components/common/BreadCrumbs";
 	import BaseForm from "@/components/common/BaseForm";
 	import tableDataFormatStrateg from "@/components/utils/table-data-format-strategy";
+	
+	import util from "@/components/utils/util";
 	
     import * as SystemConstant from '@/components/constant/systemConstant';
     export default {
@@ -152,6 +157,11 @@
 				require: false,
 				default: ()=>{}
 			},
+			crumbs:{// 是否显示面包屑
+				type: Boolean,
+				require: false,
+				default: true
+			}
         },
         data(){
             return {
@@ -165,6 +175,7 @@
                     pageSize: 5,// 当前每页显示条数
                     totalSize: 1// 总页数
                 },
+				selectedData: false,
 				children: 'childrenList'// 树形表格子节点的节点名称
             };
         },
@@ -223,6 +234,19 @@
                     the.loading = false;
                 });
             },
+			commonCheck(){// 公共检查
+			    let the = this;
+			    let num = the.selectedDataArr.length;
+			    if(num==0){
+			        util.showMsg("请选择一条数据");
+			    }
+			    if(num>1){
+			        util.showMsg("请不要多选");
+			    }
+			    if(1==num){
+			        the.selectedData = true;
+			    }
+			},
 			load(){
 				
 			}

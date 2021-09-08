@@ -154,8 +154,7 @@
                     { prop: "createTime", label: "创建时间", width: 180, type:SystemConstant.dataType.DATE, formatDate: SystemConstant.common.FORMAT_DATE },
                     { prop: "updateUser", label: "修改人", width: 180 },
                     { prop: "updateTime", label: "修改时间", width: 180, type:SystemConstant.dataType.DATE, formatDate:SystemConstant.common.FORMAT_DATE }
-                ],
-                selectedData: false
+                ]
             }
         },
         methods:{
@@ -165,8 +164,8 @@
             },
             showUserInfo(){// 显示用户详细信息
                 let the = this;
-                the.commonCheck();
-                if(the.selectedData){
+                the.$refs.userTable.commonCheck();
+                if(the.$refs.userTable.selectedData){
                     let params = the.$refs.userTable.selectedDataArr[0];
                     let id = params.id;
                     CommInterface.goToUserDetail(id);
@@ -175,17 +174,18 @@
             },
             updateWinShow(){
                 let the = this;
-                the.commonCheck();
-                let params = the.$refs.userTable.selectedDataArr[0];
-                let id = params.id;
-                return the.$router.push({
-                    path: "/userUpdate",
-                    name: "UserUpdate",
-                    params: {
-                        id: id
-                    }
-                });
-
+                the.$refs.userTable.commonCheck();
+                if(the.$refs.userTable.selectedData){
+					let params = the.$refs.userTable.selectedDataArr[0];
+					let id = params.id;
+					return the.$router.push({
+					    path: "/userUpdate",
+					    name: "UserUpdate",
+					    params: {
+					        id: id
+					    }
+					});
+				}
             },
             dleSelectionChange(val){
                 let the = this;
@@ -194,39 +194,27 @@
             },
             deleteUser(){// 删除用户
                 let the = this;
-                the.commonCheck();
-                let params = the.$refs.userTable.selectedDataArr[0];
-                let id = params.id;
-                if(id){
-                    the.$http.post("/deleteUser",{
-                        id: id
-                    }).then(function (res) {
-                        console.log("jjjjjj", res);
-                        if(res.data > 0){
-                            util.showMsg("删除成功", ComponentConstant.MessageProperties.SUCCESS);
-                            // 删除成功刷新表格数据
-                            the.$refs.userTable.loading = true;
-                            the.$refs.userTable.queryList();
-                        } else {
-                            util.showMsg("删除失败", ComponentConstant.MessageProperties.ERROR);
-                        }
-
-                    });
-                }
-
-            },
-            commonCheck(){// 公共检查
-                let the = this;
-                let num = the.$refs.userTable.selectedDataArr.length;
-                if(num==0){
-                    util.showMsg("请选择一条数据");
-                }
-                if(num>1){
-                    util.showMsg("请不要多选");
-                }
-                if(1==num){
-                    the.selectedData = true;
-                }
+                the.$refs.userTable.commonCheck();
+                if(the.$refs.userTable.selectedData){
+					let params = the.$refs.userTable.selectedDataArr[0];
+					let id = params.id;
+					if(id){
+					    the.$http.post("/deleteUser",{
+					        id: id
+					    }).then(function (res) {
+					        console.log("jjjjjj", res);
+					        if(res.data > 0){
+					            util.showMsg("删除成功", ComponentConstant.MessageProperties.SUCCESS);
+					            // 删除成功刷新表格数据
+					            the.$refs.userTable.loading = true;
+					            the.$refs.userTable.queryList();
+					        } else {
+					            util.showMsg("删除失败", ComponentConstant.MessageProperties.ERROR);
+					        }
+					
+					    });
+					}
+				}
             }
         },
         mounted() {
