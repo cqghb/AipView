@@ -41,3 +41,24 @@ export const dataType = {
     TEXT: "Text", // 文本
     NUMBER: "Number" // 数字
 };
+/**
+ * 图标管理接口
+ */
+export const consIconManage = {
+    // QUERY_ICON_BY_ID: "/icon/findPage", // 分页查询
+    FIND_PAGE: "/icon/findPage", // 分页查询
+    ADD_ICON: "/icon/insertIcon", // 新增图标
+    DEL_ICON: "/icon/deleteIcon", // 删除图标
+    QUERY_ALL: "/icon/queryAll", // 查询所有
+    UPDATE_ICON_BY_ID: "/icon/updateIcon" // 修改图标
+};
+/**
+ * 图标管理接口
+ */
+export const consMenuManage = {
+    // QUERY_ICON_BY_ID: "/menu/findPage", // 分页查询
+    FIND_PAGE: "/menu/findPage", // 分页查询
+    ADD: "/insertMenu", // 新增菜单
+    DEL: "/deleteMenu", // 删除菜单
+    UPDATE_BY_ID: "/icon/updateMenu" // 修改菜单
+};

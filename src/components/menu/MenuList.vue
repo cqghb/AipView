@@ -123,10 +123,10 @@
 					},
 				],
 				tableColumnList:[
-					{ prop: "id", label: "ID", width: 180 },
-					{ prop: "name", label: "姓名", width: 180 },
-					{ prop: "icon", label: "父节点ID", width: 180 },
-					{ prop: "parentNode", label: "菜单图标", width: 180 },
+					// { prop: "id", label: "ID", width: 180 },
+					{ prop: "name", label: "菜单名称", width: 180 },
+					{ prop: "icon", label: "菜单图标", width: 180 },
+					{ prop: "parentNode", label: "父节点ID", width: 180 },
 					{ prop: "defaultSelect", label: "是否默认选中", width: 180 },
 					{ prop: "uri", label: "请求地址", width: 180 },
 					{ prop: "createUser", label: "创建人", width: 180 },
@@ -143,7 +143,7 @@
 			addMenu(){
 			    let the = this;
 				let param = {
-					parentNode:""
+					parentNode:"0"
 				};
 				let selectItem = the.$refs.menuTable.selectedDataArr[0];
 				if(selectItem){

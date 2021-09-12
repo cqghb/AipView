@@ -234,7 +234,7 @@
         methods:{
             addUser(){
                 let the = this;
-                let user = JSON.parse(localStorage.getItem("user"));
+                let user = JSON.parse(localStorage.getItem(businessConstant.LOCAL_STORAGE_USER));
                 the.formData.createUser = user.id;
                 the.formData.headPortraitUrl = the.headPortraitUrl;
                 console.log("新增的数据", the.formData);

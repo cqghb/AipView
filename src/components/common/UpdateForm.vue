@@ -1,6 +1,6 @@
 <template>
     <div class="UpdateForm">
-        <bread-crumbs></bread-crumbs>
+        <bread-crumbs v-if="crumbs"></bread-crumbs>
         <base-form 
 					:formData="formData"
 					ref="baseForm"
@@ -15,6 +15,11 @@
 <script>
     import BreadCrumbs from "@/components/common/BreadCrumbs";
     import BaseForm from "@/components/common/BaseForm";
+	
+	import * as CommInterface from '@/components/utils/commInterface';
+	import * as SystemConstant from '@/components/constant/systemConstant';
+	import * as ComponentConstant from '@/components/constant/componentConstant';
+	
     export default {
         name: "UpdateForm",
         props:{
@@ -33,11 +38,11 @@
             },
             formData:{// 表单绑定对象
                 type:Object,
-                default:{}
+                default: ()=>{}
             },
             buttonArr:{// 动作按钮
                 type:Array,
-                default:[]
+                default: ()=>[]
             },
 			rules:{// 表单验证规则
 				type:Object,
@@ -47,6 +52,11 @@
 			baseFromModel:{// 表单绑定对象
 				type:Object,
 				default: ()=>{}
+			},
+			crumbs:{// 是否显示面包屑
+				type: Boolean,
+				require: false,
+				default: true
 			}
         },
         components:{
@@ -59,7 +69,20 @@
             };
         },
         methods: {
-
+			searchCode(codeType,paramArr, errorMsg, callback){
+				CommInterface.getCodeType(codeType,paramArr,
+				    function (res) {
+				        console.log("菜单默认选中备选项查询结果: ",res);
+						let retCode = res.code;
+						let retMsg = res.msg;
+				        if(SystemConstant.common.RET_CODE == retCode){
+				            return callback(res.data);
+				        } else {
+				            util.showMsg(errorMsg, ComponentConstant.MessageProperties.ERROR);
+				        }
+				    }
+				);
+			}
         },
         mounted() {
 			console.log('userbase-mounted')

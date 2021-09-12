@@ -3,7 +3,7 @@
 	<div>
 		<update-form
 					labelWidth="80px"
-					ref="updateForm"
+					ref="addMenuForm"
 		            :formData="formData"
 		            :formFieldList="formFieldList"
 					:baseFromModel="formData"
@@ -13,7 +13,7 @@
 					
 		<el-dialog
 		  title="选择图标"
-		  :visible.sync="centerDialogVisible"
+		  :visible="centerDialogVisible"
 		  width="70%"
 		  center>
 		  <span>
@@ -43,6 +43,7 @@
 	import * as SystemConstant from '@/components/constant/systemConstant';
 	import * as ComponentConstant from '@/components/constant/componentConstant';
 	import BaseTable from "@/components/common/BaseTable";
+	import util from "@/components/utils/util";
 	
 	export default{
 		name: "",
@@ -55,9 +56,10 @@
 				formData:{
 					id:"",//主键
 					name:"",//菜单名称
-					englishName:"",//菜单图标
+					icon:"",//菜单图标
 					parentNode:"",//父节点ID
 					defaultSelect:"",//是否默认选中
+					childrenFlag:"",//是否是末端节点
 					uri:""//请求地址
 				},
 				formFieldList:{
@@ -69,10 +71,10 @@
 					    placeholder: "请输入菜单名称...",
 					    size: ""
 					},
-					englishName: {
+					icon: {
 					    type: "Input",
 					    label: "菜单图标",
-					    prop: "englishName",
+					    prop: "icon",
 					    width: "180px",
 						readonly: true,
 					    placeholder: "请输入菜单图标称...",
@@ -112,6 +114,17 @@
 							console.log("您选择的是:",v);
 						}
 					},
+					childrenFlag: {
+					    type: "Radio",
+					    label: "是否末端节点",
+					    prop: "childrenFlag",
+					    width: "180px",
+					    radios: [],
+					    size: "",
+						change: function(v){
+							console.log("您选择的是:",v);
+						}
+					},
 					uri: {
 					    type: "Input",
 					    label: "请求地址",
@@ -124,10 +137,13 @@
 				formSize: "",
 				rules:{
 					name:[
-						{ required: true, message: '请输入菜单名称', trigger: 'blur' }
+						{ required: true, message: "请输入菜单名称", trigger: "blur" }
 					],
 					icon:[
-						{ required: true, message: '请输入菜单图标', trigger: 'blur' }
+						{ required: true, message: "请输入菜单图标", trigger: "blur" }
+					],
+					childrenFlag:[
+						{required: true, message: "请选择是否末端节点", trigger: "blur"}
 					]
 				},
 				btnHandle:[
@@ -137,7 +153,7 @@
 					    size: "",
 					    handle:()=>{
 					        let the = this;
-							
+							the.addMenu();
 					    }
 					},
 					{
@@ -146,7 +162,7 @@
 					    size: "",
 					    handle:()=>{
 					        let the = this;
-					        the.$refs.updateForm.$refs.baseForm.$refs.defaultMyForm.resetFields();
+					        the.$refs.addMenuForm.$refs.baseForm.$refs.defaultMyForm.resetFields();
 					    }
 					}
 				],
@@ -203,23 +219,23 @@
 			}
 		},
 		methods:{
-			searchDefaultSelectedOptions(){// 查询是否默认选中的码值
-				let the = this;
-				CommInterface.getCodeType(
-				    BusinessConstant.CODE_TYPE.MENU_DEFAULT_SELECTED,
-					[],
-				    function (res) {
-				        console.log("菜单默认选中备选项查询结果: ",res);
-						let retCode = res.code;
-						let retMsg = res.msg;
-				        if(SystemConstant.common.RET_CODE == retCode){
-				            the.formFieldList.defaultSelect.radios = res.data;
-				        } else {
-				            util.showMsg("菜单默认选中备选项查询失败", ComponentConstant.MessageProperties.ERROR);
-				        }
-				    }
-				);
-			},
+			// searchDefaultSelectedOptions(){// 查询是否默认选中的码值
+			// 	let the = this;
+			// 	CommInterface.getCodeType(
+			// 	    BusinessConstant.CODE_TYPE.MENU_DEFAULT_SELECTED,
+			// 		[],
+			// 	    function (res) {
+			// 	        console.log("菜单默认选中备选项查询结果: ",res);
+			// 			let retCode = res.code;
+			// 			let retMsg = res.msg;
+			// 	        if(SystemConstant.common.RET_CODE == retCode){
+			// 	            the.formFieldList.defaultSelect.radios = res.data;
+			// 	        } else {
+			// 	            util.showMsg("菜单默认选中备选项查询失败", ComponentConstant.MessageProperties.ERROR);
+			// 	        }
+			// 	    }
+			// 	);
+			// },
 			cancel(){
 				let the = this;
 				the.centerDialogVisible = false;
@@ -230,9 +246,36 @@
 				the.$refs.iconTable.commonCheck();
 				if(the.$refs.iconTable.selectedData){
 					let data = the.$refs.iconTable.selectedDataArr[0];
-					the.formData.englishName = data.englishName;
+					the.formData.icon = data.englishName;
 					the.centerDialogVisible = false;
 				}
+				
+			},
+			addMenu(){// 新增菜单
+				let the = this;
+				let user = JSON.parse(localStorage.getItem(BusinessConstant.LOCAL_STORAGE_USER));
+				the.formData.createUser = user.id;
+				the.$refs.addMenuForm.$refs.baseForm.$refs.defaultMyForm.validate((volid)=>{
+					if(volid){
+						// 业务逻辑校验 ... start ...
+						let childrenFlag = the.formData.childrenFlag;
+						let uri = the.formData.uri;
+						if(BusinessConstant.YES == childrenFlag && !uri){
+							util.showMsg("新增失败，当新增末端节点时, 请求地址 必填。", ComponentConstant.MessageProperties.ERROR);
+							return ;
+						}
+						
+						// 业务逻辑校验 ... end ...
+						CommInterface.sendPost(SystemConstant.consMenuManage.ADD, the.formData, function(num){
+							if(num>0){
+								util.showMsg("新增成功", ComponentConstant.MessageProperties.SUCCESS);
+								CommInterface.goToIconList();
+							} else {
+								util.showMsg("新增失败", ComponentConstant.MessageProperties.ERROR);
+							}
+						});
+					}
+				})
 				
 			}
 		},
@@ -243,7 +286,16 @@
 			let the = this;
 			let parentNode = the.$route.params.parentNode;
 			the.formData.parentNode = parentNode;
-			this.searchDefaultSelectedOptions();
+			// the.searchDefaultSelectedOptions();
+			// 查菜单默认选中备选项
+			the.$refs.addMenuForm.searchCode(BusinessConstant.CODE_TYPE.MENU_DEFAULT_SELECTED, [], "菜单默认选备选项查询失败", (data)=>{
+				the.formFieldList.defaultSelect.radios = data;
+			});
+			// 查是否末端节点
+			the.$refs.addMenuForm.searchCode(BusinessConstant.CODE_TYPE.YES_OR_NO, [], "是否末端节点备选项查询失败", (data)=>{
+				the.formFieldList.childrenFlag.radios = data;
+			});
+			
 		}
 	}
 	

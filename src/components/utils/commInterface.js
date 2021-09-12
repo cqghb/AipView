@@ -11,6 +11,19 @@ const msgConstant = require("@/components/constant/msgConstant");
 const systemConstant = require("@/components/constant/systemConstant");
 
 /**
+ * 发送一个get请求
+ * @param {Object} uri 请求地址
+ * @param {Object} param 参数
+ * @param {Object} callback 回调函数，将数据返回
+ */
+export function baseSendGet(uri, param, callback) {
+    util.$http.get(uri,{params: param}).then(function (res) {
+		let info = res.data;
+		return callback(info);
+    });
+}
+
+/**
  * 通过主键获取用户信息
  * 通过回调函数把异步请求的数据返回
  * @param uri 请求地址
@@ -114,7 +127,6 @@ export function getCodeType(codeType, codeList, callback) {
 		let info = res;
 		return callback(info);
     });
-	//console.log(333);
 }
 export const getCodeType2 = (param) => {
 	return new Promise((resolve, reject) => {
@@ -141,18 +153,6 @@ export function resetPass(params, callback) {
 		return callback(info);
     });
 }
-/**
- * 发送一个get请求
- * @param {Object} uri 请求地址
- * @param {Object} param 参数
- * @param {Object} callback 回调函数，将数据返回
- */
-export function baseSendGet(uri, param, callback) {
-    util.$http.get(uri,{params: param}).then(function (res) {
-		let info = res.data;
-		return callback(info);
-    });
-}
 
 /**
  * 跳转到菜单新增页面
@@ -163,5 +163,16 @@ export function goToMenuAdd(params) {
         path: "/menuAdd",
         name: "MenuAdd",
 		params: params
+    });
+}
+
+/**
+ * 转到图标列表页
+ * @returns {Promise<Route>}
+ */
+export function goToIconList() {
+    return main.default.$router.push({
+        path: "/menuList",
+        name: "MenuList"
     });
 }
