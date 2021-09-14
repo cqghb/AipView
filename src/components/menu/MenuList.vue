@@ -17,6 +17,9 @@
 	import BaseTable from "@/components/common/BaseTable";
 	import * as SystemConstant from '@/components/constant/systemConstant';
 	import * as CommInterface from '@/components/utils/commInterface';
+	import * as ComponentConstant from '@/components/constant/componentConstant';
+	
+	import util from "@/components/utils/util";
 	
 	export default {
 		name: "MenuList",
@@ -116,7 +119,7 @@
 						handle:()=>{
 							let the = this;
 							util.confirm("", "", "", "", "",function () {// 确认
-								the.deleteUser();
+								the.deleteMenu();
 							},null);
 			
 						}
@@ -140,7 +143,7 @@
 			
 		},
 		methods:{
-			addMenu(){
+			addMenu(){// 添加菜单
 			    let the = this;
 				let param = {
 					parentNode:"0"
@@ -151,6 +154,29 @@
 				}
 			    CommInterface.goToMenuAdd(param);
 			},
+			deleteMenu(){// 删除菜单
+				// 不能直接删除根节点，只能找到子节点一个个删除 
+				let the = this;
+				the.$refs.menuTable.commonCheck();
+				let selectedItem = the.$refs.menuTable.selectedDataArr[0];
+				let childrenList = selectedItem.childrenList;
+				let id = selectedItem.id;
+				if(childrenList.length > 0){
+					util.showMsg("删除失败，不能直接删除非末端节点。", ComponentConstant.MessageProperties.ERROR);
+					return ;
+				}
+				
+				CommInterface.sendPost(SystemConstant.consMenuManage.DEL, {id: id}, function(num){
+					if(num>0){
+						util.showMsg("删除成功", ComponentConstant.MessageProperties.SUCCESS);
+						the.$refs.menuTable.loading = true;
+						the.$refs.menuTable.queryList();
+					} else {
+						util.showMsg("删除失败", ComponentConstant.MessageProperties.ERROR);
+					}
+				});
+				
+			}
 		},
 		mounted() {
 			
