@@ -59,6 +59,7 @@
         created: function () {
             let the = this;
             let id = the.$route.params.id;
+			console.log("the.$route",the.$route);
             the.queryInfo(id);
         },
         mounted() {

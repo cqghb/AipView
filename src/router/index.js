@@ -11,6 +11,7 @@ import UserDetail from '@/components/user/UserDetail'
 import UserAdd from '@/components/user/UserAdd'
 import MenuList from '@/components/menu/MenuList'
 import MenuAdd from '@/components/menu/MenuAdd'
+import MenuDetail from '@/components/menu/MenuDetail'
 
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {
@@ -125,9 +126,20 @@ export default new Router({
 						path: "/menuAdd"
 					}
 				]
-			}
-			
-			]
+			},{
+				path: "/menuDetail",
+				name: "MenuDetail",
+				component: MenuDetail,
+				meta: [{
+						name: "菜单列表",
+						path: "/menuList"
+					},
+					{
+						name: "菜单详情",
+						path: "/menuDetail"
+					}
+				]
+			}]//在这里加
 		}, {
 			path: "/",
 			name: "Login",

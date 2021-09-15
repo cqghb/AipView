@@ -1,7 +1,7 @@
 <template>
 	<!-- 菜单管理列表 -->
 	<div>
-		<base-table uri="/queryMenuList"
+		<base-table :uri="uri"
 		            ref="menuTable"
 		            :operationButtonList="operationButtonList"
 		            :tableColumnList="tableColumnList"
@@ -18,6 +18,7 @@
 	import * as SystemConstant from '@/components/constant/systemConstant';
 	import * as CommInterface from '@/components/utils/commInterface';
 	import * as ComponentConstant from '@/components/constant/componentConstant';
+	import * as BusinessConstant from '@/components/constant/businessConstant';
 	
 	import util from "@/components/utils/util";
 	
@@ -28,6 +29,7 @@
 		},
 		data() {
 			return {
+				uri: SystemConstant.consMenuManage.QUERY_LIST,
 				searchData:{
 					id: "",// 主键
 					name: "",// 节点名称
@@ -91,7 +93,7 @@
 						text: "详情",
 						handle:()=>{
 							let the = this;
-							the.showUserInfo();
+							the.showDetail();
 						}
 					},
 					{
@@ -129,8 +131,9 @@
 					// { prop: "id", label: "ID", width: 180 },
 					{ prop: "name", label: "菜单名称", width: 180 },
 					{ prop: "icon", label: "菜单图标", width: 180 },
-					{ prop: "parentNode", label: "父节点ID", width: 180 },
-					{ prop: "defaultSelect", label: "是否默认选中", width: 180 },
+					// { prop: "parentNode", label: "父节点ID", width: 180 },
+					{ prop: "defaultSelect", label: "是否默认选中", width: 180},
+					// { prop: "defaultSelect", label: "是否默认选中", width: 180, codeValueConversion: BusinessConstant.CODE_VALUE, transformation:BusinessConstant.CODE_TYPE.YES_OR_NO},
 					{ prop: "uri", label: "请求地址", width: 180 },
 					{ prop: "createUser", label: "创建人", width: 180 },
 					// { prop: "createTime", label: "创建时间", width: 180, type:"Date" },
@@ -175,8 +178,19 @@
 						util.showMsg("删除失败", ComponentConstant.MessageProperties.ERROR);
 					}
 				});
-				
-			}
+			},
+			showDetail(){// 显示详细信息
+			    let the = this;
+			    the.$refs.menuTable.commonCheck();
+			    if(the.$refs.menuTable.selectedData){
+			        let params = the.$refs.menuTable.selectedDataArr[0];
+			        let queryParam = {
+						id: params.id
+					};
+			        CommInterface.goToDetail(SystemConstant.consComponentPath.MENU_DETAIL, SystemConstant.consComponentName.MENU_DETAIL, queryParam);
+			    }
+			
+			},
 		},
 		mounted() {
 			

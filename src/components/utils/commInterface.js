@@ -128,6 +128,22 @@ export function getCodeType(codeType, codeList, callback) {
 		return callback(info);
     });
 }
+
+// export async function getCodeType222(codeType, codeList) {
+// 	return await new Promise((resolve, reject) => {
+// 		util.$http.post(systemConstant.consCodeManage.SEARCH_CODEKEY_VALUE,
+// 			{
+// 				"codeType": codeType,
+// 				"codeList": codeList,
+// 			}
+// 		).then(function (res) {
+// 			console.log("码值转换响应值: ", res);
+// 			let info = res;
+// 			return info;
+// 		});
+// 	});
+    
+// }
 export const getCodeType2 = (param) => {
 	return new Promise((resolve, reject) => {
 		util.$http.get(systemConstant.consCodeManage.SEARCH_CODEKEY_VALUE, {
@@ -162,6 +178,31 @@ export function goToMenuAdd(params) {
     return main.default.$router.push({
         path: "/menuAdd",
         name: "MenuAdd",
+		params: params
+    });
+}
+
+// /**
+//  * 跳转到菜单详情页面
+//  * @returns {Promise<Route>}
+//  */
+// export function goToMenuDetail(params) {
+//     return main.default.$router.push({
+//         path: "/menuDetail",
+//         name: "MenuDetail",
+// 		params: params
+//     });
+// }
+/**
+ * 跳转到详情页面
+ * @param {Object} path path
+ * @param {Object} name 组件名称
+ * @param {Object} params 参数
+ */
+export function goToDetail(path, name, params) {
+    return main.default.$router.push({
+        path: path,
+        name: name,
 		params: params
     });
 }

@@ -77,11 +77,13 @@
                                      :prop="item.prop"
                                      :label="item.label"
                                      :width="item.width">
+									 
 						<template slot-scope="scope">
+							<!-- 码值转换 -->
+							<!-- <span v-if="'codeValue'==item.codeValueConversion" v-html="aaaa(scope, item)"></span>								 -->
 							<!-- 是否显示成图标 -->
 							<i v-if="item.showIcon" :class="test1(scope,item)"></i>
-							<span v-else>{{ test1(scope,item)}}</span>
-							
+							<span v-else>{{ test1(scope,item)}}</span>								 							
 						</template>
                     </el-table-column>
                 </el-table>
@@ -105,10 +107,13 @@
     import BreadCrumbs from "@/components/common/BreadCrumbs";
 	import BaseForm from "@/components/common/BaseForm";
 	import tableDataFormatStrateg from "@/components/utils/table-data-format-strategy";
+	import * as CommInterface from '@/components/utils/commInterface';
 	
 	import util from "@/components/utils/util";
 	
     import * as SystemConstant from '@/components/constant/systemConstant';
+	import * as BusinessConstant from '@/components/constant/businessConstant';
+	
     export default {
         name: "BaseTable",
         components:{
@@ -246,6 +251,60 @@
 			    if(1==num){
 			        the.selectedData = true;
 			    }
+			},
+			async aaaa(data, item){
+				let the = this;
+				let transformation = item.transformation;
+				// 辅助开发
+				if(!transformation){
+					console.log("请在表格列中配置transformation属性");
+				}
+				let prop = item.prop;
+				let value = data.row[prop];
+				// 不同类型，按不同处理办法，这里先写一个码值转换的
+				if(BusinessConstant.CODE_TYPE.YES_OR_NO==transformation){
+					let params = [value];
+					
+					await util.$http.post(SystemConstant.consCodeManage.SEARCH_CODEKEY_VALUE,
+						{
+							"codeType": BusinessConstant.CODE_TYPE.YES_OR_NO,
+							"codeList": params,
+						}
+					).then(function (res) {
+						
+						let info = res;
+						let codeArr = info.data;
+							// 这里只会返回一条,老数据可能存在空的情况
+							if(codeArr.length>0){
+								console.log("22323233232: ", codeArr[0].label);
+								return codeArr[0].label;
+							}
+						return "";
+					});
+					
+					
+					// let res = await CommInterface.getCodeType222(BusinessConstant.CODE_TYPE.YES_OR_NO, params
+					// , function(res){
+					// 	let codeArr = res.data;
+					// 	// 这里只会返回一条,老数据可能存在空的情况
+					// 	if(codeArr.length>0){
+					// 		console.log('dfdfdfdfdf',codeArr[0].label);
+					// 		return codeArr[0].label;
+					// 	}
+											
+					// }
+					// );
+					// console.log('dfdfdfdfdf',res);
+					// .then((res)=>{
+					// 	console.log('dfdfdfdfdf',res);
+					// 	let codeArr = res.data;
+					// 	// 这里只会返回一条,老数据可能存在空的情况
+					// 	if(codeArr.length>0){
+							
+					// 		return codeArr[0].label;
+					// 	}
+					// });
+				}
 			},
 			load(){
 				

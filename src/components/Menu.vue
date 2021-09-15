@@ -8,6 +8,8 @@
 
 <script>
     import childMenu from '@/components/ChildMenu'
+	import * as SystemConstant from '@/components/constant/systemConstant';
+	
     export default {
         name: "Menu",
         components:{
@@ -26,7 +28,7 @@
         },
         mounted() {
             let the = this;
-            the.$http.get("/queryMenu").then(function (res) {
+            the.$http.get(SystemConstant.consMenuManage.QUERY_MENU).then(function (res) {
                 console.log(res);
                 the.defaultSelect = res.data.defaultSelectList;
                 the.menuTree = res.data.rootTree;

@@ -53,12 +53,28 @@ export const consIconManage = {
     UPDATE_ICON_BY_ID: "/icon/updateIcon" // 修改图标
 };
 /**
- * 图标管理接口
+ * 菜单管理接口
  */
 export const consMenuManage = {
-    // QUERY_ICON_BY_ID: "/menu/findPage", // 分页查询
-    FIND_PAGE: "/menu/findPage", // 分页查询
-    ADD: "/insertMenu", // 新增菜单
-    DEL: "/deleteMenu", // 删除菜单
-    UPDATE_BY_ID: "/icon/updateMenu" // 修改菜单
+    QUERY_BY_ID: "/menu/queryMenuById", // 通过ID查询
+    // FIND_PAGE: "/menu/findPage", // 分页查询
+    ADD: "/menu/insertMenu", // 新增菜单
+    DEL: "/menu/deleteMenu", // 删除菜单
+    QUERY_MENU: "/menu/queryMenu", // 后管左侧菜单树
+    QUERY_LIST: "/menu/queryMenuList", // 后管左侧菜单树
+    UPDATE_BY_ID: "/menu/updateMenu" // 修改菜单
+};
+/**
+ * 组件Path
+ */
+export const consComponentPath = {
+    MENU_DETAIL: "/menuDetail", // 菜单详情
+    // UPDATE_BY_ID: "/icon/updateMenu" // 修改菜单
+};
+/**
+ * 组件名称
+ */
+export const consComponentName = {
+    MENU_DETAIL: "MenuDetail", // 菜单详情组件名称
+    // UPDATE_BY_ID: "/icon/updateMenu" // 修改菜单
 };
