@@ -12,6 +12,7 @@ import UserAdd from '@/components/user/UserAdd'
 import MenuList from '@/components/menu/MenuList'
 import MenuAdd from '@/components/menu/MenuAdd'
 import MenuDetail from '@/components/menu/MenuDetail'
+import MenuUpdate from '@/components/menu/MenuUpdate'
 
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {
@@ -60,8 +61,7 @@ export default new Router({
 				meta: [{
 						name: "用户列表",
 						path: "/userList"
-					},
-					{
+					},{
 						name: "用户详情",
 						path: "/userDetail"
 					}
@@ -73,8 +73,7 @@ export default new Router({
 				meta: [{
 						name: "用户列表",
 						path: "/userList"
-					},
-					{
+					},{
 						name: "用户修改",
 						path: "/userUpdate"
 					}
@@ -86,8 +85,7 @@ export default new Router({
 				meta: [{
 						name: "用户列表",
 						path: "/userList"
-					},
-					{
+					},{
 						name: "新增用户",
 						path: "/userAdd"
 					}
@@ -99,8 +97,7 @@ export default new Router({
 				meta: [{
 						name: "用户列表",
 						path: "/userList"
-					},
-					{
+					},{
 						name: "用户详情",
 						path: "/simpleDetailPage"
 					}
@@ -120,8 +117,7 @@ export default new Router({
 				meta: [{
 						name: "菜单列表",
 						path: "/menuList"
-					},
-					{
+					},{
 						name: "新增菜单",
 						path: "/menuAdd"
 					}
@@ -133,10 +129,21 @@ export default new Router({
 				meta: [{
 						name: "菜单列表",
 						path: "/menuList"
-					},
-					{
+					},{
 						name: "菜单详情",
 						path: "/menuDetail"
+					}
+				]
+			},{
+				path: "/menuUpdate",
+				name: "MenuUpdate",
+				component: MenuUpdate,
+				meta: [{
+						name: "菜单列表",
+						path: "/menuList"
+					},{
+						name: "菜单维护",
+						path: "/menuUpdate"
 					}
 				]
 			}]//在这里加

@@ -62,13 +62,15 @@ export const consMenuManage = {
     DEL: "/menu/deleteMenu", // 删除菜单
     QUERY_MENU: "/menu/queryMenu", // 后管左侧菜单树
     QUERY_LIST: "/menu/queryMenuList", // 后管左侧菜单树
-    UPDATE_BY_ID: "/menu/updateMenu" // 修改菜单
+    QUERY_PARENT_MENU: "/menu/queryParentMenu", // 分页查询所有父菜单
+    MENU_UPDATE: "/menu/updateMenu" // 维护菜单
 };
 /**
  * 组件Path
  */
 export const consComponentPath = {
     MENU_DETAIL: "/menuDetail", // 菜单详情
+    MENU_UPDATE: "/menuUpdate", // 维护菜单
     // UPDATE_BY_ID: "/icon/updateMenu" // 修改菜单
 };
 /**
@@ -76,5 +78,12 @@ export const consComponentPath = {
  */
 export const consComponentName = {
     MENU_DETAIL: "MenuDetail", // 菜单详情组件名称
+    MENU_UPDATE: "MenuUpdate", // 维护菜单组件名称
     // UPDATE_BY_ID: "/icon/updateMenu" // 修改菜单
 };
+/**
+ * 子组件调用父组件方法名称
+ */
+export const consChildrenCompUseParentComp = {
+	UPDATE_PARENT_PROPERTY: "updateParentProperty",// 子组件调用父组件方法名称
+}

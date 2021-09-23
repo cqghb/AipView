@@ -5,7 +5,6 @@
 					:formData="formData"
 					ref="baseForm"
 					:formFieldList="formFieldList"
-					:baseFromModel="baseFromModel"
 					:size="size"
 					:rules="rules"
 					:buttonArr="buttonArr"></base-form>
@@ -49,10 +48,10 @@
 				require: false,
 				default: ()=>{}
 			},
-			baseFromModel:{// 表单绑定对象
-				type:Object,
-				default: ()=>{}
-			},
+			// baseFromModel:{// 表单绑定对象
+			// 	type:Object,
+			// 	default: ()=>{}
+			// },
 			crumbs:{// 是否显示面包屑
 				type: Boolean,
 				require: false,

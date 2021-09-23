@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-form label-position="right"
-		:model="baseFromModel"
+		:model="formData"
 		:inline="myInline"
 		ref="defaultMyForm"
 		:rules="rules"
@@ -209,10 +209,10 @@
 				require: false,
 				default: ()=>{}
 			},
-			baseFromModel:{// 表单绑定对象
-				type:Object,
-				default: ()=>{}
-			},
+			// baseFromModel:{// 表单绑定对象
+			// 	type:Object,
+			// 	default: ()=>{}
+			// },
 			myInline: {
 				type: Boolean,
 				required: false,
