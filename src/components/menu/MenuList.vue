@@ -134,7 +134,7 @@
 					// { prop: "parentNode", label: "父节点ID", width: 180 },
 					{ prop: "defaultSelect", label: "是否默认选中", width: 180},
 					// { prop: "defaultSelect", label: "是否默认选中", width: 180, codeValueConversion: BusinessConstant.CODE_VALUE, transformation:BusinessConstant.CODE_TYPE.YES_OR_NO},
-					{ prop: "uri", label: "请求地址", width: 180 },
+					// { prop: "uri", label: "请求地址", width: 180 },
 					{ prop: "createUser", label: "创建人", width: 180 },
 					// { prop: "createTime", label: "创建时间", width: 180, type:"Date" },
 					{ prop: "createTime", label: "创建时间", width: 180, type:SystemConstant.dataType.DATE, formatDate: SystemConstant.common.FORMAT_DATE },
@@ -189,7 +189,7 @@
 			        let queryParam = {
 						id: params.id
 					};
-			        CommInterface.goToDetail(SystemConstant.consComponentPath.MENU_DETAIL, SystemConstant.consComponentName.MENU_DETAIL, queryParam);
+			        CommInterface.goToPage(SystemConstant.consComponentPath.MENU_DETAIL, SystemConstant.consComponentName.MENU_DETAIL, queryParam);
 			    }
 			},
 			updateMenu(){
@@ -200,9 +200,12 @@
 					let param = {
 					        id: params.id
 					    };
-					CommInterface.goToDetail(SystemConstant.consComponentPath.MENU_UPDATE, SystemConstant.consComponentName.MENU_UPDATE, param);
+					CommInterface.goToPage(SystemConstant.consComponentPath.MENU_UPDATE, SystemConstant.consComponentName.MENU_UPDATE, param);
 				}
 			}
+		},
+		created() {
+			
 		},
 		mounted() {
 			

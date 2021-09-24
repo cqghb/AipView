@@ -1,11 +1,15 @@
 <template>
-	<!-- 菜单维护页面 -->
+	<!-- 
+		菜单维护页面 
+		不显示出地址是为了防止被黑
+	-->
 	<div>
 		<update-form labelWidth="80px"
 					 ref="menuUpdate"
 		             :formData="formData"
 		             :formFieldList="formFieldList"
 		             :size="formSize"
+					 :rules="rules"
 		             :buttonArr="btnHandle"></update-form>
 		<icon-dialog ref="dialogIcon" 
 					@updateParentProperty="updateIcon"></icon-dialog>
@@ -19,9 +23,13 @@
 	import UpdateForm from "@/components/common/UpdateForm";
 	import IconDialog from "@/components/icon/IconDialog";
 	import MenuDialog from "@/components/menu/MenuDialog";
+	
+	import util from "@/components/utils/util";
 	import * as CommInterface from '@/components/utils/commInterface';
 	import * as SystemConstant from '@/components/constant/systemConstant';
 	import * as BusinessConstant from '@/components/constant/businessConstant';
+	import * as ComponentConstant from '@/components/constant/componentConstant';
+	
 	
 	export default{
 		name: "UpdateMenu",
@@ -38,7 +46,7 @@
 				    icon: "",
 					// parentNodeShow: "",
 				    parentNode: "",
-				    uri: ""
+				    // uri: ""
 				},
 				formFieldList:{
 				    name: {
@@ -106,17 +114,25 @@
 				    		console.log("您选择的是:",v);
 				    	}
 				    },
-				    uri: {
-				        type: "Input",
-				        label: "请求地址",
-				        prop: "uri",
-						readonly: true,
-				        width: "180px",
-				        placeholder: "请输入请求地址称...",
-				        size: ""
-				    }
+				  //   uri: {
+				  //       type: "Input",
+				  //       label: "请求地址",
+				  //       prop: "uri",
+						// readonly: true,
+				  //       width: "180px",
+				  //       placeholder: "请输入请求地址称...",
+				  //       size: ""
+				  //   }
 				},
 				formSize: "",
+				rules:{
+					name:[
+						{ required: true, message: "请输入菜单名称", trigger: "blur" }
+					],
+					parentNode:[
+						{required: true, message: "菜单父节点不能为空", trigger: "blur"}
+					]
+				},
 				btnHandle:[
 				    {
 				        label:"修改",
@@ -124,16 +140,15 @@
 				        size: "",
 				        handle:()=>{
 				            let the = this;
-				            //the.updateUser();
+				            the.updateMenu();
 				        }
-				    },
-				    {
-				        label:"重置",
-				        type:"primary",
+				    },{
+				        label:"返回",
+				        type:"",
 				        size: "",
 				        handle:()=>{
 				            let the = this;
-				            
+				            CommInterface.goToPage(SystemConstant.consComponentPath.LIST_MENU, SystemConstant.consComponentName.LIST_MENU, {});
 				        }
 				    }
 				]
@@ -168,6 +183,31 @@
 				let name = parentMenu.name;
 				// the.formData.parentNodeShow = name + "-" + id;
 				the.formData.parentNode = id;
+			},
+			updateMenu(){// 维护菜单
+				let the = this;
+				let user = JSON.parse(localStorage.getItem(BusinessConstant.LOCAL_STORAGE_USER));
+				the.formData.updateUser = user.id;
+				console.log("修改的数据", the.formData);
+				the.$refs.menuUpdate.$refs.baseForm.$refs.defaultMyForm.validate((volid)=>{
+					if(volid){
+						CommInterface.sendPost(
+						    SystemConstant.consMenuManage.UPDATE,
+						    the.formData,
+						    function (res) {
+						        console.log("修改结果 ",res);
+						        if(res>0){
+						            util.showMsg("修改成功", ComponentConstant.MessageProperties.SUCCESS);
+						            CommInterface.goToPage(SystemConstant.consComponentPath.LIST_MENU, SystemConstant.consComponentName.LIST_MENU, {});
+						        } else {
+						            util.showMsg("修改失败", ComponentConstant.MessageProperties.ERROR);
+						        }
+						
+						    }
+						);
+					}
+				});
+				
 			}
 		},
 		created() {

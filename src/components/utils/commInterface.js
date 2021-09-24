@@ -199,7 +199,7 @@ export function goToMenuAdd(params) {
  * @param {Object} name 组件名称
  * @param {Object} params 参数
  */
-export function goToDetail(path, name, params) {
+export function goToPage(path, name, params) {
     return main.default.$router.push({
         path: path,
         name: name,

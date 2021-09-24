@@ -173,7 +173,7 @@
             },
             updateUser(){// 修改用户
                 let the = this;
-                let user = JSON.parse(localStorage.getItem("user"));
+                let user = JSON.parse(localStorage.getItem(BusinessConstant.LOCAL_STORAGE_USER));
                 the.formData.updateUser = user.id;
                 console.log("修改的数据", the.formData);
                 CommInterface.sendPost(
