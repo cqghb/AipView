@@ -13,6 +13,13 @@ import MenuList from '@/components/menu/MenuList'
 import MenuAdd from '@/components/menu/MenuAdd'
 import MenuDetail from '@/components/menu/MenuDetail'
 import MenuUpdate from '@/components/menu/MenuUpdate'
+import MenuAuthList from '@/components/authority_manage/menu_authority/MenuAuthList'
+import RoleList from '@/components/authority_manage/role/RoleList'
+import RoleAdd from '@/components/authority_manage/role/RoleAdd'
+import RoleDetail from '@/components/authority_manage/role/RoleDetail'
+import RoleUpdate from '@/components/authority_manage/role/RoleUpdate'
+import RoleMenuList from '@/components/authority_manage/role_menu/RoleMenuList'
+import UserRoleList from '@/components/authority_manage/user_role/UserRoleList'
 
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {
@@ -144,6 +151,78 @@ export default new Router({
 					},{
 						name: "菜单维护",
 						path: "/menuUpdate"
+					}
+				]
+			},{
+				path: "/menuAuthList",
+				name: "MenuAuthList",
+				component: MenuAuthList,
+				meta: [{
+						name: "菜单权限列表",
+						path: "/menuAuthList"
+					}
+				]
+			},{
+				path: "/roleList",
+				name: "RoleList",
+				component: RoleList,
+				meta: [{
+						name: "角色列表",
+						path: "/roleList"
+					}
+				]
+			},{
+				path: "/roleAdd",
+				name: "RoleAdd",
+				component: RoleAdd,
+				meta: [{
+						name: "角色列表",
+						path: "/roleList"
+					},{
+						name: "角色添加",
+						path: "/roleAdd"
+					}
+				]
+			},{
+				path: "/roleDetail",
+				name: "RoleDetail",
+				component: RoleDetail,
+				meta: [{
+						name: "角色列表",
+						path: "/roleList"
+					},{
+						name: "角色详情",
+						path: "/roleDetail"
+					}
+				]
+			},{
+				path: "/roleUpdate",
+				name: "RoleUpdate",
+				component: RoleUpdate,
+				meta: [{
+						name: "角色列表",
+						path: "/roleList"
+					},{
+						name: "角色维护",
+						path: "/roleUpdate"
+					}
+				]
+			},{
+				path: "/roleMenuList",
+				name: "RoleMenuList",
+				component: RoleMenuList,
+				meta: [{
+						name: "角色菜单关系列表",
+						path: "/roleMenuList"
+					}
+				]
+			},{
+				path: "/userRoleList",
+				name: "UserRoleList",
+				component: UserRoleList,
+				meta: [{
+						name: "角色菜单关系列表",
+						path: "/userRoleList"
 					}
 				]
 			}]//在这里加

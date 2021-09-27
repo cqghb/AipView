@@ -1,7 +1,8 @@
 <template>
     <div>
         <el-menu-item v-if="itemData.childrenList.length==0" :index="itemData.uri" :key="itemData.id">
-            <span>{{itemData.name}}</span>
+            <i :class="itemData.icon"></i>
+			<span>{{itemData.name}}</span>
         </el-menu-item>
 
         <el-submenu v-if="itemData.childrenList.length>0" :index="itemData.id" :key="itemData.id">

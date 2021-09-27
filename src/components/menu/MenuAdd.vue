@@ -140,7 +140,7 @@
 						{ required: true, message: "请输入菜单名称", trigger: "blur" }
 					],
 					icon:[
-						{ required: true, message: "请输入菜单图标", trigger: "blur" }
+						{ required: true, message: "请选择菜单图标", trigger: "blur" }
 					],
 					childrenFlag:[
 						{required: true, message: "请选择是否末端节点", trigger: "blur"}
