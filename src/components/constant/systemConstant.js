@@ -89,3 +89,13 @@ export const consComponentName = {
 export const consChildrenCompUseParentComp = {
 	UPDATE_PARENT_PROPERTY: "updateParentProperty",// 子组件调用父组件方法名称
 }
+
+/**
+ * 角色管理接口
+ */
+export const consRoleManage = {
+    FIND_PAGE: "/role/findPage", // 分页查询
+    ADD: "/role/insertRole", // 新增角色
+    DEL: "/role/deleteRole", // 删除角色
+    UPDATE_BY_ID: "/role/updateRole" // 修改角色
+};
