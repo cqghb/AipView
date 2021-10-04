@@ -33,7 +33,7 @@
 				searchData:{
 					id: "",// 主键
 					name: "",// 节点名称
-					parentNode: ""// 父节点ID
+					parentNode: BusinessConstant.NO2// 父节点标志
 				},
 				searchForm:{
 					id: {
@@ -51,15 +51,16 @@
 						width: "180px",
 						placeholder: "请输入菜单名称...",
 						size:""
-					},
-					parentNode: {
-						type: "Input",
-						label: "菜单父节点ID",
-						prop: "parentNode",
-						width: "180px",
-						placeholder: "请输入菜单父节点ID...",
-						size:""
 					}
+					// ,
+					// parentNode: {// 这个应该用下拉选项来做
+					// 	type: "Input",
+					// 	label: "菜单父节点标志",
+					// 	prop: "parentNode",
+					// 	width: "180px",
+					// 	placeholder: "请输入菜单父节点ID...",
+					// 	size:""
+					// }
 					
 				},
 				searchHandle:[
