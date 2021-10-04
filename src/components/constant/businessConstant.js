@@ -3,6 +3,7 @@
 export const LOCAL_STORAGE_USER = "user";// 本地登录用户缓存
 export const YES = "1";// 是
 export const NO = "2";// 否
+export const NO2 = "0";// 否
 export const CODE_VALUE = "codeValue";// 码值
 // 码值相关常量
 export const CODE_TYPE = {
