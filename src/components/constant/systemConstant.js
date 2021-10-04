@@ -72,7 +72,8 @@ export const consComponentPath = {
     MENU_DETAIL: "/menuDetail", // 菜单详情
     MENU_UPDATE: "/menuUpdate", // 维护菜单
     LIST_MENU: "/menuList", // 菜单列表
-    // UPDATE_BY_ID: "/icon/updateMenu" // 修改菜单
+    ADD_ROLE: "/roleAddu", // 添加角色
+    LIST_ROLE: "/roleList", // 角色列表
 };
 /**
  * 组件名称
@@ -81,7 +82,8 @@ export const consComponentName = {
     MENU_DETAIL: "MenuDetail", // 菜单详情组件名称
     MENU_UPDATE: "MenuUpdate", // 维护菜单组件名称
     LIST_MENU: "MenuList", // 菜单列表组件名称
-    // UPDATE_BY_ID: "/icon/updateMenu" // 修改菜单
+    ADD_ROLE: "RoleAdd", // 添加角色
+    LIST_ROLE: "RoleList", // 角色列表
 };
 /**
  * 子组件调用父组件方法名称

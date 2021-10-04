@@ -150,7 +150,7 @@
 			addMenu(){// 添加菜单
 			    let the = this;
 				let param = {
-					parentNode:"0"
+					parentNode: BusinessConstant.NO2
 				};
 				let selectItem = the.$refs.menuTable.selectedDataArr[0];
 				if(selectItem){
