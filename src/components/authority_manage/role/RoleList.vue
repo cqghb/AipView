@@ -18,6 +18,8 @@
 	
 	import * as SystemConstant from '@/components/constant/systemConstant';
 	import * as CommInterface from '@/components/utils/commInterface';
+	import * as MsgConstant from '@/components/constant/msgConstant';
+	import * as ComponentConstant from '@/components/constant/componentConstant';
 	
 	import util from "@/components/utils/util";
 	
@@ -90,7 +92,7 @@
 						text: "修改",
 						handle:()=>{
 							let the = this;
-							// the.updateMenu();
+							the.updateRole();
 						}
 					},
 					{
@@ -100,15 +102,16 @@
 						handle:()=>{
 							let the = this;
 							util.confirm("", "", "", "", "",function () {// 确认
-								// the.deleteMenu();
-							},null);
+								the.deleteRole();
+							}, null);
 							
 						}
 					},
 				],
 				tableColumnList:[
-					{ prop: "id", label: "ID", width: 180 },
+					// { prop: "id", label: "ID", width: 180 },
 					{ prop: "name", label: "角色名称", width: 180 },
+					{ prop: "remark", label: "备注"},
 					{ prop: "createUser", label: "创建人", width: 180 },
 					{ prop: "createTime", label: "创建时间", width: 180, type:SystemConstant.dataType.DATE, formatDate: SystemConstant.common.FORMAT_DATE },
 					{ prop: "updateUser", label: "修改人", width: 180 },
@@ -118,10 +121,36 @@
 			};
 		},
 		methods:{
-			addRole(){
-				// let the = this;
-				//let selectItem = the.$refs.roleTable.selectedDataArr[0];
+			addRole(){// 添加
 				CommInterface.goToPage(SystemConstant.consComponentPath.ADD_ROLE, SystemConstant.consComponentName.ADD_ROLE, {});
+			},
+			updateRole(){// 修改
+				let the = this;
+				the.$refs.roleTable.commonCheck();
+				if(the.$refs.roleTable.selectedData){
+					let params = the.$refs.roleTable.selectedDataArr[0];
+					let param = {
+					        id: params.id
+					    };
+					CommInterface.goToPage(SystemConstant.consComponentPath.UPDATE_ROLE, SystemConstant.consComponentName.UPDATE_ROLE, param);
+				}
+			},
+			deleteRole(){// 删除
+				let the = this;
+				the.$refs.roleTable.commonCheck();
+				if(the.$refs.roleTable.selectedData){
+					let selectedItem = the.$refs.roleTable.selectedDataArr[0];
+					let id = selectedItem.id;
+					CommInterface.sendPost(SystemConstant.consRoleManage.UPDATE_DEL_TAG, {id: id}, function(num){
+						if(num>0){
+							util.showMsg(MsgConstant.msgCommon.SUCCESS_DELETE, ComponentConstant.MessageProperties.SUCCESS);
+							the.$refs.roleTable.loading = true;
+							the.$refs.roleTable.queryList();
+						} else {
+							util.showMsg(MsgConstant.msgCommon.FALL_DELETE, ComponentConstant.MessageProperties.ERROR);
+						}
+					});
+				}
 			}
 		},
 		created() {

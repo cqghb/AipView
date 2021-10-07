@@ -74,6 +74,7 @@ export const consComponentPath = {
     LIST_MENU: "/menuList", // 菜单列表
     ADD_ROLE: "/roleAddu", // 添加角色
     LIST_ROLE: "/roleList", // 角色列表
+    UPDATE_ROLE: "/roleUpdate", // 维护角色
 };
 /**
  * 组件名称
@@ -84,6 +85,7 @@ export const consComponentName = {
     LIST_MENU: "MenuList", // 菜单列表组件名称
     ADD_ROLE: "RoleAdd", // 添加角色
     LIST_ROLE: "RoleList", // 角色列表
+	UPDATE_ROLE: "RoleUpdate", // 维护角色
 };
 /**
  * 子组件调用父组件方法名称
@@ -98,6 +100,8 @@ export const consChildrenCompUseParentComp = {
 export const consRoleManage = {
     FIND_PAGE: "/role/findPage", // 分页查询
     ADD: "/role/insertRole", // 新增角色
-    DEL: "/role/deleteRole", // 删除角色
-    UPDATE_BY_ID: "/role/updateRole" // 修改角色
+    // DEL: "/role/deleteRole", // 删除角色
+    UPDATE: "/role/updateRole", // 修改角色
+	QUERY_BY_ID: "/role/queryById", // 通过ID查询
+	UPDATE_DEL_TAG: "/role/updateRoleDelTag", // 逻辑删除角色
 };

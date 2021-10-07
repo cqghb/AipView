@@ -25,6 +25,16 @@
 							:disabled="btn.disable"
 							:ref="btn.ref"
 							@click="btn.handle()">{{btn.label}}</el-button>
+							
+				<!-- 文本域 -->
+				<el-input
+						v-if="item.type==='Textarea'"
+				        v-model="formData[item.prop]"
+						type="textarea"
+				        :size="item.size"
+						:readonly="item.readonly"
+						:placeholder="item.placeholder"
+				        clearable></el-input>
 				<!-- 密码框 -->
 				<el-input 
 						v-if="item.type==='Password'"

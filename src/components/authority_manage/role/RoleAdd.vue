@@ -33,6 +33,7 @@
 			return {
 				formData:{
 					name:"",//角色名称
+					remark:"",//备注
 				},
 				formFieldList:{
 					name: {
@@ -41,6 +42,14 @@
 					    prop: "name",
 					    width: "180px",
 					    placeholder: "请输入角色名称...",
+					    size: ""
+					},
+					remark: {
+					    type: "Textarea",
+					    label: "备注",
+					    prop: "remark",
+					    width: "180px",
+					    placeholder: "请输入备注...",
 					    size: ""
 					}
 				},
@@ -79,10 +88,10 @@
 					if(volid){
 						CommInterface.sendPost(SystemConstant.consRoleManage.ADD, the.formData, function(num){
 							if(num>0){
-								util.showMsg(MsgConstant.msgCommon.SUCCESS, ComponentConstant.MessageProperties.SUCCESS);
+								util.showMsg(MsgConstant.msgCommon.SUCCESS_ADD, ComponentConstant.MessageProperties.SUCCESS);
 								CommInterface.goToPage(SystemConstant.consComponentPath.LIST_ROLE, SystemConstant.consComponentName.LIST_ROLE, {});
 							} else {
-								util.showMsg(MsgConstant.msgCommon.FAIL, ComponentConstant.MessageProperties.ERROR);
+								util.showMsg(MsgConstant.msgCommon.FAIL_ADD, ComponentConstant.MessageProperties.ERROR);
 							}
 						});
 					}
