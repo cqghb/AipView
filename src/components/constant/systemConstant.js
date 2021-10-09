@@ -105,3 +105,14 @@ export const consRoleManage = {
 	QUERY_BY_ID: "/role/queryById", // 通过ID查询
 	UPDATE_DEL_TAG: "/role/updateRoleDelTag", // 逻辑删除角色
 };
+
+/**
+ * 数据操作管理接口
+ */
+export const consDopManage = {
+    FIND_PAGE: "/dataOperate/findPage", // 分页查询
+    ADD: "/dataOperate/insertDop", // 新增数据操
+    UPDATE: "/dataOperate/updateDop", // 修改数据操
+	QUERY_BY_ID: "/dataOperate/queryById", // 通过ID查询
+	UPDATE_DEL_TAG: "/dataOperate/updateDelTag", // 逻辑删除数据操
+};
