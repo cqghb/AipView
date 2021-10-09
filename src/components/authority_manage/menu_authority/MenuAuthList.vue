@@ -66,22 +66,22 @@
 				],
 				formSize: "",
 				operationButtonList:[
-					// {
-					// 	type: "",
-					// 	icon: "el-icon-more",
-					// 	text: "详情",
-					// 	handle:()=>{
-					// 		let the = this;
-					// 		the.showDetail();
-					// 	}
-					// },// 太简单不用详情页面了
+					{
+						type: "",
+						icon: "el-icon-more",
+						text: "详情",
+						handle:()=>{
+							let the = this;
+							the.showDetail();
+						}
+					},
 					{
 						type: "primary",
 						icon: "el-icon-plus",
 						text: "新增",
 						handle:()=>{
 							let the = this;
-							// the.addRole();
+							the.addDop();
 						}
 					},
 					{
@@ -90,7 +90,7 @@
 						text: "修改",
 						handle:()=>{
 							let the = this;
-							// the.updateRole();
+							the.updateDop();
 						}
 					},
 					{
@@ -100,7 +100,7 @@
 						handle:()=>{
 							let the = this;
 							util.confirm("", "", "", "", "",function () {// 确认
-								// the.deleteRole();
+								the.deleteDop();
 							}, null);
 							
 						}
@@ -108,8 +108,9 @@
 				],
 				tableColumnList:[
 					// { prop: "id", label: "ID", width: 180 },
-					{ prop: "name", label: "角色名称", width: 180 },
-					{ prop: "remark", label: "备注"},
+					{ prop: "name", label: "操作名称", width: 180 },
+					{ prop: "operateAddr", label: "请求地址", width: 180},
+					// { prop: "remark", label: "备注"},
 					{ prop: "createUser", label: "创建人", width: 180 },
 					{ prop: "createTime", label: "创建时间", width: 180, type:SystemConstant.dataType.DATE, formatDate: SystemConstant.common.FORMAT_DATE },
 					{ prop: "updateUser", label: "修改人", width: 180 },
@@ -119,7 +120,20 @@
 			};
 		},
 		methods:{
-			
+			showDetail(){
+				let the = this;
+				CommInterface.goToPage(SystemConstant.consComponentPath.ADD_DOP, SystemConstant.consComponentName.ADD_DOP, {});
+			},
+			addDop(){
+				let the = this;
+				CommInterface.goToPage(SystemConstant.consComponentPath.ADD_DOP, SystemConstant.consComponentName.ADD_DOP, {});
+			},
+			updateDop(){
+				let the = this;
+			},
+			deleteDop(){
+				let the = this;
+			}
 		},
 		created() {
 			

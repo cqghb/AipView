@@ -75,6 +75,10 @@ export const consComponentPath = {
     ADD_ROLE: "/roleAddu", // 添加角色
     LIST_ROLE: "/roleList", // 角色列表
     UPDATE_ROLE: "/roleUpdate", // 维护角色
+    LIST_DOP: "/menuAuthList", // 操作列表
+    ADD_DOP: "/dopAdd", // 新增操作
+    UPDATE_DOP: "/dopUpdate", // 维护操作
+    DETAIL_DOP: "/dopDetail", // 操作详情
 };
 /**
  * 组件名称
@@ -86,6 +90,10 @@ export const consComponentName = {
     ADD_ROLE: "RoleAdd", // 添加角色
     LIST_ROLE: "RoleList", // 角色列表
 	UPDATE_ROLE: "RoleUpdate", // 维护角色
+	LIST_DOP: "MenuAuthList", // 操作列表
+	ADD_DOP: "DopAdd", // 新增操作
+	UPDATE_DOP: "DopUpdate", // 维护操作
+	DETAIL_DOP: "DopDetail", // 操作详情
 };
 /**
  * 子组件调用父组件方法名称

@@ -20,6 +20,9 @@ import RoleDetail from '@/components/authority_manage/role/RoleDetail'
 import RoleUpdate from '@/components/authority_manage/role/RoleUpdate'
 import RoleMenuList from '@/components/authority_manage/role_menu/RoleMenuList'
 import UserRoleList from '@/components/authority_manage/user_role/UserRoleList'
+import DopAdd from '@/components/authority_manage/menu_authority/DopAdd'
+import DopUpdate from '@/components/authority_manage/menu_authority/DopUpdate'
+import DopDetail from '@/components/authority_manage/menu_authority/DopDetail'
 
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {
@@ -163,6 +166,42 @@ export default new Router({
 					}
 				]
 			},{
+				path: "/dopAdd",
+				name: "DopAdd",
+				component: DopAdd,
+				meta: [{
+						name: "菜单权限列表",
+						path: "/menuAuthList"
+					},{
+						name: "新增操作",
+						path: "/dopAdd"
+					}
+				]
+			},{
+				path: "/dopUpdate",
+				name: "DopUpdate",
+				component: DopUpdate,
+				meta: [{
+						name: "菜单权限列表",
+						path: "/menuAuthList"
+					},{
+						name: "维护操作",
+						path: "/dopUpdate"
+					}
+				]
+			},{
+				path: "/dopDetail",
+				name: "DopDetail",
+				component: DopDetail,
+				meta: [{
+						name: "菜单权限列表",
+						path: "/menuAuthList"
+					},{
+						name: "操作详情",
+						path: "/dopDetail"
+					}
+				]
+			},{
 				path: "/roleList",
 				name: "RoleList",
 				component: RoleList,
@@ -225,7 +264,7 @@ export default new Router({
 						path: "/userRoleList"
 					}
 				]
-			}]//在这里加
+			}]//在这里加 DopAdd
 		}, {
 			path: "/",
 			name: "Login",
