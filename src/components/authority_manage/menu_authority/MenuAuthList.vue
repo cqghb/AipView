@@ -15,6 +15,7 @@
 
 <script>
 	import BaseTable from "@/components/common/BaseTable";
+	import util from "@/components/utils/util";
 	
 	import * as SystemConstant from '@/components/constant/systemConstant';
 	import * as CommInterface from '@/components/utils/commInterface';
@@ -122,7 +123,14 @@
 		methods:{
 			showDetail(){
 				let the = this;
-				CommInterface.goToPage(SystemConstant.consComponentPath.ADD_DOP, SystemConstant.consComponentName.ADD_DOP, {});
+				the.$refs.dopTable.commonCheck();
+				if(the.$refs.dopTable.selectedData){
+				    let params = the.$refs.dopTable.selectedDataArr[0];
+				    let queryParam = {
+						id: params.id
+					};
+				    CommInterface.goToPage(SystemConstant.consComponentPath.DETAIL_DOP, SystemConstant.consComponentName.DETAIL_DOP, queryParam);
+				}
 			},
 			addDop(){
 				let the = this;
@@ -130,9 +138,31 @@
 			},
 			updateDop(){
 				let the = this;
+				the.$refs.dopTable.commonCheck();
+				if(the.$refs.dopTable.selectedData){
+					let params = the.$refs.dopTable.selectedDataArr[0];
+					let param = {
+					        id: params.id
+					    };
+					CommInterface.goToPage(SystemConstant.consComponentPath.UPDATE_DOP, SystemConstant.consComponentName.UPDATE_DOP, param);
+				}
 			},
 			deleteDop(){
 				let the = this;
+				the.$refs.dopTable.commonCheck();
+				if(the.$refs.dopTable.selectedData){
+					let selectedItem = the.$refs.dopTable.selectedDataArr[0];
+					let id = selectedItem.id;
+					CommInterface.sendPost(SystemConstant.consDopManage.UPDATE_DEL_TAG, {id: id}, function(num){
+						if(num>0){
+							util.showMsg(MsgConstant.msgCommon.SUCCESS_DELETE, ComponentConstant.MessageProperties.SUCCESS);
+							the.$refs.dopTable.loading = true;
+							the.$refs.dopTable.queryList();
+						} else {
+							util.showMsg(MsgConstant.msgCommon.FALL_DELETE, ComponentConstant.MessageProperties.ERROR);
+						}
+					});
+				}
 			}
 		},
 		created() {

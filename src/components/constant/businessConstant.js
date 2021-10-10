@@ -11,5 +11,6 @@ export const CODE_TYPE = {
     LIKES: "likes", // 喜好类型
     MENU_DEFAULT_SELECTED: "menuDefaultSelected", // 菜单是否默认选中[展开]
     YES_OR_NO: "yesOrNo", // 公共选中项
-    SEX: "sex" // 性别
+    SEX: "sex", // 性别
+    DEL_TAG: "delTag", // 是否删除
 };
