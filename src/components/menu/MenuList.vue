@@ -80,9 +80,7 @@
 						size: "",
 						handle:()=>{
 							let the = this;
-							the.searchData.id= "";
-							the.searchData.name= "";
-							the.searchData.parentNode= "";
+							the.$refs.menuTable.$refs.searchMenuForm.$refs.defaultMyForm.resetFields();
 						}
 					}
 				],

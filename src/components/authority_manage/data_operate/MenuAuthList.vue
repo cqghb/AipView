@@ -61,7 +61,7 @@
 						size: "",
 						handle:()=>{
 							let the = this;
-							// TODO 待完成
+							the.$refs.dopTable.$refs.searchDopForm.$refs.defaultMyForm.resetFields();
 						}
 					}
 				],

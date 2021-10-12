@@ -239,7 +239,7 @@
                     the.loading = false;
                 });
             },
-			commonCheck(){// 公共检查
+			commonCheck(){// 公共检查-只能选择一行数据
 			    let the = this;
 			    let num = the.selectedDataArr.length;
 			    if(num==0){
@@ -251,6 +251,14 @@
 			    if(1==num){
 			        the.selectedData = true;
 			    }
+			},
+			commonCheckMultipleData(){// 公共检查-可以选择多行数据，但是不能一行都不选择
+			    let the = this;
+			    let num = the.selectedDataArr.length;
+			    if(num==0){
+			        util.showMsg("请至少选择一行数据");
+			    }
+			    the.selectedData = true;
 			},
 			async aaaa(data, item){
 				let the = this;

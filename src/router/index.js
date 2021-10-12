@@ -13,16 +13,19 @@ import MenuList from '@/components/menu/MenuList'
 import MenuAdd from '@/components/menu/MenuAdd'
 import MenuDetail from '@/components/menu/MenuDetail'
 import MenuUpdate from '@/components/menu/MenuUpdate'
-import MenuAuthList from '@/components/authority_manage/menu_authority/MenuAuthList'
+import MenuAuthList from '@/components/authority_manage/data_operate/MenuAuthList'
 import RoleList from '@/components/authority_manage/role/RoleList'
 import RoleAdd from '@/components/authority_manage/role/RoleAdd'
 import RoleDetail from '@/components/authority_manage/role/RoleDetail'
 import RoleUpdate from '@/components/authority_manage/role/RoleUpdate'
 import RoleMenuList from '@/components/authority_manage/role_menu/RoleMenuList'
 import UserRoleList from '@/components/authority_manage/user_role/UserRoleList'
-import DopAdd from '@/components/authority_manage/menu_authority/DopAdd'
-import DopUpdate from '@/components/authority_manage/menu_authority/DopUpdate'
-import DopDetail from '@/components/authority_manage/menu_authority/DopDetail'
+import DopAdd from '@/components/authority_manage/data_operate/DopAdd'
+import DopUpdate from '@/components/authority_manage/data_operate/DopUpdate'
+import DopDetail from '@/components/authority_manage/data_operate/DopDetail'
+import MenuDataOperateShipList from '@/components/authority_manage/menu_data_operate_ship/MenuDataOperateShipList'
+import MenuDataOperateShipDetail from '@/components/authority_manage/menu_data_operate_ship/MenuDataOperateShipDetail'
+import MenuDataOperateShipSetting from '@/components/authority_manage/menu_data_operate_ship/MenuDataOperateShipSetting'
 
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {
@@ -264,7 +267,40 @@ export default new Router({
 						path: "/userRoleList"
 					}
 				]
-			}]//在这里加 DopAdd
+			},{
+				path: "/menuDataOperateShipList",
+				name: "MenuDataOperateShipList",
+				component: MenuDataOperateShipList,
+				meta: [{
+						name: "菜单与数据操作关系配置",
+						path: "/menuDataOperateShipList"
+					}
+				]
+			},{
+				path: "/menuDataOperateShipDetail",
+				name: "MenuDataOperateShipDetail",
+				component: MenuDataOperateShipDetail,
+				meta: [{
+						name: "菜单与数据操作关系-菜单列表",
+						path: "/menuDataOperateShipList"
+					},{
+						name: "菜单与数据操作关系配置",
+						path: "/menuDataOperateShipDetail"
+					}
+				]
+			},{
+				path: "/menuDataOperateShipSetting",
+				name: "MenuDataOperateShipSetting",
+				component: MenuDataOperateShipSetting,
+				meta: [{
+						name: "菜单与数据操作关系-菜单列表",
+						path: "/menuDataOperateShipList"
+					},{
+						name: "菜单与数据操作关系配置",
+						path: "/menuDataOperateShipSetting"
+					}
+				]
+			}]//在这里加 
 		}, {
 			path: "/",
 			name: "Login",

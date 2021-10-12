@@ -85,7 +85,7 @@
 						size: "",
 						handle:()=>{
 							let the = this;
-							
+							the.$refs.iconTable.$refs.searchIconForm.$refs.defaultMyForm.resetFields();
 						}
 					}
 				],

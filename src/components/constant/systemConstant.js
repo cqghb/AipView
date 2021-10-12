@@ -79,6 +79,9 @@ export const consComponentPath = {
     ADD_DOP: "/dopAdd", // 新增操作
     UPDATE_DOP: "/dopUpdate", // 维护操作
     DETAIL_DOP: "/dopDetail", // 操作详情
+    LIST_DOSL: "/menuDataOperateShipList", // 菜单操作关系列表
+    DETAIL_DOSL: "/menuDataOperateShipDetail", // 菜单操作关系详情
+    UPDATE_DOSL: "/menuDataOperateShipSetting", // 菜单操作关系维护
 };
 /**
  * 组件名称
@@ -94,6 +97,9 @@ export const consComponentName = {
 	ADD_DOP: "DopAdd", // 新增操作
 	UPDATE_DOP: "DopUpdate", // 维护操作
 	DETAIL_DOP: "DopDetail", // 操作详情
+	LIST_DOSL: "MenuDataOperateShipList", // 菜单操作关系列表
+	DETAIL_DOSL: "MenuDataOperateShipDetail", // 菜单操作关系详情
+	UPDATE_DOSL: "MenuDataOperateShipSetting", // 菜单操作关系维护
 };
 /**
  * 子组件调用父组件方法名称

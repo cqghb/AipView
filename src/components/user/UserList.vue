@@ -98,8 +98,7 @@
                         size: "",
                         handle:()=>{
                             let the = this;
-                            the.searchData.id= "";
-                            the.searchData.name= "";
+                            the.$refs.userTable.$refs.searchUserForm.$refs.defaultMyForm.resetFields();
                         }
                     }
                 ],
