@@ -19,6 +19,8 @@
 	
 	import * as SystemConstant from '@/components/constant/systemConstant';
 	import * as CommInterface from '@/components/utils/commInterface';
+	import * as ComponentConstant from '@/components/constant/componentConstant';
+	import * as MsgConstant from '@/components/constant/msgConstant';
 	
 	export default {
 		name: "MenuDataOperateShipSetting",
@@ -92,8 +94,28 @@
 				let the = this;
 				the.$refs.dataOperateTable.commonCheckMultipleData();
 				if(the.$refs.dataOperateTable.selectedData){
-					let dataOperateArr = the.$refs.menuDOSLTable.selectedDataArr;
+					let dataOperateArr = the.$refs.dataOperateTable.selectedDataArr;
 					// 拿出操作ID
+					let params = {
+						menuId: the.menuId,
+						dataOperateList: []
+					};
+					for(let i=0; i<dataOperateArr.length;i++){
+						params.dataOperateList.push(dataOperateArr[i].id);
+					}
+					CommInterface.sendPost(
+					    SystemConstant.consMenuDataOperateRelationManage.UPDATE,
+					    params,
+					    function (res) {
+					        console.log("修改结果 ",res);
+					        if(res>0){
+					            util.showMsg(MsgConstant.msgCommon.SUCCESS_UPDATE, ComponentConstant.MessageProperties.SUCCESS);
+					        } else {
+					            util.showMsg(MsgConstant.msgCommon.FAIL_UPDATE, ComponentConstant.MessageProperties.ERROR);
+					        }
+					
+					    }
+					);
 				}
 			}
 		},

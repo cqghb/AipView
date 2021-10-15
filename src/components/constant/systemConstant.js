@@ -130,3 +130,14 @@ export const consDopManage = {
 	QUERY_BY_ID: "/dataOperate/queryById", // 通过ID查询
 	UPDATE_DEL_TAG: "/dataOperate/updateDelTag", // 逻辑删除数据操
 };
+
+/**
+ * 数据操作管理接口
+ */
+export const consMenuDataOperateRelationManage = {
+    // FIND_PAGE: "/menuDataOperateRelation/findPage", // 分页查询
+    // ADD: "/menuDataOperateRelation/insertDop", // 新增数据操
+    UPDATE: "/menuDataOperateRelation/updateMenuDataOperateRelation", // 修改数据操
+	QUERY_BY_MENU_ID: "/menuDataOperateRelation/queryByMenuId", // 通过ID查询
+	// UPDATE_DEL_TAG: "/menuDataOperateRelation/updateDelTag", // 逻辑删除数据操
+};

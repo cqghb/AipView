@@ -108,8 +108,9 @@
 				the.$refs.menuDOSLTable.commonCheck();
 				if(the.$refs.menuDOSLTable.selectedData){
 					let params = the.$refs.menuDOSLTable.selectedDataArr[0];
-					let parentNode = params.parentNode;
-					if(BusinessConstant.YES != parentNode){
+					console.log(params);
+					let childrenList = params.childrenList;
+					if(childrenList.length!=0){
 						util.showMsg("请选择末端子节点", ComponentConstant.MessageProperties.ERROR);
 						return false;
 					}
@@ -128,6 +129,7 @@
 				console.log("123")
 			},
 			settingMenuDataOperateShip(){
+				// 只要目前没有子节点的都可以设置
 				let the = this;
 				if(the.selectChildrenTiem()){
 					let params = the.$refs.menuDOSLTable.selectedDataArr[0];
