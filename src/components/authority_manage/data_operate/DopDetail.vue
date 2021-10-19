@@ -22,6 +22,7 @@
 					{ name: "id", fieldName: "ID", type: "text", fieldValue: "" },
 					{ name: "name", fieldName: "菜单名称", type: "text", fieldValue: "" },
 					{ name: "operateAddr", fieldName: "菜单图标", type: "text", fieldValue: "" },
+					{ name: "subgroup", fieldName: "所属分组", type: "text", fieldValue: "", transformation: BusinessConstant.CODE_TYPE.DATA_OPERATE_SUBGROUP },
 					{ name: "remark", fieldName: "父节点ID", type: "text", fieldValue: "" },
 					{ name: "delTag", fieldName: "是否删除", type: "text", fieldValue: "", transformation: BusinessConstant.CODE_TYPE.DEL_TAG },
 					{ name: "createUser", fieldName: "创建人", type: "text", fieldValue: "" },

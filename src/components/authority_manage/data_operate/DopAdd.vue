@@ -21,6 +21,7 @@
 	import * as ComponentConstant from '@/components/constant/componentConstant';
 	import * as CommInterface from '@/components/utils/commInterface';
 	import * as SystemConstant from '@/components/constant/systemConstant';
+	import * as BusinessConstant from '@/components/constant/businessConstant';
 	
 	export default {
 		name:"DopAdd",
@@ -51,6 +52,17 @@
 					    placeholder: "请输入操作名称...",
 					    size: ""
 					},
+					subgroup: {
+					    type: "Select",
+					    label: "所属分组",
+					    prop: "subgroup",
+					    width: "180px",
+					    options: [],
+					    size: "",
+						change: function(v){
+							console.log("您选择的是:",v);
+						}
+					},
 					remark: {
 					    type: "Textarea",
 					    label: "备注",
@@ -67,6 +79,9 @@
 					],
 					operateAddr:[
 						{ required: true, message: "请输入操作地址", trigger: "blur" }
+					],
+					subgroup:[
+						{ required: true, message: "请选择所属分组", trigger: "blur" }
 					]
 				},
 				btnHandle:[
@@ -112,7 +127,10 @@
 			
 		},
 		mounted() {
-			
+			let the = this;
+			the.$refs.addDopForm.searchCode(BusinessConstant.CODE_TYPE.DATA_OPERATE_SUBGROUP, [], "数据操作分组选备选项查询失败", (data)=>{
+				the.formFieldList.subgroup.options = data;
+			});
 		}
 	}
 </script>

@@ -49,6 +49,8 @@
 						v-if="item.type==='Select'"
 						v-model="formData[item.prop]"
 						:size="item.size"
+						clearable
+						filterable
 						:placeholder="item.placeholder"
 						@change="item.change(formData[item.prop])">
 					<!-- el-option 使用的是双向绑定来动态改变可选项 -->

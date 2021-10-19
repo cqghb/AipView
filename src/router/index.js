@@ -164,7 +164,7 @@ export default new Router({
 				name: "MenuAuthList",
 				component: MenuAuthList,
 				meta: [{
-						name: "菜单权限列表",
+						name: "数据操作列表",
 						path: "/menuAuthList"
 					}
 				]
@@ -173,7 +173,7 @@ export default new Router({
 				name: "DopAdd",
 				component: DopAdd,
 				meta: [{
-						name: "菜单权限列表",
+						name: "数据操作列表",
 						path: "/menuAuthList"
 					},{
 						name: "新增操作",
@@ -185,7 +185,7 @@ export default new Router({
 				name: "DopUpdate",
 				component: DopUpdate,
 				meta: [{
-						name: "菜单权限列表",
+						name: "数据操作列表",
 						path: "/menuAuthList"
 					},{
 						name: "维护操作",
@@ -197,7 +197,7 @@ export default new Router({
 				name: "DopDetail",
 				component: DopDetail,
 				meta: [{
-						name: "菜单权限列表",
+						name: "数据操作列表",
 						path: "/menuAuthList"
 					},{
 						name: "操作详情",

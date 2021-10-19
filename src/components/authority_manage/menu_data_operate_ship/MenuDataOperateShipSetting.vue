@@ -21,6 +21,7 @@
 	import * as CommInterface from '@/components/utils/commInterface';
 	import * as ComponentConstant from '@/components/constant/componentConstant';
 	import * as MsgConstant from '@/components/constant/msgConstant';
+	import * as BusinessConstant from '@/components/constant/businessConstant';
 	
 	export default {
 		name: "MenuDataOperateShipSetting",
@@ -30,9 +31,10 @@
 		data() {
 			return {
 				menuId: "",
-				uri: SystemConstant.consDopManage.FIND_PAGE,
+				uri: SystemConstant.consCodeManage.FIND_PAGE_CHILDREN,
 				searchData:{
 					name: "",// 操作名称
+					codeType: BusinessConstant.CODE_TYPE.DATA_OPERATE_SUBGROUP,// 操作名称
 				},
 				searchForm:{
 					name: {
@@ -82,8 +84,8 @@
 					},
 				],
 				tableColumnList:[
-					{ prop: "name", label: "操作名称", width: 180 },
-					{ prop: "operateAddr", label: "请求地址", width: 180},
+					{ prop: "name", label: "操作名称", width: 300 },
+					{ prop: "operateAddr", label: "请求地址", width: 240},
 					{ prop: "remark", label: "备注"},
 				],
 				selectedData: false

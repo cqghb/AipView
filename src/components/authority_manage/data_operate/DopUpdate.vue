@@ -63,6 +63,17 @@
 							console.log("您选择的是:",v);
 						}
 					},
+					subgroup: {
+					    type: "Select",
+					    label: "所属分组",
+					    prop: "subgroup",
+					    width: "180px",
+					    options: [],
+					    size: "",
+						change: function(v){
+							console.log("您选择的是:",v);
+						}
+					},
 					remark: {
 					    type: "Textarea",
 					    label: "备注",
@@ -79,6 +90,9 @@
 					],
 					operateAddr:[
 						{ required: true, message: "请输入操作地址", trigger: "blur" }
+					],
+					subgroup:[
+						{ required: true, message: "请选择所属分组", trigger: "blur" }
 					]
 				},
 				btnHandle:[
@@ -148,6 +162,9 @@
 			the.queryInfo(id);
 			the.$refs.dopUpdate.searchCode(BusinessConstant.CODE_TYPE.DEL_TAG, [], "删除标记查询失败", (data)=>{
 				the.formFieldList.delTag.radios = data;
+			});
+			the.$refs.dopUpdate.searchCode(BusinessConstant.CODE_TYPE.DATA_OPERATE_SUBGROUP, [], "数据操作分组选备选项查询失败", (data)=>{
+				the.formFieldList.subgroup.options = data;
 			});
 		}
 	}

@@ -13,4 +13,5 @@ export const CODE_TYPE = {
     YES_OR_NO: "yesOrNo", // 公共选中项
     SEX: "sex", // 性别
     DEL_TAG: "delTag", // 是否删除
+    DATA_OPERATE_SUBGROUP: "dataOperateSubgroup", // 数据操作分组
 };

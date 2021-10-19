@@ -111,6 +111,7 @@
 					// { prop: "id", label: "ID", width: 180 },
 					{ prop: "name", label: "操作名称", width: 180 },
 					{ prop: "operateAddr", label: "请求地址", width: 180},
+					{ prop: "subgroup", label: "所属分组", width: 180},
 					// { prop: "remark", label: "备注"},
 					{ prop: "createUser", label: "创建人", width: 180 },
 					{ prop: "createTime", label: "创建时间", width: 180, type:SystemConstant.dataType.DATE, formatDate: SystemConstant.common.FORMAT_DATE },
