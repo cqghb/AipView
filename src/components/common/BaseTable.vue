@@ -66,6 +66,7 @@
                         @selection-change="handleSelectionChange"
 						row-key="id"
 						:load="load"
+						:default-expand-all="defaultExpandAll"
 						:tree-props="{children: children, hasChildren: 'hasChildren'}"
                         style="width: 100%">
                     <el-table-column
@@ -76,7 +77,9 @@
                                      :key="index"
                                      :prop="item.prop"
                                      :label="item.label"
-                                     :width="item.width">
+                                     :width="item.width"
+									 :show-overflow-tooltip="showOverflowTooltip"
+									 >
 									 
 						<template slot-scope="scope">
 							<!-- 码值转换 -->
@@ -134,6 +137,16 @@
                 type: String,
                 require: false
             },
+			defaultExpandAll: {// 如果是树形表格，是否默然展开所有，默认不展开
+				type: Boolean,
+				require: false,
+				default: false
+			},
+			showOverflowTooltip: {// 表格展示不完的数据显示方式 true 鼠标移动上去的时候展示全部 false 单行展示
+				type: Boolean,
+				require: false,
+				default: true
+			},
             operationButtonList:{// 操作按钮
                 type: Array,
                 require: false,

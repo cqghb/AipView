@@ -139,6 +139,6 @@ export const consMenuDataOperateRelationManage = {
     // FIND_PAGE: "/menuDataOperateRelation/findPage", // 分页查询
     // ADD: "/menuDataOperateRelation/insertDop", // 新增数据操
     UPDATE: "/menuDataOperateRelation/updateMenuDataOperateRelation", // 修改数据操
-	QUERY_BY_MENU_ID: "/menuDataOperateRelation/queryByMenuId", // 通过ID查询
+	QUERY_BY_MENU_ID: "/menuDataOperateRelation/queryMenuDataOperation", // 通过菜单ID查询
 	// UPDATE_DEL_TAG: "/menuDataOperateRelation/updateDelTag", // 逻辑删除数据操
 };
