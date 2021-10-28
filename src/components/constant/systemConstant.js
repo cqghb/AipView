@@ -16,6 +16,7 @@ export const consUserManage = {
 export const consCodeManage = {
     SEARCH_CODEKEY_VALUE: "/codeValue/searchCodeKeyValue", // 码值查询
     FIND_PAGE_CHILDREN: "/codeValue/findPageChildren", // 数据操作列表查询
+    FIND_PAGE_CHILDREN2: "/codeValue/findPageChildren2", // 数据操作
 };
 
 /**

@@ -26,6 +26,7 @@ import DopDetail from '@/components/authority_manage/data_operate/DopDetail'
 import MenuDataOperateShipList from '@/components/authority_manage/menu_data_operate_ship/MenuDataOperateShipList'
 import MenuDataOperateShipDetail from '@/components/authority_manage/menu_data_operate_ship/MenuDataOperateShipDetail'
 import MenuDataOperateShipSetting from '@/components/authority_manage/menu_data_operate_ship/MenuDataOperateShipSetting'
+import MenuDataOperateShipSetting2 from '@/components/authority_manage/menu_data_operate_ship/MenuDataOperateShipSetting2'
 
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {
@@ -298,6 +299,15 @@ export default new Router({
 					},{
 						name: "菜单与数据操作关系配置",
 						path: "/menuDataOperateShipSetting"
+					}
+				]
+			},{
+				path: "/menuDataOperateShipSetting2",
+				name: "MenuDataOperateShipSetting2",
+				component: MenuDataOperateShipSetting2,
+				meta: [{
+						name: "菜单与数据操作关系配置",
+						path: "/menuDataOperateShipSetting2"
 					}
 				]
 			}]//在这里加 
