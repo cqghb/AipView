@@ -118,6 +118,7 @@
 				let checkedNodeArr = the.$refs.dataOperTree.getCheckedNodes();
 				let checkedIdList = [];
 				for(let i=0; i<checkedNodeArr.length; i++){
+					// 根全部不要
 					if(checkedNodeArr[i].childrenList){
 						continue;
 					}
