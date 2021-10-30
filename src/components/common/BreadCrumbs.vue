@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="breadcrumb">
         <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item v-for="(item,index) in breadList"
                                 :key="index"
@@ -39,5 +39,7 @@
 </script>
 
 <style scoped>
-
+	.breadcrumb{
+		margin-bottom: 24px;
+	}
 </style>

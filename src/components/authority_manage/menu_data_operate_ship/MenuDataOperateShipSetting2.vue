@@ -26,13 +26,11 @@
 				  </div>
 				  <div class="block">
 				    <p>数据操作权限树</p>
-					<el-button 
-					           @click="menuDataOperateShipSetting">
-					    数据操作权限更新
-					</el-button>
+					<el-button @click="editEnable">数据操作权限更新</el-button>
+					<el-button v-if="!editFlag" @click="menuDataOperateShipSetting">更新</el-button>
 				    <el-tree
 				      :data="dataOperateList"
-					  :props="defaultProps"
+					  :props="defaultProps2"
 				      show-checkbox
 					  ref="dataOperTree"
 				      node-key="id"
@@ -71,13 +69,19 @@
 				menuDataList:[],// 左侧菜单数据
 				dataOperateList:[],// 右侧操作权限数据
 				defaultProps: {
-				          children: 'childrenList',
-				          label: 'name'
+				          children: "childrenList",
+				          label: "name",
+				        },
+				defaultProps2: {
+				          children: "childrenList",
+				          label: "name",
+						  disabled: this.disabledFn
 				        },
 				dataOperateListDefaultCheck:[],
 				filterText: '',
 				menuId: "",
 				uri: SystemConstant.consCodeManage.FIND_PAGE_CHILDREN,
+				editFlag: true,// 右边树是否可以选中
 				
 			};
 		},
@@ -179,6 +183,15 @@
 					// 清空权限
 					_this.$refs.dataOperTree.setCheckedKeys([]);
 				}
+			},
+			disabledFn(){
+				let _this = this;
+				
+				return _this.editFlag;
+			},
+			editEnable(){
+				let _this = this;
+				_this.editFlag = _this.editFlag ? false : true;
 			}
 			
 		},
