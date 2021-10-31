@@ -115,6 +115,7 @@ export const consChildrenCompUseParentComp = {
  */
 export const consRoleManage = {
     FIND_PAGE: "/role/findPage", // 分页查询
+    QUERY_ALL: "/role/queryAllRole", // 查询所有
     ADD: "/role/insertRole", // 新增角色
     // DEL: "/role/deleteRole", // 删除角色
     UPDATE: "/role/updateRole", // 修改角色

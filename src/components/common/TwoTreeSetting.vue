@@ -14,7 +14,7 @@
 				    <el-tree
 				      :data="leftTreeDataList"
 					  class="filter-tree"
-					  :props="leftDefaultProps"
+					  :props="leftDefaultProps2"
 					  :filter-node-method="filterNode"
 				      default-expand-all
 					  :node-key="leftNodeKey"
@@ -34,7 +34,6 @@
 					           @click="item.handle()">
 					    {{ item.text }}
 					</el-button>
-					<!-- <el-button v-if="!editFlag" @click="menuDataOperateShipSetting">更新</el-button> -->
 				    <el-tree
 				      :data="rightTreeDataList"
 					  :props="rightDefaultProps2"
@@ -84,14 +83,6 @@
 			    require: false,
 			    default: ()=>[]
 			},
-			// leftTreeUri:{// 左侧树查询数据接口
-			//     type: String,
-			//     require: true
-			// },
-			// rightTreeUri:{// 右侧树查询数据接口
-			//     type: String,
-			//     require: true
-			// },
 			leftTreeDataList:{// 左侧树数据
 				type: Array,
 				require: false,
@@ -122,50 +113,30 @@
 				require: false,
 				default:()=>[]
 			},
-			leftDefaultProps: {// 左侧树组件 配置选项
+			leftDefaultProps: {// 左侧树组件 配置选项 指明children和label,不传就用默认的
 				type: Object,
 				require: false,
-				default: ()=>{
-					return {
-						children: "childrenList",// 子节点
-						label: "name",// 节点名称
-					};
-				}
+				default: ()=>{}
 			},
-			rightDefaultProps: {// 右侧树组件 配置选项
+			rightDefaultProps: {// 右侧树组件 配置选项 指明children和label,不传就用默认的
 				type: Object,
 				require: false,
-				default: ()=>{
-					// return {
-					// 	children: "childrenList",// 子节点
-					// 	label: "name",// 节点名称
-					// };
-				}
+				default: ()=>{}
 			},
-			// leftTreeNodeClickEvent:{// 左侧树节点点击事件
-			//     type: Function,
-			//     require: false,
-			// 	default: ()=>{
-			// 		return Function;
-			// 	}
-			// },
-			// rightTreeNodeClickEvent:{// 右侧树节点点击事件
-			//     type: Function,
-			//     require: false,
-			// 	default: ()=>{
-			// 		return Function;
-			// 	}
-			// },
 		},
 		data() {
 			return {
 				editFlag: true,// 默认右侧树不可选则
 				filterText: "",
 				rightDefaultProps2: {
-				          children: "childrenList",
-				          label: "name",
-						  disabled: this.disabledFn // 这个属性直接给 true false 都没有
-				        },
+					children: "childrenList",
+					label: "name",
+					disabled: this.disabledFn // 这个属性直接给 true false 都没有
+				},
+				leftDefaultProps2: {// 左侧树组件 配置选项
+					children: "childrenList",
+					label: "name",
+				},
 			}
 		},
 		watch:{
@@ -189,7 +160,7 @@
 			leftTreeNodeClickEvent(data, nodeObj, nodeComp){
 				let _this = this;
 				// 父组件 没有这个方法会报错
-				_this.$emit("menuTreeNodeClick",data, nodeObj, nodeComp);
+				_this.$emit("leftTreeNodeClick",data, nodeObj, nodeComp);
 			},
 			rightTreeNodeClickEvent(data, nodeObj, nodeComp){
 				console.log('a', data);
@@ -204,6 +175,10 @@
 			if(_this.$props.rightDefaultProps){
 				_this.rightDefaultProps2.children = _this.$props.rightDefaultProps.children;
 				_this.rightDefaultProps2.label = _this.$props.rightDefaultProps.label;
+			}
+			if(_this.$props.leftDefaultProps){
+				_this.leftDefaultProps2.children = _this.$props.leftDefaultProps.children;
+				_this.leftDefaultProps2.label = _this.$props.leftDefaultProps.label;
 			}
 		},
 		mounted() {

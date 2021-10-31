@@ -12,7 +12,7 @@
 							:rightTreeDataList="dataOperateList"
 							leftTreeCurrentCheckKey=""
 							:rightTreeDefaultCheckedList="dataOperateListDefaultCheck"
-							@menuTreeNodeClick="menuTreeNodeClick"
+							@leftTreeNodeClick="menuTreeNodeClick"
 							:rightTreeNodeClickEvent="()=>{}"
 							></two-tree-setting>
 		
@@ -40,8 +40,8 @@
 			return {
 				operationButtonList: [
 					{
-						type: "danger",
-						icon: "el-icon-delet",
+						type: ComponentConstant.ButtonTypeProperties.WARNING,
+						icon: "el-icon-edit",
 						text: "更新数据操作权限",
 						handle:()=>{
 							let _this = this;
@@ -52,9 +52,7 @@
 				menuDataList:[],// 左侧菜单数据
 				dataOperateList:[],// 右侧操作权限数据
 				dataOperateListDefaultCheck:[],
-				menuId: "",
-				uri: SystemConstant.consCodeManage.FIND_PAGE_CHILDREN,
-				
+				menuId: "",				
 			};
 		},
 		computed: {
@@ -134,7 +132,6 @@
 				console.log('b', nodeObj);
 				console.log('c', nodeComp);
 				let _this = this;
-				console.log('this', _this);
 				_this.menuId = data.id;
 				let childrenFlag = data.childrenFlag;
 				// 点击根菜单才去查相关菜单权限
