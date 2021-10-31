@@ -20,7 +20,7 @@
 					  :node-key="leftNodeKey"
 					  highlight-current
 					  :current-node-key="leftTreeCurrentCheckKey"
-					  @node-click="leftHandler"
+					  @node-click="leftTreeNodeClickEvent"
 					  ref="leftTree">
 				    </el-tree>
 				  </div>
@@ -37,7 +37,7 @@
 					<!-- <el-button v-if="!editFlag" @click="menuDataOperateShipSetting">更新</el-button> -->
 				    <el-tree
 				      :data="rightTreeDataList"
-					  :props="rightDefaultProps"
+					  :props="rightDefaultProps2"
 				      show-checkbox
 					  ref="rightTree"
 				      :node-key="rightNodeKey"
@@ -45,7 +45,7 @@
 					  highlight-current
 					  :default-checked-keys="rightTreeDefaultCheckedList"
 					  :check-on-click-node="true"
-					  @node-click="rightHandler"
+					  @node-click="rightTreeNodeClickEvent"
 				      :expand-on-click-node="true">
 				    </el-tree>
 				  </div>
@@ -58,9 +58,7 @@
 <script>
 	import BreadCrumbs from "@/components/common/BreadCrumbs";
 	
-	import * as CommInterface from '@/components/utils/commInterface';
-	// import * as SystemConstant from '@/components/constant/systemConstant';
-	
+	//import * as CommInterface from '@/components/utils/commInterface';	
 	
 	export default {
 		name:"TwoTreeSetting",
@@ -86,13 +84,23 @@
 			    require: false,
 			    default: ()=>[]
 			},
-			leftTreeUri:{// 左侧树查询数据接口
-			    type: String,
-			    require: true
+			// leftTreeUri:{// 左侧树查询数据接口
+			//     type: String,
+			//     require: true
+			// },
+			// rightTreeUri:{// 右侧树查询数据接口
+			//     type: String,
+			//     require: true
+			// },
+			leftTreeDataList:{// 左侧树数据
+				type: Array,
+				require: false,
+				default: ()=>[]
 			},
-			rightTreeUri:{// 右侧树查询数据接口
-			    type: String,
-			    require: true
+			rightTreeDataList:{// 右侧树数据
+				type: Array,
+				require: false,
+				default: ()=>[]
 			},
 			leftNodeKey:{// 每个树节点用来作为唯一标识的属性，整棵树应该是唯一的
 				type: String,
@@ -128,34 +136,42 @@
 				type: Object,
 				require: false,
 				default: ()=>{
-					return {
-						children: "childrenList",// 子节点
-						label: "name",// 节点名称
-						disabled: this.disabledFn
-					};
+					// return {
+					// 	children: "childrenList",// 子节点
+					// 	label: "name",// 节点名称
+					// };
 				}
 			},
-			leftTreeNodeClickEvent:{// 左侧树节点点击事件
-			    type: Function,
-			    require: false,
-				default: ()=>{
-					return Function;
-				}
-			},
-			rightTreeNodeClickEvent:{// 右侧树节点点击事件
-			    type: Function,
-			    require: false,
-				default: ()=>{
-					return Function;
-				}
-			},
+			// leftTreeNodeClickEvent:{// 左侧树节点点击事件
+			//     type: Function,
+			//     require: false,
+			// 	default: ()=>{
+			// 		return Function;
+			// 	}
+			// },
+			// rightTreeNodeClickEvent:{// 右侧树节点点击事件
+			//     type: Function,
+			//     require: false,
+			// 	default: ()=>{
+			// 		return Function;
+			// 	}
+			// },
 		},
 		data() {
 			return {
 				editFlag: true,// 默认右侧树不可选则
-				leftTreeDataList:[],// 左侧树数据
-				rightTreeDataList:[],// 右侧树数据
+				filterText: "",
+				rightDefaultProps2: {
+				          children: "childrenList",
+				          label: "name",
+						  disabled: this.disabledFn // 这个属性直接给 true false 都没有
+				        },
 			}
+		},
+		watch:{
+			filterText(val) {
+			    this.$refs.leftTree.filter(val);
+			},
 		},
 		methods:{
 			editEnable(){// 可选择/不可选择 相互切换
@@ -166,50 +182,33 @@
 				let _this = this;
 				return _this.editFlag;
 			},
-			getLeftTreeDataList(){// 查询左侧树数据
-				let the = this;
-				CommInterface.baseSendGet(
-				    the.leftTreeUri,
-				    null,
-				    function (res) {
-				        the.leftTreeDataList = res.rootTree;
-				    }
-				);
-			},
-			getRightTreeDataList(){
-				let the = this;
-				CommInterface.sendPost(
-				    the.rightTreeUri,
-				    null,
-				    function (res) {
-				        the.rightTreeDataList = res;
-				    }
-				);
-			},
 			filterNode(value, data) {
 				if (!value) return true;
 				return data.name.indexOf(value) !== -1;
 			},
-			leftHandler(){
+			leftTreeNodeClickEvent(data, nodeObj, nodeComp){
 				let _this = this;
-				_this.leftTreeNodeClickEvent();
+				// 父组件 没有这个方法会报错
+				_this.$emit("menuTreeNodeClick",data, nodeObj, nodeComp);
 			},
-			rightHandler(){
+			rightTreeNodeClickEvent(data, nodeObj, nodeComp){
+				console.log('a', data);
+				console.log('b', nodeObj);
+				console.log('c', nodeComp);
 				let _this = this;
-				_this.rightTreeNodeClickEvent();
 			},
 			
 		},
 		created() {
-			
+			let _this = this;
+			if(_this.$props.rightDefaultProps){
+				_this.rightDefaultProps2.children = _this.$props.rightDefaultProps.children;
+				_this.rightDefaultProps2.label = _this.$props.rightDefaultProps.label;
+			}
 		},
 		mounted() {
 			let _this = this;
-			_this.getMenuDataList();
-			_this.getDataOperateList();
 			_this.$refs.leftTree.setCurrentKey(_this.leftTreeCurrentCheckKey); 
-
-			// _this.$refs.leftTree.setCurrentKey(this.currentNodekey); 
 		}
 	}
 </script>

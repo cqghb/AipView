@@ -3,54 +3,26 @@
 	菜单配置数据操作权限 
 	-->
 	<div>
-		<bread-crumbs></bread-crumbs>
-		<div class="demo-block demo-tree">
-			<div class="source">
-				<div class="custom-tree-container">
-				  <div class="block">
-				    <p>菜单树</p>
-					<el-input
-					  placeholder="输入关键字进行过滤"
-					  v-model="filterText">
-					</el-input>
-				    <el-tree
-				      :data="menuDataList"
-					  class="filter-tree"
-					  :props="defaultProps"
-					  :filter-node-method="filterNode"
-				      default-expand-all
-					  highlight-current
-					  @node-click="menuTreeNodeClick"
-					  ref="menuTree">
-				    </el-tree>
-				  </div>
-				  <div class="block">
-				    <p>数据操作权限树</p>
-					<el-button @click="editEnable">数据操作权限更新</el-button>
-					<el-button v-if="!editFlag" @click="menuDataOperateShipSetting">更新</el-button>
-				    <el-tree
-				      :data="dataOperateList"
-					  :props="defaultProps2"
-				      show-checkbox
-					  ref="dataOperTree"
-				      node-key="id"
-				      default-expand-all
-					  highlight-current
-					  :default-checked-keys="dataOperateListDefaultCheck"
-					  :check-on-click-node="true"
-				      :expand-on-click-node="true">
-				    </el-tree>
-				  </div>
-				</div>
-			</div>
-		</div>
+		<two-tree-setting ref="menuOperSetting"
+							leftTreeTheme="菜单树" 
+							rightTreeTheme="数据操作权限树"
+							editEnableLabel="菜单操作数据权限更新"
+							:operationButtonList="operationButtonList"
+							:leftTreeDataList="menuDataList"
+							:rightTreeDataList="dataOperateList"
+							leftTreeCurrentCheckKey=""
+							:rightTreeDefaultCheckedList="dataOperateListDefaultCheck"
+							@menuTreeNodeClick="menuTreeNodeClick"
+							:rightTreeNodeClickEvent="()=>{}"
+							></two-tree-setting>
+		
 	</div>
 	
 	
 </template>
 
 <script>
-	import BreadCrumbs from "@/components/common/BreadCrumbs";
+	import TwoTreeSetting from "@/components/common/TwoTreeSetting";
 	import util from "@/components/utils/util";
 	
 	import * as SystemConstant from '@/components/constant/systemConstant';
@@ -62,33 +34,28 @@
 	export default {
 		name: "MenuDataOperateShipSetting2",
 		components: {
-			"bread-crumbs": BreadCrumbs,
+			"two-tree-setting": TwoTreeSetting,
 		},
 		data() {
 			return {
+				operationButtonList: [
+					{
+						type: "danger",
+						icon: "el-icon-delet",
+						text: "更新数据操作权限",
+						handle:()=>{
+							let _this = this;
+							_this.menuDataOperateShipSetting();
+						}
+					}
+				],
 				menuDataList:[],// 左侧菜单数据
 				dataOperateList:[],// 右侧操作权限数据
-				defaultProps: {
-				          children: "childrenList",
-				          label: "name",
-				        },
-				defaultProps2: {
-				          children: "childrenList",
-				          label: "name",
-						  disabled: this.disabledFn
-				        },
 				dataOperateListDefaultCheck:[],
-				filterText: '',
 				menuId: "",
 				uri: SystemConstant.consCodeManage.FIND_PAGE_CHILDREN,
-				editFlag: true,// 右边树是否可以选中
 				
 			};
-		},
-		watch:{
-			filterText(val) {
-			    this.$refs.menuTree.filter(val);
-			}
 		},
 		computed: {
 		},
@@ -113,13 +80,9 @@
 				    }
 				);
 			},
-			filterNode(value, data) {
-				if (!value) return true;
-				return data.name.indexOf(value) !== -1;
-			},
 			menuDataOperateShipSetting(){
 				let the = this;
-				let checkedNodeArr = the.$refs.dataOperTree.getCheckedNodes();
+				let checkedNodeArr = the.$refs.menuOperSetting.$refs.rightTree.getCheckedNodes();
 				let checkedIdList = [];
 				for(let i=0; i<checkedNodeArr.length; i++){
 					// 根全部不要
@@ -133,9 +96,7 @@
 					menuId: the.menuId,
 					dataOperateList: checkedIdList
 				};
-				
 				console.log('params', params);
-				
 				CommInterface.sendPost(
 				    SystemConstant.consMenuDataOperateRelationManage.UPDATE,
 				    params,
@@ -146,7 +107,6 @@
 				        } else {
 				            util.showMsg(MsgConstant.msgCommon.FAIL_UPDATE, ComponentConstant.MessageProperties.ERROR);
 				        }
-				
 				    }
 				);
 			},
@@ -165,7 +125,7 @@
 						for(let i=0; i<res.length; i++){
 							oldDataOperationList.push(res[i].id);
 						}
-						the.$refs.dataOperTree.setCheckedKeys(oldDataOperationList);
+						the.$refs.menuOperSetting.$refs.rightTree.setCheckedKeys(oldDataOperationList);
 				    }
 				);
 			},
@@ -174,6 +134,7 @@
 				console.log('b', nodeObj);
 				console.log('c', nodeComp);
 				let _this = this;
+				console.log('this', _this);
 				_this.menuId = data.id;
 				let childrenFlag = data.childrenFlag;
 				// 点击根菜单才去查相关菜单权限
@@ -181,19 +142,9 @@
 					_this.queryMenuDataOperation();
 				} else {
 					// 清空权限
-					_this.$refs.dataOperTree.setCheckedKeys([]);
+					_this.$refs.menuOperSetting.$refs.rightTree.setCheckedKeys([]);
 				}
 			},
-			disabledFn(){
-				let _this = this;
-				
-				return _this.editFlag;
-			},
-			editEnable(){
-				let _this = this;
-				_this.editFlag = _this.editFlag ? false : true;
-			}
-			
 		},
 		created() {
 			

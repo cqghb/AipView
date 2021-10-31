@@ -210,11 +210,11 @@
             },
             formData:{// 表单绑定对象
                 type:Object,
-                default:{}
+                default:()=>{}
             },
             buttonArr:{// 动作按钮
                 type:Array,
-                default:[]
+                default:()=>[]
             },
 			rules:{// 表单验证规则
 				type:Object,
