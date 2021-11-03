@@ -144,3 +144,11 @@ export const consMenuDataOperateRelationManage = {
 	QUERY_BY_MENU_ID: "/menuDataOperateRelation/queryMenuDataOperation", // 通过菜单ID查询
 	// UPDATE_DEL_TAG: "/menuDataOperateRelation/updateDelTag", // 逻辑删除数据操
 };
+
+/**
+ * 角色菜单关系接口
+ */
+export const consRoleMenuRelationManage = {
+    UPDATE: "/roleMenuRelation/updateRoleMenuRelation", // 修改角色菜单关系
+	QUERY_MENU_BY_ROLE_ID: "/roleMenuRelation/queryMenuDataOperation", // 通过角色ID查询角色所有菜单
+};

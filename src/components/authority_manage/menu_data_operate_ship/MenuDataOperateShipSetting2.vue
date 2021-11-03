@@ -52,7 +52,7 @@
 				menuDataList:[],// 左侧菜单数据
 				dataOperateList:[],// 右侧操作权限数据
 				dataOperateListDefaultCheck:[],
-				menuId: "",				
+				menuId: "",			
 			};
 		},
 		computed: {
@@ -80,6 +80,10 @@
 			},
 			menuDataOperateShipSetting(){
 				let the = this;
+				if(the.menuId == ""){
+					util.showMsg("请选择左侧菜单", ComponentConstant.MessageProperties.ERROR);
+					return ;
+				}
 				let checkedNodeArr = the.$refs.menuOperSetting.$refs.rightTree.getCheckedNodes();
 				let checkedIdList = [];
 				for(let i=0; i<checkedNodeArr.length; i++){
