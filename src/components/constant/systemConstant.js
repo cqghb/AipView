@@ -150,5 +150,5 @@ export const consMenuDataOperateRelationManage = {
  */
 export const consRoleMenuRelationManage = {
     UPDATE: "/roleMenuRelation/updateRoleMenuRelation", // 修改角色菜单关系
-	QUERY_MENU_BY_ROLE_ID: "/roleMenuRelation/queryMenuDataOperation", // 通过角色ID查询角色所有菜单
+	QUERY_RELATION_BY_ROLE_ID: "/roleMenuRelation/queryRoleMenu", // 通过角色ID查询角色所有菜单
 };

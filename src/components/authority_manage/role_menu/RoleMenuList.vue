@@ -74,6 +74,7 @@
 				console.log('c', nodeComp);
 				let _this = this;
 				_this.roleId = data.id;
+				_this.queryRoleMenu();
 			},
 			roleMenuRelationSetting(){// 角色菜单关系设置
 				let the = this;
@@ -111,6 +112,23 @@
 				    }
 				);
 			},
+			queryRoleMenu(){
+				let _this = this;
+				CommInterface.baseSendGet(
+				    SystemConstant.consRoleMenuRelationManage.QUERY_RELATION_BY_ROLE_ID,
+				    {roleId: _this.roleId},
+				    function (res) {
+						console.log("查询结果 ",res);
+				        let oldRelationList = [];// 原来的数据操作权限
+						for(let i=0; i<res.length; i++){
+							oldRelationList.push(res[i].menuId);
+						}
+						_this.$refs.roleMenuSetting.$refs.rightTree.setCheckedKeys(oldRelationList);
+				
+				    }
+				);
+				
+			}
 		},
 		created() {
 			
