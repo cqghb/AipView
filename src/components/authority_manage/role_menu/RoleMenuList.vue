@@ -34,7 +34,7 @@
 					{
 						type: ComponentConstant.ButtonTypeProperties.WARNING,
 						icon: "el-icon-edit",
-						text: "角色菜案权限更新",
+						text: "角色菜单权限更新",
 						handle:()=>{
 							let _this = this;
 							_this.roleMenuRelationSetting();

@@ -8,7 +8,8 @@ export const consUserManage = {
     ADD_USER: "/insertUser", // 新增用户
     RESET_PASS: "/resetPass", // 重置密码
     SIGN_OUT: "/signOut", // 退出登录
-    UPDATE_USER_BY_ID: "/updateUser" // 根据ID修改用户ID
+    UPDATE_USER_BY_ID: "/updateUser", // 根据ID修改用户ID
+    QUERY_ALL: "/queryAllUser", // 查询所有有效用户
 };
 /**
  * 码值管理
@@ -151,4 +152,12 @@ export const consMenuDataOperateRelationManage = {
 export const consRoleMenuRelationManage = {
     UPDATE: "/roleMenuRelation/updateRoleMenuRelation", // 修改角色菜单关系
 	QUERY_RELATION_BY_ROLE_ID: "/roleMenuRelation/queryRoleMenu", // 通过角色ID查询角色所有菜单
+};
+
+/**
+ * 用户角色关系接口
+ */
+export const consUserRoleRelationManage = {
+    UPDATE: "/roleUserRelation/updateRoleMenuRelation", // 修改用户角色菜单关系
+	QUERY_RELATION_BY_USER_ID: "/roleUserRelation/queryUserRoleByUserId", // 根据用户ID查询出所有角色权限
 };
