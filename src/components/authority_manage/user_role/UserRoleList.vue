@@ -90,7 +90,7 @@
 					roleIdList: checkedIdList
 				};
 				CommInterface.sendPost(
-				    SystemConstant.consRoleMenuRelationManage.UPDATE,
+				    SystemConstant.consUserRoleRelationManage.UPDATE,
 				    params,
 				    function (res) {
 				        if(res>0){
@@ -109,7 +109,7 @@
 				    function (res) {
 				        let oldRelationList = [];// 原来的数据操作权限
 						for(let i=0; i<res.length; i++){
-							oldRelationList.push(res[i].menuId);
+							oldRelationList.push(res[i].id);
 						}
 						_this.$refs.userRoleSetting.$refs.rightTree.setCheckedKeys(oldRelationList);
 				

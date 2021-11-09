@@ -158,6 +158,6 @@ export const consRoleMenuRelationManage = {
  * 用户角色关系接口
  */
 export const consUserRoleRelationManage = {
-    UPDATE: "/roleUserRelation/updateRoleMenuRelation", // 修改用户角色菜单关系
+    UPDATE: "/roleUserRelation/updateUserRoleRelation", // 修改用户角色菜单关系
 	QUERY_RELATION_BY_USER_ID: "/roleUserRelation/queryUserRoleByUserId", // 根据用户ID查询出所有角色权限
 };
