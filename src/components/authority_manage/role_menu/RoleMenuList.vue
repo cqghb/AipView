@@ -86,11 +86,13 @@
 				let checkedIdList = [];
 				for(let i=0; i<checkedNodeArr.length; i++){
 					// 根全部不要
-					if(BusinessConstant.NO == checkedNodeArr[i].childrenFlag){
-						continue;
-					} else {
-						checkedIdList.push(checkedNodeArr[i].id);
-					}
+					// if(BusinessConstant.NO == checkedNodeArr[i].childrenFlag){
+					// 	continue;
+					// } else {
+					// 	checkedIdList.push(checkedNodeArr[i].id);
+					// }
+					
+					checkedIdList.push(checkedNodeArr[i].id);
 					
 				}
 				// 拿出操作ID
