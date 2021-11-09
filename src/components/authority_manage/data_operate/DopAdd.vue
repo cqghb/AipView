@@ -33,6 +33,7 @@
 				formData:{
 					name:"",//操作名称
 					operateAddr:"",//操作地址
+					subgroup:"",//所属分组
 					remark:"",//备注
 				},
 				formFieldList:{
@@ -128,6 +129,14 @@
 		},
 		mounted() {
 			let the = this;
+			let item = the.$route.params.item;
+			if(item){
+				the.formData.name = item.name;
+				the.formData.operateAddr = item.operateAddr;
+				the.formData.subgroup = item.subgroup;
+				the.formData.remark = item.remark;
+			}
+			
 			the.$refs.addDopForm.searchCode(BusinessConstant.CODE_TYPE.DATA_OPERATE_SUBGROUP, [], "数据操作分组选备选项查询失败", (data)=>{
 				the.formFieldList.subgroup.options = data;
 			});

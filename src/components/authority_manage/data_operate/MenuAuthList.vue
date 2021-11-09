@@ -135,7 +135,14 @@
 			},
 			addDop(){
 				let the = this;
-				CommInterface.goToPage(SystemConstant.consComponentPath.ADD_DOP, SystemConstant.consComponentName.ADD_DOP, {});
+				let param = {
+				        item: null
+				    };
+				if(the.$refs.dopTable.selectedDataArr){
+					let params = the.$refs.dopTable.selectedDataArr[0];
+					param.item = params;
+				}
+				CommInterface.goToPage(SystemConstant.consComponentPath.ADD_DOP, SystemConstant.consComponentName.ADD_DOP, param);
 			},
 			updateDop(){
 				let the = this;
