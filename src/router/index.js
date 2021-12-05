@@ -27,6 +27,8 @@ import MenuDataOperateShipList from '@/components/authority_manage/menu_data_ope
 import MenuDataOperateShipDetail from '@/components/authority_manage/menu_data_operate_ship/MenuDataOperateShipDetail'
 import MenuDataOperateShipSetting from '@/components/authority_manage/menu_data_operate_ship/MenuDataOperateShipSetting'
 import MenuDataOperateShipSetting2 from '@/components/authority_manage/menu_data_operate_ship/MenuDataOperateShipSetting2'
+import IconList from '@/components/icon/IconList'
+
 
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {
@@ -308,6 +310,15 @@ export default new Router({
 				meta: [{
 						name: "菜单与数据操作关系配置",
 						path: "/menuDataOperateShipSetting2"
+					}
+				]
+			},{
+				path: "/iconList",
+				name: "IconList",
+				component: IconList,
+				meta: [{
+						name: "图标列表",
+						path: "/iconList"
 					}
 				]
 			}]//在这里加 

@@ -61,7 +61,7 @@
 			getMenuDataList(){
 				let the = this;
 				CommInterface.baseSendGet(
-				    SystemConstant.consMenuManage.QUERY_MENU,
+				    SystemConstant.consMenuManage.QUERY_MENU_ALL,
 				    null,
 				    function (res) {
 				        the.menuDataList = res.rootTree;
