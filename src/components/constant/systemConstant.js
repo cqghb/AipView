@@ -66,7 +66,8 @@ export const consMenuManage = {
     QUERY_MENU: "/menu/queryMenu", // 后管左侧菜单树
     QUERY_LIST: "/menu/queryMenuList", // 后管左侧菜单树
     QUERY_PARENT_MENU: "/menu/queryParentMenu", // 分页查询所有父菜单
-    UPDATE: "/menu/updateMenu" // 维护菜单
+    UPDATE: "/menu/updateMenu",// 维护菜单
+	QUERY_MENU_ALL: "/menu/queryMenuAll",// 用户菜单配置右侧树
 };
 /**
  * 组件Path
