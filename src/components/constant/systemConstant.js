@@ -53,7 +53,7 @@ export const consIconManage = {
     ADD_ICON: "/icon/insertIcon", // 新增图标
     DEL_ICON: "/icon/deleteIcon", // 删除图标
     QUERY_ALL: "/icon/queryAll", // 查询所有
-    UPDATE_ICON_BY_ID: "/icon/updateIcon" // 修改图标
+    UPDATE_ICON_BY_ID: "/icon/updateIcon", // 修改图标
 };
 /**
  * 菜单管理接口
@@ -86,6 +86,8 @@ export const consComponentPath = {
     LIST_DOSL: "/menuDataOperateShipList", // 菜单操作关系列表
     DETAIL_DOSL: "/menuDataOperateShipDetail", // 菜单操作关系详情
     UPDATE_DOSL: "/menuDataOperateShipSetting", // 菜单操作关系维护
+    ADD_ICON: "/iconAdd", // 新增图标
+	LIST_ICON: "/iconList", // 图标列表
 };
 /**
  * 组件名称
@@ -104,6 +106,8 @@ export const consComponentName = {
 	LIST_DOSL: "MenuDataOperateShipList", // 菜单操作关系列表
 	DETAIL_DOSL: "MenuDataOperateShipDetail", // 菜单操作关系详情
 	UPDATE_DOSL: "MenuDataOperateShipSetting", // 菜单操作关系维护
+	ADD_ICON: "IconAdd", // 添加角色
+	LIST_ICON: "IconList", // 图标列表
 };
 /**
  * 子组件调用父组件方法名称

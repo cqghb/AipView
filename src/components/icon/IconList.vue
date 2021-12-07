@@ -124,7 +124,7 @@
 		},
 		methods:{
 			addRole(){// 添加
-				CommInterface.goToPage(SystemConstant.consComponentPath.ADD_ROLE, SystemConstant.consComponentName.ADD_ROLE, {});
+				CommInterface.goToPage(SystemConstant.consComponentPath.ADD_ICON, SystemConstant.consComponentName.ADD_ICON, {});
 			},
 			updateRole(){// 修改
 				let the = this;

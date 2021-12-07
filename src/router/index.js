@@ -28,6 +28,7 @@ import MenuDataOperateShipDetail from '@/components/authority_manage/menu_data_o
 import MenuDataOperateShipSetting from '@/components/authority_manage/menu_data_operate_ship/MenuDataOperateShipSetting'
 import MenuDataOperateShipSetting2 from '@/components/authority_manage/menu_data_operate_ship/MenuDataOperateShipSetting2'
 import IconList from '@/components/icon/IconList'
+import IconAdd from '@/components/icon/IconAdd'
 
 
 const originalPush = Router.prototype.push
@@ -319,6 +320,18 @@ export default new Router({
 				meta: [{
 						name: "图标列表",
 						path: "/iconList"
+					}
+				]
+			},{
+				path: "/iconAdd",
+				name: "IconAdd",
+				component: IconAdd,
+				meta: [{
+						name: "图标列表",
+						path: "/iconList"
+					},{
+						name: "新增列表",
+						path: "/iconAdd"
 					}
 				]
 			}]//在这里加 
