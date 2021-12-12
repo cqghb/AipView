@@ -83,7 +83,7 @@
 						text: "新增",
 						handle:()=>{
 							let the = this;
-							the.addRole();
+							the.addIcon();
 						}
 					},
 					{
@@ -92,7 +92,7 @@
 						text: "修改",
 						handle:()=>{
 							let the = this;
-							the.updateRole();
+							the.updateIcon();
 						}
 					},
 					{
@@ -102,7 +102,7 @@
 						handle:()=>{
 							let the = this;
 							util.confirm("", "", "", "", "",function () {// 确认
-								the.deleteRole();
+								the.deleteIcon();
 							}, null);
 							
 						}
@@ -123,31 +123,31 @@
 			};
 		},
 		methods:{
-			addRole(){// 添加
+			addIcon(){// 添加
 				CommInterface.goToPage(SystemConstant.consComponentPath.ADD_ICON, SystemConstant.consComponentName.ADD_ICON, {});
 			},
-			updateRole(){// 修改
+			updateIcon(){// 修改
 				let the = this;
-				the.$refs.roleTable.commonCheck();
-				if(the.$refs.roleTable.selectedData){
-					let params = the.$refs.roleTable.selectedDataArr[0];
+				the.$refs.iconManaTable.commonCheck();
+				if(the.$refs.iconManaTable.selectedData){
+					let params = the.$refs.iconManaTable.selectedDataArr[0];
 					let param = {
 					        id: params.id
 					    };
-					CommInterface.goToPage(SystemConstant.consComponentPath.UPDATE_ROLE, SystemConstant.consComponentName.UPDATE_ROLE, param);
+					CommInterface.goToPage(SystemConstant.consComponentPath.UPDATE_ICON, SystemConstant.consComponentName.UPDATE_ICON, param);
 				}
 			},
-			deleteRole(){// 删除
+			deleteIcon(){// 删除
 				let the = this;
-				the.$refs.roleTable.commonCheck();
-				if(the.$refs.roleTable.selectedData){
-					let selectedItem = the.$refs.roleTable.selectedDataArr[0];
+				the.$refs.iconManaTable.commonCheck();
+				if(the.$refs.iconManaTable.selectedData){
+					let selectedItem = the.$refs.iconManaTable.selectedDataArr[0];
 					let id = selectedItem.id;
-					CommInterface.sendPost(SystemConstant.consRoleManage.UPDATE_DEL_TAG, {id: id}, function(num){
+					CommInterface.sendPost(SystemConstant.consIconManage.UPDATE_DEL_TAG, {id: id}, function(num){
 						if(num>0){
 							util.showMsg(MsgConstant.msgCommon.SUCCESS_DELETE, ComponentConstant.MessageProperties.SUCCESS);
-							the.$refs.roleTable.loading = true;
-							the.$refs.roleTable.queryList();
+							the.$refs.iconManaTable.loading = true;
+							the.$refs.iconManaTable.queryList();
 						} else {
 							util.showMsg(MsgConstant.msgCommon.FALL_DELETE, ComponentConstant.MessageProperties.ERROR);
 						}

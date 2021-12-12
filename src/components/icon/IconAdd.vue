@@ -102,7 +102,7 @@
 				let the = this;
 				the.$refs.addIconForm.$refs.baseForm.$refs.defaultMyForm.validate((volid)=>{
 					if(volid){
-						CommInterface.sendPost(SystemConstant.consIconManage.ADD_ICON, the.formData, function(num){
+						CommInterface.sendPost(SystemConstant.consIconManage.ADD, the.formData, function(num){
 							if(num>0){
 								util.showMsg(MsgConstant.msgCommon.SUCCESS_ADD, ComponentConstant.MessageProperties.SUCCESS);
 								CommInterface.goToPage(SystemConstant.consComponentPath.LIST_ICON, SystemConstant.consComponentName.LIST_ICON, {});
