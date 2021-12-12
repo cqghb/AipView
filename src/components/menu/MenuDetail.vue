@@ -25,6 +25,7 @@
 					{ name: "icon", fieldName: "菜单图标", type: "text", fieldValue: "" },
 					{ name: "parentNode", fieldName: "父节点ID", type: "text", fieldValue: "" },
 					{ name: "defaultSelect", fieldName: "是否默认选中", type: "text", fieldValue: "", transformation: BusinessConstant.CODE_TYPE.YES_OR_NO},
+					{ name: "childrenFlag", fieldName: "是否是子菜单", type: "text", fieldValue: "", transformation: BusinessConstant.CODE_TYPE.YES_OR_NO},
 					{ name: "uri", fieldName: "请求地址", type: "text", fieldValue: "" },
 					{ name: "createUser", fieldName: "创建人", type: "text", fieldValue: "" },
 					{ name: "createTime", fieldName: "创建时间", type: SystemConstant.dataType.DATE, fieldValue: "", formatDate:SystemConstant.common.FORMAT_DATE },

@@ -46,7 +46,8 @@
 				    icon: "",
 					// parentNodeShow: "",
 				    parentNode: "",
-				    // uri: ""
+					childrenFlag:"",//是否是末端节点
+				    uri: ""
 				},
 				formFieldList:{
 				    name: {
@@ -114,15 +115,26 @@
 				    		console.log("您选择的是:",v);
 				    	}
 				    },
-				  //   uri: {
-				  //       type: "Input",
-				  //       label: "请求地址",
-				  //       prop: "uri",
-						// readonly: true,
-				  //       width: "180px",
-				  //       placeholder: "请输入请求地址称...",
-				  //       size: ""
-				  //   }
+					childrenFlag: {
+					    type: "Radio",
+					    label: "是否末端节点",
+					    prop: "childrenFlag",
+					    width: "180px",
+					    radios: [],
+					    size: "",
+						change: function(v){
+							console.log("您选择的是:",v);
+						}
+					},
+				    uri: {
+				        type: "Input",
+				        label: "请求地址",
+				        prop: "uri",
+						//readonly: true,
+				        width: "180px",
+				        placeholder: "请输入请求地址称...",
+				        size: ""
+				    }
 				},
 				formSize: "",
 				rules:{
@@ -188,6 +200,15 @@
 				let the = this;
 				let user = JSON.parse(localStorage.getItem(BusinessConstant.LOCAL_STORAGE_USER));
 				the.formData.updateUser = user.id;
+				// 业务逻辑校验 ... start ...
+				let childrenFlag = the.formData.childrenFlag;
+				let uri = the.formData.uri;
+				if(BusinessConstant.YES == childrenFlag && !uri){
+					util.showMsg("维护失败，当新增末端节点时, 请求地址 必填。", ComponentConstant.MessageProperties.ERROR);
+					return ;
+				}
+				
+				// 业务逻辑校验 ... end ...
 				console.log("修改的数据", the.formData);
 				the.$refs.menuUpdate.$refs.baseForm.$refs.defaultMyForm.validate((volid)=>{
 					if(volid){
@@ -220,6 +241,10 @@
 			console.log(the.$refs.menuUpdate);
 			the.$refs.menuUpdate.searchCode(BusinessConstant.CODE_TYPE.MENU_DEFAULT_SELECTED, [], "菜单默认选备选项查询失败", (data)=>{
 				the.formFieldList.defaultSelect.radios = data;
+			});
+			// 查是否末端节点
+			the.$refs.menuUpdate.searchCode(BusinessConstant.CODE_TYPE.YES_OR_NO, [], "是否末端节点备选项查询失败", (data)=>{
+				the.formFieldList.childrenFlag.radios = data;
 			});
 			
 		}
