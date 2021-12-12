@@ -32,6 +32,7 @@
 				uri: SystemConstant.consDopManage.FIND_PAGE,
 				searchData:{
 					name: "",// 操作名称
+					operateAddr: "",// 操作地址
 				},
 				searchForm:{
 					name: {
@@ -41,8 +42,15 @@
 						width: "180px",
 						placeholder: "请输入操作名称...",
 						size:""
+					},
+					operateAddr: {
+						type: "Input",
+						label: "操作地址",
+						prop: "operateAddr",
+						width: "180px",
+						placeholder: "请输入操作地址...",
+						size:""
 					}
-					
 				},
 				searchHandle:[
 					{
