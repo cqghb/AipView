@@ -58,7 +58,7 @@
 					name:"",//菜单名称
 					icon:"",//菜单图标
 					parentNode:"",//父节点ID
-					defaultSelect:"",//是否默认选中
+					defaultSelect:"2",//是否默认选中
 					childrenFlag:"",//是否是末端节点
 					uri:""//请求地址
 				},
