@@ -18,7 +18,11 @@
                         :size="item.size"
 						:readonly="item.readonly"
 						:placeholder="item.placeholder"
-                        clearable></el-input>
+                        clearable>
+							<i v-if="item.iconArr" 
+								:slot="item.iconArr.slot" 
+								:class="'el-input__icon ' + item.iconArr.class"></i>
+						</el-input>
 						<el-button v-for="(btn, index) in item.btnArr" 
 							:size="btn.size || size"
 							:key="btn.id"

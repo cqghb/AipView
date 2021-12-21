@@ -84,9 +84,11 @@
 						<template slot-scope="scope">
 							<!-- 码值转换 -->
 							<!-- <span v-if="'codeValue'==item.codeValueConversion" v-html="aaaa(scope, item)"></span>								 -->
-							<!-- 是否显示成图标 -->
+							<!-- 
+							是否显示成图标：显示图标就不显示文字
+							-->
 							<i v-if="item.showIcon" :class="test1(scope,item)"></i>
-							<span v-else>{{ test1(scope,item)}}</span>								 							
+							<span>{{ test1(scope,item)}}</span>								 							
 						</template>
                     </el-table-column>
                 </el-table>

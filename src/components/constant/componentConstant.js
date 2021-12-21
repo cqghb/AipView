@@ -20,3 +20,8 @@ export const ButtonTypeProperties = {
     info: "info",// 信息按钮
     text: "text"// 文字按钮
 };
+
+export const IconShowPosition = {
+	PREFIX: "prefix",// 靠左
+	SUFFIX: "suffix",// 靠右
+};

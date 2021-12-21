@@ -92,7 +92,11 @@
 									the.centerDialogVisible = true;
 								}
 							}
-						]
+						],
+						// iconArr: {// 图标信息
+						// 	slot: "prefix",
+						// 	class: "el-icon-search",
+						// }
 					},
 					parentNode: {
 					    type: "Input",
@@ -246,7 +250,12 @@
 				the.$refs.iconTable.commonCheck();
 				if(the.$refs.iconTable.selectedData){
 					let data = the.$refs.iconTable.selectedDataArr[0];
-					the.formData.icon = data.englishName;
+					let iconCode = data.englishName;
+					the.formData.icon = iconCode;
+					the.formFieldList.icon.iconArr = {
+						slot: ComponentConstant.IconShowPosition.PREFIX,
+						class: iconCode
+					};
 					the.centerDialogVisible = false;
 				}
 				

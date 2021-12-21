@@ -180,13 +180,20 @@
 			dealRes(res){// 对回显数据预处理
 			    let the = this;
 			    the.formData = res;
-				// let id = res.id;
-				// let name = res.name;
-				// the.formData.parentNodeShow = name + "-" + id;
+				let iconCode = res.icon;
+				the.formFieldList.icon.iconArr = {
+					slot: ComponentConstant.IconShowPosition.PREFIX,
+					class: iconCode
+				};
 			},
 			updateIcon(icon){
 				let the = this;
-				the.formData.icon = icon.englishName;
+				let iconCode = icon.englishName;
+				the.formFieldList.icon.iconArr = {
+					slot: ComponentConstant.IconShowPosition.PREFIX,
+					class: iconCode
+				};
+				the.formData.icon = iconCode;
 			},
 			updateParentNode(parentMenu){
 				console.log('parentMenu',parentMenu)
