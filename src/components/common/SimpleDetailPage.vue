@@ -29,7 +29,11 @@
 					  
 					</el-row>
 				</el-col>
-				<!-- <el-col :span="12" v-else>{{ item.fieldValue }}</el-col> -->
+				<el-col :span="12" v-else-if="item.showIcon">
+					<!-- 用法参考菜单详情页 -->
+					<i :class="item.fieldValue"></i>
+					{{ item.fieldValue }}
+				</el-col>
 				<el-col :span="12" v-else>{{ item.fieldValue | dataFormatFilter(item.type, item.name, item.format)}}</el-col>
 				
             </el-row>

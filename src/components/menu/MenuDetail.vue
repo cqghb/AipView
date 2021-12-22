@@ -7,10 +7,10 @@
 </template>
 
 <script>
-	import SimpleDetailPage from "@/components/common/SimpleDetailPage"
-	import * as CommInterface from '@/components/utils/commInterface'
-	import * as SystemConstant from '@/components/constant/systemConstant'
-	import * as BusinessConstant from '@/components/constant/businessConstant'
+	import SimpleDetailPage from "@/components/common/SimpleDetailPage";
+	import * as CommInterface from '@/components/utils/commInterface';
+	import * as SystemConstant from '@/components/constant/systemConstant';
+	import * as BusinessConstant from '@/components/constant/businessConstant';
 	
 	export default{
 		name: "MenuDetail",
@@ -22,7 +22,7 @@
 				fieldList:[
 					{ name: "id", fieldName: "ID", type: "text", fieldValue: "" },
 					{ name: "name", fieldName: "菜单名称", type: "text", fieldValue: "" },
-					{ name: "icon", fieldName: "菜单图标", type: "text", fieldValue: "" },
+					{ name: "icon", fieldName: "菜单图标", type: "text", fieldValue: "", showIcon: true },/*这个字段的值就是图标的英文名*/
 					{ name: "parentNode", fieldName: "父节点ID", type: "text", fieldValue: "" },
 					{ name: "defaultSelect", fieldName: "是否默认选中", type: "text", fieldValue: "", transformation: BusinessConstant.CODE_TYPE.YES_OR_NO},
 					{ name: "childrenFlag", fieldName: "是否是子菜单", type: "text", fieldValue: "", transformation: BusinessConstant.CODE_TYPE.YES_OR_NO},

@@ -19,6 +19,7 @@
 						:readonly="item.readonly"
 						:placeholder="item.placeholder"
                         clearable>
+						<!-- 使用请参考 菜单维护、菜单新增功能 -->
 							<i v-if="item.iconArr" 
 								:slot="item.iconArr.slot" 
 								:class="'el-input__icon ' + item.iconArr.class"></i>
