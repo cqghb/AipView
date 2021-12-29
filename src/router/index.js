@@ -30,6 +30,7 @@ import MenuDataOperateShipSetting2 from '@/components/authority_manage/menu_data
 import IconList from '@/components/icon/IconList'
 import IconAdd from '@/components/icon/IconAdd'
 import IconUpdate from '@/components/icon/IconUpdate'
+import SpecificationGroupList from '@/components/commodity/specification_group/SpecificationGroupList'
 
 
 const originalPush = Router.prototype.push
@@ -345,6 +346,15 @@ export default new Router({
 					},{
 						name: "维护图标",
 						path: "/iconUpdate"
+					}
+				]
+			},{
+				path: "/specificationGroupList",
+				name: "SpecificationGroupList",
+				component: SpecificationGroupList,
+				meta: [{
+						name: "产品规格分组列表",
+						path: "/specificationGroupList"
 					}
 				]
 			}]//在这里加 

@@ -91,6 +91,7 @@ export const consComponentPath = {
     ADD_ICON: "/iconAdd", // 新增图标
 	LIST_ICON: "/iconList", // 图标列表
 	UPDATE_ICON: "/iconUpdate", // 维护图标
+	LIST_SPECIFICATION_GROUP: "/specificationGroupList", // 产品规格分组列表
 };
 /**
  * 组件名称
@@ -112,6 +113,7 @@ export const consComponentName = {
 	ADD_ICON: "IconAdd", // 添加角色
 	LIST_ICON: "IconList", // 图标列表
 	UPDATE_ICON: "IconUpdate", // 维护图标
+	LIST_SPECIFICATION_GROUP: "SpecificationGroupList", // 产品规格分组列表
 };
 /**
  * 子组件调用父组件方法名称
@@ -169,4 +171,13 @@ export const consRoleMenuRelationManage = {
 export const consUserRoleRelationManage = {
     UPDATE: "/roleUserRelation/updateUserRoleRelation", // 修改用户角色菜单关系
 	QUERY_RELATION_BY_USER_ID: "/roleUserRelation/queryUserRoleByUserId", // 根据用户ID查询出所有角色权限
+};
+
+/**
+ * 商品规格组管理接口
+ */
+export const consSpecificationGroupManage = {
+    FIND_PAGE: "/specificationGroup/findPage", // 产品规格分组列表查询
+    QUERY_BY_ID: "/specificationGroup/queryById", // 通过主键查询
+	UPDATE_DEL_TAG: "/specificationGroup/updateDelTag", // 逻辑删除操作
 };
