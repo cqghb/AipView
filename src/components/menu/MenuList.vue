@@ -129,9 +129,9 @@
 				tableColumnList:[
 					// { prop: "id", label: "ID", width: 180 },
 					{ prop: "name", label: "菜单名称", width: 180 },
-					{ prop: "icon", label: "菜单图标", width: 180 },
+					{ prop: "icon", label: "菜单图标", width: 180, showIcon:true },
 					// { prop: "parentNode", label: "父节点ID", width: 180 },
-					{ prop: "defaultSelect", label: "是否默认选中", width: 180},
+					{ prop: "defaultSelect", label: "是否默认选中", width: 180 },
 					// { prop: "defaultSelect", label: "是否默认选中", width: 180, codeValueConversion: BusinessConstant.CODE_VALUE, transformation:BusinessConstant.CODE_TYPE.YES_OR_NO},
 					// { prop: "uri", label: "请求地址", width: 180 },
 					{ prop: "createUser", label: "创建人", width: 180 },

@@ -24,9 +24,12 @@ let tableDataFormat = function(){
 tableDataFormat.prototype.format = function(row, item){
 	let self = this;
 	let strategy = item.formatDate;
+	let type = item.type;
 	let name = item.prop;// 列英文名称
-	if(strategy){
+	if(systemConstant.dataType.DATE==type){
 		return tableDataFormatStrategy[strategy].apply(this, arguments);
+	} else if(systemConstant.dataType.TEXT==type){
+		
 	} else {
 		return row[name];
 	}

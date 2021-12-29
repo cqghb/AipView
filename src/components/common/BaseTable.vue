@@ -88,7 +88,8 @@
 							是否显示成图标：显示图标就不显示文字
 							-->
 							<i v-if="item.showIcon" :class="test1(scope,item)"></i>
-							<span>{{ test1(scope,item)}}</span>								 							
+							<span v-html="test1(scope,item)"></span>	
+							<!-- <span v-html="test1(scope,item)">{{ test1(scope,item)}}</span>	 -->
 						</template>
                     </el-table-column>
                 </el-table>
@@ -200,20 +201,28 @@
             };
         },
         methods:{
-			test1(sp,item){
-				// console.log("sp:", sp);
-				// console.log("tableDataFormatStrateg:", tableDataFormatStrateg);
+			// test1(a,b) {
+			//     return  '<b>hello async</b>';
+			// },
+			test1 (sp,item){
 				let the = this;
+				// let a = "";
+				
+				//     let bb = tableDataFormatStrateg.tableDataFormat.prototype.format(sp.row, item).then(r=>{
+				// 		console.log('r',r);
+				// 	});
+					
+				// 	console.log('bb',bb);
+				// 	return bb;
+				
+				// await tableDataFormatStrateg.tableDataFormat.prototype.format(sp.row, item).then(res=>{
+				// 	a = res;
+				// });
+				// return a;
 				return tableDataFormatStrateg.tableDataFormat.prototype.format(sp.row, item);
-				// let columnType = item.type;
-				// let columnProp = sp.column.property;
-				// console.log('columnType=',columnType);
-				// console.log('columnProp=',columnProp);
-				// if("Date"==columnType){
-				// 	return the.$moment(sp.row[columnProp]).format(SystemConstant.common.YYYY_MM_DD_HH_mm_ss);
-				// }else{
-				// 	return sp.row[columnProp];
-				// }
+			},
+			async aaaaqq(){
+				return 1;
 			},
             clearParams(){// 清空条件输入框
                 let the = this;
