@@ -17,7 +17,7 @@
 	import BaseTable from "@/components/common/BaseTable";
 	
 	import * as SystemConstant from '@/components/constant/systemConstant';
-	
+	import * as CommInterface from '@/components/utils/commInterface';
 	
 	export default{
 		name: "SpecificationGroupList",
@@ -79,7 +79,7 @@
 						text: "新增",
 						handle:()=>{
 							let the = this;
-							the.addRole();
+							the.addSpecificationGroup();
 						}
 					},
 					{
@@ -88,7 +88,7 @@
 						text: "修改",
 						handle:()=>{
 							let the = this;
-							the.updateRole();
+							the.updateSpecificationGroup();
 						}
 					},
 					{
@@ -98,7 +98,7 @@
 						handle:()=>{
 							let the = this;
 							util.confirm("", "", "", "", "",function () {// 确认
-								the.deleteRole();
+								the.deleteSpecificationGroup();
 							}, null);
 							
 						}
@@ -117,7 +117,24 @@
 			};
 		},
 		methods:{
-			
+			addSpecificationGroup(){
+				let _this = this;
+				CommInterface.goToPage(SystemConstant.consComponentPath.ADD_SPECIFICATION_GROUP, SystemConstant.consComponentName.ADD_SPECIFICATION_GROUP, {});
+			},
+			updateSpecificationGroup(){
+				let _this = this;
+				_this.$refs.specificationGroupTable.commonCheck();
+				if(_this.$refs.specificationGroupTable.selectedData){
+					let params = _this.$refs.specificationGroupTable.selectedDataArr[0];
+					let param = {
+					        id: params.id
+					    };
+					CommInterface.goToPage(SystemConstant.consComponentPath.UPDATE_SPECIFICATION_GROUP, SystemConstant.consComponentName.UPDATE_SPECIFICATION_GROUP, param);
+				}
+			},
+			deleteSpecificationGroup(){
+				let _this = this;
+			}
 		},
 		created() {
 			

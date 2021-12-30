@@ -31,6 +31,9 @@ import IconList from '@/components/icon/IconList'
 import IconAdd from '@/components/icon/IconAdd'
 import IconUpdate from '@/components/icon/IconUpdate'
 import SpecificationGroupList from '@/components/commodity/specification_group/SpecificationGroupList'
+import AddSpecificationGroup from '@/components/commodity/specification_group/AddSpecificationGroup'
+import UpdateSpecificationGroup from '@/components/commodity/specification_group/UpdateSpecificationGroup'
+
 
 
 const originalPush = Router.prototype.push
@@ -355,6 +358,30 @@ export default new Router({
 				meta: [{
 						name: "产品规格分组列表",
 						path: "/specificationGroupList"
+					}
+				]
+			},{
+				path: "/addSpecificationGroup",
+				name: "AddSpecificationGroup",
+				component: AddSpecificationGroup,
+				meta: [{
+						name: "产品规格分组列表",
+						path: "/specificationGroupList"
+					},{
+						name: "添加产品规格分组",
+						path: "/addSpecificationGroup"
+					}
+				]
+			},{
+				path: "/updateSpecificationGroup",
+				name: "UpdateSpecificationGroup",
+				component: UpdateSpecificationGroup,
+				meta: [{
+						name: "产品规格分组列表",
+						path: "/specificationGroupList"
+					},{
+						name: "维护产品规格分组",
+						path: "/updateSpecificationGroup"
 					}
 				]
 			}]//在这里加 

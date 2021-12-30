@@ -92,6 +92,8 @@ export const consComponentPath = {
 	LIST_ICON: "/iconList", // 图标列表
 	UPDATE_ICON: "/iconUpdate", // 维护图标
 	LIST_SPECIFICATION_GROUP: "/specificationGroupList", // 产品规格分组列表
+	ADD_SPECIFICATION_GROUP: "/addSpecificationGroup", // 添加产品规格分组
+	UPDATE_SPECIFICATION_GROUP: "/updateSpecificationGroup", // 维护产品规格分组
 };
 /**
  * 组件名称
@@ -114,6 +116,8 @@ export const consComponentName = {
 	LIST_ICON: "IconList", // 图标列表
 	UPDATE_ICON: "IconUpdate", // 维护图标
 	LIST_SPECIFICATION_GROUP: "SpecificationGroupList", // 产品规格分组列表
+	ADD_SPECIFICATION_GROUP: "AddSpecificationGroup", // 添加产品规格分组
+	UPDATE_SPECIFICATION_GROUP: "UpdateSpecificationGroup", // 维护产品规格分组
 };
 /**
  * 子组件调用父组件方法名称
@@ -180,4 +184,6 @@ export const consSpecificationGroupManage = {
     FIND_PAGE: "/specificationGroup/findPage", // 产品规格分组列表查询
     QUERY_BY_ID: "/specificationGroup/queryById", // 通过主键查询
 	UPDATE_DEL_TAG: "/specificationGroup/updateDelTag", // 逻辑删除操作
+	ADD: "/specificationGroup/insertSpecificationGroup", // 添加
+	UPDATE: "/specificationGroup/updateSpecificationGroup", // 维护
 };
