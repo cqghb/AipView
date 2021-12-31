@@ -18,6 +18,11 @@
 	
 	import * as SystemConstant from '@/components/constant/systemConstant';
 	import * as CommInterface from '@/components/utils/commInterface';
+	import * as businessConstant from '@/components/constant/businessConstant';
+	import * as MsgConstant from '@/components/constant/msgConstant';
+	import * as ComponentConstant from '@/components/constant/componentConstant';
+	
+	import util from "@/components/utils/util";
 	
 	export default{
 		name: "SpecificationGroupList",
@@ -29,6 +34,7 @@
 				uri: SystemConstant.consSpecificationGroupManage.FIND_PAGE,
 				searchData:{
 					name: "",// 节点名称
+					delTag: businessConstant.NO,// 删除标记
 				},
 				searchForm:{
 					name: {
@@ -38,6 +44,16 @@
 						width: "180px",
 						placeholder: "请输入规格组名称...",
 						size:""
+					},
+					delTag: {
+						type: "Select",
+						label: "删除标志",
+						prop: "delTag",
+						width: "180px",
+						options: [],
+						change: function(v){
+							console.log("当前值",v);
+						}
 					}
 					
 				},
@@ -107,16 +123,33 @@
 				tableColumnList:[
 					// { prop: "id", label: "ID", width: 180 },
 					{ prop: "name", label: "规格组名称", width: 180 },
+					{ prop: "delTag", label: "删除标记", width: 80 },
 					{ prop: "remark", label: "备注"},
-					{ prop: "createUser", label: "创建人", width: 180 },
-					{ prop: "createTime", label: "创建时间", width: 180, type:SystemConstant.dataType.DATE, formatDate: SystemConstant.common.FORMAT_DATE },
-					{ prop: "updateUser", label: "修改人", width: 180 },
-					{ prop: "updateTime", label: "修改时间", width: 180, type:SystemConstant.dataType.DATE, formatDate:SystemConstant.common.FORMAT_DATE }
+					{ prop: "createUser", label: "创建人", width: 120 },
+					{ prop: "createTime", label: "创建时间", width: 160, type:SystemConstant.dataType.DATE, formatDate: SystemConstant.common.FORMAT_DATE },
+					{ prop: "updateUser", label: "修改人", width: 120 },
+					{ prop: "updateTime", label: "修改时间", width: 160, type:SystemConstant.dataType.DATE, formatDate:SystemConstant.common.FORMAT_DATE }
 				],
 				selectedData: false
 			};
 		},
 		methods:{
+			searchDelTagOptions(){//学历查询
+				let _this = this;
+				CommInterface.getCodeType(
+				    businessConstant.CODE_TYPE.YES_OR_NO,
+					[],
+				    function (res) {
+						let retCode = res.code;
+						let retMsg = res.msg;
+				        if(SystemConstant.common.RET_CODE == retCode){
+				            _this.searchForm.delTag.options = res.data;
+				        } else {
+				            util.showMsg("删除标记备选项查询失败", ComponentConstant.MessageProperties.ERROR);
+				        }
+				    }
+				);
+			},
 			addSpecificationGroup(){
 				let _this = this;
 				CommInterface.goToPage(SystemConstant.consComponentPath.ADD_SPECIFICATION_GROUP, SystemConstant.consComponentName.ADD_SPECIFICATION_GROUP, {});
@@ -134,13 +167,28 @@
 			},
 			deleteSpecificationGroup(){
 				let _this = this;
+				_this.$refs.specificationGroupTable.commonCheck();
+				if(_this.$refs.specificationGroupTable.selectedData){
+					let selectedItem = _this.$refs.specificationGroupTable.selectedDataArr[0];
+					let id = selectedItem.id;
+					CommInterface.sendPost(SystemConstant.consSpecificationGroupManage.UPDATE_DEL_TAG, {id: id}, function(num){
+						if(num>0){
+							util.showMsg(MsgConstant.msgCommon.SUCCESS_DELETE, ComponentConstant.MessageProperties.SUCCESS);
+							_this.$refs.specificationGroupTable.loading = true;
+							_this.$refs.specificationGroupTable.queryList();
+						} else {
+							util.showMsg(MsgConstant.msgCommon.FALL_DELETE, ComponentConstant.MessageProperties.ERROR);
+						}
+					});
+				}
 			}
 		},
 		created() {
 			
 		},
 		mounted() {
-			
+			let _this = this;
+			_this.searchDelTagOptions();
 		}
 	}
 </script>
