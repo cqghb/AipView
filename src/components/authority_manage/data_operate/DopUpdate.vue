@@ -139,10 +139,13 @@
 						    SystemConstant.consDopManage.UPDATE,
 						    the.formData,
 						    function (res) {
-						        console.log("修改结果 ",res);
+						        console.log("修改结果 ",the.formData.operateAddr);
+								let param = {
+								        operateAddr: the.formData.operateAddr
+								    };
 						        if(res>0){
 						            util.showMsg(MsgConstant.msgCommon.SUCCESS_UPDATE, ComponentConstant.MessageProperties.SUCCESS);
-						            CommInterface.goToPage(SystemConstant.consComponentPath.LIST_DOP, SystemConstant.consComponentName.LIST_DOP, {});
+						            CommInterface.goToPage(SystemConstant.consComponentPath.LIST_DOP, SystemConstant.consComponentName.LIST_DOP, param);
 						        } else {
 						            util.showMsg(MsgConstant.msgCommon.FAIL_UPDATE, ComponentConstant.MessageProperties.ERROR);
 						        }

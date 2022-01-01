@@ -3,7 +3,7 @@
 		<!-- 添加商品规格组 -->
 		<update-form
 					labelWidth="80px"
-					ref="addSpecificationForm"
+					ref="addSpecificationGroupForm"
 		            :formData="formData"
 		            :formFieldList="formFieldList"
 					:baseFromModel="formData"
@@ -73,7 +73,7 @@
 					    size: "",
 					    handle:()=>{
 					        let the = this;
-					        the.$refs.addSpecificationForm.$refs.baseForm.$refs.defaultMyForm.resetFields();
+					        the.$refs.addSpecificationGroupForm.$refs.baseForm.$refs.defaultMyForm.resetFields();
 					    }
 					}
 				],
@@ -82,7 +82,7 @@
 		methods:{
 			add(){
 				let _this = this;
-				_this.$refs.addSpecificationForm.$refs.baseForm.$refs.defaultMyForm.validate((volid)=>{
+				_this.$refs.addSpecificationGroupForm.$refs.baseForm.$refs.defaultMyForm.validate((volid)=>{
 					if(volid){
 						CommInterface.sendPost(SystemConstant.consSpecificationGroupManage.ADD, _this.formData, function(num){
 							if(num>0){

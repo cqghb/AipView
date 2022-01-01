@@ -114,8 +114,11 @@
 					if(volid){
 						CommInterface.sendPost(SystemConstant.consDopManage.ADD, the.formData, function(num){
 							if(num>0){
+								let param = {
+								        operateAddr: the.formData.operateAddr
+								    };
 								util.showMsg(MsgConstant.msgCommon.SUCCESS_ADD, ComponentConstant.MessageProperties.SUCCESS);
-								CommInterface.goToPage(SystemConstant.consComponentPath.LIST_DOP, SystemConstant.consComponentName.LIST_DOP, {});
+								CommInterface.goToPage(SystemConstant.consComponentPath.LIST_DOP, SystemConstant.consComponentName.LIST_DOP, param);
 							} else {
 								util.showMsg(MsgConstant.msgCommon.FAIL_ADD, ComponentConstant.MessageProperties.ERROR);
 							}

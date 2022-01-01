@@ -1,0 +1,182 @@
+<template>
+	<div>
+		<!-- 产品规格管理 -->
+		<base-table :uri="uri"
+		            ref="specificationTable"
+		            :operationButtonList="operationButtonList"
+		            :tableColumnList="tableColumnList"
+		            :searchData="searchData"
+		            :searchForm="searchForm"
+		            :formSize="formSize"
+					searchFormRef="searchSpecificationForm"
+		            :searchHandle="searchHandle"></base-table>
+	</div>
+</template>
+
+<script>
+	import BaseTable from "@/components/common/BaseTable";
+	
+	import * as SystemConstant from '@/components/constant/systemConstant';
+	import * as CommInterface from '@/components/utils/commInterface';
+	import * as businessConstant from '@/components/constant/businessConstant';
+	import * as MsgConstant from '@/components/constant/msgConstant';
+	import * as ComponentConstant from '@/components/constant/componentConstant';
+	
+	export default {
+		name: "Specification",
+		components: {
+			"base-table": BaseTable,
+		},
+		data() {
+			return {
+				uri: SystemConstant.consSpecificationManage.FIND_PAGE,
+				searchData:{
+					name: "",// 节点名称
+					delTag: businessConstant.NO,// 删除标记
+				},
+				searchForm:{
+					name: {
+						type: "Input",
+						label: "规格名称",
+						prop: "name",
+						width: "180px",
+						placeholder: "请输入规格名称...",
+						size:""
+					},
+					delTag: {
+						type: "Select",
+						label: "删除标志",
+						prop: "delTag",
+						width: "180px",
+						options: [],
+						change: function(v){
+							console.log("当前值",v);
+						}
+					}
+					
+				},
+				searchHandle:[
+					{
+						label:"查询",
+						type:"primary",
+						size: "",
+						handle:()=>{
+							let the = this;
+							the.loading = true;
+							the.$refs.specificationTable.queryList();// 调子组件的方法
+						}
+					},
+					{
+						label:"重置",
+						type:"primary",
+						size: "",
+						handle:()=>{
+							let the = this;
+							the.$refs.specificationTable.$refs.searchSpecificationForm.$refs.defaultMyForm.resetFields();
+						}
+					}
+				],
+				formSize: "",
+				operationButtonList:[
+					{
+						type: "",
+						icon: "el-icon-more",
+						text: "详情",
+						handle:()=>{
+							let the = this;
+							the.detail();
+						}
+					},
+					{
+						type: "primary",
+						icon: "el-icon-plus",
+						text: "新增",
+						handle:()=>{
+							let the = this;
+							the.add();
+						}
+					},
+					{
+						type: "warning",
+						icon: "el-icon-edit",
+						text: "修改",
+						handle:()=>{
+							let the = this;
+							the.update();
+						}
+					},
+					{
+						type: "danger",
+						icon: "el-icon-delet",
+						text: "删除",
+						handle:()=>{
+							let the = this;
+							util.confirm("", "", "", "", "",function () {// 确认
+								the.delete();
+							}, null);
+							
+						}
+					},
+				],
+				tableColumnList:[
+					// { prop: "id", label: "ID", width: 180 },
+					{ prop: "name", label: "规格名称", width: 180 },
+					{ prop: "groupId", label: "SKU产品规格组ID", width: 180 },
+					{ prop: "groupId", label: "SKU产品规格组名称", width: 180 },
+					{ prop: "typeId", label: "SPU商品分类ID", width: 180 },
+					{ prop: "typeId", label: "SPU商品分类名称", width: 180 },
+					{ prop: "addr", label: "显示位置", width: 180 },
+					{ prop: "delTag", label: "删除标记", width: 80 },
+					{ prop: "remark", label: "备注"},
+					{ prop: "createUser", label: "创建人", width: 120 },
+					{ prop: "createTime", label: "创建时间", width: 160, type:SystemConstant.dataType.DATE, formatDate: SystemConstant.common.FORMAT_DATE },
+					{ prop: "updateUser", label: "修改人", width: 120 },
+					{ prop: "updateTime", label: "修改时间", width: 160, type:SystemConstant.dataType.DATE, formatDate:SystemConstant.common.FORMAT_DATE }
+				],
+				selectedData: false
+			};
+		},
+		methods: {
+			searchDelTagOptions(){//学历查询
+				let _this = this;
+				CommInterface.getCodeType(
+				    businessConstant.CODE_TYPE.YES_OR_NO,
+					[],
+				    function (res) {
+						let retCode = res.code;
+						let retMsg = res.msg;
+				        if(SystemConstant.common.RET_CODE == retCode){
+				            _this.searchForm.delTag.options = res.data;
+				        } else {
+				            util.showMsg("删除标记备选项查询失败", ComponentConstant.MessageProperties.ERROR);
+				        }
+				    }
+				);
+			},
+			add(){// 新增
+				let _this = this;
+				CommInterface.goToPage(SystemConstant.consComponentPath.ADD_SPECIFICATION, SystemConstant.consComponentName.ADD_SPECIFICATION, {});
+			},
+			update(){// 修改
+				let _this = this;
+			},
+			delete(){// 删除
+				let _this = this;
+			},
+			detail(){// 详情
+				let _this = this;
+			},
+			
+		},
+		created() {
+			let _this = this;
+		},
+		mounted() {
+			let _this = this;
+			_this.searchDelTagOptions();
+		}
+	}
+</script>
+
+<style>
+</style>

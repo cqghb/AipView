@@ -94,6 +94,10 @@ export const consComponentPath = {
 	LIST_SPECIFICATION_GROUP: "/specificationGroupList", // 产品规格分组列表
 	ADD_SPECIFICATION_GROUP: "/addSpecificationGroup", // 添加产品规格分组
 	UPDATE_SPECIFICATION_GROUP: "/updateSpecificationGroup", // 维护产品规格分组
+	LIST_SPECIFICATION: "/listSpecification", // 产品规格列表
+	ADD_SPECIFICATION: "/addSpecification", // 添加产品规格
+	UPDATE_SPECIFICATION: "/updateSpecification", // 维护产品规格
+	DETAIL_SPECIFICATION: "/detailSpecification", // 维护产品规格
 };
 /**
  * 组件名称
@@ -118,6 +122,10 @@ export const consComponentName = {
 	LIST_SPECIFICATION_GROUP: "SpecificationGroupList", // 产品规格分组列表
 	ADD_SPECIFICATION_GROUP: "AddSpecificationGroup", // 添加产品规格分组
 	UPDATE_SPECIFICATION_GROUP: "UpdateSpecificationGroup", // 维护产品规格分组
+	LIST_SPECIFICATION: "ListSpecification", // 产品规格列表
+	ADD_SPECIFICATION: "AddSpecification", // 添加产品规格
+	UPDATE_SPECIFICATION: "UpdateSpecification", // 维护产品规格
+	DETAIL_SPECIFICATION: "DetailSpecification", // 维护产品规格
 };
 /**
  * 子组件调用父组件方法名称
@@ -178,7 +186,7 @@ export const consUserRoleRelationManage = {
 };
 
 /**
- * 商品规格组管理接口
+ * 产品规格组管理接口
  */
 export const consSpecificationGroupManage = {
     FIND_PAGE: "/specificationGroup/findPage", // 产品规格分组列表查询
@@ -186,4 +194,14 @@ export const consSpecificationGroupManage = {
 	UPDATE_DEL_TAG: "/specificationGroup/updateDelTag", // 逻辑删除操作
 	ADD: "/specificationGroup/insertSpecificationGroup", // 添加
 	UPDATE: "/specificationGroup/updateSpecificationGroup", // 维护
+};
+/**
+ * 产品规格管理接口
+ */
+export const consSpecificationManage = {
+    FIND_PAGE: "/specification/findPage", // 产品规格分组列表查询
+    QUERY_BY_ID: "/specification/queryById", // 通过主键查询
+	UPDATE_DEL_TAG: "/specification/updateDelTag", // 逻辑删除操作
+	ADD: "/specification/insertSpecification", // 添加
+	UPDATE: "/specification/updateSpecification", // 维护
 };

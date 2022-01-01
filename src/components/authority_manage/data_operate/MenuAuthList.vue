@@ -182,10 +182,16 @@
 			}
 		},
 		created() {
-			
+			let _this = this;
+			let operateAddr = _this.$route.params.operateAddr;
+			if(operateAddr){
+				// 匹配路径第一段
+				let reg = /\/(.+?)\//g;
+				_this.searchData.operateAddr = reg.exec(operateAddr)[0];
+			}
 		},
 		mounted() {
-			
+			let _this = this;
 		}
 	}
 </script>

@@ -33,6 +33,11 @@ import IconUpdate from '@/components/icon/IconUpdate'
 import SpecificationGroupList from '@/components/commodity/specification_group/SpecificationGroupList'
 import AddSpecificationGroup from '@/components/commodity/specification_group/AddSpecificationGroup'
 import UpdateSpecificationGroup from '@/components/commodity/specification_group/UpdateSpecificationGroup'
+import ListSpecification from '@/components/commodity/specification/ListSpecification'
+import AddSpecification from '@/components/commodity/specification/AddSpecification'
+import UpdateSpecification from '@/components/commodity/specification/UpdateSpecification'
+import DetailSpecification from '@/components/commodity/specification/DetailSpecification'
+
 
 
 
@@ -384,7 +389,52 @@ export default new Router({
 						path: "/updateSpecificationGroup"
 					}
 				]
-			}]//在这里加 
+			},{
+				path: "/listSpecification",
+				name: "ListSpecification",
+				component: ListSpecification,
+				meta: [{
+						name: "产品规格列表",
+						path: "/listSpecification"
+					}
+				]
+			},{
+				path: "/addSpecification",
+				name: "AddSpecification",
+				component: AddSpecification,
+				meta: [{
+						name: "产品规格列表",
+						path: "/listSpecification"
+					},{
+						name: "新增产品规格",
+						path: "/addSpecification"
+					}
+				]
+			},{
+				path: "/updateSpecification",
+				name: "UpdateSpecification",
+				component: UpdateSpecification,
+				meta: [{
+						name: "产品规格列表",
+						path: "/listSpecification"
+					},{
+						name: "维护产品规格",
+						path: "/updateSpecification"
+					}
+				]
+			},{
+				path: "/detailSpecification",
+				name: "DetailSpecification",
+				component: DetailSpecification,
+				meta: [{
+						name: "产品规格列表",
+						path: "/listSpecification"
+					},{
+						name: "产品规格详情",
+						path: "/detailSpecification"
+					}
+				]
+			}]//在这里加 ListSpecification
 		}, {
 			path: "/",
 			name: "Login",
