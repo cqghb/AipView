@@ -38,7 +38,6 @@ import ListSpecification from '@/components/commodity/specification/ListSpecific
 import AddSpecification from '@/components/commodity/specification/AddSpecification'
 import UpdateSpecification from '@/components/commodity/specification/UpdateSpecification'
 import DetailSpecification from '@/components/commodity/specification/DetailSpecification'
-import Test from '@/components/commodity/spu_type/test'
 import ListSpuType from '@/components/commodity/spu_type/ListSpuType'
 import SelectSpuType from '@/components/commodity/spu_type/SelectSpuType'
 
@@ -407,10 +406,6 @@ export default new Router({
 				path: "/addSpecification",
 				name: "AddSpecification",
 				component: AddSpecification,
-				// components: {
-				// 	default: AddSpecification,
-				// 	groupId: SpecificationGroupList
-				// },
 				meta: [{
 						name: "产品规格列表",
 						path: "/listSpecification"
@@ -424,11 +419,6 @@ export default new Router({
 						path: "/selectSpecificationGroup",
 						name: "SelectSpecificationGroup",
 						component: SelectSpecificationGroup,
-					},
-					{
-						path: "/test",
-						name: "Test",
-						component: Test,
 					},
 					{
 						path: "/selectSpuType",
