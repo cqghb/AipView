@@ -2,13 +2,13 @@
 	<div>
 		<!-- 商品规格组管理 -->
 		<base-table :uri="uri"
-		            ref="specificationGroupTable"
+		            ref="spuTypeTable"
 		            :operationButtonList="operationButtonList"
 		            :tableColumnList="tableColumnList"
 		            :searchData="searchData"
 		            :searchForm="searchForm"
 		            :formSize="formSize"
-					searchFormRef="searchSpecificationGroupForm"
+					searchFormRef="searchSpuTypeForm"
 		            :searchHandle="searchHandle"></base-table>
 	</div>
 </template>
@@ -18,23 +18,23 @@
 	
 	import * as SystemConstant from '@/components/constant/systemConstant';
 	import * as CommInterface from '@/components/utils/commInterface';
-	import * as businessConstant from '@/components/constant/businessConstant';
+	import * as BusinessConstant from '@/components/constant/businessConstant';
 	import * as MsgConstant from '@/components/constant/msgConstant';
 	import * as ComponentConstant from '@/components/constant/componentConstant';
 	
 	import util from "@/components/utils/util";
 	
 	export default{
-		name: "SpecificationGroupList",
+		name: "ListSpuType",
 		components:{
 			"base-table": BaseTable,
 		},
 		data() {
 			return {
-				uri: SystemConstant.consSpecificationGroupManage.FIND_PAGE,
+				uri: SystemConstant.consSpuTypeManage.FIND_PAGE,
 				searchData:{
 					name: "",// 节点名称
-					delTag: businessConstant.NO,// 删除标记
+					delTag: BusinessConstant.NO,// 删除标记
 				},
 				searchForm:{
 					name: {
@@ -65,7 +65,7 @@
 						handle:()=>{
 							let the = this;
 							the.loading = true;
-							the.$refs.specificationGroupTable.queryList();// 调子组件的方法
+							the.$refs.spuTypeTable.queryList();// 调子组件的方法
 						}
 					},
 					{
@@ -74,7 +74,7 @@
 						size: "",
 						handle:()=>{
 							let the = this;
-							the.$refs.specificationGroupTable.$refs.searchSpecificationGroupForm.$refs.defaultMyForm.resetFields();
+							the.$refs.spuTypeTable.$refs.searchSpecificationGroupForm.$refs.defaultMyForm.resetFields();
 						}
 					}
 				],
@@ -95,7 +95,7 @@
 						text: "新增",
 						handle:()=>{
 							let the = this;
-							the.addSpecificationGroup();
+							the.add();
 						}
 					},
 					{
@@ -104,7 +104,7 @@
 						text: "修改",
 						handle:()=>{
 							let the = this;
-							the.updateSpecificationGroup();
+							the.update();
 						}
 					},
 					{
@@ -114,7 +114,7 @@
 						handle:()=>{
 							let the = this;
 							util.confirm("", "", "", "", "",function () {// 确认
-								the.deleteSpecificationGroup();
+								the.delete();
 							}, null);
 							
 						}
@@ -122,7 +122,7 @@
 				],
 				tableColumnList:[
 					// { prop: "id", label: "ID", width: 180 },
-					{ prop: "name", label: "规格组名称", width: 180 },
+					{ prop: "name", label: "货品类型名称", width: 180 },
 					{ prop: "delTag", label: "删除标记", width: 80 },
 					{ prop: "remark", label: "备注"},
 					{ prop: "createUser", label: "创建人", width: 120 },
@@ -134,10 +134,10 @@
 			};
 		},
 		methods:{
-			searchDelTagOptions(){
+			search(){
 				let _this = this;
 				CommInterface.getCodeType(
-				    businessConstant.CODE_TYPE.YES_OR_NO,
+				    BusinessConstant.CODE_TYPE.YES_OR_NO,
 					[],
 				    function (res) {
 						let retCode = res.code;
@@ -150,32 +150,32 @@
 				    }
 				);
 			},
-			addSpecificationGroup(){
+			add(){
 				let _this = this;
 				CommInterface.goToPage(SystemConstant.consComponentPath.ADD_SPECIFICATION_GROUP, SystemConstant.consComponentName.ADD_SPECIFICATION_GROUP, {});
 			},
-			updateSpecificationGroup(){
+			update(){
 				let _this = this;
-				_this.$refs.specificationGroupTable.commonCheck();
-				if(_this.$refs.specificationGroupTable.selectedData){
-					let params = _this.$refs.specificationGroupTable.selectedDataArr[0];
+				_this.$refs.spuTypeTable.commonCheck();
+				if(_this.$refs.spuTypeTable.selectedData){
+					let params = _this.$refs.spuTypeTable.selectedDataArr[0];
 					let param = {
 					        id: params.id
 					    };
 					CommInterface.goToPage(SystemConstant.consComponentPath.UPDATE_SPECIFICATION_GROUP, SystemConstant.consComponentName.UPDATE_SPECIFICATION_GROUP, param);
 				}
 			},
-			deleteSpecificationGroup(){
+			delete(){
 				let _this = this;
-				_this.$refs.specificationGroupTable.commonCheck();
-				if(_this.$refs.specificationGroupTable.selectedData){
-					let selectedItem = _this.$refs.specificationGroupTable.selectedDataArr[0];
+				_this.$refs.spuTypeTable.commonCheck();
+				if(_this.$refs.spuTypeTable.selectedData){
+					let selectedItem = _this.$refs.spuTypeTable.selectedDataArr[0];
 					let id = selectedItem.id;
 					CommInterface.sendPost(SystemConstant.consSpecificationGroupManage.UPDATE_DEL_TAG, {id: id}, function(num){
 						if(num>0){
 							util.showMsg(MsgConstant.msgCommon.SUCCESS_DELETE, ComponentConstant.MessageProperties.SUCCESS);
-							_this.$refs.specificationGroupTable.loading = true;
-							_this.$refs.specificationGroupTable.queryList();
+							_this.$refs.spuTypeTable.loading = true;
+							_this.$refs.spuTypeTable.queryList();
 						} else {
 							util.showMsg(MsgConstant.msgCommon.FALL_DELETE, ComponentConstant.MessageProperties.ERROR);
 						}
@@ -188,7 +188,7 @@
 		},
 		mounted() {
 			let _this = this;
-			_this.searchDelTagOptions();
+			_this.search();
 		}
 	}
 </script>
