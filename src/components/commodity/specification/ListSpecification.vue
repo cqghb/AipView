@@ -9,7 +9,8 @@
 		            :searchForm="searchForm"
 		            :formSize="formSize"
 					searchFormRef="searchSpecificationForm"
-		            :searchHandle="searchHandle"></base-table>
+		            :searchHandle="searchHandle" 
+					@searchDelTagOptions="searchDelTagOptions"></base-table>
 	</div>
 </template>
 
@@ -137,22 +138,26 @@
 			};
 		},
 		methods: {
-			searchDelTagOptions(){//学历查询
+			searchDelTagOptions(data){
 				let _this = this;
-				CommInterface.getCodeType(
-				    businessConstant.CODE_TYPE.YES_OR_NO,
-					[],
-				    function (res) {
-						let retCode = res.code;
-						let retMsg = res.msg;
-				        if(SystemConstant.common.RET_CODE == retCode){
-				            _this.searchForm.delTag.options = res.data;
-				        } else {
-				            util.showMsg("删除标记备选项查询失败", ComponentConstant.MessageProperties.ERROR);
-				        }
-				    }
-				);
+				_this.searchForm.delTag.options = data;
 			},
+			// searchDelTagOptions(){//学历查询
+			// 	let _this = this;
+			// 	CommInterface.getCodeType(
+			// 	    businessConstant.CODE_TYPE.YES_OR_NO,
+			// 		[],
+			// 	    function (res) {
+			// 			let retCode = res.code;
+			// 			let retMsg = res.msg;
+			// 	        if(SystemConstant.common.RET_CODE == retCode){
+			// 	            _this.searchForm.delTag.options = res.data;
+			// 	        } else {
+			// 	            util.showMsg("删除标记备选项查询失败", ComponentConstant.MessageProperties.ERROR);
+			// 	        }
+			// 	    }
+			// 	);
+			// },
 			add(){// 新增
 				let _this = this;
 				CommInterface.goToPage(SystemConstant.consComponentPath.ADD_SPECIFICATION, SystemConstant.consComponentName.ADD_SPECIFICATION, {});
@@ -173,7 +178,7 @@
 		},
 		mounted() {
 			let _this = this;
-			_this.searchDelTagOptions();
+			// _this.searchDelTagOptions();
 		}
 	}
 </script>

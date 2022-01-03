@@ -9,7 +9,8 @@
 		            :searchForm="searchForm"
 		            :formSize="formSize"
 					searchFormRef="searchSpecificationGroupForm"
-		            :searchHandle="searchHandle"></base-table>
+		            :searchHandle="searchHandle" 
+					@searchDelTagOptions="searchDelTagOptions"></base-table>
 	</div>
 </template>
 
@@ -18,7 +19,7 @@
 	
 	import * as SystemConstant from '@/components/constant/systemConstant';
 	import * as CommInterface from '@/components/utils/commInterface';
-	import * as businessConstant from '@/components/constant/businessConstant';
+	import * as BusinessConstant from '@/components/constant/businessConstant';
 	import * as MsgConstant from '@/components/constant/msgConstant';
 	import * as ComponentConstant from '@/components/constant/componentConstant';
 	
@@ -34,7 +35,7 @@
 				uri: SystemConstant.consSpecificationGroupManage.FIND_PAGE,
 				searchData:{
 					name: "",// 节点名称
-					delTag: businessConstant.NO,// 删除标记
+					delTag: BusinessConstant.NO,// 删除标记
 				},
 				searchForm:{
 					name: {
@@ -134,22 +135,26 @@
 			};
 		},
 		methods:{
-			searchDelTagOptions(){
+			searchDelTagOptions(data){
 				let _this = this;
-				CommInterface.getCodeType(
-				    businessConstant.CODE_TYPE.YES_OR_NO,
-					[],
-				    function (res) {
-						let retCode = res.code;
-						let retMsg = res.msg;
-				        if(SystemConstant.common.RET_CODE == retCode){
-				            _this.searchForm.delTag.options = res.data;
-				        } else {
-				            util.showMsg("删除标记备选项查询失败", ComponentConstant.MessageProperties.ERROR);
-				        }
-				    }
-				);
+				_this.searchForm.delTag.options = data;
 			},
+			// searchDelTagOptions(){
+			// 	let _this = this;
+			// 	CommInterface.getCodeType(
+			// 	    BusinessConstant.CODE_TYPE.YES_OR_NO,
+			// 		[],
+			// 	    function (res) {
+			// 			let retCode = res.code;
+			// 			let retMsg = res.msg;
+			// 	        if(SystemConstant.common.RET_CODE == retCode){
+			// 	            _this.searchForm.delTag.options = res.data;
+			// 	        } else {
+			// 	            util.showMsg("删除标记备选项查询失败", ComponentConstant.MessageProperties.ERROR);
+			// 	        }
+			// 	    }
+			// 	);
+			// },
 			addSpecificationGroup(){
 				let _this = this;
 				CommInterface.goToPage(SystemConstant.consComponentPath.ADD_SPECIFICATION_GROUP, SystemConstant.consComponentName.ADD_SPECIFICATION_GROUP, {});
@@ -188,7 +193,7 @@
 		},
 		mounted() {
 			let _this = this;
-			_this.searchDelTagOptions();
+			// _this.searchDelTagOptions();
 		}
 	}
 </script>

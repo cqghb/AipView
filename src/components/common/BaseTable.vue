@@ -119,6 +119,8 @@
 	
     import * as SystemConstant from '@/components/constant/systemConstant';
 	import * as BusinessConstant from '@/components/constant/businessConstant';
+	import * as MsgConstant from '@/components/constant/msgConstant';
+	import * as ComponentConstant from '@/components/constant/componentConstant';
 	
     export default {
         name: "BaseTable",
@@ -221,9 +223,6 @@
 				// return a;
 				return tableDataFormatStrateg.tableDataFormat.prototype.format(sp.row, item);
 			},
-			async aaaaqq(){
-				return 1;
-			},
             clearParams(){// 清空条件输入框
                 let the = this;
             },
@@ -284,67 +283,62 @@
 			    }
 			    the.selectedData = true;
 			},
-			async aaaa(data, item){
-				let the = this;
-				let transformation = item.transformation;
-				// 辅助开发
-				if(!transformation){
-					console.log("请在表格列中配置transformation属性");
-				}
-				let prop = item.prop;
-				let value = data.row[prop];
-				// 不同类型，按不同处理办法，这里先写一个码值转换的
-				if(BusinessConstant.CODE_TYPE.YES_OR_NO==transformation){
-					let params = [value];
+			// async aaaa(data, item){
+			// 	let the = this;
+			// 	let transformation = item.transformation;
+			// 	// 辅助开发
+			// 	if(!transformation){
+			// 		console.log("请在表格列中配置transformation属性");
+			// 	}
+			// 	let prop = item.prop;
+			// 	let value = data.row[prop];
+			// 	// 不同类型，按不同处理办法，这里先写一个码值转换的
+			// 	if(BusinessConstant.CODE_TYPE.YES_OR_NO==transformation){
+			// 		let params = [value];
 					
-					await util.$http.post(SystemConstant.consCodeManage.SEARCH_CODEKEY_VALUE,
-						{
-							"codeType": BusinessConstant.CODE_TYPE.YES_OR_NO,
-							"codeList": params,
-						}
-					).then(function (res) {
+			// 		await util.$http.post(SystemConstant.consCodeManage.SEARCH_CODEKEY_VALUE,
+			// 			{
+			// 				"codeType": BusinessConstant.CODE_TYPE.YES_OR_NO,
+			// 				"codeList": params,
+			// 			}
+			// 		).then(function (res) {
 						
-						let info = res;
-						let codeArr = info.data;
-							// 这里只会返回一条,老数据可能存在空的情况
-							if(codeArr.length>0){
-								console.log("22323233232: ", codeArr[0].label);
-								return codeArr[0].label;
-							}
-						return "";
-					});
-					
-					
-					// let res = await CommInterface.getCodeType222(BusinessConstant.CODE_TYPE.YES_OR_NO, params
-					// , function(res){
-					// 	let codeArr = res.data;
-					// 	// 这里只会返回一条,老数据可能存在空的情况
-					// 	if(codeArr.length>0){
-					// 		console.log('dfdfdfdfdf',codeArr[0].label);
-					// 		return codeArr[0].label;
-					// 	}
-											
-					// }
-					// );
-					// console.log('dfdfdfdfdf',res);
-					// .then((res)=>{
-					// 	console.log('dfdfdfdfdf',res);
-					// 	let codeArr = res.data;
-					// 	// 这里只会返回一条,老数据可能存在空的情况
-					// 	if(codeArr.length>0){
-							
-					// 		return codeArr[0].label;
-					// 	}
-					// });
-				}
+			// 			let info = res;
+			// 			let codeArr = info.data;
+			// 				// 这里只会返回一条,老数据可能存在空的情况
+			// 				if(codeArr.length>0){
+			// 					console.log("22323233232: ", codeArr[0].label);
+			// 					return codeArr[0].label;
+			// 				}
+			// 			return "";
+			// 		});
+			// 	// }
+			// },
+			searchDelTagOptions(){
+				let _this = this;
+				CommInterface.getCodeType(
+				    BusinessConstant.CODE_TYPE.YES_OR_NO,
+					[],
+				    function (res) {
+						let retCode = res.code;
+						let retMsg = res.msg;
+				        if(SystemConstant.common.RET_CODE == retCode){
+				            // _this.searchForm.delTag.options = res.data;
+							_this.$emit("searchDelTagOptions", res.data);
+				        } else {
+				            util.showMsg("删除标记备选项查询失败", ComponentConstant.MessageProperties.ERROR);
+				        }
+				    }
+				);
 			},
 			load(){
 				
 			}
         },
         created: function () {
-            let the = this;
-            the.queryList();
+            let _this = this;
+            _this.queryList();
+			_this.searchDelTagOptions();
         },
         mounted() {
             let the = this;

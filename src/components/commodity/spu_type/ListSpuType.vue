@@ -9,7 +9,8 @@
 		            :searchForm="searchForm"
 		            :formSize="formSize"
 					searchFormRef="searchSpuTypeForm"
-		            :searchHandle="searchHandle"></base-table>
+		            :searchHandle="searchHandle"
+					@searchDelTagOptions="searchDelTagOptions"></base-table>
 	</div>
 </template>
 
@@ -134,22 +135,26 @@
 			};
 		},
 		methods:{
-			search(){
+			searchDelTagOptions(data){
 				let _this = this;
-				CommInterface.getCodeType(
-				    BusinessConstant.CODE_TYPE.YES_OR_NO,
-					[],
-				    function (res) {
-						let retCode = res.code;
-						let retMsg = res.msg;
-				        if(SystemConstant.common.RET_CODE == retCode){
-				            _this.searchForm.delTag.options = res.data;
-				        } else {
-				            util.showMsg("删除标记备选项查询失败", ComponentConstant.MessageProperties.ERROR);
-				        }
-				    }
-				);
+				_this.searchForm.delTag.options = data;
 			},
+			// search(){
+			// 	let _this = this;
+			// 	CommInterface.getCodeType(
+			// 	    BusinessConstant.CODE_TYPE.YES_OR_NO,
+			// 		[],
+			// 	    function (res) {
+			// 			let retCode = res.code;
+			// 			let retMsg = res.msg;
+			// 	        if(SystemConstant.common.RET_CODE == retCode){
+			// 	            _this.searchForm.delTag.options = res.data;
+			// 	        } else {
+			// 	            util.showMsg("删除标记备选项查询失败", ComponentConstant.MessageProperties.ERROR);
+			// 	        }
+			// 	    }
+			// 	);
+			// },
 			add(){
 				let _this = this;
 				CommInterface.goToPage(SystemConstant.consComponentPath.ADD_SPECIFICATION_GROUP, SystemConstant.consComponentName.ADD_SPECIFICATION_GROUP, {});
@@ -188,7 +193,7 @@
 		},
 		mounted() {
 			let _this = this;
-			_this.search();
+			// _this.search();
 		}
 	}
 </script>
