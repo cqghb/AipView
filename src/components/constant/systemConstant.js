@@ -99,6 +99,8 @@ export const consComponentPath = {
 	SELECT_SPECIFICATION_GROUP_ADD_SPECIFICATION: "/addSpecification/selectSpecificationGroup", // 选择产品规格分组
 	SELECT_SPU_TYPE_ADD_SPECIFICATION: "/addSpecification/selectSpuType", // 选择货品类型
 	UPDATE_SPECIFICATION: "/updateSpecification", // 维护产品规格
+	SELECT_SPECIFICATION_GROUP_UPDATE_SPECIFICATION: "/updateSpecification/selectSpecificationGroup2", // 选择产品规格分组
+	SELECT_SPU_TYPE_UPDATE_SPECIFICATION: "/updateSpecification/selectSpuType2", // 选择货品类型
 	DETAIL_SPECIFICATION: "/detailSpecification", // 维护产品规格
 };
 /**
@@ -129,6 +131,8 @@ export const consComponentName = {
 	SELECT_SPECIFICATION_GROUP_ADD_SPECIFICATION: "SelectSpecificationGroup", // 选择产品规格分组
 	SELECT_SPU_TYPE_ADD_SPECIFICATION: "SelectSpuType", // 选择货品类型
 	UPDATE_SPECIFICATION: "UpdateSpecification", // 维护产品规格
+	SELECT_SPECIFICATION_GROUP_UPDATE_SPECIFICATION: "SelectSpecificationGroup2", // 选择产品规格分组
+	SELECT_SPU_TYPE_UPDATE_SPECIFICATION: "SelectSpuType2", // 选择货品类型
 	DETAIL_SPECIFICATION: "DetailSpecification", // 维护产品规格
 };
 /**
@@ -204,7 +208,8 @@ export const consSpecificationGroupManage = {
  */
 export const consSpecificationManage = {
     FIND_PAGE: "/specification/findPage", // 产品规格分组列表查询
-    QUERY_BY_ID: "/specification/queryById", // 通过主键查询
+    QUERY_BY_ID: "/specification/queryById", // 通过主键查询queryDetail
+    QUERY_DETAIL: "/specification/queryDetail", // 通过主键查询详细信息
 	UPDATE_DEL_TAG: "/specification/updateDelTag", // 逻辑删除操作
 	ADD: "/specification/insertSpecification", // 添加
 	UPDATE: "/specification/updateSpecification", // 维护

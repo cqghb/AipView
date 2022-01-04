@@ -1,11 +1,10 @@
 <template>
 	<div>
-		
+		<!-- 添加产品规格 -->
 		<div class="demo-block demo-tree">
 			<div class="source">
 				<div class="custom-tree-container">
 					<div class="block">
-						<!-- 添加产品规格 -->
 						<update-form
 									labelWidth="80px"
 									ref="addSpecificationForm"
@@ -18,12 +17,10 @@
 					</div>
 					<div class="block">
 						<router-view @setSpecificationGroup="setSpecificationGroup" @setSpuType="setSpuType"></router-view>
-						<!-- <router-view name="typeId"></router-view> -->
 					</div>
 				</div>
 			</div>			
 		</div>
-		
 	</div>
 </template>
 
@@ -195,7 +192,7 @@
 				let _this = this;
 				_this.formData.typeId = typeId;
 				_this.formData.typeIdName = typeId + "-" + typeName;
-			}
+			},
 		},
 		created() {
 			let _this = this;

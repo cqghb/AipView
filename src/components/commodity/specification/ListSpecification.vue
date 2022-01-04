@@ -142,28 +142,20 @@
 				let _this = this;
 				_this.searchForm.delTag.options = data;
 			},
-			// searchDelTagOptions(){//学历查询
-			// 	let _this = this;
-			// 	CommInterface.getCodeType(
-			// 	    businessConstant.CODE_TYPE.YES_OR_NO,
-			// 		[],
-			// 	    function (res) {
-			// 			let retCode = res.code;
-			// 			let retMsg = res.msg;
-			// 	        if(SystemConstant.common.RET_CODE == retCode){
-			// 	            _this.searchForm.delTag.options = res.data;
-			// 	        } else {
-			// 	            util.showMsg("删除标记备选项查询失败", ComponentConstant.MessageProperties.ERROR);
-			// 	        }
-			// 	    }
-			// 	);
-			// },
 			add(){// 新增
 				let _this = this;
 				CommInterface.goToPage(SystemConstant.consComponentPath.ADD_SPECIFICATION, SystemConstant.consComponentName.ADD_SPECIFICATION, {});
 			},
 			update(){// 修改
 				let _this = this;
+				_this.$refs.specificationTable.commonCheck();
+				if(_this.$refs.specificationTable.selectedData){
+					let params = _this.$refs.specificationTable.selectedDataArr[0];
+					let param = {
+					        id: params.id
+					    };
+					CommInterface.goToPage(SystemConstant.consComponentPath.UPDATE_SPECIFICATION, SystemConstant.consComponentName.UPDATE_SPECIFICATION, param);
+				}
 			},
 			delete(){// 删除
 				let _this = this;
@@ -178,7 +170,6 @@
 		},
 		mounted() {
 			let _this = this;
-			// _this.searchDelTagOptions();
 		}
 	}
 </script>

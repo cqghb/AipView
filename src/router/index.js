@@ -32,6 +32,7 @@ import IconAdd from '@/components/icon/IconAdd'
 import IconUpdate from '@/components/icon/IconUpdate'
 import SpecificationGroupList from '@/components/commodity/specification_group/SpecificationGroupList'
 import SelectSpecificationGroup from '@/components/commodity/specification_group/SelectSpecificationGroup'
+import SelectSpecificationGroup2 from '@/components/commodity/specification_group/SelectSpecificationGroup'
 import AddSpecificationGroup from '@/components/commodity/specification_group/AddSpecificationGroup'
 import UpdateSpecificationGroup from '@/components/commodity/specification_group/UpdateSpecificationGroup'
 import ListSpecification from '@/components/commodity/specification/ListSpecification'
@@ -40,6 +41,7 @@ import UpdateSpecification from '@/components/commodity/specification/UpdateSpec
 import DetailSpecification from '@/components/commodity/specification/DetailSpecification'
 import ListSpuType from '@/components/commodity/spu_type/ListSpuType'
 import SelectSpuType from '@/components/commodity/spu_type/SelectSpuType'
+import SelectSpuType2 from '@/components/commodity/spu_type/SelectSpuType'
 
 
 
@@ -425,7 +427,6 @@ export default new Router({
 						name: "SelectSpuType",
 						component: SelectSpuType,
 					},
-					// 
 				]
 			},{
 				path: "/updateSpecification",
@@ -438,6 +439,18 @@ export default new Router({
 						name: "维护产品规格",
 						path: "/updateSpecification"
 					}
+				],
+				children:[
+					{
+						path: "/selectSpecificationGroup2",
+						name: "SelectSpecificationGroup2",
+						component: SelectSpecificationGroup2,
+					},
+					{
+						path: "/selectSpuType2",
+						name: "SelectSpuType2",
+						component: SelectSpuType2,
+					},
 				]
 			},{
 				path: "/detailSpecification",
