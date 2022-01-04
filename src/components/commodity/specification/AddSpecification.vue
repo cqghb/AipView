@@ -175,10 +175,10 @@
 				let _this = this;
 				_this.$refs.addSpecificationForm.$refs.baseForm.$refs.defaultMyForm.validate((volid)=>{
 					if(volid){
-						CommInterface.sendPost(SystemConstant.consSpecificationGroupManage.ADD, _this.formData, function(num){
+						CommInterface.sendPost(SystemConstant.consSpecificationManage.ADD, _this.formData, function(num){
 							if(num>0){
 								util.showMsg(MsgConstant.msgCommon.SUCCESS_ADD, ComponentConstant.MessageProperties.SUCCESS);
-								CommInterface.goToPage(SystemConstant.consComponentPath.LIST_SPECIFICATION_GROUP, SystemConstant.consComponentName.LIST_SPECIFICATION_GROUP, {});
+								CommInterface.goToPage(SystemConstant.consComponentPath.LIST_SPECIFICATION, SystemConstant.consComponentName.LIST_SPECIFICATION, {});
 							} else {
 								util.showMsg(MsgConstant.msgCommon.FAIL_ADD, ComponentConstant.MessageProperties.ERROR);
 							}
