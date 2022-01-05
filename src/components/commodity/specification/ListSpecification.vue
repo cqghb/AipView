@@ -23,6 +23,9 @@
 	import * as MsgConstant from '@/components/constant/msgConstant';
 	import * as ComponentConstant from '@/components/constant/componentConstant';
 	
+	import util from "@/components/utils/util";
+	
+	
 	export default {
 		name: "Specification",
 		components: {
@@ -129,10 +132,10 @@
 					{ prop: "addr", label: "显示位置", width: 180 },
 					{ prop: "delTag", label: "删除标记", width: 80 },
 					{ prop: "remark", label: "备注"},
-					{ prop: "createUser", label: "创建人", width: 120 },
-					{ prop: "createTime", label: "创建时间", width: 160, type:SystemConstant.dataType.DATE, formatDate: SystemConstant.common.FORMAT_DATE },
-					{ prop: "updateUser", label: "修改人", width: 120 },
-					{ prop: "updateTime", label: "修改时间", width: 160, type:SystemConstant.dataType.DATE, formatDate:SystemConstant.common.FORMAT_DATE }
+					// { prop: "createUser", label: "创建人", width: 120 },
+					// { prop: "createTime", label: "创建时间", width: 160, type:SystemConstant.dataType.DATE, formatDate: SystemConstant.common.FORMAT_DATE },
+					// { prop: "updateUser", label: "修改人", width: 120 },
+					// { prop: "updateTime", label: "修改时间", width: 160, type:SystemConstant.dataType.DATE, formatDate:SystemConstant.common.FORMAT_DATE }
 				],
 				selectedData: false
 			};
@@ -157,8 +160,22 @@
 					CommInterface.goToPage(SystemConstant.consComponentPath.UPDATE_SPECIFICATION, SystemConstant.consComponentName.UPDATE_SPECIFICATION, param);
 				}
 			},
-			delete(){// 删除
+			delete(){// 删除 删除之后只是不让再配置到商品规格中去
 				let _this = this;
+				_this.$refs.specificationTable.commonCheck();
+				if(_this.$refs.specificationTable.selectedData){
+					let selectedItem = _this.$refs.specificationTable.selectedDataArr[0];
+					let id = selectedItem.id;
+					CommInterface.sendPost(SystemConstant.consSpecificationManage.UPDATE_DEL_TAG, {id: id}, function(num){
+						if(num>0){
+							util.showMsg(MsgConstant.msgCommon.SUCCESS_DELETE, ComponentConstant.MessageProperties.SUCCESS);
+							_this.$refs.specificationTable.loading = true;
+							_this.$refs.specificationTable.queryList();
+						} else {
+							util.showMsg(MsgConstant.msgCommon.FALL_DELETE, ComponentConstant.MessageProperties.ERROR);
+						}
+					});
+				}
 			},
 			detail(){// 详情
 				let _this = this;
