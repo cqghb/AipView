@@ -141,6 +141,12 @@
 					name:[
 						{ required: true, message: "请输入规格名称", trigger: "blur" }
 					],
+					groupIdName:[
+						{ required: true, message: "请选择产品规格分组名称", trigger: "blur" }
+					],
+					typeIdName:[
+						{ required: true, message: "请选择货品类型名称", trigger: "blur" }
+					],
 				},
 				btnHandle:[
 					{
@@ -222,5 +228,6 @@
 	}
 </script>
 
-<style>
+<style scoped>
+	@import url("../../../../static/css/LeftRight.css");
 </style>

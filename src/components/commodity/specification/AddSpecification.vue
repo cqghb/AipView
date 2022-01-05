@@ -144,6 +144,12 @@
 					name:[
 						{ required: true, message: "请输入规格名称", trigger: "blur" }
 					],
+					groupIdName:[
+						{ required: true, message: "请选择产品规格分组名称", trigger: "blur" }
+					],
+					typeIdName:[
+						{ required: true, message: "请选择货品类型名称", trigger: "blur" }
+					],
 				},
 				btnHandle:[
 					{
@@ -203,27 +209,6 @@
 	}
 </script>
 
-<style>
-	.custom-tree-container {
-	    display: flex;
-	    margin: -24px;
-	}
-	.block {
-	    flex: 1;
-	    padding: 8px 24px 24px;
-	}
-	.demo-block {
-	    margin-bottom: 24px;
-		
-		border: 1px solid #ebebeb;
-		border-radius: 3px;
-		transition: .2s;
-	}
-	.demo-block .source {
-	    padding: 24px;
-	}
-	
-	.demo-tree .block:first-child {
-	    border-right: 1px solid #eff2f6;
-	}
+<style scoped>
+	@import url("../../../../static/css/LeftRight.css");
 </style>
