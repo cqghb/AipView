@@ -179,6 +179,14 @@
 			},
 			detail(){// 详情
 				let _this = this;
+				_this.$refs.specificationTable.commonCheck();
+				if(_this.$refs.specificationTable.selectedData){
+					let params = _this.$refs.specificationTable.selectedDataArr[0];
+					let param = {
+					        id: params.id
+					    };
+					CommInterface.goToPage(SystemConstant.consComponentPath.DETAIL_SPECIFICATION, SystemConstant.consComponentName.DETAIL_SPECIFICATION, param);
+				}
 			},
 			
 		},
