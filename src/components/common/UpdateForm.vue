@@ -7,6 +7,7 @@
 					:formFieldList="formFieldList"
 					:size="size"
 					:rules="rules"
+					:labelWidth="labelWidth"
 					:buttonArr="buttonArr"></base-form>
     </div>
 </template>

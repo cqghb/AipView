@@ -42,8 +42,9 @@ import DetailSpecification from '@/components/commodity/specification/DetailSpec
 import ListSpuType from '@/components/commodity/spu_type/ListSpuType'
 import SelectSpuType from '@/components/commodity/spu_type/SelectSpuType'
 import SelectSpuType2 from '@/components/commodity/spu_type/SelectSpuType'
-
-
+import AddSpuType from '@/components/commodity/spu_type/AddSpuType'
+import UpdateSpuType from '@/components/commodity/spu_type/UpdateSpuType'
+import DetailSpuType from '@/components/commodity/spu_type/DetailSpuType'
 
 
 
@@ -471,6 +472,42 @@ export default new Router({
 				meta: [{
 						name: "货品类型列表查询",
 						path: "/listSpuType"
+					}
+				]
+			},{
+				path: "/addSpuType",
+				name: "AddSpuType",
+				component: AddSpuType,
+				meta: [{
+						name: "货品类型列表查询",
+						path: "/listSpuType"
+					},{
+						name: "添加货品类型",
+						path: "/addSpuType"
+					}
+				]
+			},{
+				path: "/updateSpuType",
+				name: "UpdateSpuType",
+				component: UpdateSpuType,
+				meta: [{
+						name: "货品类型列表查询",
+						path: "/listSpuType"
+					},{
+						name: "维护货品类型",
+						path: "/updateSpuType"
+					}
+				]
+			},{
+				path: "/detailSpuType",
+				name: "DetailSpuType",
+				component: DetailSpuType,
+				meta: [{
+						name: "货品类型列表查询",
+						path: "/listSpuType"
+					},{
+						name: "货品类型详情",
+						path: "/detailSpuType"
 					}
 				]
 			}]//在这里加 

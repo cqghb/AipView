@@ -77,10 +77,6 @@
 								handle: (me) => {
 									let the = this;
 									CommInterface.goToPage(SystemConstant.consComponentPath.SELECT_SPECIFICATION_GROUP_ADD_SPECIFICATION, SystemConstant.consComponentName.SELECT_SPECIFICATION_GROUP_ADD_SPECIFICATION,{});
-									// return main.default.$router.push({
-									//     path: "/addSpecification/specificationGroupList",
-									//     name: "SpecificationGroupList"
-									// });
 								}
 							}
 						],
@@ -108,7 +104,6 @@
 								handle: (me) => {
 									let the = this;
 									CommInterface.goToPage(SystemConstant.consComponentPath.SELECT_SPU_TYPE_ADD_SPECIFICATION,SystemConstant.consComponentName.SELECT_SPU_TYPE_ADD_SPECIFICATION,{});
-									// the.centerDialogVisible = true;
 								}
 							}
 						],

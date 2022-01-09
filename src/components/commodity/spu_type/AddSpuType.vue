@@ -2,8 +2,8 @@
 	<div>
 		<!-- 添加商品规格组 -->
 		<update-form
-					labelWidth="80px"
-					ref="addSpecificationGroupForm"
+					labelWidth="120px"
+					ref="addSpuTypeForm"
 		            :formData="formData"
 		            :formFieldList="formFieldList"
 					:baseFromModel="formData"
@@ -23,23 +23,32 @@
 	import * as ComponentConstant from '@/components/constant/componentConstant';
 	
 	export default{
-		name:"AddSpecificationGroup",
+		name:"AddSpuType",
 		components:{
 			"update-form": UpdateForm,
 		},
 		data() {
 			return {
 				formData:{
-					name:"",// 规格组名称
+					name:"",// 货品类型名称
+					code:"",// 货品类型代码
 					remark:"",// 备注
 				},
 				formFieldList:{
 					name: {
 					    type: "Input",
-					    label: "规格组名称",
+					    label: "货品类型名称",
 					    prop: "name",
 					    width: "180px",
-					    placeholder: "请输入规格组名称...",
+					    placeholder: "请输入货品类型名称...",
+					    size: ""
+					},
+					code: {
+					    type: "Input",
+					    label: "货品类型代码",
+					    prop: "code",
+					    width: "180px",
+					    placeholder: "请输入货品类型代码...",
 					    size: ""
 					},
 					remark: {
@@ -54,7 +63,10 @@
 				formSize: "",
 				rules:{
 					name:[
-						{ required: true, message: "请输入规格组名称", trigger: "blur" }
+						{ required: true, message: "请输入货品类型名称", trigger: "blur" }
+					],
+					code:[
+						{ required: true, message: "请输入货品类型代码", trigger: "blur" }
 					],
 				},
 				btnHandle:[
@@ -63,8 +75,8 @@
 					    type:"primary",
 					    size: "",
 					    handle:()=>{
-					        let the = this;
-							the.add();
+					        let _this = this;
+							_this.add();
 					    }
 					},
 					{
@@ -72,8 +84,8 @@
 					    type:"primary",
 					    size: "",
 					    handle:()=>{
-					        let the = this;
-					        the.$refs.addSpecificationGroupForm.$refs.baseForm.$refs.defaultMyForm.resetFields();
+					        let _this = this;
+					        _this.$refs.addSpuTypeForm.$refs.baseForm.$refs.defaultMyForm.resetFields();
 					    }
 					}
 				],
@@ -82,12 +94,12 @@
 		methods:{
 			add(){
 				let _this = this;
-				_this.$refs.addSpecificationGroupForm.$refs.baseForm.$refs.defaultMyForm.validate((volid)=>{
+				_this.$refs.addSpuTypeForm.$refs.baseForm.$refs.defaultMyForm.validate((volid)=>{
 					if(volid){
-						CommInterface.sendPost(SystemConstant.consSpecificationGroupManage.ADD, _this.formData, function(num){
+						CommInterface.sendPost(SystemConstant.consSpuTypeManage.ADD, _this.formData, function(num){
 							if(num>0){
 								util.showMsg(MsgConstant.msgCommon.SUCCESS_ADD, ComponentConstant.MessageProperties.SUCCESS);
-								CommInterface.goToPage(SystemConstant.consComponentPath.LIST_SPECIFICATION_GROUP, SystemConstant.consComponentName.LIST_SPECIFICATION_GROUP, {});
+								CommInterface.goToPage(SystemConstant.consComponentPath.LIST_SPU_TYPE, SystemConstant.consComponentName.LIST_SPU_TYPE, {});
 							} else {
 								util.showMsg(MsgConstant.msgCommon.FAIL_ADD, ComponentConstant.MessageProperties.ERROR);
 							}
@@ -97,13 +109,14 @@
 			}
 		},
 		created() {
-			
+			let _this = this;
 		},
 		mounted() {
-			
+			let _this = this;
 		}
 	}
 </script>
 
 <style scoped="scoped">
+	
 </style>

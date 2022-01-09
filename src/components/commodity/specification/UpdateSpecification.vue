@@ -77,7 +77,7 @@
 								size: "50px",
 								disable: false,
 								handle: (me) => {
-									let the = this;
+									let _this = this;
 									CommInterface.goToPage(SystemConstant.consComponentPath.SELECT_SPECIFICATION_GROUP_UPDATE_SPECIFICATION, SystemConstant.consComponentName.SELECT_SPECIFICATION_GROUP_UPDATE_SPECIFICATION,{});
 								}
 							}
@@ -104,7 +104,7 @@
 								size: "50px",
 								disable: false,
 								handle: (me) => {
-									let the = this;
+									let _this = this;
 									CommInterface.goToPage(SystemConstant.consComponentPath.SELECT_SPU_TYPE_UPDATE_SPECIFICATION,SystemConstant.consComponentName.SELECT_SPU_TYPE_UPDATE_SPECIFICATION,{});
 								}
 							}
@@ -154,8 +154,8 @@
 					    type:"primary",
 					    size: "",
 					    handle:()=>{
-					        let the = this;
-							the.update();
+					        let _this = this;
+							_this.update();
 					    }
 					},
 					{
@@ -163,7 +163,7 @@
 					    type:"",
 					    size: "",
 					    handle:()=>{
-					        let the = this;
+					        let _this = this;
 					        CommInterface.goToPage(SystemConstant.consComponentPath.LIST_SPECIFICATION, SystemConstant.consComponentName.LIST_SPECIFICATION, {});
 					    }
 					}
@@ -183,21 +183,17 @@
 			},
 			dealRes(res){// 对回显数据预处理
 			    let _this = this;
-				// res.groupIdName = "0-1";
-				// res.typeIdName = "0-a";
 			    _this.formData = res;
 				console.log('_this.formData0',_this.formData);
 			},
 			setSpecificationGroup(groupId, groupName){
 				let _this = this;
-				console.log('_this.formData1',_this.formData);
 				_this.formData.groupId = groupId;
 				_this.formData.groupIdName = groupId + "-"+ groupName;
 				console.log('_this.formData2',_this.formData);
 			},
 			setSpuType(typeId, typeName){
 				let _this = this;
-				console.log('2');
 				_this.formData.typeId = typeId;
 				_this.formData.typeIdName = typeId + "-" + typeName;
 			},
@@ -228,6 +224,6 @@
 	}
 </script>
 
-<style scoped>
+<style scoped="scoped">
 	@import url("../../../../static/css/LeftRight.css");
 </style>

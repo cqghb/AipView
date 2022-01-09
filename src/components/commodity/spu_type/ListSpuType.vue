@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<!-- 商品规格组管理 -->
+		<!-- 货品类型管理 -->
 		<base-table :uri="uri"
 		            ref="spuTypeTable"
 		            :operationButtonList="operationButtonList"
@@ -124,6 +124,7 @@
 				tableColumnList:[
 					// { prop: "id", label: "ID", width: 180 },
 					{ prop: "name", label: "货品类型名称", width: 180 },
+					{ prop: "code", label: "货品类型代码", width: 180 },
 					{ prop: "delTag", label: "删除标记", width: 80 },
 					{ prop: "remark", label: "备注"},
 					{ prop: "createUser", label: "创建人", width: 120 },
@@ -157,7 +158,7 @@
 			// },
 			add(){
 				let _this = this;
-				CommInterface.goToPage(SystemConstant.consComponentPath.ADD_SPECIFICATION_GROUP, SystemConstant.consComponentName.ADD_SPECIFICATION_GROUP, {});
+				CommInterface.goToPage(SystemConstant.consComponentPath.ADD_SPU_TYPE, SystemConstant.consComponentName.ADD_SPU_TYPE, {});
 			},
 			update(){
 				let _this = this;
@@ -198,5 +199,5 @@
 	}
 </script>
 
-<style>
+<style scoped="scoped">
 </style>

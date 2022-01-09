@@ -65,9 +65,9 @@
 						type:"primary",
 						size: "",
 						handle:()=>{
-							let the = this;
-							the.loading = true;
-							the.$refs.specificationTable.queryList();// 调子组件的方法
+							let _this = this;
+							_this.loading = true;
+							_this.$refs.specificationTable.queryList();// 调子组件的方法
 						}
 					},
 					{
@@ -75,8 +75,8 @@
 						type:"primary",
 						size: "",
 						handle:()=>{
-							let the = this;
-							the.$refs.specificationTable.$refs.searchSpecificationForm.$refs.defaultMyForm.resetFields();
+							let _this = this;
+							_this.$refs.specificationTable.$refs.searchSpecificationForm.$refs.defaultMyForm.resetFields();
 						}
 					}
 				],
@@ -87,8 +87,8 @@
 						icon: "el-icon-more",
 						text: "详情",
 						handle:()=>{
-							let the = this;
-							the.detail();
+							let _this = this;
+							_this.detail();
 						}
 					},
 					{
@@ -96,8 +96,8 @@
 						icon: "el-icon-plus",
 						text: "新增",
 						handle:()=>{
-							let the = this;
-							the.add();
+							let _this = this;
+							_this.add();
 						}
 					},
 					{
@@ -105,8 +105,8 @@
 						icon: "el-icon-edit",
 						text: "修改",
 						handle:()=>{
-							let the = this;
-							the.update();
+							let _this = this;
+							_this.update();
 						}
 					},
 					{
@@ -114,9 +114,9 @@
 						icon: "el-icon-delet",
 						text: "删除",
 						handle:()=>{
-							let the = this;
+							let _this = this;
 							util.confirm("", "", "", "", "",function () {// 确认
-								the.delete();
+								_this.delete();
 							}, null);
 							
 						}
@@ -199,5 +199,5 @@
 	}
 </script>
 
-<style scoped>
+<style scoped="scoped">
 </style>

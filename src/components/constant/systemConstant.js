@@ -102,6 +102,10 @@ export const consComponentPath = {
 	SELECT_SPECIFICATION_GROUP_UPDATE_SPECIFICATION: "/updateSpecification/selectSpecificationGroup2", // 选择产品规格分组
 	SELECT_SPU_TYPE_UPDATE_SPECIFICATION: "/updateSpecification/selectSpuType2", // 选择货品类型
 	DETAIL_SPECIFICATION: "/detailSpecification", // 维护产品规格
+	LIST_SPU_TYPE: "/listSpuType", // 货品类型名称列表
+	ADD_SPU_TYPE: "/addSpuType", // 添加货品类型
+	UPDATE_SPU_TYPE: "/updateSpuType", // 维护货品类型
+	DETAIL_SPU_TYPE: "/detailSpuType", // 货品类型详情
 };
 /**
  * 组件名称
@@ -133,7 +137,11 @@ export const consComponentName = {
 	UPDATE_SPECIFICATION: "UpdateSpecification", // 维护产品规格
 	SELECT_SPECIFICATION_GROUP_UPDATE_SPECIFICATION: "SelectSpecificationGroup2", // 选择产品规格分组
 	SELECT_SPU_TYPE_UPDATE_SPECIFICATION: "SelectSpuType2", // 选择货品类型
-	DETAIL_SPECIFICATION: "DetailSpecification", // 维护产品规格
+	DETAIL_SPECIFICATION: "DetailSpecification", // 产品规格详情
+	LIST_SPU_TYPE: "ListSpuType", // 货品类型名称列表
+	ADD_SPU_TYPE: "AddSpuType", // 添加货品类型
+	UPDATE_SPU_TYPE: "UpdateSpuType", // 维护货品类型
+	DETAIL_SPU_TYPE: "DetailSpuType", // 货品类型详情
 };
 /**
  * 子组件调用父组件方法名称
