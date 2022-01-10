@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<!-- 详情 -->
+		<!-- 货品类型详情 -->
 		<simple-detail-page v-if="toRender" 
 			:fieldList="fieldList" 
 			:info="info"></simple-detail-page>
@@ -14,7 +14,7 @@
 	import * as BusinessConstant from '@/components/constant/businessConstant'
 	
 	export default {
-		name: "",
+		name: "DetailSpuType",
 		components: {
 			"simple-detail-page": SimpleDetailPage
 		},
@@ -22,10 +22,8 @@
 			return {
 				fieldList:[
 					{ name: "id", fieldName: "ID", type: "text", fieldValue: "" },
-					{ name: "name", fieldName: "产品规格名称", type: "text", fieldValue: "" },
-					{ name: "groupIdName", fieldName: "产品所属规格组", type: "text", fieldValue: "" },
-					{ name: "typeIdName", fieldName: "产品所属货品类型", type: "text", fieldValue: "", transformation: BusinessConstant.CODE_TYPE.DATA_OPERATE_SUBGROUP },
-					{ name: "addr", fieldName: "显示位置", type: "text", fieldValue: "" },
+					{ name: "name", fieldName: "货品类型名称", type: "text", fieldValue: "" },
+					{ name: "code", fieldName: "货品类型代码", type: "text", fieldValue: "" },
 					{ name: "remark", fieldName: "备注", type: "text", fieldValue: "" },
 					{ name: "delTag", fieldName: "是否删除", type: "text", fieldValue: "", transformation: BusinessConstant.CODE_TYPE.DEL_TAG },
 					{ name: "createUser", fieldName: "创建人", type: "text", fieldValue: "" },
@@ -41,7 +39,7 @@
 			queryInfo(id){
 			    let _this = this;
 			    CommInterface.sendPost(
-			        SystemConstant.consSpecificationManage.QUERY_DETAIL,
+			        SystemConstant.consSpuTypeManage.QUERY_BY_ID,
 			        {
 			            id: id
 			        },

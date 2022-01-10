@@ -1,8 +1,8 @@
 <template>
 	<div>
-		<!-- 维护 -->
-		<update-form labelWidth="80px"
-					 ref="updateForm"
+		<!-- 货品类型维护 -->
+		<update-form labelWidth="120px"
+					 ref="updateSpuTypeForm"
 		             :formData="formData"
 		             :formFieldList="formFieldList"
 		             :size="formSize"
@@ -30,15 +30,34 @@
 				formData: {
 				    id: "",
 				    name: "",
+				    code: "",
 				    remark: "",
 				},
 				formFieldList:{
+					id: {
+					    type: "Input",
+					    label: "货品类型ID",
+					    prop: "id",
+					    width: "180px",
+					    placeholder: "请输入货品类型ID...",
+						readonly: true,
+					    size: ""
+					},
 					name: {
 					    type: "Input",
-					    label: "规格组名称",
+					    label: "货品类型名称",
 					    prop: "name",
 					    width: "180px",
-					    placeholder: "请输入规格组名称...",
+					    placeholder: "请输入货品类型名称...",
+					    size: ""
+					},
+					code: {
+					    type: "Input",
+					    label: "货品类型代码",
+					    prop: "code",
+					    width: "180px",
+					    placeholder: "请输入货品类型代码...",
+						readonly: true,
 					    size: ""
 					},
 					remark: {
@@ -51,8 +70,14 @@
 				},
 				formSize: "",
 				rules:{
+					id:[
+						{ required: true, message: "请输入规格组ID", trigger: "blur" }
+					],
 					name:[
 						{ required: true, message: "请输入规格组名称", trigger: "blur" }
+					],
+					code:[
+						{ required: true, message: "请输入货品类型代码", trigger: "blur" }
 					]
 				},
 				btnHandle:[
@@ -70,7 +95,7 @@
 				        size: "",
 				        handle:()=>{
 				            let the = this;
-				            CommInterface.goToPage(SystemConstant.consComponentPath.LIST_SPECIFICATION_GROUP, SystemConstant.consComponentName.LIST_SPECIFICATION_GROUP, {});
+				            CommInterface.goToPage(SystemConstant.consComponentPath.LIST_SPU_TYPE, SystemConstant.consComponentName.LIST_SPU_TYPE, {});
 				        }
 				    }
 				],
@@ -80,7 +105,7 @@
 			queryInfo(id){
 				let _this = this;
 				CommInterface.sendPost(
-				    SystemConstant.consSpecificationGroupManage.QUERY_BY_ID,
+				    SystemConstant.consSpuTypeManage.QUERY_BY_ID,
 				    {
 				        id: id
 				    },
@@ -93,16 +118,16 @@
 			},
 			update(){
 				let _this = this;
-				_this.$refs.updateForm.$refs.baseForm.$refs.defaultMyForm.validate((volid)=>{
+				_this.$refs.updateSpuTypeForm.$refs.baseForm.$refs.defaultMyForm.validate((volid)=>{
 					if(volid){
 						CommInterface.sendPost(
-						    SystemConstant.consSpecificationGroupManage.UPDATE,
+						    SystemConstant.consSpuTypeManage.UPDATE,
 						    _this.formData,
 						    function (res) {
 						        console.log("修改结果 ",res);
 						        if(res>0){
 						            util.showMsg(MsgConstant.msgCommon.SUCCESS_UPDATE, ComponentConstant.MessageProperties.SUCCESS);
-						            CommInterface.goToPage(SystemConstant.consComponentPath.LIST_SPECIFICATION_GROUP, SystemConstant.consComponentName.LIST_SPECIFICATION_GROUP, {});
+						            CommInterface.goToPage(SystemConstant.consComponentPath.LIST_SPU_TYPE, SystemConstant.consComponentName.LIST_SPU_TYPE, {});
 						        } else {
 						            util.showMsg(MsgConstant.msgCommon.FAIL_UPDATE, ComponentConstant.MessageProperties.ERROR);
 						        }

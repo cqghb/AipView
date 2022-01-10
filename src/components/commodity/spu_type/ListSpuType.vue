@@ -81,15 +81,15 @@
 				],
 				formSize: "",
 				operationButtonList:[
-					// {
-					// 	type: "",
-					// 	icon: "el-icon-more",
-					// 	text: "详情",
-					// 	handle:()=>{
-					// 		let the = this;
-					// 		the.showDetail();
-					// 	}
-					// },// 太简单不用详情页面了
+					{
+						type: "",
+						icon: "el-icon-more",
+						text: "详情",
+						handle:()=>{
+							let the = this;
+							the.detail();
+						}
+					},
 					{
 						type: "primary",
 						icon: "el-icon-plus",
@@ -140,22 +140,6 @@
 				let _this = this;
 				_this.searchForm.delTag.options = data;
 			},
-			// search(){
-			// 	let _this = this;
-			// 	CommInterface.getCodeType(
-			// 	    BusinessConstant.CODE_TYPE.YES_OR_NO,
-			// 		[],
-			// 	    function (res) {
-			// 			let retCode = res.code;
-			// 			let retMsg = res.msg;
-			// 	        if(SystemConstant.common.RET_CODE == retCode){
-			// 	            _this.searchForm.delTag.options = res.data;
-			// 	        } else {
-			// 	            util.showMsg("删除标记备选项查询失败", ComponentConstant.MessageProperties.ERROR);
-			// 	        }
-			// 	    }
-			// 	);
-			// },
 			add(){
 				let _this = this;
 				CommInterface.goToPage(SystemConstant.consComponentPath.ADD_SPU_TYPE, SystemConstant.consComponentName.ADD_SPU_TYPE, {});
@@ -168,7 +152,7 @@
 					let param = {
 					        id: params.id
 					    };
-					CommInterface.goToPage(SystemConstant.consComponentPath.UPDATE_SPECIFICATION_GROUP, SystemConstant.consComponentName.UPDATE_SPECIFICATION_GROUP, param);
+					CommInterface.goToPage(SystemConstant.consComponentPath.UPDATE_SPU_TYPE, SystemConstant.consComponentName.UPDATE_SPU_TYPE, param);
 				}
 			},
 			delete(){
@@ -177,7 +161,7 @@
 				if(_this.$refs.spuTypeTable.selectedData){
 					let selectedItem = _this.$refs.spuTypeTable.selectedDataArr[0];
 					let id = selectedItem.id;
-					CommInterface.sendPost(SystemConstant.consSpecificationGroupManage.UPDATE_DEL_TAG, {id: id}, function(num){
+					CommInterface.sendPost(SystemConstant.consSpuTypeManage.UPDATE_DEL_TAG, {id: id}, function(num){
 						if(num>0){
 							util.showMsg(MsgConstant.msgCommon.SUCCESS_DELETE, ComponentConstant.MessageProperties.SUCCESS);
 							_this.$refs.spuTypeTable.loading = true;
@@ -186,6 +170,17 @@
 							util.showMsg(MsgConstant.msgCommon.FALL_DELETE, ComponentConstant.MessageProperties.ERROR);
 						}
 					});
+				}
+			},
+			detail(){
+				let _this = this;
+				_this.$refs.spuTypeTable.commonCheck();
+				if(_this.$refs.spuTypeTable.selectedData){
+					let params = _this.$refs.spuTypeTable.selectedDataArr[0];
+					let param = {
+					        id: params.id
+					    };
+					CommInterface.goToPage(SystemConstant.consComponentPath.DETAIL_SPU_TYPE, SystemConstant.consComponentName.DETAIL_SPU_TYPE, param);
 				}
 			}
 		},
