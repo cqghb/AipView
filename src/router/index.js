@@ -42,10 +42,12 @@ import DetailSpecification from '@/components/commodity/specification/DetailSpec
 import ListSpuType from '@/components/commodity/spu_type/ListSpuType'
 import SelectSpuType from '@/components/commodity/spu_type/SelectSpuType'
 import SelectSpuType2 from '@/components/commodity/spu_type/SelectSpuType'
+import SelectSpuTypeProperty from '@/components/commodity/spu_type/SelectSpuType'
 import AddSpuType from '@/components/commodity/spu_type/AddSpuType'
 import UpdateSpuType from '@/components/commodity/spu_type/UpdateSpuType'
 import DetailSpuType from '@/components/commodity/spu_type/DetailSpuType'
-
+import ListProperty from '@/components/commodity/property/ListProperty'
+import AddProperty from '@/components/commodity/property/AddProperty'
 
 
 const originalPush = Router.prototype.push
@@ -509,6 +511,34 @@ export default new Router({
 						name: "货品类型详情",
 						path: "/detailSpuType"
 					}
+				]
+			},{
+				path: "/listProperty",
+				name: "ListProperty",
+				component: ListProperty,
+				meta: [{
+						name: "产品属性列表查询",
+						path: "/listProperty"
+					}
+				]
+			},{
+				path: "/addProperty",
+				name: "AddProperty",
+				component: AddProperty,
+				meta: [{
+						name: "产品属性列表查询",
+						path: "/listProperty"
+					},{
+						name: "新增产品属性",
+						path: "/addProperty"
+					}
+				],
+				children:[
+					{
+						path: "/selectSpuTypeProperty",
+						name: "SelectSpuTypeProperty",
+						component: SelectSpuTypeProperty,
+					},
 				]
 			}]//在这里加 
 		}, {

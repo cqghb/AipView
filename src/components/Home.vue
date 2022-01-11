@@ -35,5 +35,9 @@
 </script>
 
 <style scoped>
-
+	#home{
+		/* position: absolute;
+		height: 100%;
+		border: #42B983 1px solid; */
+	}
 </style>

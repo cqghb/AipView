@@ -1,9 +1,12 @@
 <template>
-    <el-aside width="250px" style="height:100%;background-color: rgb(238, 241, 246)">
-        <el-menu :default-openeds="defaultSelect" router>
-            <childMenu :key="item.id" v-for="item in menuTree" :item-data="item"></childMenu>
-        </el-menu>
-    </el-aside>
+	<div class="teee">
+		<el-aside width="250px" style="height:100%;background-color: rgb(238, 241, 246)">
+		    <el-menu :default-openeds="defaultSelect" router>
+		        <childMenu :key="item.id" v-for="item in menuTree" :item-data="item"></childMenu>
+		    </el-menu>
+		</el-aside>
+	</div>
+    
 </template>
 
 <script>
@@ -42,4 +45,7 @@
     .el-aside {
         color: #333;
     }
+	.teee{
+		
+	}
 </style>

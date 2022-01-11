@@ -8,6 +8,7 @@
 		            :searchData="searchData"
 		            :searchForm="searchForm"
 		            :formSize="formSize"
+					:crumbs="false"
 					searchFormRef="searchSelectSpuTypeForm"
 		            :searchHandle="searchHandle"></base-table>
 	</div>

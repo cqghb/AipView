@@ -106,6 +106,9 @@ export const consComponentPath = {
 	ADD_SPU_TYPE: "/addSpuType", // 添加货品类型
 	UPDATE_SPU_TYPE: "/updateSpuType", // 维护货品类型
 	DETAIL_SPU_TYPE: "/detailSpuType", // 货品类型详情
+	LIST_PROPERTY: "/listProperty", // 产品属性列表
+	ADD_PROPERTY: "/addProperty", // 添加产品属性
+	SELECT_SPU_TYPE_ADD_PROPERTY: "/addProperty/selectSpuTypeProperty", // 选择货品类型
 };
 /**
  * 组件名称
@@ -142,6 +145,9 @@ export const consComponentName = {
 	ADD_SPU_TYPE: "AddSpuType", // 添加货品类型
 	UPDATE_SPU_TYPE: "UpdateSpuType", // 维护货品类型
 	DETAIL_SPU_TYPE: "DetailSpuType", // 货品类型详情
+	LIST_PROPERTY: "ListProperty", // 产品属性列表
+	ADD_PROPERTY: "AddProperty", // 添加产品属性
+	SELECT_SPU_TYPE_ADD_PROPERTY: "SelectSpuTypeProperty", // 选择货品类型
 };
 /**
  * 子组件调用父组件方法名称
@@ -232,4 +238,15 @@ export const consSpuTypeManage = {
 	UPDATE_DEL_TAG: "/spuType/updateDelTag", // 逻辑删除操作
 	ADD: "/spuType/insertSpuType", // 添加
 	UPDATE: "/spuType/updateSpuType", // 维护
+};
+
+/**
+ * 货品属性管理接口
+ */
+export const consPropertyManage = {
+    FIND_PAGE: "/property/findPage", // 产品规格分组列表查询
+    QUERY_BY_ID: "/property/queryById", // 通过主键查询
+	UPDATE_DEL_TAG: "/property/updateDelTag", // 逻辑删除操作
+	ADD: "/property/insertProperty", // 添加
+	UPDATE: "/property/updateProperty", // 维护
 };
