@@ -6,7 +6,7 @@
 				<div class="custom-tree-container">
 					<div class="block">
 						<update-form
-									labelWidth="80px"
+									labelWidth="120px"
 									ref="addPropertyForm"
 						            :formData="formData"
 						            :formFieldList="formFieldList"

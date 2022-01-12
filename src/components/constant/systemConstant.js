@@ -222,7 +222,7 @@ export const consSpecificationGroupManage = {
  */
 export const consSpecificationManage = {
     FIND_PAGE: "/specification/findPage", // 产品规格分组列表查询
-    QUERY_BY_ID: "/specification/queryById", // 通过主键查询queryDetail
+    QUERY_BY_ID: "/specification/queryById", // 通过主键查询
     QUERY_DETAIL: "/specification/queryDetail", // 通过主键查询详细信息
 	UPDATE_DEL_TAG: "/specification/updateDelTag", // 逻辑删除操作
 	ADD: "/specification/insertSpecification", // 添加
@@ -238,6 +238,7 @@ export const consSpuTypeManage = {
 	UPDATE_DEL_TAG: "/spuType/updateDelTag", // 逻辑删除操作
 	ADD: "/spuType/insertSpuType", // 添加
 	UPDATE: "/spuType/updateSpuType", // 维护
+	QUERY_DETAIL: "/spuType/queryDetail", // 通过主键查询详细信息
 };
 
 /**
