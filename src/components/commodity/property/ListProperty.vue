@@ -124,7 +124,8 @@
 				],
 				tableColumnList:[
 					{ prop: "id", label: "ID", width: 180 },
-					{ prop: "name", label: "属性名称", width: 180 },
+					{ prop: "name", label: "产品属性名称", width: 180 },
+					{ prop: "value", label: "产品属性值", width: 180 },
 					{ prop: "typeId", label: "分类ID", width: 180 },
 					{ prop: "delTag", label: "删除标记", width: 80 },
 					{ prop: "remark", label: "备注"},
@@ -153,7 +154,7 @@
 					let param = {
 					        id: params.id
 					    };
-					CommInterface.goToPage(SystemConstant.consComponentPath.UPDATE_SPECIFICATION, SystemConstant.consComponentName.UPDATE_SPECIFICATION, param);
+					CommInterface.goToPage(SystemConstant.consComponentPath.UPDATE_PROPERTY, SystemConstant.consComponentName.UPDATE_PROPERTY, param);
 				}
 			},
 			delete(){// 删除 删除之后只是不让再配置到商品规格中去
@@ -162,7 +163,7 @@
 				if(_this.$refs.propertyTable.selectedData){
 					let selectedItem = _this.$refs.propertyTable.selectedDataArr[0];
 					let id = selectedItem.id;
-					CommInterface.sendPost(SystemConstant.consSpecificationManage.UPDATE_DEL_TAG, {id: id}, function(num){
+					CommInterface.sendPost(SystemConstant.consPropertyManage.UPDATE_DEL_TAG, {id: id}, function(num){
 						if(num>0){
 							util.showMsg(MsgConstant.msgCommon.SUCCESS_DELETE, ComponentConstant.MessageProperties.SUCCESS);
 							_this.$refs.propertyTable.loading = true;
@@ -181,7 +182,7 @@
 					let param = {
 					        id: params.id
 					    };
-					CommInterface.goToPage(SystemConstant.consComponentPath.DETAIL_SPECIFICATION, SystemConstant.consComponentName.DETAIL_SPECIFICATION, param);
+					CommInterface.goToPage(SystemConstant.consComponentPath.DETAIL_PROPERTY, SystemConstant.consComponentName.DETAIL_PROPERTY, param);
 				}
 			},
 			

@@ -6,8 +6,8 @@
 				<div class="custom-tree-container">
 					<div class="block">
 						<update-form
-									labelWidth="80px"
-									ref="updateForm"
+									labelWidth="120px"
+									ref="updatePropertyForm"
 						            :formData="formData"
 						            :formFieldList="formFieldList"
 									:baseFromModel="formData"
@@ -16,7 +16,7 @@
 						            :buttonArr="btnHandle"></update-form>
 					</div>
 					<div class="block">
-						<router-view @setSpecificationGroup="setSpecificationGroup" @setSpuType="setSpuType"></router-view>
+						<router-view @setSpuType="setSpuType"></router-view>
 					</div>
 				</div>
 			</div>			
@@ -35,7 +35,7 @@
 	
 	
 	export default {
-		name: "Update",
+		name: "UpdateProperty",
 		components: {
 			"update-form": UpdateForm,
 		},
@@ -43,61 +43,49 @@
 			return {
 				formData: {
 					id: "",// ID
-					name: "",// 规格名称
-					groupIdName: "",// 规格组ID-名称
-					groupId: "",// 规格组ID
+					name: "",// 产品属性名称
+					value: "",// 属性值
 					typeIdName: "",// 分类ID-名称
 					typeId: "",// 分类ID
-					addr: "",// 显示位置
 					remark: "",// 备注
 				},
 				formFieldList: {
-					name: {
+					id: {
 					    type: "Input",
-					    label: "规格名称",
-					    prop: "name",
+					    label: "产品属性ID",
+					    prop: "id",
 					    width: "180px",
-					    placeholder: "请输入规格名称...",
+					    placeholder: "请输入产品属性ID...",
+						readonly: true,
 					    size: ""
 					},
-					groupIdName: {
+					name: {
 					    type: "Input",
-					    label: "产品规格分组名称",
-					    prop: "groupIdName",
+					    label: "产品属性名称",
+					    prop: "name",
 					    width: "180px",
-						readonly: true,
-					    placeholder: "请选择产品规格分组名称...",
-					    size: "",
-						btnArr: [
-							{
-								label: "选择产品规格分组名称",
-								id: "selectGroupIdName",
-								type: "primary",
-								ref: "selectGroupIdName",
-								size: "50px",
-								disable: false,
-								handle: (me) => {
-									let _this = this;
-									CommInterface.goToPage(SystemConstant.consComponentPath.SELECT_SPECIFICATION_GROUP_UPDATE_SPECIFICATION, SystemConstant.consComponentName.SELECT_SPECIFICATION_GROUP_UPDATE_SPECIFICATION,{});
-								}
-							}
-						],
-						// iconArr: {// 图标信息
-						// 	slot: "prefix",
-						// 	class: "el-icon-search",
-						// }
+					    placeholder: "请输入产品属性名称...",
+					    size: ""
+					},
+					value: {
+					    type: "Textarea",
+					    label: "产品属性值",
+					    prop: "value",
+					    width: "180px",
+					    placeholder: "请输入属性值...",
+					    size: ""
 					},
 					typeIdName: {
 					    type: "Input",
-					    label: "货品类型名称",
+					    label: "产品所属货品类型",
 					    prop: "typeIdName",
 					    width: "180px",
 						readonly: true,
-					    placeholder: "请选择货品类型名称...",
+					    placeholder: "请选择货品类型...",
 					    size: "",
 						btnArr: [
 							{
-								label: "选择货品规格分组名称",
+								label: "选择货品类型",
 								id: "selectTypeIdName",
 								type: "primary",
 								ref: "selectTypeIdNameBtn",
@@ -105,7 +93,7 @@
 								disable: false,
 								handle: (me) => {
 									let _this = this;
-									CommInterface.goToPage(SystemConstant.consComponentPath.SELECT_SPU_TYPE_UPDATE_SPECIFICATION,SystemConstant.consComponentName.SELECT_SPU_TYPE_UPDATE_SPECIFICATION,{});
+									CommInterface.goToPage(SystemConstant.consComponentPath.SELECT_SPU_TYPE_UPDATE_PROPERTY,SystemConstant.consComponentName.SELECT_SPU_TYPE_UPDATE_PROPERTY,{});
 								}
 							}
 						],
@@ -113,19 +101,6 @@
 						// 	slot: "prefix",
 						// 	class: "el-icon-search",
 						// }
-					},
-					addr: {
-					    type: "Number",
-					    label: "位置",
-					    prop: "addr",
-					    width: "180px",
-						step: 1,
-					    min: 1,
-					    max: 100,
-						change: function(v) {
-							console.log("当前值",v)
-						}
-					    
 					},
 					remark: {
 					    type: "Textarea",
@@ -138,14 +113,17 @@
 				},
 				formSize: "",
 				rules:{
-					name:[
-						{ required: true, message: "请输入规格名称", trigger: "blur" }
+					id:[
+						{ required: true, message: "请输入产品属性ID", trigger: "blur" }
 					],
-					groupIdName:[
-						{ required: true, message: "请选择产品规格分组名称", trigger: "blur" }
+					name:[
+						{ required: true, message: "请输入产品属性名称", trigger: "blur" }
+					],
+					value:[
+						{ required: true, message: "请输入产品属性值", trigger: "blur" }
 					],
 					typeIdName:[
-						{ required: true, message: "请选择货品类型名称", trigger: "blur" }
+						{ required: true, message: "请选择货品类型", trigger: "blur" }
 					],
 				},
 				btnHandle:[
@@ -164,7 +142,7 @@
 					    size: "",
 					    handle:()=>{
 					        let _this = this;
-					        CommInterface.goToPage(SystemConstant.consComponentPath.LIST_SPECIFICATION, SystemConstant.consComponentName.LIST_SPECIFICATION, {});
+					        CommInterface.goToPage(SystemConstant.consComponentPath.LIST_PROPERTY, SystemConstant.consComponentName.LIST_PROPERTY, {});
 					    }
 					}
 				],
@@ -174,7 +152,7 @@
 			queryInfo(id){
 				let _this = this;
 				CommInterface.sendPost(
-				    SystemConstant.consSpecificationManage.QUERY_DETAIL,
+				    SystemConstant.consPropertyManage.QUERY_DETAIL,
 				    {
 				        id: id
 				    },
@@ -184,13 +162,6 @@
 			dealRes(res){// 对回显数据预处理
 			    let _this = this;
 			    _this.formData = res;
-				console.log('_this.formData0',_this.formData);
-			},
-			setSpecificationGroup(groupId, groupName){
-				let _this = this;
-				_this.formData.groupId = groupId;
-				_this.formData.groupIdName = groupId + "-"+ groupName;
-				console.log('_this.formData2',_this.formData);
 			},
 			setSpuType(typeId, typeName){
 				let _this = this;
@@ -199,12 +170,12 @@
 			},
 			update(){
 				let _this = this;
-				_this.$refs.updateForm.$refs.baseForm.$refs.defaultMyForm.validate((volid)=>{
+				_this.$refs.updatePropertyForm.$refs.baseForm.$refs.defaultMyForm.validate((volid)=>{
 					if(volid){
-						CommInterface.sendPost(SystemConstant.consSpecificationManage.UPDATE, _this.formData, function(num){
+						CommInterface.sendPost(SystemConstant.consPropertyManage.UPDATE, _this.formData, function(num){
 							if(num>0){
 								util.showMsg(MsgConstant.msgCommon.SUCCESS_UPDATE, ComponentConstant.MessageProperties.SUCCESS);
-								CommInterface.goToPage(SystemConstant.consComponentPath.LIST_SPECIFICATION, SystemConstant.consComponentName.LIST_SPECIFICATION, {});
+								CommInterface.goToPage(SystemConstant.consComponentPath.LIST_PROPERTY, SystemConstant.consComponentName.LIST_PROPERTY, {});
 							} else {
 								util.showMsg(MsgConstant.msgCommon.FAIL_UPDATE, ComponentConstant.MessageProperties.ERROR);
 							}

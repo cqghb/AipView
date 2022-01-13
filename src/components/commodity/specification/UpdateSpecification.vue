@@ -62,15 +62,15 @@
 					},
 					groupIdName: {
 					    type: "Input",
-					    label: "产品规格分组名称",
+					    label: "产品规格分组",
 					    prop: "groupIdName",
 					    width: "180px",
 						readonly: true,
-					    placeholder: "请选择产品规格分组名称...",
+					    placeholder: "请选择产品规格分组...",
 					    size: "",
 						btnArr: [
 							{
-								label: "选择产品规格分组名称",
+								label: "选择产品规格分组",
 								id: "selectGroupIdName",
 								type: "primary",
 								ref: "selectGroupIdName",
@@ -89,15 +89,15 @@
 					},
 					typeIdName: {
 					    type: "Input",
-					    label: "货品类型名称",
+					    label: "货品类型",
 					    prop: "typeIdName",
 					    width: "180px",
 						readonly: true,
-					    placeholder: "请选择货品类型名称...",
+					    placeholder: "请选择货品类型...",
 					    size: "",
 						btnArr: [
 							{
-								label: "选择货品规格分组名称",
+								label: "选择货品类型",
 								id: "selectTypeIdName",
 								type: "primary",
 								ref: "selectTypeIdNameBtn",

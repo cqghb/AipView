@@ -42,6 +42,7 @@
 			return {
 				formData: {
 					name: "",// 属性名称
+					value: "",// 属性值
 					typeIdName: "",// 分类ID-名称
 					typeId: "",// 分类ID
 					remark: "",// 备注
@@ -49,10 +50,18 @@
 				formFieldList: {
 					name: {
 					    type: "Input",
-					    label: "属性名称",
+					    label: "产品属性名称",
 					    prop: "name",
 					    width: "180px",
 					    placeholder: "请输入属性名称...",
+					    size: ""
+					},
+					value: {
+					    type: "Textarea",
+					    label: "产品属性值",
+					    prop: "value",
+					    width: "180px",
+					    placeholder: "请输入属性值...",
 					    size: ""
 					},
 					typeIdName: {
@@ -94,7 +103,10 @@
 				formSize: "",
 				rules:{
 					name:[
-						{ required: true, message: "请输入规格名称", trigger: "blur" }
+						{ required: true, message: "请输入产品属性名称", trigger: "blur" }
+					],
+					value:[
+						{ required: true, message: "请输入产品属性值", trigger: "blur" }
 					],
 					typeIdName:[
 						{ required: true, message: "请选择货品类型名称", trigger: "blur" }

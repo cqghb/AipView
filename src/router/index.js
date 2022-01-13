@@ -42,13 +42,15 @@ import DetailSpecification from '@/components/commodity/specification/DetailSpec
 import ListSpuType from '@/components/commodity/spu_type/ListSpuType'
 import SelectSpuType from '@/components/commodity/spu_type/SelectSpuType'
 import SelectSpuType2 from '@/components/commodity/spu_type/SelectSpuType'
-import SelectSpuTypeProperty from '@/components/commodity/spu_type/SelectSpuType'
 import AddSpuType from '@/components/commodity/spu_type/AddSpuType'
 import UpdateSpuType from '@/components/commodity/spu_type/UpdateSpuType'
 import DetailSpuType from '@/components/commodity/spu_type/DetailSpuType'
 import ListProperty from '@/components/commodity/property/ListProperty'
 import AddProperty from '@/components/commodity/property/AddProperty'
-
+import SelectSpuTypeProperty from '@/components/commodity/spu_type/SelectSpuType'
+import DetailProperty from '@/components/commodity/property/DetailProperty'
+import UpdateProperty from '@/components/commodity/property/UpdateProperty'
+import SelectSpuTypeUpdateProperty from '@/components/commodity/spu_type/SelectSpuType'
 
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {
@@ -522,6 +524,18 @@ export default new Router({
 					}
 				]
 			},{
+				path: "/detailProperty",
+				name: "DetailProperty",
+				component: DetailProperty,
+				meta: [{
+						name: "产品属性列表查询",
+						path: "/listProperty"
+					},{
+						name: "产品属性详情",
+						path: "/detailProperty"
+					}
+				]
+			},{
 				path: "/addProperty",
 				name: "AddProperty",
 				component: AddProperty,
@@ -540,7 +554,26 @@ export default new Router({
 						component: SelectSpuTypeProperty,
 					},
 				]
-			}]//在这里加 
+			},{
+				path: "/updateProperty",
+				name: "UpdateProperty",
+				component: UpdateProperty,
+				meta: [{
+						name: "产品属性列表查询",
+						path: "/listProperty"
+					},{
+						name: "维护产品属性",
+						path: "/updateProperty"
+					}
+				],
+				children:[
+					{
+						path: "/selectSpuTypeUpdateProperty",
+						name: "SelectSpuTypeUpdateProperty",
+						component: SelectSpuTypeUpdateProperty,
+					},
+				]
+			}]//在这里加
 		}, {
 			path: "/",
 			name: "Login",

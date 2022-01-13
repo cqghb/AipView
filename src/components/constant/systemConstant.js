@@ -109,6 +109,9 @@ export const consComponentPath = {
 	LIST_PROPERTY: "/listProperty", // 产品属性列表
 	ADD_PROPERTY: "/addProperty", // 添加产品属性
 	SELECT_SPU_TYPE_ADD_PROPERTY: "/addProperty/selectSpuTypeProperty", // 选择货品类型
+	DETAIL_PROPERTY: "/detailProperty", // 产品属性详情
+	UPDATE_PROPERTY: "/updateProperty", // 维护产品属性
+	SELECT_SPU_TYPE_UPDATE_PROPERTY: "/updateProperty/selectSpuTypeUpdateProperty", // 选择货品类型
 };
 /**
  * 组件名称
@@ -148,6 +151,9 @@ export const consComponentName = {
 	LIST_PROPERTY: "ListProperty", // 产品属性列表
 	ADD_PROPERTY: "AddProperty", // 添加产品属性
 	SELECT_SPU_TYPE_ADD_PROPERTY: "SelectSpuTypeProperty", // 选择货品类型
+	DETAIL_PROPERTY: "DetailProperty", // 产品属性详情
+	UPDATE_PROPERTY: "UpdateProperty", // 维护产品属性
+	SELECT_SPU_TYPE_UPDATE_PROPERTY: "SelectSpuTypeUpdateProperty", // 选择货品类型
 };
 /**
  * 子组件调用父组件方法名称
@@ -250,4 +256,5 @@ export const consPropertyManage = {
 	UPDATE_DEL_TAG: "/property/updateDelTag", // 逻辑删除操作
 	ADD: "/property/insertProperty", // 添加
 	UPDATE: "/property/updateProperty", // 维护
+	QUERY_DETAIL: "/property/queryDetail", // 详情
 };
