@@ -125,7 +125,6 @@
 				tableColumnList:[
 					{ prop: "id", label: "ID", width: 180 },
 					{ prop: "name", label: "产品属性名称", width: 180 },
-					// { prop: "value", label: "产品属性值", width: 180 },
 					{ prop: "typeId", label: "分类ID", width: 180 },
 					{ prop: "delTag", label: "删除标记", width: 80 },
 					{ prop: "remark", label: "备注"},
