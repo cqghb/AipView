@@ -60,19 +60,38 @@
                         ref="multipleTable"
                         @row-click="handelClickRow"
                         border
+						:stripe="true"
+						highlight-current-row
                         :loading="loading"
                         element-loading-text="数据加载中"
                         element-loading-background="rgba(0, 0, 0, 0.8)"
                         @selection-change="handleSelectionChange"
+						@current-change="handleCurrentChange2"
 						row-key="id"
 						:load="load"
 						:default-expand-all="defaultExpandAll"
 						:tree-props="{children: children, hasChildren: 'hasChildren'}"
                         style="width: 100%">
+						<!-- 多选 -->
                     <el-table-column
                             type="selection"
-                            width="55">
+							v-if="multiSelect"
+                            width="50">
                     </el-table-column>
+					<!-- 
+					单选: el-radio 的v-model与label的值一样就是选中状态。
+					单选要求查询出的数据必须要有id属性，且值唯一
+					-->
+					<el-table-column
+					        width="50" 
+							label="选择"
+							v-else>
+							<template slot-scope="scope">
+								<el-radio v-model="templateRadio" 
+								@change.native="radioEvent(scope)"
+								:label="scope.row.id">&nbsp;</el-radio>
+							</template>
+					</el-table-column>
                     <el-table-column v-for="(item, index) in tableColumnList"
                                      :key="index"
                                      :prop="item.prop"
@@ -184,28 +203,32 @@
 				type: Boolean,
 				require: false,
 				default: true
-			}
+			},
+			multiSelect:{// 表格是否多选，true:多选;false: 单选
+				type: Boolean,
+				require: false,
+				default: true
+			},
         },
         data(){
             return {
                 dataArr:[],// 表格数据
                 loading: true,
                 params: {},
-                selectedDataArr: [],// 选中的数据
+                selectedDataArr: [],/* 多选时，选中的数据全部放到这里 */
                 page:{// 分页参数
                     currentPage: 1,// 当前页
                     pageSizeArr:[5, 10, 20, 30, 40],// 可选每页显示数据条数
                     pageSize: 5,// 当前每页显示条数
                     totalSize: 1// 总页数
                 },
+				templateRadio: "",/* 单选按钮绑定的值，只是为了让按钮出于选中状态，无其他意义 */
+				currentRow: null,/* 当前选中的数据，单选时，选中的数据存这里 */
 				selectedData: false,
 				children: 'childrenList'// 树形表格子节点的节点名称
             };
         },
         methods:{
-			// test1(a,b) {
-			//     return  '<b>hello async</b>';
-			// },
 			test1 (sp,item){
 				let the = this;
 				// let a = "";
@@ -233,6 +256,7 @@
             handleSelectionChange(val){// 选中表格数据事件
                 let the = this;
                 the.selectedDataArr = val;
+				// console.log(the.$refs.multipleTable);
             },
             handleSizeChange(val){// 分页组件每页数据条数改变触发事件
                 let the = this;
@@ -283,37 +307,6 @@
 			    }
 			    the.selectedData = true;
 			},
-			// async aaaa(data, item){
-			// 	let the = this;
-			// 	let transformation = item.transformation;
-			// 	// 辅助开发
-			// 	if(!transformation){
-			// 		console.log("请在表格列中配置transformation属性");
-			// 	}
-			// 	let prop = item.prop;
-			// 	let value = data.row[prop];
-			// 	// 不同类型，按不同处理办法，这里先写一个码值转换的
-			// 	if(BusinessConstant.CODE_TYPE.YES_OR_NO==transformation){
-			// 		let params = [value];
-					
-			// 		await util.$http.post(SystemConstant.consCodeManage.SEARCH_CODEKEY_VALUE,
-			// 			{
-			// 				"codeType": BusinessConstant.CODE_TYPE.YES_OR_NO,
-			// 				"codeList": params,
-			// 			}
-			// 		).then(function (res) {
-						
-			// 			let info = res;
-			// 			let codeArr = info.data;
-			// 				// 这里只会返回一条,老数据可能存在空的情况
-			// 				if(codeArr.length>0){
-			// 					console.log("22323233232: ", codeArr[0].label);
-			// 					return codeArr[0].label;
-			// 				}
-			// 			return "";
-			// 		});
-			// 	// }
-			// },
 			searchDelTagOptions(){
 				let _this = this;
 				CommInterface.getCodeType(
@@ -330,6 +323,14 @@
 				        }
 				    }
 				);
+			},
+			handleCurrentChange2(row){/* 单选会触发 */
+				let _this = this;
+				_this.currentRow = row;
+				_this.templateRadio = row.id;/* 如果没有ID将不会出现选中效果 */
+			},
+			radioEvent(sp){/* 单选按钮点击时执行事件，暂时有没有用 */
+				let _this = this;
 			},
 			load(){
 				
