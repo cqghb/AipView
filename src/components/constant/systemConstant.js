@@ -112,6 +112,12 @@ export const consComponentPath = {
 	DETAIL_PROPERTY: "/detailProperty", // 产品属性详情
 	UPDATE_PROPERTY: "/updateProperty", // 维护产品属性
 	SELECT_SPU_TYPE_UPDATE_PROPERTY: "/updateProperty/selectSpuTypeUpdateProperty", // 选择货品类型
+	LIST_PROPERTY_OPTION: "/listPropertyOption", /* 产品属性值列表 */
+	ADD_PROPERTY_OPTION: "/addPropertyOption", /* 产品属性值添加 */
+	ADD_PO_SELECT_PROPERTY: "/addPropertyOption/addPOSelectProperty", /* 选择产品属性名称 */
+	UPDATE_PROPERTY_OPTION: "/updatePropertyOption", /* 产品属性值维护 */
+	UPDATE_PO_SELECT_PROPERTY: "/updatePropertyOption/updatePOSelectProperty", /* 选择产品属性名称 */
+	DETAIL_PROPERTY_OPTION: "/detailPropertyOption", /* 产品属性值维护 */
 };
 /**
  * 组件名称
@@ -154,6 +160,14 @@ export const consComponentName = {
 	DETAIL_PROPERTY: "DetailProperty", // 产品属性详情
 	UPDATE_PROPERTY: "UpdateProperty", // 维护产品属性
 	SELECT_SPU_TYPE_UPDATE_PROPERTY: "SelectSpuTypeUpdateProperty", // 选择货品类型
+	LIST_PROPERTY_OPTION: "ListPropertyOption", /* 产品属性值列表 */
+	ADD_PROPERTY_OPTION: "AddPropertyOption", /* 产品属性值添加 */
+	ADD_PO_SELECT_PROPERTY: "AddPOSelectProperty", /* 选择产品属性名称 */
+	UPDATE_PROPERTY_OPTION: "UpdatePropertyOption", /* 产品属性值维护 */
+	UPDATE_PO_SELECT_PROPERTY: "UpdatePOSelectProperty", /* 选择产品属性名称 */
+	DETAIL_PROPERTY_OPTION: "DetailPropertyOption", /* 产品属性值维护 */
+	
+	
 };
 /**
  * 子组件调用父组件方法名称
@@ -248,7 +262,7 @@ export const consSpuTypeManage = {
 };
 
 /**
- * 货品属性管理接口
+ * 产品属性管理接口
  */
 export const consPropertyManage = {
     FIND_PAGE: "/property/findPage", // 产品规格分组列表查询
@@ -257,4 +271,16 @@ export const consPropertyManage = {
 	ADD: "/property/insertProperty", // 添加
 	UPDATE: "/property/updateProperty", // 维护
 	QUERY_DETAIL: "/property/queryDetail", // 详情
+};
+
+/**
+ * 产品属性值管理接口
+ */
+export const consPropertyOptionManage = {
+    FIND_PAGE: "/propertyOptions/findPage", // 产品规格分组列表查询
+    QUERY_BY_ID: "/propertyOptions/queryById", // 通过主键查询
+	UPDATE_DEL_TAG: "/propertyOptions/updateDelTag", // 逻辑删除操作
+	ADD: "/propertyOptions/insertProperty", // 添加
+	UPDATE: "/propertyOptions/updateProperty", // 维护
+	QUERY_DETAIL: "/propertyOptions/queryDetail", // 详情
 };

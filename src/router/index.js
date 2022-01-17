@@ -51,6 +51,13 @@ import SelectSpuTypeProperty from '@/components/commodity/spu_type/SelectSpuType
 import DetailProperty from '@/components/commodity/property/DetailProperty'
 import UpdateProperty from '@/components/commodity/property/UpdateProperty'
 import SelectSpuTypeUpdateProperty from '@/components/commodity/spu_type/SelectSpuType'
+import ListPropertyOption from '@/components/commodity/property_options/ListPropertyOption'
+import AddPropertyOption from '@/components/commodity/property_options/AddPropertyOption'
+import AddPOSelectProperty from '@/components/commodity/property/SelectProperty'
+import UpdatePropertyOption from '@/components/commodity/property_options/UpdatePropertyOption'
+import UpdatePOSelectProperty from '@/components/commodity/property/SelectProperty'
+import DetailPropertyOption from '@/components/commodity/property_options/DetailPropertyOption'
+
 
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {
@@ -572,6 +579,65 @@ export default new Router({
 						name: "SelectSpuTypeUpdateProperty",
 						component: SelectSpuTypeUpdateProperty,
 					},
+				]
+			},{
+				path: "/listPropertyOption",
+				name: "ListPropertyOption",
+				component: ListPropertyOption,
+				meta: [{
+						name: "产品属性值列表查询",
+						path: "/listPropertyOption"
+					}
+				]
+			},{
+				path: "/addPropertyOption",
+				name: "AddPropertyOption",
+				component: AddPropertyOption,
+				meta: [{
+						name: "产品属性列表查询",
+						path: "/listPropertyOption"
+					},{
+						name: "新增产品属性值",
+						path: "/addPropertyOption"
+					}
+				],
+				children:[
+					{
+						path: "/addPOSelectProperty",
+						name: "AddPOSelectProperty",
+						component: AddPOSelectProperty,
+					},
+				]
+			},{
+				path: "/updatePropertyOption",
+				name: "UpdatePropertyOption",
+				component: UpdatePropertyOption,
+				meta: [{
+						name: "产品属性列表查询",
+						path: "/listPropertyOption"
+					},{
+						name: "维护产品属性值",
+						path: "/updatePropertyOption"
+					}
+				],
+				children:[
+					{
+						path: "/updatePOSelectProperty",
+						name: "UpdatePOSelectProperty",
+						component: UpdatePOSelectProperty,
+					},
+				]
+			},{
+				path: "/detailPropertyOption",
+				name: "DetailPropertyOption",
+				component: DetailPropertyOption,
+				meta: [{
+						name: "产品属性列表查询",
+						path: "/listPropertyOption"
+					},{
+						name: "产品属性值详情",
+						path: "/detailPropertyOption"
+					}
 				]
 			}]//在这里加
 		}, {

@@ -290,7 +290,7 @@
 			    let the = this;
 			    let num = the.selectedDataArr.length;
 			    if(num==0){
-			        util.showMsg("请选择一条数据");
+			        util.showMsg(BusinessConstant.SELECTED_ONE_DATA);
 			    }
 			    if(num>1){
 			        util.showMsg("请不要多选");

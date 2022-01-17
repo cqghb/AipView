@@ -5,6 +5,7 @@ export const YES = "1";// 是
 export const NO = "2";// 否
 export const NO2 = "0";// 否
 export const CODE_VALUE = "codeValue";// 码值
+export const SELECTED_ONE_DATA = "请选择一条数据";
 // 码值相关常量
 export const CODE_TYPE = {
     EDUCATION: "education", // 学历类型
