@@ -96,9 +96,9 @@
 					value:[
 						{ required: true, message: "请输入产品属性值", trigger: "blur" }
 					],
-					propertyName:[
-						{ required: true, message: "请选择产品属性名称", trigger: "blur" }
-					],
+					// propertyName:[
+					// 	{ required: true, message: "请选择产品属性名称", trigger: "blur" }
+					// ],
 				},
 				btnHandle:[
 					{

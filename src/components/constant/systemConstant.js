@@ -280,7 +280,7 @@ export const consPropertyOptionManage = {
     FIND_PAGE: "/propertyOptions/findPage", // 产品规格分组列表查询
     QUERY_BY_ID: "/propertyOptions/queryById", // 通过主键查询
 	UPDATE_DEL_TAG: "/propertyOptions/updateDelTag", // 逻辑删除操作
-	ADD: "/propertyOptions/insertProperty", // 添加
-	UPDATE: "/propertyOptions/updateProperty", // 维护
+	ADD: "/propertyOptions/insertPropertyValue", // 添加
+	UPDATE: "/propertyOptions/updatePropertyValue", // 维护
 	QUERY_DETAIL: "/propertyOptions/queryDetail", // 详情
 };
