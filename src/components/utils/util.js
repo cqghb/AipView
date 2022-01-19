@@ -1,6 +1,8 @@
 const eUI = require("element-ui");
 const axios = require("axios");
 const componentConstant = require("@/components/constant/componentConstant");
+const businessConstant = require("@/components/constant/businessConstant");
+const systemConstant = require("@/components/constant/systemConstant");
 const commInterface = require("@/components/utils/commInterface");
 axios.defaults.withCredentials = true;// 允许跨域携带cookie
 // axios 配置
@@ -153,10 +155,30 @@ let alert = function(message, title, type, callback){
 		
 	});
 };
+/**
+ * 查询删除标记备选项
+ */
+let searchDelTagOptions = function (){
+	let _this = this;
+	commInterface.getCodeType(
+		businessConstant.CODE_TYPE.YES_OR_NO,
+		[],
+		function (res) {
+			let retCode = res.code;
+			let retMsg = res.msg;
+			if(systemConstant.common.RET_CODE == retCode){
+				return res.data;
+			} else {
+				showMsg("删除标记备选项查询失败", componentConstant.MessageProperties.ERROR);
+			}
+		}
+	);
+};
 module.exports = {
     showMsg: showMsg,
     empty: empty,
     confirm: confirm,
     $http: $http,
-    alert: alert
+    alert: alert,
+	searchDelTagOptions: searchDelTagOptions
 };

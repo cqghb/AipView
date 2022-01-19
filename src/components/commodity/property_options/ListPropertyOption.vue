@@ -150,22 +150,9 @@
 				let _this = this;
 				_this.$refs.propertyOptionTable.selectOneDataToPage(SystemConstant.consComponentPath.UPDATE_PROPERTY_OPTION, SystemConstant.consComponentName.UPDATE_PROPERTY_OPTION);
 			},
-			delete(){// 删除 删除之后只是不让再配置到商品规格中去
+			delete(){// 删除
 				let _this = this;
-				_this.$refs.propertyOptionTable.commonCheck();
-				if(_this.$refs.propertyOptionTable.selectedData){
-					let selectedItem = _this.$refs.propertyOptionTable.selectedDataArr[0];
-					let id = selectedItem.id;
-					CommInterface.sendPost(SystemConstant.consSpecificationManage.UPDATE_DEL_TAG, {id: id}, function(num){
-						if(num>0){
-							util.showMsg(MsgConstant.msgCommon.SUCCESS_DELETE, ComponentConstant.MessageProperties.SUCCESS);
-							_this.$refs.propertyOptionTable.loading = true;
-							_this.$refs.propertyOptionTable.queryList();
-						} else {
-							util.showMsg(MsgConstant.msgCommon.FALL_DELETE, ComponentConstant.MessageProperties.ERROR);
-						}
-					});
-				}
+				_this.$refs.propertyOptionTable.updateDelTag(SystemConstant.consPropertyOptionManage.UPDATE_DEL_TAG);
 			},
 			detail(){// 详情
 				let _this = this;

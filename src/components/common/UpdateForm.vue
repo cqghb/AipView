@@ -15,6 +15,7 @@
 <script>
     import BreadCrumbs from "@/components/common/BreadCrumbs";
     import BaseForm from "@/components/common/BaseForm";
+	import util from "@/components/utils/util";
 	
 	import * as CommInterface from '@/components/utils/commInterface';
 	import * as SystemConstant from '@/components/constant/systemConstant';
@@ -69,7 +70,7 @@
             };
         },
         methods: {
-			searchCode(codeType,paramArr, errorMsg, callback){
+			searchCode(codeType, paramArr, errorMsg, callback){
 				CommInterface.getCodeType(codeType,paramArr,
 				    function (res) {
 				        console.log("菜单默认选中备选项查询结果: ",res);
@@ -82,14 +83,18 @@
 				        }
 				    }
 				);
-			}
+			},
+			// searchDelTagOptions(){
+			// 	let _this = this;
+			// 	let delTagOption = util.searchDelTagOptions();
+			// 	_this.$emit("searchDelTagOptions", delTagOption);
+			// },
         },
         mounted() {
-			console.log('userbase-mounted')
+			let _this = this;
+			// _this.searchDelTagOptions();
         },
         created() {
-			console.log('userbase-createdd')
-			console.log('formFieldList',this.formFieldList);
         }
     }
 </script>

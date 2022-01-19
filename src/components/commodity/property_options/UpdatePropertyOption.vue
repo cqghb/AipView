@@ -32,7 +32,7 @@
 	import * as SystemConstant from '@/components/constant/systemConstant';
 	import * as MsgConstant from '@/components/constant/msgConstant';
 	import * as ComponentConstant from '@/components/constant/componentConstant';
-	
+	import * as BusinessConstant from '@/components/constant/businessConstant';
 	
 	export default {
 		name: "UpdatePropertyOption",
@@ -47,6 +47,7 @@
 					attrId: "",/* 产品属性名称ID */
 					propertyName: "",/* 产品属性名称 */
 					attrId: "",/* 产品属性名称ID */
+					delTag: "",/* 删除标记 */
 					remark: "",/* 备注 */
 				},
 				formFieldList: {
@@ -94,6 +95,16 @@
 						// 	class: "el-icon-search",
 						// }
 					},
+					delTag: {
+						type: "Select",
+						label: "删除标志",
+						prop: "delTag",
+						width: "180px",
+						options: [],
+						change: function(v){
+							console.log("当前值",v);
+						}
+					},
 					remark: {
 					    type: "Textarea",
 					    label: "备注",
@@ -110,6 +121,9 @@
 					],
 					value:[
 						{ required: true, message: "请输入产品属性值", trigger: "blur" }
+					],
+					delTag:[
+						{ required: true, message: "删除标志不能为空", trigger: "blur" }
 					],
 				},
 				btnHandle:[
@@ -150,6 +164,10 @@
 			    _this.formData = res;
 				console.log('_this.formData0',_this.formData);
 			},
+			// searchDelTagOptions(data){
+			// 	let _this = this;
+			// 	_this.formData.delTag.options = data;
+			// },
 			setPropertyName(attrId, propertyName){
 				let _this = this;
 				_this.formData.attrId = attrId;
@@ -178,6 +196,9 @@
 			let _this = this;
 			let id = _this.$route.params.id;
 			_this.queryInfo(id);
+			_this.$refs.updatePropertyOptionForm.searchCode(BusinessConstant.CODE_TYPE.YES_OR_NO, [], "",function(data){
+				_this.formFieldList.delTag.options = data;
+			});
 		}
 	}
 </script>

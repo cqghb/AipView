@@ -344,6 +344,29 @@
 			    	util.showMsg(businessConstant.SELECTED_ONE_DATA);
 			    }
 			},
+			updateDelTag(uri){/* uri:后端接口地址； 删除数据刷新页面 */
+			    let _this = this;
+			    let item = _this.currentRow;
+			    if(item){
+					let id = item.id;
+					let delTag = item.delTag;
+					if(businessConstant.YES==delTag){
+						util.showMsg(businessConstant.DELETED);
+					} else {
+						CommInterface.sendPost(uri, {id: id}, function(num){
+							if(num>0){
+								util.showMsg(MsgConstant.msgCommon.SUCCESS_DELETE, ComponentConstant.MessageProperties.SUCCESS);
+								_this.loading = true;
+								_this.queryList();
+							} else {
+								util.showMsg(MsgConstant.msgCommon.FALL_DELETE, ComponentConstant.MessageProperties.ERROR);
+							}
+						});
+					}
+			    } else {
+			    	util.showMsg(businessConstant.SELECTED_ONE_DATA);
+			    }
+			},
 			load(){
 				
 			}
