@@ -332,6 +332,18 @@
 			radioEvent(sp){/* 单选按钮点击时执行事件，暂时有没有用 */
 				let _this = this;
 			},
+			selectOneDataToPage(componentPath, componentName){/* componentName:组件的名称；选中一条数据，然后跳转到页面 */
+			    let _this = this;
+			    let item = _this.currentRow;
+			    if(item){
+			    	let param = {
+			    	        id: item.id
+			    	    };
+			    	CommInterface.goToPage(componentPath, componentName, param);
+			    } else {
+			    	util.showMsg(businessConstant.SELECTED_ONE_DATA);
+			    }
+			},
 			load(){
 				
 			}

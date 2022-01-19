@@ -1,13 +1,13 @@
 <template>
 	<div>
-		<!-- 添加 -->
+		<!-- 维护产品属性值 -->
 		<div class="demo-block demo-tree">
 			<div class="source">
 				<div class="custom-tree-container">
 					<div class="block">
 						<update-form
 									labelWidth="120px"
-									ref="addPropertyOptionForm"
+									ref="updatePropertyOptionForm"
 						            :formData="formData"
 						            :formFieldList="formFieldList"
 									:baseFromModel="formData"
@@ -32,21 +32,33 @@
 	import * as SystemConstant from '@/components/constant/systemConstant';
 	import * as MsgConstant from '@/components/constant/msgConstant';
 	import * as ComponentConstant from '@/components/constant/componentConstant';
-		
+	
+	
 	export default {
-		name: "AddPropertyOption",
+		name: "UpdatePropertyOption",
 		components: {
 			"update-form": UpdateForm,
 		},
 		data() {
 			return {
 				formData: {
+					id: "",/* ID */
 					value: "",/* 产品属性值 */
+					attrId: "",/* 产品属性名称ID */
 					propertyName: "",/* 产品属性名称 */
 					attrId: "",/* 产品属性名称ID */
 					remark: "",/* 备注 */
 				},
 				formFieldList: {
+					id: {
+					    type: "Input",
+					    label: "产品属性值ID",
+					    prop: "id",
+					    width: "180px",
+					    placeholder: "请输入产品属性值ID...",
+						readonly: true,
+					    size: ""
+					},
 					value: {
 					    type: "Input",
 					    label: "产品属性值",
@@ -73,7 +85,7 @@
 								disable: false,
 								handle: (me) => {
 									let the = this;
-									CommInterface.goToPage(SystemConstant.consComponentPath.ADD_PO_SELECT_PROPERTY, SystemConstant.consComponentName.ADD_PO_SELECT_PROPERTY,{});
+									CommInterface.goToPage(SystemConstant.consComponentPath.UPDATE_PO_SELECT_PROPERTY, SystemConstant.consComponentName.UPDATE_PO_SELECT_PROPERTY,{});
 								}
 							}
 						],
@@ -93,63 +105,79 @@
 				},
 				formSize: "",
 				rules:{
+					id:[
+						{ required: true, message: "请输入产品属性值ID", trigger: "blur" }
+					],
 					value:[
 						{ required: true, message: "请输入产品属性值", trigger: "blur" }
 					],
-					// propertyName:[
-					// 	{ required: true, message: "请选择产品属性名称", trigger: "blur" }
-					// ],
 				},
 				btnHandle:[
 					{
-					    label:"新增",
+					    label:"维护",
 					    type:"primary",
 					    size: "",
 					    handle:()=>{
 					        let _this = this;
-							_this.add();
+							_this.update();
 					    }
 					},
 					{
-					    label:"重置",
-					    type:"primary",
+					    label:"返回",
+					    type:"",
 					    size: "",
 					    handle:()=>{
 					        let _this = this;
-					        _this.$refs.addPropertyOptionForm.$refs.baseForm.$refs.defaultMyForm.resetFields();
+					        CommInterface.goToPage(SystemConstant.consComponentPath.LIST_PROPERTY_OPTION, SystemConstant.consComponentName.LIST_PROPERTY_OPTION, {});
 					    }
 					}
 				],
 			};
 		},
 		methods: {
-			add(){
+			queryInfo(id){
 				let _this = this;
-				_this.$refs.addPropertyOptionForm.$refs.baseForm.$refs.defaultMyForm.validate((volid)=>{
-					if(volid){
-						CommInterface.sendPost(SystemConstant.consPropertyOptionManage.ADD, _this.formData, function(num){
-							if(num>0){
-								util.showMsg(MsgConstant.msgCommon.SUCCESS_ADD, ComponentConstant.MessageProperties.SUCCESS);
-								CommInterface.goToPage(SystemConstant.consComponentPath.LIST_PROPERTY_OPTION, SystemConstant.consComponentName.LIST_PROPERTY_OPTION, {});
-							} else {
-								util.showMsg(MsgConstant.msgCommon.FAIL_ADD, ComponentConstant.MessageProperties.ERROR);
-							}
-						});
-					}
-				});
+				CommInterface.sendPost(
+				    SystemConstant.consPropertyOptionManage.QUERY_DETAIL,
+				    {
+				        id: id
+				    },
+				    _this.dealRes
+				);
+			},
+			dealRes(res){// 对回显数据预处理
+			    let _this = this;
+			    _this.formData = res;
+				console.log('_this.formData0',_this.formData);
 			},
 			setPropertyName(attrId, propertyName){
 				let _this = this;
 				_this.formData.attrId = attrId;
 				_this.formData.propertyName = attrId + "-"+ propertyName;
 			},
-			
+			update(){
+				let _this = this;
+				_this.$refs.updatePropertyOptionForm.$refs.baseForm.$refs.defaultMyForm.validate((volid)=>{
+					if(volid){
+						CommInterface.sendPost(SystemConstant.consPropertyOptionManage.UPDATE, _this.formData, function(num){
+							if(num>0){
+								util.showMsg(MsgConstant.msgCommon.SUCCESS_UPDATE, ComponentConstant.MessageProperties.SUCCESS);
+								CommInterface.goToPage(SystemConstant.consComponentPath.LIST_PROPERTY_OPTION, SystemConstant.consComponentName.LIST_PROPERTY_OPTION, {});
+							} else {
+								util.showMsg(MsgConstant.msgCommon.FAIL_UPDATE, ComponentConstant.MessageProperties.ERROR);
+							}
+						});
+					}
+				});
+			},
 		},
 		created() {
 			let _this = this;
 		},
 		mounted() {
 			let _this = this;
+			let id = _this.$route.params.id;
+			_this.queryInfo(id);
 		}
 	}
 </script>

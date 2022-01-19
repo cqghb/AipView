@@ -148,14 +148,7 @@
 			},
 			update(){// 修改
 				let _this = this;
-				_this.$refs.propertyOptionTable.commonCheck();
-				if(_this.$refs.Table.selectedData){
-					let params = _this.$refs.Table.selectedDataArr[0];
-					let param = {
-					        id: params.id
-					    };
-					CommInterface.goToPage(SystemConstant.consComponentPath.UPDATE_SPECIFICATION, SystemConstant.consComponentName.UPDATE_SPECIFICATION, param);
-				}
+				_this.$refs.propertyOptionTable.selectOneDataToPage(SystemConstant.consComponentPath.UPDATE_PROPERTY_OPTION, SystemConstant.consComponentName.UPDATE_PROPERTY_OPTION);
 			},
 			delete(){// 删除 删除之后只是不让再配置到商品规格中去
 				let _this = this;
@@ -176,14 +169,7 @@
 			},
 			detail(){// 详情
 				let _this = this;
-				_this.$refs.propertyOptionTable.commonCheck();
-				if(_this.$refs.propertyOptionTable.selectedData){
-					let params = _this.$refs.propertyOptionTable.selectedDataArr[0];
-					let param = {
-					        id: params.id
-					    };
-					CommInterface.goToPage(SystemConstant.consComponentPath.DETAIL_SPECIFICATION, SystemConstant.consComponentName.DETAIL_SPECIFICATION, param);
-				}
+				_this.$refs.propertyOptionTable.selectOneDataToPage(SystemConstant.consComponentPath.DETAIL_PROPERTY_OPTION, SystemConstant.consComponentName.DETAIL_PROPERTY_OPTION);
 			},
 			
 		},
