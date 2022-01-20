@@ -1,15 +1,15 @@
 <template>
 	<div>
-		<!-- 产品属性值管理 -->
+		<!-- 产品属性值配置管理 -->
 		<base-table :uri="uri"
-		            ref="propertyOptionTable"
+		            ref="skuPropertyOptionTable"
 		            :operationButtonList="operationButtonList"
 		            :tableColumnList="tableColumnList"
 		            :searchData="searchData"
 		            :searchForm="searchForm"
 		            :formSize="formSize"
 					:multiSelect="false"
-					searchFormRef="searchPropertyOptionForm"
+					searchFormRef="searchSkuPropertyOptionForm"
 		            :searchHandle="searchHandle" 
 					@searchDelTagOptions="searchDelTagOptions"></base-table>
 	</div>
@@ -21,31 +21,57 @@
 	import * as SystemConstant from '@/components/constant/systemConstant';
 	import * as CommInterface from '@/components/utils/commInterface';
 	import * as businessConstant from '@/components/constant/businessConstant';
-	import * as MsgConstant from '@/components/constant/msgConstant';
 	import * as ComponentConstant from '@/components/constant/componentConstant';
 	
 	import util from "@/components/utils/util";
 	
 	
 	export default {
-		name: "ListPropertyOption",
+		name: "ListSkuPropertyOption",
 		components: {
 			"base-table": BaseTable,
 		},
 		data() {
 			return {
-				uri: SystemConstant.consPropertyOptionManage.FIND_PAGE,
+				uri: SystemConstant.consSkuPropertyOptionManage.FIND_PAGE,
 				searchData:{
-					value: "",/* 值 */
-					delTag: businessConstant.NO,// 删除标记
+					skuId: "",/* 产品ID */
+					skuName: "",/* 产品名称 */
+					proOptId: "",/* 产品属性值ID */
+					proOptName: "",/* 产品属性值名称 */
+					delTag: businessConstant.NO,/* 删除标记 */
 				},
 				searchForm:{
-					value: {
+					skuId: {
 						type: "Input",
-						label: "产品属性值",
-						prop: "name",
+						label: "产品ID",
+						prop: "skuId",
 						width: "180px",
-						placeholder: "请输入产品属性值...",
+						placeholder: "请输入产品ID...",
+						size:""
+					},
+					skuName: {
+						type: "Input",
+						label: "产品名称",
+						prop: "skuName",
+						width: "180px",
+						placeholder: "请输入产品名称...",
+						size:""
+					},
+					proOptId: {
+						type: "Input",
+						label: "产品属性值ID",
+						prop: "proOptId",
+						width: "180px",
+						placeholder: "请输入产品属性值ID...",
+						size:""
+					},
+					proOptName: {
+						type: "Input",
+						label: "产品属性值名称",
+						prop: "proOptName",
+						width: "180px",
+						placeholder: "请输入产品属性值名称...",
 						size:""
 					},
 					delTag: {
@@ -68,7 +94,7 @@
 						handle:()=>{
 							let _this = this;
 							_this.loading = true;
-							_this.$refs.propertyOptionTable.queryList();// 调子组件的方法
+							_this.$refs.skuPropertyOptionTable.queryList();// 调子组件的方法
 						}
 					},
 					{
@@ -77,7 +103,7 @@
 						size: "",
 						handle:()=>{
 							let _this = this;
-							_this.$refs.propertyOptionTable.$refs.searchPropertyOptionForm.$refs.defaultMyForm.resetFields();
+							_this.$refs.skuPropertyOptionTable.$refs.searchSkuPropertyOptionForm.$refs.defaultMyForm.resetFields();
 						}
 					}
 				],
@@ -125,8 +151,8 @@
 				],
 				tableColumnList:[
 					// { prop: "id", label: "ID", width: 180 },
-					{ prop: "value", label: "产品属性值", width: 180 },
-					{ prop: "propertyName", label: "SKU产品属性名称", width: 180 },
+					{ prop: "skuId", label: "产品ID", width: 180 },
+					{ prop: "proOptId", label: "SKU属性值ID", width: 180 },
 					{ prop: "delTag", label: "删除标记", width: 80 },
 					{ prop: "remark", label: "备注"},
 					// { prop: "createUser", label: "创建人", width: 120 },
@@ -154,7 +180,7 @@
 			},
 			delete(){/* 删除 */
 				let _this = this;
-				_this.$refs.propertyOptionTable.updateDelTag(SystemConstant.consPropertyOptionManage.UPDATE_DEL_TAG);
+				_this.$refs.propertyOptionTable.updateDelTag(SystemConstant.consSkuPropertyOptionManage.UPDATE_DEL_TAG);
 				
 			},
 			detail(){/* 详情 */

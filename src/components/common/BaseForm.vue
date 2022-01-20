@@ -202,7 +202,7 @@
         props:{
             labelWidth:{// 名称长度
                 type:String,
-                default:'100px'
+                default:'120px'
             },
             size:{// 表单项的长度
                 type:String,

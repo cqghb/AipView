@@ -332,7 +332,12 @@
 			radioEvent(sp){/* 单选按钮点击时执行事件，暂时有没有用 */
 				let _this = this;
 			},
-			selectOneDataToPage(componentPath, componentName){/* componentName:组件的名称；选中一条数据，然后跳转到页面 */
+			selectOneDataToPage(componentPath, componentName){
+				/* 
+				* 选中一条数据，然后跳转到页面; 进入修改页面、详情页面可以使用。
+				* componentPath: 组件的URI
+				* componentName:组件的名称； 
+				*/
 			    let _this = this;
 			    let item = _this.currentRow;
 			    if(item){
@@ -344,7 +349,10 @@
 			    	util.showMsg(businessConstant.SELECTED_ONE_DATA);
 			    }
 			},
-			updateDelTag(uri){/* uri:后端接口地址； 删除数据刷新页面 */
+			updateDelTag(uri){
+				/* 
+				* uri:后端接口地址； 删除数据刷新页面 
+				*/
 			    let _this = this;
 			    let item = _this.currentRow;
 			    if(item){
@@ -366,6 +374,16 @@
 			    } else {
 			    	util.showMsg(businessConstant.SELECTED_ONE_DATA);
 			    }
+			},
+			toPage(componentPath, componentName, params){
+				/*
+				* 进入新页面，可以携带参数，可用于进入新增页面。
+				* componentPath: 组件的URI
+				* componentName: 组件的名称
+				* params: 参数
+				*/
+				let _this = this;
+				CommInterface.goToPage(componentPath, componentName, params);
 			},
 			load(){
 				

@@ -118,6 +118,9 @@ export const consComponentPath = {
 	UPDATE_PROPERTY_OPTION: "/updatePropertyOption", /* 产品属性值维护 */
 	UPDATE_PO_SELECT_PROPERTY: "/updatePropertyOption/updatePOSelectProperty", /* 选择产品属性名称 */
 	DETAIL_PROPERTY_OPTION: "/detailPropertyOption", /* 产品属性值维护 */
+	LIST_SKU_PROPERTY_OPTION: "/listSkuPropertyOption", /* 产品属性配置列表 */
+	UPDATE_SKU_PROPERTY_OPTION: "/updateSkuPropertyOption", /* 产品属性配置 */
+	DETAIL_SKU_PROPERTY_OPTION: "/detailSkuPropertyOption", /* 产品属性详情 */
 };
 /**
  * 组件名称
@@ -166,6 +169,9 @@ export const consComponentName = {
 	UPDATE_PROPERTY_OPTION: "UpdatePropertyOption", /* 产品属性值维护 */
 	UPDATE_PO_SELECT_PROPERTY: "UpdatePOSelectProperty", /* 选择产品属性名称 */
 	DETAIL_PROPERTY_OPTION: "DetailPropertyOption", /* 产品属性值维护 */
+	LIST_SKU_PROPERTY_OPTION: "ListSkuPropertyOption", /* 产品属性配置列表 */
+	UPDATE_SKU_PROPERTY_OPTION: "UpdateSkuPropertyOption", /* 产品属性配置 */
+	DETAIL_SKU_PROPERTY_OPTION: "DetailSkuPropertyOption", /* 产品属性详情 */
 	
 	
 };
@@ -283,4 +289,15 @@ export const consPropertyOptionManage = {
 	ADD: "/propertyOptions/insertPropertyValue", // 添加
 	UPDATE: "/propertyOptions/updatePropertyValue", // 维护
 	QUERY_DETAIL: "/propertyOptions/queryDetail", // 详情
+};
+/**
+ * 产品与属性配置管理接口
+ */
+export const consSkuPropertyOptionManage = {
+    FIND_PAGE: "/skuPropertyOption/findPage", /* 产品与属性配置分页查询 */
+    QUERY_BY_ID: "/skuPropertyOption/queryById", /* 通过主键查询 */
+	UPDATE_DEL_TAG: "/skuPropertyOption/updateDelTag", /* 逻辑删除操作 */
+	ADD: "/skuPropertyOption/insertSkuPropertyOption", /* 添加 */
+	UPDATE: "/skuPropertyOption/updateSkuPropertyOption", /* 维护 */
+	QUERY_DETAIL: "/skuPropertyOption/queryDetail", /* 详情 */
 };

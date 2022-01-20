@@ -57,6 +57,10 @@ import AddPOSelectProperty from '@/components/commodity/property/SelectProperty'
 import UpdatePropertyOption from '@/components/commodity/property_options/UpdatePropertyOption'
 import UpdatePOSelectProperty from '@/components/commodity/property/SelectProperty'
 import DetailPropertyOption from '@/components/commodity/property_options/DetailPropertyOption'
+import ListSkuPropertyOption from '@/components/commodity/sku_property_option/ListSkuPropertyOption'
+// import AddSkuPropertyOption from '@/components/commodity/sku_property_option/AddSkuPropertyOption'
+import UpdateSkuPropertyOption from '@/components/commodity/sku_property_option/UpdateSkuPropertyOption'
+import DetailSkuPropertyOption from '@/components/commodity/sku_property_option/DetailSkuPropertyOption'
 
 
 const originalPush = Router.prototype.push
@@ -639,7 +643,54 @@ export default new Router({
 						path: "/detailPropertyOption"
 					}
 				]
-			}]//在这里加
+			},{
+				path: "/listSkuPropertyOption",
+				name: "ListSkuPropertyOption",
+				component: ListSkuPropertyOption,
+				meta: [{
+						name: "产品属性配置列表查询",
+						path: "/listSkuPropertyOption"
+					}
+				]
+			}
+			// ,{
+			// 	path: "/addSkuPropertyOption",
+			// 	name: "AddSkuPropertyOption",
+			// 	component: AddSkuPropertyOption,
+			// 	meta: [{
+			// 			name: "产品属性配置列表查询",
+			// 			path: "/listSkuPropertyOption"
+			// 		},{
+			// 			name: "产品属性配置",
+			// 			path: "/addSkuPropertyOption"
+			// 		}
+			// 	]
+			// }
+			,{
+				path: "/updateSkuPropertyOption",
+				name: "UpdateSkuPropertyOption",
+				component: UpdateSkuPropertyOption,
+				meta: [{
+						name: "产品属性配置列表查询",
+						path: "/listSkuPropertyOption"
+					},{
+						name: "产品属性配置",
+						path: "/updateSkuPropertyOption"
+					}
+				]
+			},{
+				path: "/detailSkuPropertyOption",
+				name: "DetailSkuPropertyOption",
+				component: DetailSkuPropertyOption,
+				meta: [{
+						name: "产品属性配置列表查询",
+						path: "/listSkuPropertyOption"
+					},{
+						name: "产品属性详情",
+						path: "/detailSkuPropertyOption"
+					}
+				]
+			}]//在这里加 
 		}, {
 			path: "/",
 			name: "Login",
