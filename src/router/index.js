@@ -60,6 +60,7 @@ import DetailPropertyOption from '@/components/commodity/property_options/Detail
 import ListSkuPropertyOption from '@/components/commodity/sku_property_option/ListSkuPropertyOption'
 // import AddSkuPropertyOption from '@/components/commodity/sku_property_option/AddSkuPropertyOption'
 import UpdateSkuPropertyOption from '@/components/commodity/sku_property_option/UpdateSkuPropertyOption'
+import UpdateSelectPropertyOption from '@/components/commodity/property_options/SelectPropertyOption'
 import DetailSkuPropertyOption from '@/components/commodity/sku_property_option/DetailSkuPropertyOption'
 
 
@@ -677,6 +678,13 @@ export default new Router({
 						name: "产品属性配置",
 						path: "/updateSkuPropertyOption"
 					}
+				],
+				children:[
+					{
+						path: "/updateSelectPropertyOption",
+						name: "UpdateSelectPropertyOption",
+						component: UpdateSelectPropertyOption,
+					},
 				]
 			},{
 				path: "/detailSkuPropertyOption",
@@ -690,7 +698,7 @@ export default new Router({
 						path: "/detailSkuPropertyOption"
 					}
 				]
-			}]//在这里加 
+			}]//在这里加
 		}, {
 			path: "/",
 			name: "Login",

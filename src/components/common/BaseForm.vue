@@ -178,7 +178,16 @@
 				</el-upload>
 				<el-dialog v-if="item.fileType=='1' && item.num!=1" :visible.sync="item.dialogVisible">
 					<img width="100%" :src="item.dialogImageUrl" alt="" />
-				 </el-dialog>
+				</el-dialog>
+				<div v-if="'list'==item.type">
+					<el-alert
+						v-for="(item2, index2) in formData[item.prop]"
+						:key="index2"
+					    :title="item2.propertyName"
+					    type="warning"
+					    @close="item.close(item2.id)">
+					</el-alert>
+				</div>
             </el-form-item>
 			<el-form-item>
 				<el-button v-for="item in buttonArr"

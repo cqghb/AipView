@@ -118,15 +118,15 @@
 							_this.detail();
 						}
 					},
-					{
-						type: "primary",
-						icon: "el-icon-plus",
-						text: "新增",
-						handle:()=>{
-							let _this = this;
-							_this.add();
-						}
-					},
+					// {
+					// 	type: "primary",
+					// 	icon: "el-icon-plus",
+					// 	text: "新增",
+					// 	handle:()=>{
+					// 		let _this = this;
+					// 		_this.add();
+					// 	}
+					// },
 					{
 						type: "warning",
 						icon: "el-icon-edit",
@@ -168,24 +168,24 @@
 				let _this = this;
 				_this.searchForm.delTag.options = data;
 			},
-			add(){/* 新增 */
-				let _this = this;
-				_this.$refs.propertyOptionTable.toPage(SystemConstant.consComponentPath.ADD_PROPERTY_OPTION, SystemConstant.consComponentName.ADD_PROPERTY_OPTION, {});
+			// add(){/* 新增 */
+			// 	let _this = this;
+			// 	_this.$refs.propertyOptionTable.toPage(SystemConstant.consComponentPath.ADD_PROPERTY_OPTION, SystemConstant.consComponentName.ADD_PROPERTY_OPTION, {});
 				
-			},
+			// },
 			update(){/* 修改 */
 				let _this = this;
-				_this.$refs.propertyOptionTable.selectOneDataToPage(SystemConstant.consComponentPath.UPDATE_PROPERTY_OPTION, SystemConstant.consComponentName.UPDATE_PROPERTY_OPTION);
+				_this.$refs.skuPropertyOptionTable.selectOneDataToPage(SystemConstant.consComponentPath.UPDATE_SKU_PROPERTY_OPTION, SystemConstant.consComponentName.UPDATE_SKU_PROPERTY_OPTION);
 				
 			},
 			delete(){/* 删除 */
 				let _this = this;
-				_this.$refs.propertyOptionTable.updateDelTag(SystemConstant.consSkuPropertyOptionManage.UPDATE_DEL_TAG);
+				_this.$refs.skuPropertyOptionTable.updateDelTag(SystemConstant.consSkuPropertyOptionManage.UPDATE_DEL_TAG);
 				
 			},
 			detail(){/* 详情 */
 				let _this = this;
-				_this.$refs.propertyOptionTable.selectOneDataToPage(SystemConstant.consComponentPath.DETAIL_PROPERTY_OPTION, SystemConstant.consComponentName.DETAIL_PROPERTY_OPTION);
+				_this.$refs.skuPropertyOptionTable.selectOneDataToPage(SystemConstant.consComponentPath.DETAIL_SKU_PROPERTY_OPTION, SystemConstant.consComponentName.DETAIL_SKU_PROPERTY_OPTION);
 				
 			},
 			

@@ -1,12 +1,12 @@
 <template>
 	<div>
-		<!-- 维护 -->
+		<!-- 维护产品属性 -->
 		<div class="demo-block demo-tree">
 			<div class="source">
 				<div class="custom-tree-container">
 					<div class="block">
 						<update-form
-									labelWidth="80px"
+									labelWidth="130px"
 									ref="updateSkuPropertyOptionForm"
 						            :formData="formData"
 						            :formFieldList="formFieldList"
@@ -16,7 +16,7 @@
 						            :buttonArr="btnHandle"></update-form>
 					</div>
 					<div class="block">
-						<router-view @setSpecificationGroup="setSpecificationGroup" @setSpuType="setSpuType"></router-view>
+						<router-view @setPropertyValues="setPropertyValues"></router-view>
 					</div>
 				</div>
 			</div>			
@@ -32,6 +32,7 @@
 	import * as SystemConstant from '@/components/constant/systemConstant';
 	import * as MsgConstant from '@/components/constant/msgConstant';
 	import * as ComponentConstant from '@/components/constant/componentConstant';
+	import * as BusinessConstant from '@/components/constant/businessConstant';
 	
 	
 	export default {
@@ -42,90 +43,88 @@
 		data() {
 			return {
 				formData: {
-					id: "",// ID
-					name: "",// 规格名称
-					groupIdName: "",// 规格组ID-名称
-					groupId: "",// 规格组ID
-					typeIdName: "",// 分类ID-名称
-					typeId: "",// 分类ID
-					addr: "",// 显示位置
-					remark: "",// 备注
+					id: "",/* 属性关系ID */
+					skuId: "",/* 产品ID */
+					skuIdName: "",/* 产品ID-产品名称 */
+					proOptId: "",/* 属性值ID */
+					proOptIdName: "",/* 属性值ID-属性值 */
+					delTag: "",/* 删除标记 */
+					remark: "",/* 备注 */
+					listProperty: null,
 				},
 				formFieldList: {
-					name: {
+					id: {
 					    type: "Input",
-					    label: "规格名称",
-					    prop: "name",
+					    label: "属性关系ID",
+					    prop: "id",
 					    width: "180px",
-					    placeholder: "请输入规格名称...",
+					    placeholder: "请输入属性关系ID...",
+						readonly: true,
 					    size: ""
 					},
-					groupIdName: {
+					skuIdName: {
 					    type: "Input",
-					    label: "产品规格分组名称",
-					    prop: "groupIdName",
+					    label: "产品ID-产品名称",
+					    prop: "skuIdName",
 					    width: "180px",
+					    placeholder: "请输入产品ID-产品名称...",
 						readonly: true,
-					    placeholder: "请选择产品规格分组名称...",
-					    size: "",
-						btnArr: [
-							{
-								label: "选择产品规格分组名称",
-								id: "selectGroupIdName",
-								type: "primary",
-								ref: "selectGroupIdName",
-								size: "50px",
-								disable: false,
-								handle: (me) => {
-									let _this = this;
-									CommInterface.goToPage(SystemConstant.consComponentPath.SELECT_SPECIFICATION_GROUP_UPDATE_SPECIFICATION, SystemConstant.consComponentName.SELECT_SPECIFICATION_GROUP_UPDATE_SPECIFICATION,{});
-								}
-							}
-						],
-						// iconArr: {// 图标信息
-						// 	slot: "prefix",
-						// 	class: "el-icon-search",
-						// }
+					    size: ""
 					},
-					typeIdName: {
-					    type: "Input",
-					    label: "货品类型名称",
-					    prop: "typeIdName",
-					    width: "180px",
-						readonly: true,
-					    placeholder: "请选择货品类型名称...",
-					    size: "",
-						btnArr: [
-							{
-								label: "选择货品规格分组名称",
-								id: "selectTypeIdName",
-								type: "primary",
-								ref: "selectTypeIdNameBtn",
-								size: "50px",
-								disable: false,
-								handle: (me) => {
-									let _this = this;
-									CommInterface.goToPage(SystemConstant.consComponentPath.SELECT_SPU_TYPE_UPDATE_SPECIFICATION,SystemConstant.consComponentName.SELECT_SPU_TYPE_UPDATE_SPECIFICATION,{});
-								}
-							}
-						],
-						// iconArr: {// 图标信息
-						// 	slot: "prefix",
-						// 	class: "el-icon-search",
-						// }
-					},
-					addr: {
-					    type: "Number",
-					    label: "位置",
-					    prop: "addr",
-					    width: "180px",
-						step: 1,
-					    min: 1,
-					    max: 100,
-						change: function(v) {
-							console.log("当前值",v)
+					// propertyName: {
+					//     type: "Input",
+					//     label: "产品属性名称",
+					//     prop: "propertyName",
+					//     width: "180px",
+					// 	readonly: true,
+					//     placeholder: "请选择产品属性名称...",
+					//     size: "",
+					// 	btnArr: [
+					// 		{
+					// 			label: "选择产品属性名称",
+					// 			id: "selectPropertyName",
+					// 			type: "primary",
+					// 			ref: "selectPropertyName",
+					// 			size: "50px",
+					// 			disable: false,
+					// 			handle: (me) => {
+					// 				let the = this;
+					// 				CommInterface.goToPage(SystemConstant.consComponentPath.UPDATE_SELECT_PROPERTY_OPTION, SystemConstant.consComponentName.UPDATE_SELECT_PROPERTY_OPTION,{});
+					// 			}
+					// 		}
+					// 	],
+						
+					// },
+					delTag: {
+						type: "Select",
+						label: "删除标志",
+						prop: "delTag",
+						width: "180px",
+						options: [],
+						change: function(v){
+							console.log("当前值",v);
 						}
-					    
+					},
+					listProperty: {
+					    type: "list",
+					    label: "属性列表",
+					    prop: "listProperty",
+					    width: "180px",
+					    placeholder: "请输入备注...",
+					    size: "",
+						close: (id)=>{
+							console.log(id);
+							let _this = this;
+							let index = null;
+							for(let i=0; i<_this.formData.listProperty.length;i++){
+								if(id==_this.formData.listProperty[i].id){
+									index = i;
+									break;
+								}
+							}
+							_this.formData.listProperty.splice(index,1);
+							console.log(_this.formData.listProperty);
+						}
 					},
 					remark: {
 					    type: "Textarea",
@@ -138,14 +137,23 @@
 				},
 				formSize: "",
 				rules:{
-					name:[
-						{ required: true, message: "请输入规格名称", trigger: "blur" }
+					id:[
+						{ required: true, message: "属性关系ID不能为空", trigger: "blur" }
 					],
-					groupIdName:[
-						{ required: true, message: "请选择产品规格分组名称", trigger: "blur" }
+					skuId:[
+						{ required: true, message: "属性关系ID不能为空", trigger: "blur" }
 					],
-					typeIdName:[
-						{ required: true, message: "请选择货品类型名称", trigger: "blur" }
+					skuIdName:[
+						{ required: true, message: "产品ID-产品名称不能为空", trigger: "blur" }
+					],
+					proOptId:[
+						{ required: true, message: "产品属性值ID不能为空", trigger: "blur" }
+					],
+					proOptIdName:[
+						{ required: true, message: "请选择产品属性值ID-属性值", trigger: "blur" }
+					],
+					delTag:[
+						{ required: true, message: "删除标志不能为空", trigger: "blur" }
 					],
 				},
 				btnHandle:[
@@ -164,7 +172,7 @@
 					    size: "",
 					    handle:()=>{
 					        let _this = this;
-					        CommInterface.goToPage(SystemConstant.consComponentPath.LIST_SPECIFICATION, SystemConstant.consComponentName.LIST_SPECIFICATION, {});
+					        CommInterface.goToPage(SystemConstant.consComponentPath.LIST_SKU_PROPERTY_OPTION, SystemConstant.consComponentName.LIST_SKU_PROPERTY_OPTION, {});
 					    }
 					}
 				],
@@ -174,7 +182,7 @@
 			queryInfo(id){
 				let _this = this;
 				CommInterface.sendPost(
-				    SystemConstant.consSpecificationManage.QUERY_DETAIL,
+				    SystemConstant.consSkuPropertyOptionManage.QUERY_DETAIL,
 				    {
 				        id: id
 				    },
@@ -184,22 +192,21 @@
 			dealRes(res){// 对回显数据预处理
 			    let _this = this;
 			    _this.formData = res;
-				console.log('_this.formData0',_this.formData);
 			},
-			setSpecificationGroup(groupId, groupName){
+			setPropertyValues(item){
 				let _this = this;
-				_this.formData.groupId = groupId;
-				_this.formData.groupIdName = groupId + "-"+ groupName;
-				console.log('_this.formData2',_this.formData);
-			},
-			setSpuType(typeId, typeName){
-				let _this = this;
-				_this.formData.typeId = typeId;
-				_this.formData.typeIdName = typeId + "-" + typeName;
+				// _this.formData.groupId = groupId;
+				// _this.formData.groupIdName = groupId + "-"+ groupName;
+				// console.log(item);
+				for(let i=0;i<item.length;i++){
+					_this.formData.listProperty.push(item[i]);
+				}
+				
+				console.log(_this.formData.listProperty);
 			},
 			update(){
 				let _this = this;
-				_this.$refs.updateForm.$refs.baseForm.$refs.defaultMyForm.validate((volid)=>{
+				_this.$refs.updateSkuPropertyOptionForm.$refs.baseForm.$refs.defaultMyForm.validate((volid)=>{
 					if(volid){
 						CommInterface.sendPost(SystemConstant.consSpecificationManage.UPDATE, _this.formData, function(num){
 							if(num>0){
@@ -220,6 +227,10 @@
 			let _this = this;
 			let id = _this.$route.params.id;
 			_this.queryInfo(id);
+			_this.$refs.updateSkuPropertyOptionForm.searchCode(BusinessConstant.CODE_TYPE.YES_OR_NO, [], "",function(data){
+				_this.formFieldList.delTag.options = data;
+			});
+			CommInterface.goToPage(SystemConstant.consComponentPath.UPDATE_SELECT_PROPERTY_OPTION, SystemConstant.consComponentName.UPDATE_SELECT_PROPERTY_OPTION,{});
 		}
 	}
 </script>

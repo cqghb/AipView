@@ -120,7 +120,10 @@ export const consComponentPath = {
 	DETAIL_PROPERTY_OPTION: "/detailPropertyOption", /* 产品属性值维护 */
 	LIST_SKU_PROPERTY_OPTION: "/listSkuPropertyOption", /* 产品属性配置列表 */
 	UPDATE_SKU_PROPERTY_OPTION: "/updateSkuPropertyOption", /* 产品属性配置 */
+	UPDATE_SELECT_PROPERTY_OPTION: "/updateSkuPropertyOption/updateSelectPropertyOption", /* 产品属性配置 */
 	DETAIL_SKU_PROPERTY_OPTION: "/detailSkuPropertyOption", /* 产品属性详情 */
+	
+	
 };
 /**
  * 组件名称
@@ -171,6 +174,7 @@ export const consComponentName = {
 	DETAIL_PROPERTY_OPTION: "DetailPropertyOption", /* 产品属性值维护 */
 	LIST_SKU_PROPERTY_OPTION: "ListSkuPropertyOption", /* 产品属性配置列表 */
 	UPDATE_SKU_PROPERTY_OPTION: "UpdateSkuPropertyOption", /* 产品属性配置 */
+	UPDATE_SELECT_PROPERTY_OPTION: "UpdateSelectPropertyOption", /* 产品属性配置 */
 	DETAIL_SKU_PROPERTY_OPTION: "DetailSkuPropertyOption", /* 产品属性详情 */
 	
 	
