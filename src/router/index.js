@@ -63,6 +63,8 @@ import UpdateSkuPropertyOption from '@/components/commodity/sku_property_option/
 import UpdateSelectPropertyOption from '@/components/commodity/property_options/SelectPropertyOption'
 import DetailSkuPropertyOption from '@/components/commodity/sku_property_option/DetailSkuPropertyOption'
 
+import ListSkuSpecificationOption from '@/components/commodity/sku_specification_option/ListSkuSpecificationOption'
+
 
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {
@@ -698,7 +700,16 @@ export default new Router({
 						path: "/detailSkuPropertyOption"
 					}
 				]
-			}]//在这里加
+			},{
+				path: "/listSkuSpecificationOption",
+				name: "ListSkuSpecificationOption",
+				component: ListSkuSpecificationOption,
+				meta: [{
+						name: "产品规格选项管理",
+						path: "/listSkuSpecificationOption"
+					}
+				]
+			}]//在这里加 
 		}, {
 			path: "/",
 			name: "Login",

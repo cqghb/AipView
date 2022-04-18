@@ -122,7 +122,7 @@ export const consComponentPath = {
 	UPDATE_SKU_PROPERTY_OPTION: "/updateSkuPropertyOption", /* 产品属性配置 */
 	UPDATE_SELECT_PROPERTY_OPTION: "/updateSkuPropertyOption/updateSelectPropertyOption", /* 产品属性配置 */
 	DETAIL_SKU_PROPERTY_OPTION: "/detailSkuPropertyOption", /* 产品属性详情 */
-	
+	LIST_SKU_SPECIFICATION_OPTION: "/listSkuSpecificationOption", /* 产品规格选项管理 */
 	
 };
 /**
@@ -176,6 +176,7 @@ export const consComponentName = {
 	UPDATE_SKU_PROPERTY_OPTION: "UpdateSkuPropertyOption", /* 产品属性配置 */
 	UPDATE_SELECT_PROPERTY_OPTION: "UpdateSelectPropertyOption", /* 产品属性配置 */
 	DETAIL_SKU_PROPERTY_OPTION: "DetailSkuPropertyOption", /* 产品属性详情 */
+	LIST_SKU_SPECIFICATION_OPTION: "ListSkuSpecificationOption", /* 产品规格选项管理 */
 	
 	
 };
@@ -304,4 +305,16 @@ export const consSkuPropertyOptionManage = {
 	ADD: "/skuPropertyOption/insertSkuPropertyOption", /* 添加 */
 	UPDATE: "/skuPropertyOption/updateSkuPropertyOption", /* 维护 */
 	QUERY_DETAIL: "/skuPropertyOption/queryDetail", /* 详情 */
+};
+
+/**
+ * 产品规格选项配置管理接口
+ */
+export const consSkuSpecificationOptionManage = {
+    FIND_PAGE: "/skuSpecificationOption/findPage", /* 产品规格选项配置分页查询 */
+    QUERY_BY_ID: "/skuSpecificationOption/queryById", /* 通过主键查询 */
+	UPDATE_DEL_TAG: "/skuSpecificationOption/updateDelTag", /* 逻辑删除操作 */
+	ADD: "/skuSpecificationOption/insertSkuPropertyOption", /* 添加 */
+	UPDATE: "/skuSpecificationOption/updateSkuPropertyOption", /* 维护 */
+	QUERY_DETAIL: "/skuSpecificationOption/queryDetail", /* 详情 */
 };
