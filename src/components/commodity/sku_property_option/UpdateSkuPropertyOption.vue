@@ -226,7 +226,12 @@
 		mounted() {
 			let _this = this;
 			let id = _this.$route.params.id;
-			_this.queryInfo(id);
+			let skuIdArr = id.split("-");
+			let skuId = skuIdArr[1];
+			if(!skuId){
+				skuId = skuIdArr[0];
+			}
+			_this.queryInfo(skuId);
 			_this.$refs.updateSkuPropertyOptionForm.searchCode(BusinessConstant.CODE_TYPE.YES_OR_NO, [], "",function(data){
 				_this.formFieldList.delTag.options = data;
 			});

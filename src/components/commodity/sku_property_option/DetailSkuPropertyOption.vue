@@ -60,7 +60,15 @@
 		mounted() {
 			let _this = this;
 			let id = _this.$route.params.id;
-			_this.queryInfo(id);
+			/* 列表查询的时候特殊处理 */
+			let skuId = id.split("-")[1];
+			if(skuId){
+				_this.queryInfo(skuId);
+			} else {
+				/*  把界面显示出来 */
+				_this.toRender = true;
+			}
+			
 		}
 	}
 </script>

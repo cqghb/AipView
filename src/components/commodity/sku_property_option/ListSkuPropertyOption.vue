@@ -150,15 +150,13 @@
 					},
 				],
 				tableColumnList:[
-					// { prop: "id", label: "ID", width: 180 },
-					{ prop: "skuId", label: "产品ID", width: 180 },
-					{ prop: "proOptId", label: "SKU属性值ID", width: 180 },
+					{ prop: "id", label: "ID", width: 180 },
+					{ prop: "code", label: "产品代码", width: 180 },
+					{ prop: "name", label: "产品名称", width: 180 },
+					{ prop: "attrName", label: "SKU产品属性名称", width: 180 },
+					{ prop: "value", label: "产品属性值", width: 180 },
 					{ prop: "delTag", label: "删除标记", width: 80 },
-					{ prop: "remark", label: "备注"},
-					// { prop: "createUser", label: "创建人", width: 120 },
-					// { prop: "createTime", label: "创建时间", width: 160, type:SystemConstant.dataType.DATE, formatDate: SystemConstant.common.FORMAT_DATE },
-					// { prop: "updateUser", label: "修改人", width: 120 },
-					// { prop: "updateTime", label: "修改时间", width: 160, type:SystemConstant.dataType.DATE, formatDate:SystemConstant.common.FORMAT_DATE }
+					{ prop: "remark", label: "备注"}
 				],
 				selectedData: false
 			};
