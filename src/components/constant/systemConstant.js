@@ -123,7 +123,10 @@ export const consComponentPath = {
 	UPDATE_SELECT_PROPERTY_OPTION: "/updateSkuPropertyOption/updateSelectPropertyOption", /* 产品属性配置 */
 	DETAIL_SKU_PROPERTY_OPTION: "/detailSkuPropertyOption", /* 产品属性详情 */
 	LIST_SKU_SPECIFICATION_OPTION: "/listSkuSpecificationOption", /* 产品规格选项管理 */
-	
+	LIST_SPU_BRAND: "/listSpuBrand", /* 产品品牌管理 */
+	DETAIL_SPU_BRAND: "/detailSpuBrand", /* 产品品牌详情*/
+	UPDATE_SPU_BRAND: "/updateSpuBrand", /* 产品品牌维护 */
+	ADD_SPU_BRAND: "/addSpuBrand", /* 产品品牌新增 */
 };
 /**
  * 组件名称
@@ -177,6 +180,10 @@ export const consComponentName = {
 	UPDATE_SELECT_PROPERTY_OPTION: "UpdateSelectPropertyOption", /* 产品属性配置 */
 	DETAIL_SKU_PROPERTY_OPTION: "DetailSkuPropertyOption", /* 产品属性详情 */
 	LIST_SKU_SPECIFICATION_OPTION: "ListSkuSpecificationOption", /* 产品规格选项管理 */
+	LIST_SPU_BRAND: "ListSpuBrand", /* 产品品牌管理 */
+	DETAIL_SPU_BRAND: "DetailSpuBrand", /* 产品品牌详情*/
+	UPDATE_SPU_BRAND: "UpdateSpuBrand", /* 产品品牌维护 */
+	ADD_SPU_BRAND: "AddSpuBrand", /* 产品品牌新增 */
 	
 	
 };
@@ -317,4 +324,15 @@ export const consSkuSpecificationOptionManage = {
 	ADD: "/skuSpecificationOption/insertSkuPropertyOption", /* 添加 */
 	UPDATE: "/skuSpecificationOption/updateSkuPropertyOption", /* 维护 */
 	QUERY_DETAIL: "/skuSpecificationOption/queryDetail", /* 详情 */
+};
+
+/**
+ * 产品规格选项配置管理接口
+ */
+export const consSpuSpuBrandManage = {
+    FIND_PAGE: "/spuBrand/findPage", /* 产品规格选项配置分页查询 */
+    QUERY_BY_ID: "/spuBrand/queryById", /* 通过主键查询 */
+	UPDATE_DEL_TAG: "/spuBrand/updateDelTag", /* 逻辑删除操作 */
+	ADD: "/spuBrand/addSpuBrand", /* 添加 */
+	UPDATE: "/spuBrand/updateSpuBrand", /* 维护 */
 };
