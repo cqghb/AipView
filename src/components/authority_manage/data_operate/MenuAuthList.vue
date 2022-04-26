@@ -9,6 +9,8 @@
 		            :searchForm="searchForm"
 		            :formSize="formSize"
 					searchFormRef="searchDopForm"
+					@searchDelTagOptions="searchDelTagOptions"
+					@searchDataOperateSubgroup="searchDataOperateSubgroup"
 		            :searchHandle="searchHandle"></base-table>
 	</div>
 </template>
@@ -21,6 +23,7 @@
 	import * as CommInterface from '@/components/utils/commInterface';
 	import * as MsgConstant from '@/components/constant/msgConstant';
 	import * as ComponentConstant from '@/components/constant/componentConstant';
+	import * as businessConstant from '@/components/constant/businessConstant';
 	
 	export default {
 		name: "MenuAuthList",
@@ -33,6 +36,8 @@
 				searchData:{
 					name: "",// 操作名称
 					operateAddr: "",// 操作地址
+					subgroup: "",// 所属分组
+					delTag: businessConstant.NO,// 删除标记
 				},
 				searchForm:{
 					name: {
@@ -50,6 +55,26 @@
 						width: "180px",
 						placeholder: "请输入操作地址...",
 						size:""
+					},
+					subgroup: {
+						type: "Select",
+						label: "所属分组",
+						prop: "subgroup",
+						width: "180px",
+						options: [],
+						change: function(v){
+							console.log("当前值",v);
+						}
+					},
+					delTag: {
+						type: "Select",
+						label: "删除标志",
+						prop: "delTag",
+						width: "180px",
+						options: [],
+						change: function(v){
+							console.log("当前值",v);
+						}
 					}
 				},
 				searchHandle:[
@@ -130,6 +155,14 @@
 			};
 		},
 		methods:{
+			searchDelTagOptions(data){
+				let _this = this;
+				_this.searchForm.delTag.options = data;
+			},
+			searchDataOperateSubgroup(data){
+				let _this = this;
+				_this.searchForm.subgroup.options = data;
+			},
 			showDetail(){
 				let the = this;
 				the.$refs.dopTable.commonCheck();

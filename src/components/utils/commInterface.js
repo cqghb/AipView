@@ -217,3 +217,13 @@ export function goToIconList() {
         name: "MenuList"
     });
 }
+/**
+ * 查询货品类型
+ */
+export function searchSPUTypeCode(params, callback) {
+    util.$http.post(systemConstant.consSpuTypeManage.SEARCH_SPU_TYPE_CODE, params)
+    .then(function (res) {
+    	let info = res.data;
+    	return callback(info);
+    });
+}

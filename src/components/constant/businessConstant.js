@@ -17,3 +17,10 @@ export const CODE_TYPE = {
     DEL_TAG: "delTag", // 是否删除
     DATA_OPERATE_SUBGROUP: "dataOperateSubgroup", // 数据操作分组
 };
+/**
+ * 回调函数名称
+ */
+export const CALLBACK_FUNCTION_NAME = {
+    SEARCH_DEL_TAG_OPTIONS: "searchDelTagOptions", // 查删除标志
+    SEARCH_DATA_OPERATE_SUBGROUP: "searchDataOperateSubgroup", // 查数据操作分组
+};

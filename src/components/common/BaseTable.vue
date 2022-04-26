@@ -307,17 +307,20 @@
 			    }
 			    the.selectedData = true;
 			},
-			searchDelTagOptions(){
+			/*
+			codeType 码值类型；
+			methodName 回调方法名称
+			*/ 
+			searchDelTagOptions(codeType, methodName){
 				let _this = this;
 				CommInterface.getCodeType(
-				    BusinessConstant.CODE_TYPE.YES_OR_NO,
+				    codeType,
 					[],
 				    function (res) {
 						let retCode = res.code;
 						let retMsg = res.msg;
 				        if(SystemConstant.common.RET_CODE == retCode){
-				            // _this.searchForm.delTag.options = res.data;
-							_this.$emit("searchDelTagOptions", res.data);
+							_this.$emit(methodName, res.data);
 				        } else {
 				            util.showMsg("删除标记备选项查询失败", ComponentConstant.MessageProperties.ERROR);
 				        }
@@ -392,7 +395,8 @@
         created: function () {
             let _this = this;
             _this.queryList();
-			_this.searchDelTagOptions();
+			_this.searchDelTagOptions(BusinessConstant.CODE_TYPE.YES_OR_NO, BusinessConstant.CALLBACK_FUNCTION_NAME.SEARCH_DEL_TAG_OPTIONS);
+			_this.searchDelTagOptions(BusinessConstant.CODE_TYPE.DATA_OPERATE_SUBGROUP, BusinessConstant.CALLBACK_FUNCTION_NAME.SEARCH_DATA_OPERATE_SUBGROUP);
         },
         mounted() {
             let the = this;

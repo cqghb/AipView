@@ -68,10 +68,12 @@ import DetailSpuBrand from '@/components/commodity/spu_brand/DetailSpuBrand'
 import UpdateSpuBrand from '@/components/commodity/spu_brand/UpdateSpuBrand'
 import AddSpuBrand from '@/components/commodity/spu_brand/AddSpuBrand'
 
-
 import ListSkuSpecificationOption from '@/components/commodity/sku_specification_option/ListSkuSpecificationOption'
 
-
+import ListSpu from '@/components/commodity/spu/ListSpu'
+import DetailSpu from '@/components/commodity/spu/DetailSpu'
+import UpdateSpu from '@/components/commodity/spu/UpdateSpu'
+import AddSpu from '@/components/commodity/spu/AddSpu'
 
 
 
@@ -759,8 +761,53 @@ export default new Router({
 						name: "SPU产品品牌管理",
 						path: "/listSpuBrand"
 					},{
-						name: "添加SPU产品品牌",
+						name: "维护SPU产品品牌",
 						path: "/updateSpuBrand"
+					}
+				]
+			},{
+				path: "/listSpu",
+				name: "ListSpu",
+				component: ListSpu,
+				meta: [{
+						name: "SPU货品管理",
+						path: "/listSpu"
+					}
+				]
+			},{
+				path: "/detailSpu",
+				name: "DetailSpu",
+				component: DetailSpuBrand,
+				meta: [{
+						name: "SPU货品管理",
+						path: "/listSpu"
+					},{
+						name: "SPU货品详情",
+						path: "/detailSpu"
+					}
+				]
+			},{
+				path: "/addSpu",
+				name: "AddSpu",
+				component: AddSpu,
+				meta: [{
+						name: "SPU货品管理",
+						path: "/listSpu"
+					},{
+						name: "添加货品",
+						path: "/addSpu"
+					}
+				]
+			},{
+				path: "/updateSpu",
+				name: "UpdateSpu",
+				component: UpdateSpu,
+				meta: [{
+						name: "SPU货品管理",
+						path: "/listSpu"
+					},{
+						name: "维护货品",
+						path: "/updateSpu"
 					}
 				]
 			}]//在这里加 

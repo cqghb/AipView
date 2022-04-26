@@ -127,6 +127,10 @@ export const consComponentPath = {
 	DETAIL_SPU_BRAND: "/detailSpuBrand", /* 产品品牌详情*/
 	UPDATE_SPU_BRAND: "/updateSpuBrand", /* 产品品牌维护 */
 	ADD_SPU_BRAND: "/addSpuBrand", /* 产品品牌新增 */
+	LIST_SPU: "/listSpu", /* 货品管理 */
+	DETAIL_SPU: "/detailSpu", /* 货品详情*/
+	UPDATE_SPU: "/updateSpu", /* 货品维护 */
+	ADD_SPU: "/addSpu", /* 货品新增 */
 };
 /**
  * 组件名称
@@ -184,7 +188,10 @@ export const consComponentName = {
 	DETAIL_SPU_BRAND: "DetailSpuBrand", /* 产品品牌详情*/
 	UPDATE_SPU_BRAND: "UpdateSpuBrand", /* 产品品牌维护 */
 	ADD_SPU_BRAND: "AddSpuBrand", /* 产品品牌新增 */
-	
+	LIST_SPU: "ListSpu", /* 货品管理 */
+	DETAIL_SPU: "DetailSpu", /* 货品详情*/
+	UPDATE_SPU: "UpdateSpu", /* 货品维护 */
+	ADD_SPU: "AddSpu", /* 货品新增 */
 	
 };
 /**
@@ -277,6 +284,8 @@ export const consSpuTypeManage = {
 	ADD: "/spuType/insertSpuType", // 添加
 	UPDATE: "/spuType/updateSpuType", // 维护
 	QUERY_DETAIL: "/spuType/queryDetail", // 通过主键查询详细信息
+	SEARCH_SPU_TYPE_CODE: "/spuType/searchSPUTypeCode", // 查询货品类型 id 、 name
+	
 };
 
 /**
@@ -335,4 +344,16 @@ export const consSpuSpuBrandManage = {
 	UPDATE_DEL_TAG: "/spuBrand/updateDelTag", /* 逻辑删除操作 */
 	ADD: "/spuBrand/addSpuBrand", /* 添加 */
 	UPDATE: "/spuBrand/updateSpuBrand", /* 维护 */
+};
+
+
+/**
+ * 产品规格选项配置管理接口
+ */
+export const consSpuManage = {
+    FIND_PAGE: "/spu/findPage", /* 产品规格选项配置分页查询 */
+    QUERY_BY_ID: "/spu/queryById", /* 通过主键查询 */
+	UPDATE_DEL_TAG: "/spu/updateDelTag", /* 逻辑删除操作 */
+	ADD: "/spu/addSpu", /* 添加 */
+	UPDATE: "/spu/updateSpu", /* 维护 */
 };
