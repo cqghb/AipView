@@ -8,6 +8,7 @@
 		            :searchData="searchData"
 		            :searchForm="searchForm"
 		            :formSize="formSize"
+					:multiSelect="false"
 					searchFormRef="searchSpuForm"
 		            :searchHandle="searchHandle" 
 					@searchDelTagOptions="searchDelTagOptions"></base-table>
@@ -187,46 +188,19 @@
 			},
 			add(){// 新增
 				let _this = this;
-				CommInterface.goToPage(SystemConstant.consComponentPath.ADD_SPU, SystemConstant.consComponentName.ADD_SPU, {});
+				_this.$refs.tableSpu.toPage(SystemConstant.consComponentPath.ADD_SPU, SystemConstant.consComponentName.ADD_SPU, {});
 			},
 			update(){// 修改
 				let _this = this;
-				_this.$refs.tableSpu.commonCheck();
-				if(_this.$refs.tableSpu.selectedData){
-					let params = _this.$refs.tableSpu.selectedDataArr[0];
-					let param = {
-					        id: params.id
-					    };
-					CommInterface.goToPage(SystemConstant.consComponentPath.UPDATE_SPU, SystemConstant.consComponentName.UPDATE_SPU, param);
-				}
+				_this.$refs.tableSpu.selectOneDataToPage(SystemConstant.consComponentPath.UPDATE_SPU, SystemConstant.consComponentName.UPDATE_SPU);
 			},
 			delete(){// 删除 删除之后只是不让再配置到商品规格中去
 				let _this = this;
-				_this.$refs.tableSpu.commonCheck();
-				if(_this.$refs.tableSpu.selectedData){
-					let selectedItem = _this.$refs.tableSpu.selectedDataArr[0];
-					let id = selectedItem.id;
-					CommInterface.sendPost(SystemConstant.consSpuManage.UPDATE_DEL_TAG, {id: id}, function(num){
-						if(num>0){
-							util.showMsg(MsgConstant.msgCommon.SUCCESS_DELETE, ComponentConstant.MessageProperties.SUCCESS);
-							_this.$refs.tableSpu.loading = true;
-							_this.$refs.tableSpu.queryList();
-						} else {
-							util.showMsg(MsgConstant.msgCommon.FALL_DELETE, ComponentConstant.MessageProperties.ERROR);
-						}
-					});
-				}
+				_this.$refs.tableSpu.updateDelTag(SystemConstant.consSpuManage.UPDATE_DEL_TAG);
 			},
 			detail(){// 详情
 				let _this = this;
-				_this.$refs.tableSpu.commonCheck();
-				if(_this.$refs.tableSpu.selectedData){
-					let params = _this.$refs.tableSpu.selectedDataArr[0];
-					let param = {
-					        id: params.id
-					    };
-					CommInterface.goToPage(SystemConstant.consComponentPath.DETAIL_SPU, SystemConstant.consComponentName.DETAIL_SPU, param);
-				}
+				_this.$refs.tableSpu.selectOneDataToPage(SystemConstant.consComponentPath.DETAIL_SPU, SystemConstant.consComponentName.DETAIL_SPU);
 			},
 			searchSpuType(){
 				let _this = this;

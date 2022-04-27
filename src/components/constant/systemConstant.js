@@ -131,6 +131,9 @@ export const consComponentPath = {
 	DETAIL_SPU: "/detailSpu", /* 货品详情*/
 	UPDATE_SPU: "/updateSpu", /* 货品维护 */
 	ADD_SPU: "/addSpu", /* 货品新增 */
+	ADD_SELECT_SPU_TYPE: "/addSelectSpuType", /* 货品新增时选择货品类型 */
+	ADD_SELECT_SPU_BRAND: "/addSelectSpuBrand", /* 货品新增时选择货品类型 */
+	
 };
 /**
  * 组件名称
@@ -192,6 +195,9 @@ export const consComponentName = {
 	DETAIL_SPU: "DetailSpu", /* 货品详情*/
 	UPDATE_SPU: "UpdateSpu", /* 货品维护 */
 	ADD_SPU: "AddSpu", /* 货品新增 */
+	ADD_SELECT_SPU_TYPE: "AddSelectSpuType", /* 货品新增时选择货品类型 */
+	ADD_SELECT_SPU_BRAND: "AddSelectSpuBrand", /* 货品新增时选择货品类型 */
+	
 	
 };
 /**

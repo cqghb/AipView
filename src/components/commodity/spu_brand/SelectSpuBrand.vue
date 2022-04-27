@@ -1,8 +1,8 @@
 <template>
 	<div>
-		<!-- 货品类型选择页面 -->
+		<!-- 货品品牌选择页面 -->
 		<base-table :uri="uri"
-		            ref="selectSpuTypeTable"
+		            ref="tableSpuBrand"
 		            :operationButtonList="operationButtonList"
 		            :tableColumnList="tableColumnList"
 		            :searchData="searchData"
@@ -10,7 +10,7 @@
 		            :formSize="formSize"
 					:crumbs="false"
 					:multiSelect="false"
-					searchFormRef="searchSelectSpuTypeForm"
+					searchFormRef="searchSpuBrandForm"
 		            :searchHandle="searchHandle"></base-table>
 	</div>
 </template>
@@ -19,27 +19,33 @@
 	import BaseTable from "@/components/common/BaseTable";
 	
 	import * as SystemConstant from '@/components/constant/systemConstant';
+	import * as CommInterface from '@/components/utils/commInterface';
 	import * as businessConstant from '@/components/constant/businessConstant';
+	import * as MsgConstant from '@/components/constant/msgConstant';
+	import * as ComponentConstant from '@/components/constant/componentConstant';
 	
-	export default{
-		name: "SelectSpuType",
-		components:{
+	import util from "@/components/utils/util";
+	
+	
+	export default {
+		name: "SelectSpuBrand",
+		components: {
 			"base-table": BaseTable,
 		},
 		data() {
 			return {
-				uri: SystemConstant.consSpuTypeManage.FIND_PAGE,
+				uri: SystemConstant.consSpuSpuBrandManage.FIND_PAGE,
 				searchData:{
 					name: "",// 节点名称
-					// delTag: BusinessConstant.NO,// 删除标记
+					// delTag: businessConstant.NO,// 删除标记
 				},
 				searchForm:{
 					name: {
 						type: "Input",
-						label: "货品类型名称",
+						label: "品牌名称",
 						prop: "name",
 						width: "180px",
-						placeholder: "请输入货品类型名称...",
+						placeholder: "请输入规格名称...",
 						size:""
 					},
 					// delTag: {
@@ -60,9 +66,9 @@
 						type:"primary",
 						size: "",
 						handle:()=>{
-							let the = this;
-							the.loading = true;
-							the.$refs.selectSpuTypeTable.queryList();// 调子组件的方法
+							let _this = this;
+							_this.loading = true;
+							_this.$refs.tableSpuBrand.queryList();// 调子组件的方法
 						}
 					},
 					{
@@ -70,8 +76,8 @@
 						type:"primary",
 						size: "",
 						handle:()=>{
-							let the = this;
-							the.$refs.selectSpuTypeTable.$refs.searchSelectSpuTypeForm.$refs.defaultMyForm.resetFields();
+							let _this = this;
+							_this.$refs.tableSpuBrand.$refs.searchSpuBrandForm.$refs.defaultMyForm.resetFields();
 						}
 					}
 				],
@@ -88,26 +94,32 @@
 					}
 				],
 				tableColumnList:[
-					{ prop: "id", label: "ID", width: 180 },
-					{ prop: "name", label: "货品类型名称", width: 180 },
+					{ prop: "id", label: "品牌ID", width: 180 },
+					// { prop: "code", label: "品牌编码", width: 180 },
+					{ prop: "name", label: "品牌名称", width: 180 },
+					// { prop: "delTag", label: "删除标记", width: 80 },
 					{ prop: "remark", label: "备注"},
 				],
 				selectedData: false
 			};
 		},
-		methods:{
+		methods: {
+			// searchDelTagOptions(data){
+			// 	let _this = this;
+			// 	_this.searchForm.delTag.options = data;
+			// },
 			thisData(){
 				let _this = this;
-				let currentRow = _this.$refs.selectSpuTypeTable.currentRow;
+				let currentRow = _this.$refs.tableSpuBrand.currentRow;
 				if(currentRow){
 					// 父组件 没有这个方法会报错
-					_this.$emit(businessConstant.CALLBACK_FUNCTION_NAME.SET_SPU_TYPE, currentRow.id, currentRow.name);
+					_this.$emit(businessConstant.CALLBACK_FUNCTION_NAME.SET_SPU_BRAND, currentRow.id, currentRow.name);
 				}
 			},
 			
 		},
 		created() {
-			
+			let _this = this;
 		},
 		mounted() {
 			let _this = this;
@@ -115,5 +127,6 @@
 	}
 </script>
 
-<style>
+<style scoped="scoped">
+
 </style>

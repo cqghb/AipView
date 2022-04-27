@@ -74,8 +74,8 @@ import ListSpu from '@/components/commodity/spu/ListSpu'
 import DetailSpu from '@/components/commodity/spu/DetailSpu'
 import UpdateSpu from '@/components/commodity/spu/UpdateSpu'
 import AddSpu from '@/components/commodity/spu/AddSpu'
-
-
+import AddSelectSpuType from '@/components/commodity/spu_type/SelectSpuType'
+import AddSelectSpuBrand from '@/components/commodity/spu_brand/SelectSpuBrand'
 
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {
@@ -797,6 +797,18 @@ export default new Router({
 						name: "添加货品",
 						path: "/addSpu"
 					}
+				],
+				children:[
+					{
+						path: "/addSelectSpuType",
+						name: "AddSelectSpuType",
+						component: AddSelectSpuType,
+					},
+					{
+						path: "/addSelectSpuBrand",
+						name: "AddSelectSpuBrand",
+						component: AddSelectSpuBrand,
+					},
 				]
 			},{
 				path: "/updateSpu",

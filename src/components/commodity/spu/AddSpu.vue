@@ -17,7 +17,7 @@
 					</div>
 					<div class="block">
 						<router-view @setSpuType="setSpuType"
-							@setBrand="setBrand"></router-view>
+							@setSpuBrand="setSpuBrand"></router-view>
 					</div>
 				</div>
 			</div>			
@@ -71,10 +71,10 @@
 					    placeholder: "请输入货品名称...",
 					    size: ""
 					},
-					typeId: {
+					typeName: {
 					    type: "Input",
 					    label: "货品分类",
-					    prop: "typeId",
+					    prop: "typeName",
 					    width: "180px",
 						readonly: true,
 					    placeholder: "请选择货品分类...",
@@ -89,7 +89,7 @@
 								disable: false,
 								handle: (me) => {
 									let _this = this;
-									CommInterface.goToPage(SystemConstant.consComponentPath.SELECT_SPECIFICATION_GROUP_UPDATE_SPECIFICATION, SystemConstant.consComponentName.SELECT_SPECIFICATION_GROUP_UPDATE_SPECIFICATION,{});
+									CommInterface.goToPage(SystemConstant.consComponentPath.ADD_SELECT_SPU_TYPE, SystemConstant.consComponentName.ADD_SELECT_SPU_TYPE,{});
 								}
 							}
 						],
@@ -98,10 +98,10 @@
 						// 	class: "el-icon-search",
 						// }
 					},
-					brandId: {
+					brandName: {
 					    type: "Input",
 					    label: "品牌",
-					    prop: "brandId",
+					    prop: "brandName",
 					    width: "180px",
 						readonly: true,
 					    placeholder: "请选择品牌...",
@@ -116,7 +116,7 @@
 								disable: false,
 								handle: (me) => {
 									let _this = this;
-									CommInterface.goToPage(SystemConstant.consComponentPath.SELECT_SPU_TYPE_UPDATE_SPECIFICATION,SystemConstant.consComponentName.SELECT_SPU_TYPE_UPDATE_SPECIFICATION,{});
+									CommInterface.goToPage(SystemConstant.consComponentPath.ADD_SELECT_SPU_BRAND,SystemConstant.consComponentName.ADD_SELECT_SPU_BRAND,{});
 								}
 							}
 						],
@@ -127,20 +127,10 @@
 					},
 					briefIntroduction: {
 					    type: "Textarea",
-					    label: "备注",
+					    label: "货品简介",
 					    prop: "briefIntroduction",
-					    placeholder: "请输入备注...",
+					    placeholder: "请输入货品简介...",
 					    size: ""
-					},
-					delTag: {
-						type: "Select",
-						label: "删除标志",
-						prop: "delTag",
-						width: "180px",
-						options: [],
-						change: function(v){
-							console.log("当前值",v);
-						}
 					},
 					remark: {
 					    type: "Textarea",
@@ -206,15 +196,15 @@
 					}
 				});
 			},
-			setBrand(brandId, brandName){
+			setSpuBrand(brandId, brandName){
 				let _this = this;
 				_this.formData.brandId = brandId;
-				_this.formData.brandName = groupId + "-"+ groupName;
+				_this.formData.brandName = brandId + "-"+ brandName;
 			},
 			setSpuType(typeId, typeName){
 				let _this = this;
 				_this.formData.typeId = typeId;
-				_this.formData.typeIdName = typeId + "-" + typeName;
+				_this.formData.typeName = typeId + "-" + typeName;
 			},
 		},
 		created() {
