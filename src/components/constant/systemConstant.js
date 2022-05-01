@@ -359,6 +359,7 @@ export const consSpuSpuBrandManage = {
 export const consSpuManage = {
     FIND_PAGE: "/spu/findPage", /* 产品规格选项配置分页查询 */
     QUERY_BY_ID: "/spu/queryById", /* 通过主键查询 */
+    QUERY_BY_CODE: "/spu/queryByCode", /* 通过编码查询 */
 	UPDATE_DEL_TAG: "/spu/updateDelTag", /* 逻辑删除操作 */
 	ADD: "/spu/addSpu", /* 添加 */
 	UPDATE: "/spu/updateSpu", /* 维护 */

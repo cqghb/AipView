@@ -27,3 +27,11 @@ export const CALLBACK_FUNCTION_NAME = {
     SET_SPU_TYPE: "setSpuType", // 设置货品类型
 	
 };
+
+/**
+ * 正则表达式
+ */
+export const REG = {
+    REG1: "/^[A-Za-z0-9]+$/", /* 只能是字母 */
+	
+};

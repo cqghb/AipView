@@ -33,6 +33,7 @@
 	import * as SystemConstant from '@/components/constant/systemConstant';
 	import * as MsgConstant from '@/components/constant/msgConstant';
 	import * as ComponentConstant from '@/components/constant/componentConstant';
+	import * as BusinessConstant from '@/components/constant/businessConstant';
 		
 	export default {
 		name: "Add",
@@ -40,6 +41,13 @@
 			"update-form": UpdateForm,
 		},
 		data() {
+			const validateSpuCode = (rule, value, callback) => {
+			  	CommInterface.sendPost(SystemConstant.consSpuManage.QUERY_BY_CODE, {code: value}, function(data){
+					if(data){
+						return callback(new Error("货品编码不能重复"));
+					}
+			  	});
+			};
 			return {
 				formData: {
 					code: "",
@@ -60,7 +68,6 @@
 					    prop: "code",
 					    width: "180px",
 					    placeholder: "请输入货品编码...",
-						readonly: true,
 					    size: ""
 					},
 					name: {
@@ -132,6 +139,13 @@
 					    placeholder: "请输入货品简介...",
 					    size: ""
 					},
+					detail: {
+					    type: "Textarea",
+					    label: "货品详情",
+					    prop: "detail",
+					    placeholder: "请输入货品详情...",
+					    size: ""
+					},
 					remark: {
 					    type: "Textarea",
 					    label: "备注",
@@ -143,15 +157,17 @@
 				formSize: "",
 				rules:{
 					code:[
-						{ required: true, message: "请输入货品编码", trigger: "blur" }
+						{ required: true, message: "请输入货品编码", trigger: "blur" },
+						{ required: true, validator: validateSpuCode, trigger: "blur" },
+						// { pattern: BusinessConstant.REG.REG1, message: '只能输入数字、字母、下划线', trigger: 'blur'}
 					],
 					name:[
 						{ required: true, message: "请输入货品名称", trigger: "blur" }
 					],
-					typeId:[
+					typeName:[
 						{ required: true, message: "请选择类型", trigger: "blur" }
 					],
-					brandId:[
+					brandName:[
 						{ required: true, message: "请选择品牌", trigger: "blur" }
 					],
 					delTag:[

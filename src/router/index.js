@@ -777,7 +777,7 @@ export default new Router({
 			},{
 				path: "/detailSpu",
 				name: "DetailSpu",
-				component: DetailSpuBrand,
+				component: DetailSpu,
 				meta: [{
 						name: "SPU货品管理",
 						path: "/listSpu"
