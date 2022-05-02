@@ -284,6 +284,11 @@
                     the.page.totalSize = res.data.totalSize;
                     the.page.currentPage = res.data.currentPage;
                     the.loading = false;
+					/* 清空单选数据 start */
+                    the.currentRow = "";
+					the.templateRadio = "";
+					/* 清空单选数据 end */
+					
                 });
             },
 			commonCheck(){// 公共检查-只能选择一行数据
@@ -349,7 +354,7 @@
 			    	    };
 			    	CommInterface.goToPage(componentPath, componentName, param);
 			    } else {
-			    	util.showMsg(businessConstant.SELECTED_ONE_DATA);
+			    	util.showMsg(BusinessConstant.SELECTED_ONE_DATA);
 			    }
 			},
 			updateDelTag(uri){
@@ -361,8 +366,8 @@
 			    if(item){
 					let id = item.id;
 					let delTag = item.delTag;
-					if(businessConstant.YES==delTag){
-						util.showMsg(businessConstant.DELETED);
+					if(BusinessConstant.YES==delTag){
+						util.showMsg(BusinessConstant.DELETED);
 					} else {
 						CommInterface.sendPost(uri, {id: id}, function(num){
 							if(num>0){
@@ -375,7 +380,7 @@
 						});
 					}
 			    } else {
-			    	util.showMsg(businessConstant.SELECTED_ONE_DATA);
+			    	util.showMsg(BusinessConstant.SELECTED_ONE_DATA);
 			    }
 			},
 			toPage(componentPath, componentName, params){
