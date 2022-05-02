@@ -46,6 +46,7 @@
 					if(data){
 						return callback(new Error("货品编码不能重复"));
 					}
+					callback();
 			  	});
 			};
 			return {
