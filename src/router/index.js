@@ -73,6 +73,8 @@ import ListSkuSpecificationOption from '@/components/commodity/sku_specification
 import ListSpu from '@/components/commodity/spu/ListSpu'
 import DetailSpu from '@/components/commodity/spu/DetailSpu'
 import UpdateSpu from '@/components/commodity/spu/UpdateSpu'
+import UpdateSelectSpuType from '@/components/commodity/spu_type/SelectSpuType'
+import UpdateSelectSpuBrand from '@/components/commodity/spu_brand/SelectSpuBrand'
 import AddSpu from '@/components/commodity/spu/AddSpu'
 import AddSelectSpuType from '@/components/commodity/spu_type/SelectSpuType'
 import AddSelectSpuBrand from '@/components/commodity/spu_brand/SelectSpuBrand'
@@ -821,6 +823,18 @@ export default new Router({
 						name: "维护货品",
 						path: "/updateSpu"
 					}
+				],
+				children:[
+					{
+						path: "/updateSelectSpuType",
+						name: "UpdateSelectSpuType",
+						component: UpdateSelectSpuType,
+					},
+					{
+						path: "/updateSelectSpuBrand",
+						name: "UpdateSelectSpuBrand",
+						component: UpdateSelectSpuBrand,
+					},
 				]
 			}]//在这里加 
 		}, {

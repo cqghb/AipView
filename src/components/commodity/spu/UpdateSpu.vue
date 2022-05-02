@@ -17,7 +17,7 @@
 					</div>
 					<div class="block">
 						<router-view @setSpuType="setSpuType"
-							@setBrand="setBrand"></router-view>
+							@setSpuBrand="setSpuBrand"></router-view>
 					</div>
 				</div>
 			</div>			
@@ -33,6 +33,7 @@
 	import * as SystemConstant from '@/components/constant/systemConstant';
 	import * as MsgConstant from '@/components/constant/msgConstant';
 	import * as ComponentConstant from '@/components/constant/componentConstant';
+	import * as BusinessConstant from '@/components/constant/businessConstant';
 	
 	
 	export default {
@@ -82,10 +83,10 @@
 					    placeholder: "请输入货品名称...",
 					    size: ""
 					},
-					typeId: {
+					typeName: {
 					    type: "Input",
 					    label: "货品分类",
-					    prop: "typeId",
+					    prop: "typeName",
 					    width: "180px",
 						readonly: true,
 					    placeholder: "请选择货品分类...",
@@ -100,7 +101,7 @@
 								disable: false,
 								handle: (me) => {
 									let _this = this;
-									CommInterface.goToPage(SystemConstant.consComponentPath.SELECT_SPECIFICATION_GROUP_UPDATE_SPECIFICATION, SystemConstant.consComponentName.SELECT_SPECIFICATION_GROUP_UPDATE_SPECIFICATION,{});
+									CommInterface.goToPage(SystemConstant.consComponentPath.UPDATE_SELECT_SPU_TYPE, SystemConstant.consComponentName.UPDATE_SELECT_SPU_TYPE,{});
 								}
 							}
 						],
@@ -109,10 +110,10 @@
 						// 	class: "el-icon-search",
 						// }
 					},
-					brandId: {
+					brandName: {
 					    type: "Input",
 					    label: "品牌",
-					    prop: "brandId",
+					    prop: "brandName",
 					    width: "180px",
 						readonly: true,
 					    placeholder: "请选择品牌...",
@@ -127,7 +128,7 @@
 								disable: false,
 								handle: (me) => {
 									let _this = this;
-									CommInterface.goToPage(SystemConstant.consComponentPath.SELECT_SPU_TYPE_UPDATE_SPECIFICATION,SystemConstant.consComponentName.SELECT_SPU_TYPE_UPDATE_SPECIFICATION,{});
+									CommInterface.goToPage(SystemConstant.consComponentPath.UPDATE_SELECT_SPU_BRAND,SystemConstant.consComponentName.UPDATE_SELECT_SPU_BRAND,{});
 								}
 							}
 						],
@@ -138,9 +139,16 @@
 					},
 					briefIntroduction: {
 					    type: "Textarea",
-					    label: "备注",
+					    label: "货品简介",
 					    prop: "briefIntroduction",
 					    placeholder: "请输入备注...",
+					    size: ""
+					},
+					detail: {
+					    type: "Textarea",
+					    label: "货品详情",
+					    prop: "detail",
+					    placeholder: "请输入货品详情...",
 					    size: ""
 					},
 					delTag: {
@@ -172,10 +180,10 @@
 					name:[
 						{ required: true, message: "请输入货品名称", trigger: "blur" }
 					],
-					typeId:[
+					typeName:[
 						{ required: true, message: "请选择类型", trigger: "blur" }
 					],
-					brandId:[
+					brandName:[
 						{ required: true, message: "请选择品牌", trigger: "blur" }
 					],
 					delTag:[
@@ -198,7 +206,7 @@
 					    size: "",
 					    handle:()=>{
 					        let _this = this;
-					        CommInterface.goToPage(SystemConstant.consComponentPath.LIST_SPECIFICATION, SystemConstant.consComponentName.LIST_SPECIFICATION, {});
+					        CommInterface.goToPage(SystemConstant.consComponentPath.LIST_SPU, SystemConstant.consComponentName.LIST_SPU, {});
 					    }
 					}
 				],
@@ -208,7 +216,7 @@
 			queryInfo(id){
 				let _this = this;
 				CommInterface.sendPost(
-				    SystemConstant.consSpuManage.QUERY_DETAIL,
+				    SystemConstant.consSpuManage.QUERY_BY_ID,
 				    {
 				        id: id
 				    },
@@ -219,15 +227,15 @@
 			    let _this = this;
 			    _this.formData = res;
 			},
-			setBrand(brandId, brandName){
-				let _this = this;
-				_this.formData.brandId = brandId;
-				_this.formData.brandName = groupId + "-"+ groupName;
-			},
 			setSpuType(typeId, typeName){
 				let _this = this;
 				_this.formData.typeId = typeId;
-				_this.formData.typeIdName = typeId + "-" + typeName;
+				_this.formData.typeName = typeId + "-" + typeName;
+			},
+			setSpuBrand(brandId, brandName){
+				let _this = this;
+				_this.formData.brandId = brandId;
+				_this.formData.brandName = brandId + "-"+ brandName;
 			},
 			update(){
 				let _this = this;
@@ -252,6 +260,9 @@
 			let _this = this;
 			let id = _this.$route.params.id;
 			_this.queryInfo(id);
+			_this.$refs.updateForm.searchCode(BusinessConstant.CODE_TYPE.YES_OR_NO, [], "",function(data){
+				_this.formFieldList.delTag.options = data;
+			});
 		}
 	}
 </script>

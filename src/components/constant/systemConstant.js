@@ -130,6 +130,8 @@ export const consComponentPath = {
 	LIST_SPU: "/listSpu", /* 货品管理 */
 	DETAIL_SPU: "/detailSpu", /* 货品详情*/
 	UPDATE_SPU: "/updateSpu", /* 货品维护 */
+	UPDATE_SELECT_SPU_TYPE: "/updateSelectSpuType", /* 货品维护时选择货品类型 */
+	UPDATE_SELECT_SPU_BRAND: "/updateSelectSpuBrand", /* 货品维护时选择货品类型 */
 	ADD_SPU: "/addSpu", /* 货品新增 */
 	ADD_SELECT_SPU_TYPE: "/addSelectSpuType", /* 货品新增时选择货品类型 */
 	ADD_SELECT_SPU_BRAND: "/addSelectSpuBrand", /* 货品新增时选择货品类型 */
@@ -194,6 +196,8 @@ export const consComponentName = {
 	LIST_SPU: "ListSpu", /* 货品管理 */
 	DETAIL_SPU: "DetailSpu", /* 货品详情*/
 	UPDATE_SPU: "UpdateSpu", /* 货品维护 */
+	UPDATE_SELECT_SPU_TYPE: "UpdateSelectSpuType", /* 货品维护时选择货品类型 */
+	UPDATE_SELECT_SPU_BRAND: "UpdateSelectSpuBrand", /* 货品维护时选择货品类型 */
 	ADD_SPU: "AddSpu", /* 货品新增 */
 	ADD_SELECT_SPU_TYPE: "AddSelectSpuType", /* 货品新增时选择货品类型 */
 	ADD_SELECT_SPU_BRAND: "AddSelectSpuBrand", /* 货品新增时选择货品类型 */
