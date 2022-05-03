@@ -10,7 +10,6 @@
 		            :formSize="formSize"
 					searchFormRef="searchDopForm"
 					@searchDelTagOptions="searchDelTagOptions"
-					@searchDataOperateSubgroup="searchDataOperateSubgroup"
 		            :searchHandle="searchHandle"></base-table>
 	</div>
 </template>
@@ -159,9 +158,16 @@
 				let _this = this;
 				_this.searchForm.delTag.options = data;
 			},
-			searchDataOperateSubgroup(data){
+			searchDataOperateSubgroup(){
 				let _this = this;
-				_this.searchForm.subgroup.options = data;
+				CommInterface.searchDataOperateSubgroup(
+					[],
+				    function (res) {
+						_this.searchForm.subgroup.options = res.data;
+				    }
+				);
+				
+				
 			},
 			showDetail(){
 				let the = this;
@@ -225,6 +231,7 @@
 		},
 		mounted() {
 			let _this = this;
+			_this.searchDataOperateSubgroup();
 		}
 	}
 </script>

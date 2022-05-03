@@ -34,7 +34,7 @@
 		},
 		data() {
 			return {
-				uri: SystemConstant.consSpuSpuBrandManage.FIND_PAGE,
+				uri: SystemConstant.consSpuBrandManage.FIND_PAGE,
 				searchData:{
 					name: "",// 节点名称
 					// delTag: businessConstant.NO,// 删除标记

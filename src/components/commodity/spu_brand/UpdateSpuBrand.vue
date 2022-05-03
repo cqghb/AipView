@@ -120,7 +120,7 @@
 			queryInfo(id){
 				let _this = this;
 				CommInterface.sendPost(
-				    SystemConstant.consSpuSpuBrandManage.QUERY_BY_ID,
+				    SystemConstant.consSpuBrandManage.QUERY_BY_ID,
 				    {
 				        id: id
 				    },
@@ -136,7 +136,7 @@
 				_this.$refs.updateSpuBrandForm.$refs.baseForm.$refs.defaultMyForm.validate((volid)=>{
 					if(volid){
 						CommInterface.sendPost(
-						    SystemConstant.consSpuSpuBrandManage.UPDATE,
+						    SystemConstant.consSpuBrandManage.UPDATE,
 						    _this.formData,
 						    function (res) {
 						        console.log("修改结果 ",res);

@@ -9,6 +9,7 @@ const util = require("@/components/utils/util");
 const componentConstant = require("@/components/constant/componentConstant");
 const msgConstant = require("@/components/constant/msgConstant");
 const systemConstant = require("@/components/constant/systemConstant");
+const businessConstant = require("@/components/constant/businessConstant");
 
 /**
  * 发送一个get请求
@@ -226,4 +227,27 @@ export function searchSPUTypeCode(params, callback) {
     	let info = res.data;
     	return callback(info);
     });
+}
+
+/**
+ * 查询货品品牌
+ */
+export function searchSpuBrand(params, callback) {
+    util.$http.post(systemConstant.consSpuBrandManage.SEARCH_SPU_BRAND, params)
+    .then(function (res) {
+    	let info = res.data;
+    	return callback(info);
+    });
+}
+
+/**
+ * 查询货品品牌
+ */
+export function searchDataOperateSubgroup(codeList, callback) {
+	getCodeType(
+	    businessConstant.CODE_TYPE.DATA_OPERATE_SUBGROUP,
+		codeList,
+	    callback
+	);
+    
 }

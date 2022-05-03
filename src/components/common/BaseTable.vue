@@ -313,6 +313,8 @@
 			    the.selectedData = true;
 			},
 			/*
+			第一版，抽象方法；
+			第二版，抽象方法感觉没有必要，还是还原
 			codeType 码值类型；
 			methodName 回调方法名称
 			*/ 
@@ -401,7 +403,7 @@
             let _this = this;
             _this.queryList();
 			_this.searchDelTagOptions(BusinessConstant.CODE_TYPE.YES_OR_NO, BusinessConstant.CALLBACK_FUNCTION_NAME.SEARCH_DEL_TAG_OPTIONS);
-			_this.searchDelTagOptions(BusinessConstant.CODE_TYPE.DATA_OPERATE_SUBGROUP, BusinessConstant.CALLBACK_FUNCTION_NAME.SEARCH_DATA_OPERATE_SUBGROUP);
+			// _this.searchDelTagOptions(BusinessConstant.CODE_TYPE.DATA_OPERATE_SUBGROUP, BusinessConstant.CALLBACK_FUNCTION_NAME.SEARCH_DATA_OPERATE_SUBGROUP);
         },
         mounted() {
             let the = this;

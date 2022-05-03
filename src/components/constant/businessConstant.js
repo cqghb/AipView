@@ -22,7 +22,7 @@ export const CODE_TYPE = {
  */
 export const CALLBACK_FUNCTION_NAME = {
     SEARCH_DEL_TAG_OPTIONS: "searchDelTagOptions", // 查删除标志
-    SEARCH_DATA_OPERATE_SUBGROUP: "searchDataOperateSubgroup", // 查数据操作分组
+    // SEARCH_DATA_OPERATE_SUBGROUP: "searchDataOperateSubgroup", // 查数据操作分组
     SET_SPU_BRAND: "setSpuBrand", // 设置货品品牌
     SET_SPU_TYPE: "setSpuType", // 设置货品类型
 	

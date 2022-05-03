@@ -33,7 +33,7 @@
 		},
 		data() {
 			return {
-				uri: SystemConstant.consSpuSpuBrandManage.FIND_PAGE,
+				uri: SystemConstant.consSpuBrandManage.FIND_PAGE,
 				searchData:{
 					name: "",// 节点名称
 					delTag: businessConstant.NO,// 删除标记
@@ -162,7 +162,7 @@
 				if(_this.$refs.tableSpuBrand.selectedData){
 					let selectedItem = _this.$refs.tableSpuBrand.selectedDataArr[0];
 					let id = selectedItem.id;
-					CommInterface.sendPost(SystemConstant.consSpuSpuBrandManage.UPDATE_DEL_TAG, {id: id}, function(num){
+					CommInterface.sendPost(SystemConstant.consSpuBrandManage.UPDATE_DEL_TAG, {id: id}, function(num){
 						if(num>0){
 							util.showMsg(MsgConstant.msgCommon.SUCCESS_DELETE, ComponentConstant.MessageProperties.SUCCESS);
 							_this.$refs.tableSpuBrand.loading = true;

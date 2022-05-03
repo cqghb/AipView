@@ -202,12 +202,22 @@
 				let _this = this;
 				_this.$refs.tableSpu.selectOneDataToPage(SystemConstant.consComponentPath.DETAIL_SPU, SystemConstant.consComponentName.DETAIL_SPU);
 			},
-			searchSpuType(){
+			searchSpuType(){/* 查询货品类型 */
 				let _this = this;
 				CommInterface.searchSPUTypeCode(
 					{delTag: businessConstant.NO},
 				    function (data) {
 						_this.searchForm.typeId.options = data;
+				    }
+				);
+			},
+			searchSpuBrand(){/* 查询货品品牌 */
+				let _this = this;
+				CommInterface.searchSpuBrand(
+					{delTag: businessConstant.NO},
+				    function (data) {
+						console.log('1222',data);
+						_this.searchForm.brandId.options = data;
 				    }
 				);
 			}
@@ -219,6 +229,7 @@
 		mounted() {
 			let _this = this;
 			_this.searchSpuType();
+			_this.searchSpuBrand();
 		}
 	}
 </script>

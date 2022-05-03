@@ -95,7 +95,7 @@
 				let _this = this;
 				_this.$refs.addSpuBrandForm.$refs.baseForm.$refs.defaultMyForm.validate((volid)=>{
 					if(volid){
-						CommInterface.sendPost(SystemConstant.consSpuSpuBrandManage.ADD, _this.formData, function(num){
+						CommInterface.sendPost(SystemConstant.consSpuBrandManage.ADD, _this.formData, function(num){
 							if(num>0){
 								util.showMsg(MsgConstant.msgCommon.SUCCESS_ADD, ComponentConstant.MessageProperties.SUCCESS);
 								CommInterface.goToPage(SystemConstant.consComponentPath.LIST_SPU_BRAND, SystemConstant.consComponentName.LIST_SPU_BRAND, {});

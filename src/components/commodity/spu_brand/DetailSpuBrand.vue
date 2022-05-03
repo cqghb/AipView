@@ -39,7 +39,7 @@
 			queryInfo(id){
 			    let _this = this;
 			    CommInterface.sendPost(
-			        SystemConstant.consSpuSpuBrandManage.QUERY_BY_ID,
+			        SystemConstant.consSpuBrandManage.QUERY_BY_ID,
 			        {
 			            id: id
 			        },

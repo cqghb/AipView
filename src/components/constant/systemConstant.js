@@ -348,12 +348,13 @@ export const consSkuSpecificationOptionManage = {
 /**
  * 产品规格选项配置管理接口
  */
-export const consSpuSpuBrandManage = {
+export const consSpuBrandManage = {
     FIND_PAGE: "/spuBrand/findPage", /* 产品规格选项配置分页查询 */
     QUERY_BY_ID: "/spuBrand/queryById", /* 通过主键查询 */
 	UPDATE_DEL_TAG: "/spuBrand/updateDelTag", /* 逻辑删除操作 */
 	ADD: "/spuBrand/addSpuBrand", /* 添加 */
 	UPDATE: "/spuBrand/updateSpuBrand", /* 维护 */
+	SEARCH_SPU_BRAND: "/spuBrand/searchSpuBrand", /* 查询货品品牌[去重] */
 };
 
 
