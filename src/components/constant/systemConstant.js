@@ -135,6 +135,10 @@ export const consComponentPath = {
 	ADD_SPU: "/addSpu", /* 货品新增 */
 	ADD_SELECT_SPU_TYPE: "/addSelectSpuType", /* 货品新增时选择货品类型 */
 	ADD_SELECT_SPU_BRAND: "/addSelectSpuBrand", /* 货品新增时选择货品类型 */
+	LIST_SKU: "/listSku", /* 产品列表 */
+	DETAIL_SKU: "/detailSku", /* 产品详情*/
+	UPDATE_SKU: "/updateSku", /* 产品维护 */
+	ADD_SKU: "/addSku", /* 新增产品 */
 	
 };
 /**
@@ -201,6 +205,10 @@ export const consComponentName = {
 	ADD_SPU: "AddSpu", /* 货品新增 */
 	ADD_SELECT_SPU_TYPE: "AddSelectSpuType", /* 货品新增时选择货品类型 */
 	ADD_SELECT_SPU_BRAND: "AddSelectSpuBrand", /* 货品新增时选择货品类型 */
+	LIST_SKU: "ListSku", /* 产品列表 */
+	DETAIL_SKU: "DetailSku", /* 产品详情*/
+	UPDATE_SKU: "UpdateSku", /* 产品维护 */
+	ADD_SKU: "AddSku", /* 新增产品 */
 	
 	
 };
@@ -368,4 +376,17 @@ export const consSpuManage = {
 	UPDATE_DEL_TAG: "/spu/updateDelTag", /* 逻辑删除操作 */
 	ADD: "/spu/addSpu", /* 添加 */
 	UPDATE: "/spu/updateSpu", /* 维护 */
+};
+
+
+/**
+ * 产品管理接口
+ */
+export const consSkuManage = {
+    FIND_PAGE: "/sku/findPage", /* 产品列表分页查询 */
+    QUERY_BY_ID: "/sku/queryById", /* 通过主键查询 */
+    // QUERY_BY_CODE: "/sku/queryByCode", /* 通过编码查询 */
+	UPDATE_DEL_TAG: "/sku/updateDelTag", /* 逻辑删除操作 */
+	ADD: "/sku/addSku", /* 添加 */
+	UPDATE: "/sku/updateSku", /* 维护 */
 };

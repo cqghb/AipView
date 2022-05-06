@@ -62,14 +62,14 @@ import ListSkuPropertyOption from '@/components/commodity/sku_property_option/Li
 import UpdateSkuPropertyOption from '@/components/commodity/sku_property_option/UpdateSkuPropertyOption'
 import UpdateSelectPropertyOption from '@/components/commodity/property_options/SelectPropertyOption'
 import DetailSkuPropertyOption from '@/components/commodity/sku_property_option/DetailSkuPropertyOption'
-
+/* 产品品牌 start */
 import ListSpuBrand from '@/components/commodity/spu_brand/ListSpuBrand'
 import DetailSpuBrand from '@/components/commodity/spu_brand/DetailSpuBrand'
 import UpdateSpuBrand from '@/components/commodity/spu_brand/UpdateSpuBrand'
 import AddSpuBrand from '@/components/commodity/spu_brand/AddSpuBrand'
-
+/* 产品品牌 end */
 import ListSkuSpecificationOption from '@/components/commodity/sku_specification_option/ListSkuSpecificationOption'
-
+/* 货品管理 start */
 import ListSpu from '@/components/commodity/spu/ListSpu'
 import DetailSpu from '@/components/commodity/spu/DetailSpu'
 import UpdateSpu from '@/components/commodity/spu/UpdateSpu'
@@ -78,6 +78,14 @@ import UpdateSelectSpuBrand from '@/components/commodity/spu_brand/SelectSpuBran
 import AddSpu from '@/components/commodity/spu/AddSpu'
 import AddSelectSpuType from '@/components/commodity/spu_type/SelectSpuType'
 import AddSelectSpuBrand from '@/components/commodity/spu_brand/SelectSpuBrand'
+/* 货品管理 end */
+/* 产品管理 start */
+import ListSku from '@/components/commodity/sku/ListSku'
+import DetailSku from '@/components/commodity/sku/DetailSku'
+import AddSku from '@/components/commodity/sku/AddSku'
+import UpdateSku from '@/components/commodity/sku/UpdateSku'
+/* 产品管理 end */
+
 
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {
@@ -835,6 +843,51 @@ export default new Router({
 						name: "UpdateSelectSpuBrand",
 						component: UpdateSelectSpuBrand,
 					},
+				]
+			},{
+				path: "/listSku",
+				name: "ListSku",
+				component: ListSku,
+				meta: [{
+						name: "产品管理",
+						path: "/listSku"
+					}
+				]
+			},{
+				path: "/detailSku",
+				name: "DetailSku",
+				component: DetailSku,
+				meta: [{
+						name: "产品管理",
+						path: "/listSku"
+					},{
+						name: "产品详情",
+						path: "/detailSku"
+					}
+				]
+			},{
+				path: "/addSku",
+				name: "AddSku",
+				component: AddSku,
+				meta: [{
+						name: "产品管理",
+						path: "/listSku"
+					},{
+						name: "添加产品",
+						path: "/addSku"
+					}
+				]
+			},{
+				path: "/updateSku",
+				name: "UpdateSku",
+				component: UpdateSku,
+				meta: [{
+						name: "产品管理",
+						path: "/listSku"
+					},{
+						name: "维护产品",
+						path: "/updateSku"
+					}
 				]
 			}]//在这里加 
 		}, {

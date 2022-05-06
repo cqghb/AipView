@@ -9,6 +9,7 @@
 		            :searchForm="searchForm"
 		            :formSize="formSize"
 					searchFormRef="searchMenuForm"
+					@searchDelTagOptions="searchDelTagOptions"
 		            :searchHandle="searchHandle"></base-table>
 	</div>
 </template>
@@ -33,6 +34,7 @@
 				searchData:{
 					id: "",// 主键
 					name: "",// 节点名称
+					delTag: BusinessConstant.NO,// 删除标记
 					parentNode: BusinessConstant.NO2// 父节点标志
 				},
 				searchForm:{
@@ -51,6 +53,16 @@
 						width: "180px",
 						placeholder: "请输入菜单名称...",
 						size:""
+					},
+					delTag: {
+						type: "Select",
+						label: "删除标志",
+						prop: "delTag",
+						width: "180px",
+						options: [],
+						change: function(v){
+							console.log("当前值",v);
+						}
 					}
 					// ,
 					// parentNode: {// 这个应该用下拉选项来做
@@ -145,6 +157,10 @@
 			
 		},
 		methods:{
+			searchDelTagOptions(data){/* 获取删除标志的数据源 */
+				let _this = this;
+				_this.searchForm.delTag.options = data;
+			},
 			addMenu(){// 添加菜单
 			    let the = this;
 				let param = {
