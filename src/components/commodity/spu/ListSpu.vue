@@ -38,10 +38,10 @@
 				searchData:{
 					id: "",
 					code: "",
-					name: "",// 节点名称
+					name: "",// 货品名称
 					delTag: businessConstant.NO,// 删除标记
-					typeId: "",// 删除标记
-					brandId: "",// 删除标记
+					typeId: "",// 货品类型
+					brandId: "",// 货品品牌
 				},
 				searchForm:{
 					id: {

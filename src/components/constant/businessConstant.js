@@ -21,10 +21,14 @@ export const CODE_TYPE = {
  * 回调函数名称
  */
 export const CALLBACK_FUNCTION_NAME = {
-    SEARCH_DEL_TAG_OPTIONS: "searchDelTagOptions", // 查删除标志
+    SEARCH_DEL_TAG_OPTIONS: "searchDelTagOptions", /* 查删除标志 */
     // SEARCH_DATA_OPERATE_SUBGROUP: "searchDataOperateSubgroup", // 查数据操作分组
-    SET_SPU_BRAND: "setSpuBrand", // 设置货品品牌
-    SET_SPU_TYPE: "setSpuType", // 设置货品类型
+    SET_SPU_BRAND: "setSpuBrand", /* 设置货品品牌 */
+    SET_SPU_TYPE: "setSpuType", /* 设置货品类型 */
+    SET_SPU: "setSpu", /* 设置货品 */
+	SET_PRO_OPT:"setProOpt",/* 设置产品属性 */
+	SET_PROPERTY_VALUES:"setPropertyValues",/* 设置产品属性 */
+	SET_SINGLE_SPECIFICATION:"setSingleSpecification",/* 设置产品规格 */
 	
 };
 

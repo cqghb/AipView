@@ -138,7 +138,13 @@ export const consComponentPath = {
 	LIST_SKU: "/listSku", /* 产品列表 */
 	DETAIL_SKU: "/detailSku", /* 产品详情*/
 	UPDATE_SKU: "/updateSku", /* 产品维护 */
+	UPDATE_SKU_SELECT_PROPERTY_OPTION:"/updateSkuSelectPropertyOption",/* 维护产品时选择产品属性 */
+	UPDATE_SKU_SELECT_SINGLE_SPU:"/updateSkuSelectSingleSpu",/* 维护产品时选择产品品牌 */
+	UPDATE_SKU_SELECT_SINGLE_SPECIFICATION:"/updateSkuSelectSingleSpecification",/* 维护产品时选择产品品牌 */
 	ADD_SKU: "/addSku", /* 新增产品 */
+	ADD_SKU_SELECT_PROPERTY_OPTION:"/addSkuSelectPropertyOption",/* 添加产品时选择产品属性 */
+	ADD_SKU_SELECT_SINGLE_SPU:"/addSkuSelectSingleSpu",/* 添加产品时选择产品品牌 */
+	ADD_SKU_SELECT_SINGLE_SPECIFICATION:"/addSkuSelectSingleSpecification",/* 添加产品时选择产品品牌 */
 	
 };
 /**
@@ -208,8 +214,13 @@ export const consComponentName = {
 	LIST_SKU: "ListSku", /* 产品列表 */
 	DETAIL_SKU: "DetailSku", /* 产品详情*/
 	UPDATE_SKU: "UpdateSku", /* 产品维护 */
+	UPDATE_SKU_SELECT_PROPERTY_OPTION:"UpdateSkuSelectPropertyOption",/* 维护产品时选择产品属性 */
+	UPDATE_SKU_SELECT_SINGLE_SPU:"UpdateSkuSelectSingleSpu",/* 维护产品时选择产品品牌 */
+	UPDATE_SKU_SELECT_SINGLE_SPECIFICATION:"UpdateSkuSelectSingleSpecification",/* 维护产品时选择产品品牌 */
 	ADD_SKU: "AddSku", /* 新增产品 */
-	
+	ADD_SKU_SELECT_PROPERTY_OPTION:"AddSkuSelectPropertyOption",/* 添加产品时选择产品属性 */
+	ADD_SKU_SELECT_SINGLE_SPU:"AddSkuSelectSingleSpu",/* 添加产品时选择产品品牌 */
+	ADD_SKU_SELECT_SINGLE_SPECIFICATION:"AddSkuSelectSingleSpecification",/* 添加产品时选择产品品牌 */
 	
 };
 /**

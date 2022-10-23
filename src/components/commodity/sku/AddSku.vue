@@ -16,7 +16,8 @@
 						            :buttonArr="btnHandle"></update-form>
 					</div>
 					<div class="block">
-						<router-view @setSpecificationGroup="setSpecificationGroup" @setSpuType="setSpuType"></router-view>
+						<router-view @setPropertyValues="setPropertyValues" 
+									@setSpu="setSpu" @setSingleSpecification="setSingleSpecification"></router-view>
 					</div>
 				</div>
 			</div>			
@@ -39,83 +40,63 @@
 			"update-form": UpdateForm,
 		},
 		data() {
+			const validateSpuCode = (rule, value, callback) => {
+			  	CommInterface.sendPost(SystemConstant.consSpuManage.QUERY_BY_CODE, {code: value}, function(data){
+					if(data){
+						return callback(new Error("产品编码不能重复"));
+					}
+					callback();
+			  	});
+			};
 			return {
 				formData: {
-					name: "",// 规格名称
-					groupIdName: "",// 规格组ID-名称
-					groupId: "",// 规格组ID
-					typeIdName: "",// 分类ID-名称
-					typeId: "",// 分类ID
-					addr: "",// 显示位置
-					remark: "",// 备注
+					name: "",/** 产品名称 **/ 
+					code: "",/** 产品编码 **/
+					price: 1.00,/** 产品价格 **/
+					skuNumber: 1,/** 产品数量 **/
+					spuId: "",/** 产品所属品牌 **/
+					spuIdName: "",/** 产品所属品牌 **/
+					proOptId: [],/** 产品属性值ID **/
+					proOptIdName: "",/** 产品属性值ID **/
+					specOptiId: "",/** 规格选项值ID **/
+					specOptiIdName: "",/** 规格选项值ID **/
+					remark: "",/** 备注 **/
 				},
 				formFieldList: {
 					name: {
 					    type: "Input",
-					    label: "规格名称",
+					    label: "产品名称",
 					    prop: "name",
 					    width: "180px",
-					    placeholder: "请输入规格名称...",
+					    placeholder: "请输入产品名称...",
 					    size: ""
 					},
-					groupIdName: {
+					code: {
 					    type: "Input",
-					    label: "产品规格分组名称",
-					    prop: "groupIdName",
+					    label: "产品编码",
+					    prop: "code",
 					    width: "180px",
-						readonly: true,
-					    placeholder: "请选择产品规格分组名称...",
-					    size: "",
-						btnArr: [
-							{
-								label: "选择产品规格分组名称",
-								id: "selectGroupIdName",
-								type: "primary",
-								ref: "selectGroupIdName",
-								size: "50px",
-								disable: false,
-								handle: (me) => {
-									let the = this;
-									CommInterface.goToPage(SystemConstant.consComponentPath.SELECT_SPECIFICATION_GROUP_ADD_SPECIFICATION, SystemConstant.consComponentName.SELECT_SPECIFICATION_GROUP_ADD_SPECIFICATION,{});
-								}
-							}
-						],
-						// iconArr: {// 图标信息
-						// 	slot: "prefix",
-						// 	class: "el-icon-search",
-						// }
+					    placeholder: "请输入产品编码...",
+					    size: ""
 					},
-					typeIdName: {
-					    type: "Input",
-					    label: "货品类型名称",
-					    prop: "typeIdName",
-					    width: "180px",
-						readonly: true,
-					    placeholder: "请选择货品类型名称...",
-					    size: "",
-						btnArr: [
-							{
-								label: "选择货品规格分组名称",
-								id: "selectTypeIdName",
-								type: "primary",
-								ref: "selectTypeIdNameBtn",
-								size: "50px",
-								disable: false,
-								handle: (me) => {
-									let the = this;
-									CommInterface.goToPage(SystemConstant.consComponentPath.SELECT_SPU_TYPE_ADD_SPECIFICATION,SystemConstant.consComponentName.SELECT_SPU_TYPE_ADD_SPECIFICATION,{});
-								}
-							}
-						],
-						// iconArr: {// 图标信息
-						// 	slot: "prefix",
-						// 	class: "el-icon-search",
-						// }
-					},
-					addr: {
+					price: {
 					    type: "Number",
-					    label: "位置",
-					    prop: "addr",
+					    label: "产品价格",
+					    prop: "price",
+					    width: "180px",
+						step: 1,
+					    min: 0.01,
+					    max: 100000,
+						precision: 2,/** 小数点后面小数的精度 **/
+						change: function(v) {
+							console.log("当前值",v)
+						}
+					    
+					},
+					skuNumber: {
+					    type: "Number",
+					    label: "产品数量",
+					    prop: "skuNumber",
 					    width: "180px",
 						step: 1,
 					    min: 1,
@@ -124,6 +105,87 @@
 							console.log("当前值",v)
 						}
 					    
+					},
+					spuIdName: {
+					    type: "Input",
+					    label: "货品",
+					    prop: "spuIdName",
+					    width: "180px",
+						readonly: true,
+					    placeholder: "请选择货品...",
+					    size: "",
+						btnArr: [
+							{
+								label: "选择货品",
+								id: "selectSpuIdName",
+								type: "primary",
+								ref: "selectSpuIdNameBtn",
+								size: "50px",
+								disable: false,
+								handle: (me) => {
+									let the = this;
+									CommInterface.goToPage(SystemConstant.consComponentPath.ADD_SKU_SELECT_SINGLE_SPU,SystemConstant.consComponentName.ADD_SKU_SELECT_SINGLE_SPU,{});
+								}
+							}
+						],
+						// iconArr: {// 图标信息
+						// 	slot: "prefix",
+						// 	class: "el-icon-search",
+						// }
+					},
+					proOptIdName: {
+					    type: "Input",
+					    label: "产品属性",
+					    prop: "proOptIdName",
+					    width: "180px",
+						readonly: true,
+					    placeholder: "请选择产品属性...",
+					    size: "",
+						btnArr: [
+							{
+								label: "选择产品属性",
+								id: "selectProOptIdName",
+								type: "primary",
+								ref: "selectProOptIdNameBtn",
+								size: "50px",
+								disable: false,
+								handle: (me) => {
+									let the = this;
+									CommInterface.goToPage(SystemConstant.consComponentPath.ADD_SKU_SELECT_PROPERTY_OPTION,SystemConstant.consComponentName.ADD_SKU_SELECT_PROPERTY_OPTION,{});
+								}
+							}
+						],
+						// iconArr: {// 图标信息
+						// 	slot: "prefix",
+						// 	class: "el-icon-search",
+						// }
+					},
+					specOptiIdName: {
+					    type: "Input",
+					    label: "产品规格",
+					    prop: "specOptiIdName",
+					    width: "180px",
+						readonly: true,
+					    placeholder: "请选择产品规格...",
+					    size: "",
+						btnArr: [
+							{
+								label: "选择产品规格",
+								id: "selectSpecOptiIdName",
+								type: "primary",
+								ref: "selectSpecOptiIdName",
+								size: "50px",
+								disable: false,
+								handle: (me) => {
+									let the = this;
+									CommInterface.goToPage(SystemConstant.consComponentPath.ADD_SKU_SELECT_SINGLE_SPECIFICATION, SystemConstant.consComponentName.ADD_SKU_SELECT_SINGLE_SPECIFICATION,{});
+								}
+							}
+						],
+						// iconArr: {// 图标信息
+						// 	slot: "prefix",
+						// 	class: "el-icon-search",
+						// }
 					},
 					remark: {
 					    type: "Textarea",
@@ -137,13 +199,26 @@
 				formSize: "",
 				rules:{
 					name:[
-						{ required: true, message: "请输入规格名称", trigger: "blur" }
+						{ required: true, message: "请输入产品名称", trigger: "blur" },
+						// { required: true, validator: validateSpuCode, trigger: "blur" },
 					],
-					groupIdName:[
-						{ required: true, message: "请选择产品规格分组名称", trigger: "blur" }
+					code:[
+						{ required: true, message: "请输入产品编码", trigger: "blur" }
 					],
-					typeIdName:[
-						{ required: true, message: "请选择货品类型名称", trigger: "blur" }
+					price:[
+						{ required: true, message: "请输入产品价格", trigger: "blur" }
+					],
+					skuNumber:[
+						{ required: true, message: "请输入产品数量", trigger: "blur" }
+					],
+					spuIdName:[
+						{ required: true, message: "请选择产品品牌", trigger: "blur" }
+					],
+					proOptIdName:[
+						{ required: true, message: "请选择产品属性", trigger: "blur" }
+					],
+					specOptiIdName:[
+						{ required: true, message: "请选择产品规格", trigger: "blur" }
 					],
 				},
 				btnHandle:[
@@ -184,16 +259,34 @@
 					}
 				});
 			},
-			setSpecificationGroup(groupId, groupName){
+			setPropertyValues(dataArr){
 				let _this = this;
-				_this.formData.groupId = groupId;
-				_this.formData.groupIdName = groupId + "-"+ groupName;
+				// let proOptIdTemp = "";
+				let proOptIdNameTemp = "";
+				let arrLength = dataArr.length;
+				for(let i=0;i<arrLength;i++){
+					if(i!=arrLength-1){
+						proOptIdNameTemp += dataArr[i].propertyName + ";"
+					} else {
+						proOptIdNameTemp += dataArr[i].propertyName
+					}
+					_this.formData.proOptId.push(dataArr[i].id);
+				}
+				// _this.formData.proOptId = proOptId;
+				console.log(_this.formData.proOptId);
+				_this.formData.proOptIdName = proOptIdNameTemp;
 			},
-			setSpuType(typeId, typeName){
+			setSpu(spuId, spuName){/* 设置SPU */
 				let _this = this;
-				_this.formData.typeId = typeId;
-				_this.formData.typeIdName = typeId + "-" + typeName;
+				_this.formData.spuId = spuId;
+				_this.formData.spuIdName = spuId + "-" + spuName;
 			},
+			setSingleSpecification(speId, speName){/* 设置产品规格 */
+				let _this = this;
+				_this.formData.specOptiId = speId;
+				_this.formData.specOptiIdName = speId + "-" + speName;
+			},
+			
 		},
 		created() {
 			let _this = this;

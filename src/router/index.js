@@ -83,7 +83,15 @@ import AddSelectSpuBrand from '@/components/commodity/spu_brand/SelectSpuBrand'
 import ListSku from '@/components/commodity/sku/ListSku'
 import DetailSku from '@/components/commodity/sku/DetailSku'
 import AddSku from '@/components/commodity/sku/AddSku'
+import AddSkuSelectPropertyOption from '@/components/commodity/property_options/SelectPropertyOption'
+import AddSkuSelectSingleSpu from '@/components/commodity/spu/SelectSingleSpu'
+import AddSkuSelectSingleSpecification from '@/components/commodity/specification/SelectSingleSpecification'
 import UpdateSku from '@/components/commodity/sku/UpdateSku'
+import UpdateSkuSelectPropertyOption from '@/components/commodity/property_options/SelectPropertyOption'
+import UpdateSkuSelectSingleSpu from '@/components/commodity/spu/SelectSingleSpu'
+import UpdateSkuSelectSingleSpecification from '@/components/commodity/specification/SelectSingleSpecification'
+
+/* AddSkuSelectSingleSpecification */
 /* 产品管理 end */
 
 
@@ -876,6 +884,23 @@ export default new Router({
 						name: "添加产品",
 						path: "/addSku"
 					}
+				],
+				children:[
+					{
+						path: "/addSkuSelectPropertyOption",
+						name: "AddSkuSelectPropertyOption",
+						component: AddSkuSelectPropertyOption,
+					},
+					{
+						path: "/addSkuSelectSingleSpu",
+						name: "AddSkuSelectSingleSpu",
+						component: AddSkuSelectSingleSpu,
+					},
+					{
+						path: "/addSkuSelectSingleSpecification",
+						name: "AddSkuSelectSingleSpecification",
+						component: AddSkuSelectSingleSpecification,
+					},
 				]
 			},{
 				path: "/updateSku",
@@ -888,6 +913,23 @@ export default new Router({
 						name: "维护产品",
 						path: "/updateSku"
 					}
+				],
+				children:[
+					{
+						path: "/updateSkuSelectPropertyOption",
+						name: "UpdateSkuSelectPropertyOption",
+						component: UpdateSkuSelectPropertyOption,
+					},
+					{
+						path: "/updateSkuSelectSingleSpu",
+						name: "UpdateSkuSelectSingleSpu",
+						component: UpdateSkuSelectSingleSpu,
+					},
+					{
+						path: "/updateSkuSelectSingleSpecification",
+						name: "UpdateSkuSelectSingleSpecification",
+						component: UpdateSkuSelectSingleSpecification,
+					},
 				]
 			}]//在这里加 
 		}, {

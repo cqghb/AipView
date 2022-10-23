@@ -135,6 +135,7 @@
 							:max="item.max"
 							:placeholder="item.placeholder"
 							:value="item.value"
+							:precision="item.precision?item.precision:0"
 							@change="item.change && item.change(formData[item.prop])"
 							:step="item.step"></el-input-number>
 				<!-- 文件上传 -->
