@@ -17,7 +17,7 @@
 					</div>
 					<div class="block">
 						<router-view @setPropertyValues="setPropertyValues" 
-									@setSpu="setSpu" @setSingleSpecification="setSingleSpecification"></router-view>
+									@setSpu="setSpu" @setMultipleSpecification="setMultipleSpecification"></router-view>
 					</div>
 				</div>
 			</div>			
@@ -58,7 +58,7 @@
 					spuIdName: "",/** 产品所属品牌 **/
 					proOptId: [],/** 产品属性值ID **/
 					proOptIdName: "",/** 产品属性值ID **/
-					specOptiId: "",/** 规格选项值ID **/
+					specOptiIdArr: [],/** 规格选项值ID **/
 					specOptiIdName: "",/** 规格选项值ID **/
 					remark: "",/** 备注 **/
 				},
@@ -178,7 +178,7 @@
 								disable: false,
 								handle: (me) => {
 									let the = this;
-									CommInterface.goToPage(SystemConstant.consComponentPath.ADD_SKU_SELECT_SINGLE_SPECIFICATION, SystemConstant.consComponentName.ADD_SKU_SELECT_SINGLE_SPECIFICATION,{});
+									CommInterface.goToPage(SystemConstant.consComponentPath.ADD_SKU_SELECT_MULTIPLE_SPECIFICATION, SystemConstant.consComponentName.ADD_SKU_SELECT_MULTIPLE_SPECIFICATION,{});
 								}
 							}
 						],
@@ -248,10 +248,10 @@
 				let _this = this;
 				_this.$refs.addForm.$refs.baseForm.$refs.defaultMyForm.validate((volid)=>{
 					if(volid){
-						CommInterface.sendPost(SystemConstant.consSpecificationManage.ADD, _this.formData, function(num){
+						CommInterface.sendPost(SystemConstant.consSkuManage.ADD, _this.formData, function(num){
 							if(num>0){
 								util.showMsg(MsgConstant.msgCommon.SUCCESS_ADD, ComponentConstant.MessageProperties.SUCCESS);
-								CommInterface.goToPage(SystemConstant.consComponentPath.LIST_SPECIFICATION, SystemConstant.consComponentName.LIST_SPECIFICATION, {});
+								CommInterface.goToPage(SystemConstant.consComponentPath.LIST_SKU, SystemConstant.consComponentName.LIST_SKU, {});
 							} else {
 								util.showMsg(MsgConstant.msgCommon.FAIL_ADD, ComponentConstant.MessageProperties.ERROR);
 							}
@@ -263,6 +263,7 @@
 				let _this = this;
 				// let proOptIdTemp = "";
 				let proOptIdNameTemp = "";
+				_this.formData.proOptId = [];/* 上一次选中的清空 */
 				let arrLength = dataArr.length;
 				for(let i=0;i<arrLength;i++){
 					if(i!=arrLength-1){
@@ -281,10 +282,20 @@
 				_this.formData.spuId = spuId;
 				_this.formData.spuIdName = spuId + "-" + spuName;
 			},
-			setSingleSpecification(speId, speName){/* 设置产品规格 */
-				let _this = this;
-				_this.formData.specOptiId = speId;
-				_this.formData.specOptiIdName = speId + "-" + speName;
+			setMultipleSpecification(dataArr){/* 设置产品规格 */
+				let _this = this;				
+				let specOptiIdNameTemp = "";
+				_this.formData.specOptiIdArr = [];/* 把上一次选中的清空 */
+				let arrLength = dataArr.length;
+				for(let i=0;i<arrLength;i++){
+					if(i!=arrLength-1){
+						specOptiIdNameTemp += dataArr[i].name + ";"
+					} else {
+						specOptiIdNameTemp += dataArr[i].name
+					}
+					_this.formData.specOptiIdArr.push(dataArr[i].id);
+				}
+				_this.formData.specOptiIdName = specOptiIdNameTemp;
 			},
 			
 		},

@@ -85,7 +85,8 @@ import DetailSku from '@/components/commodity/sku/DetailSku'
 import AddSku from '@/components/commodity/sku/AddSku'
 import AddSkuSelectPropertyOption from '@/components/commodity/property_options/SelectPropertyOption'
 import AddSkuSelectSingleSpu from '@/components/commodity/spu/SelectSingleSpu'
-import AddSkuSelectSingleSpecification from '@/components/commodity/specification/SelectSingleSpecification'
+// import AddSkuSelectSingleSpecification from '@/components/commodity/specification/SelectSingleSpecification'
+import AddSkuSelectMultipleSpecification from '@/components/commodity/specification/SelectMultipleSpecification'
 import UpdateSku from '@/components/commodity/sku/UpdateSku'
 import UpdateSkuSelectPropertyOption from '@/components/commodity/property_options/SelectPropertyOption'
 import UpdateSkuSelectSingleSpu from '@/components/commodity/spu/SelectSingleSpu'
@@ -897,9 +898,9 @@ export default new Router({
 						component: AddSkuSelectSingleSpu,
 					},
 					{
-						path: "/addSkuSelectSingleSpecification",
-						name: "AddSkuSelectSingleSpecification",
-						component: AddSkuSelectSingleSpecification,
+						path: "/addSkuSelectMultipleSpecification",
+						name: "AddSkuSelectMultipleSpecification",
+						component: AddSkuSelectMultipleSpecification,
 					},
 				]
 			},{

@@ -1,16 +1,16 @@
 <template>
 	<div>
-		<!-- 选择产品规格-单选 -->
+		<!-- 选择产品规格-多选 -->
 		<base-table :uri="uri"
-		            ref="selectSingleSpecificationTable"
+		            ref="selectMultipleSpecificationTable"
 		            :operationButtonList="operationButtonList"
 		            :tableColumnList="tableColumnList"
 		            :searchData="searchData"
 		            :searchForm="searchForm"
 		            :formSize="formSize"
-					:multiSelect="false"
+					:multiSelect="true"
 					:crumbs="false"
-					searchFormRef="searchSelectSingleSpecificationForm"
+					searchFormRef="searchSelectMultipleSpecificationForm"
 		            :searchHandle="searchHandle" 
 					@searchDelTagOptions="searchDelTagOptions"></base-table>
 	</div>
@@ -23,7 +23,7 @@
 	import * as businessConstant from '@/components/constant/businessConstant';
 	
 	export default {
-		name: "SelectSingleSpecification",
+		name: "SelectMultipleSpecification",
 		components: {
 			"base-table": BaseTable,
 		},
@@ -53,7 +53,7 @@
 						handle:()=>{
 							let _this = this;
 							_this.loading = true;
-							_this.$refs.selectSingleSpecificationTable.queryList();// 调子组件的方法
+							_this.$refs.selectMultipleSpecificationTable.queryList();// 调子组件的方法
 						}
 					},
 					{
@@ -62,7 +62,7 @@
 						size: "",
 						handle:()=>{
 							let _this = this;
-							_this.$refs.selectSingleSpecificationTable.$refs.searchSelectSingleSpecificationForm.$refs.defaultMyForm.resetFields();
+							_this.$refs.selectMultipleSpecificationTable.$refs.searchSelectMultipleSpecificationForm.$refs.defaultMyForm.resetFields();
 						}
 					}
 				],
@@ -97,9 +97,18 @@
 			},
 			ok(){/* 确定 */
 				let _this = this;
-				let currentRow = _this.$refs.selectSingleSpecificationTable.currentRow;
-				if(currentRow){
-					_this.$emit(businessConstant.CALLBACK_FUNCTION_NAME.SET_SINGLE_SPECIFICATION, currentRow.id, currentRow.name);
+				let selectArr = _this.$refs.selectMultipleSpecificationTable.selectedDataArr;
+				if(selectArr){
+					let tmpArr = [];
+					for(let i=0;i<selectArr.length;i++){
+						let item = {
+							id: selectArr[i].id,
+							name: selectArr[i].id + "-" + selectArr[i].name
+						};
+						tmpArr.push(item);
+					}
+					// 父组件 没有这个方法会报错
+					_this.$emit(businessConstant.CALLBACK_FUNCTION_NAME.SET_MULTIPLE_SPECIFICATION, tmpArr);
 				}
 			},
 			

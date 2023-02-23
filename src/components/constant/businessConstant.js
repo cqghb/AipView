@@ -28,7 +28,8 @@ export const CALLBACK_FUNCTION_NAME = {
     SET_SPU: "setSpu", /* 设置货品 */
 	SET_PRO_OPT:"setProOpt",/* 设置产品属性 */
 	SET_PROPERTY_VALUES:"setPropertyValues",/* 设置产品属性 */
-	SET_SINGLE_SPECIFICATION:"setSingleSpecification",/* 设置产品规格 */
+	SET_SINGLE_SPECIFICATION:"setSingleSpecification",/* 设置产品规格-单选 */
+	SET_MULTIPLE_SPECIFICATION:"setMultipleSpecification",/* 设置产品规格-多选 */
 	
 };
 
