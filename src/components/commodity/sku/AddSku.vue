@@ -1,33 +1,158 @@
 <template>
 	<div>
-		<!-- 产品添加 -->
-		<div class="demo-block demo-tree">
-			<div class="source">
-				<div class="custom-tree-container">
-					<div class="block">
-						<update-form
-									labelWidth="80px"
-									ref="addForm"
-						            :formData="formData"
-						            :formFieldList="formFieldList"
-									:baseFromModel="formData"
-						            :size="formSize"
-									:rules="rules"
-						            :buttonArr="btnHandle"></update-form>
-					</div>
-					<div class="block">
-						<router-view @setPropertyValues="setPropertyValues" 
-									@setSpu="setSpu" @setMultipleSpecification="setMultipleSpecification"></router-view>
-					</div>
-				</div>
-			</div>			
-		</div>
+		<el-divider content-position="left">商品基础信息配置(配置与商品价格直接相关的属性)</el-divider>
+		<el-form :model="baseInfo" ref="dynamicValidateForm" label-width="100px" class="demo-dynamic">
+			<el-form-item label="名称" prop="name">
+				<el-input v-model="baseInfo.name"></el-input>
+			</el-form-item>
+			<el-form-item label="所属SPU" prop="spuNo">
+				<!-- <el-input v-model="baseInfo.spuId"></el-input> -->
+				<el-select v-model="baseInfo.spuNo" filterable placeholder="请选择">
+					<el-option v-for="item in spuIdOption" 
+						:key="item.value" 
+						:label="item.label" 
+						:value="item.value"></el-option>
+				</el-select>
+			</el-form-item>
+			<el-form-item label="数量" prop="number">
+				<el-input v-model="baseInfo.number"></el-input>
+				<!-- <el-input-number controls-position="right"
+					:min="1"
+					label="122"
+					:model="baseInfo.number"></el-input-number> -->
+			</el-form-item>
+			<el-form-item label="价格" prop="price">
+				<el-input v-model="baseInfo.price"></el-input>
+				<!-- <el-input-number :precision="2" 
+					controls-position="right"
+					:min="0.01"
+					label="12"
+					:model="baseInfo.price"></el-input-number> -->
+			</el-form-item>
+			<el-divider content-position="left">商品介绍</el-divider>
+			<div :key="domain.key" v-for="(domain, index) in baseInfo.domains">
+				<el-form-item
+				:label="'属性名' + (index+1)"
+				:key="domain.key"
+				:prop="'domains.' + index + '.name'"
+				:rules="{
+				  required: true, message: '域名不能为空', trigger: 'blur'
+				}"
+				>
+					<el-input v-model="domain.name"></el-input>
+				</el-form-item>
+				<el-form-item
+				:label="'属性值' + (index+1)"
+				:key="domain.key"
+				:prop="'domains.' + index + '.value'"
+				:rules="{
+				  required: true, message: '域名不能为空', trigger: 'blur'
+				}"
+				>
+					<el-input v-model="domain.value"></el-input>
+					<el-button v-if="baseInfo.domains.length==(index+1)" @click="addDomain">新增属性</el-button>
+					<el-button v-if="1!=(index+1)" @click.prevent="removeDomain(domain)">删除</el-button>
+				</el-form-item>
+			</div>
+			<el-divider content-position="left">规格与包装</el-divider>
+			<template v-for="(item, index) in baseInfo.specificationPackage">
+				<el-form-item :key="item.key" 
+					:label="'规格组名称' + (index + 1)" 
+					:prop="item.name">
+					<el-input v-model="item.name"></el-input>
+					<!-- 最后一个才显示新增按钮 -->
+					<el-button v-if="baseInfo.specificationPackage.length==(index+1)" 
+						@click="addSpePac">新增</el-button>
+					<!-- 当只有一个时，不能删除 -->
+					<el-button v-if="1!=(index+1)" 
+						@click.prevent="removeSpePac(item)">删除</el-button>
+				</el-form-item>
+				<template v-for="(spec, sindex) in item.componentArr">
+					<el-form-item :key="spec.key" 
+						:label="'组件名' + (index + 1) + '-' + (sindex + 1)" 
+						:prop="spec.name">
+						<el-input v-model="spec.name"></el-input>
+					</el-form-item>
+					<el-form-item :key="spec.key" 
+						:label="'组件值' + (index + 1) + '-' + (sindex + 1)" 
+						:prop="spec.value">
+						<el-input v-model="spec.value"></el-input>
+						<!-- 最后一个才显示新增按钮 -->
+						<el-button :key="spec.key" 
+							v-if="item.componentArr.length  == (sindex + 1)" 
+							@click="addComponent(index)">新增</el-button>
+						<!-- 当只有一个时，不能删除 -->
+						<el-button :key="spec.key" 
+							v-if="1 != (sindex + 1)" 
+							@click.prevent="removeComponent(index, spec)">删除</el-button>
+					</el-form-item>
+					
+				</template>
+				
+			</template>
+			
+			<el-divider content-position="left">售后保障</el-divider>
+			<el-form-item>
+				<rich-text ref="child" :values="baseInfo.skuAfterSales.afterSales"/>
+			</el-form-item>
+			
+			<el-form-item>
+			<!-- <el-button type="primary" @click="submitForm('dynamicValidateForm')">提交</el-button> -->
+			<!-- <el-button @click="addDomain">新增域名</el-button> -->
+			<el-button @click="resetForm('dynamicValidateForm')">重置</el-button>
+			<el-button @click="addSku('dynamicValidateForm')">提交</el-button>
+			</el-form-item>
+		</el-form>
+		<el-divider content-position="left">上传商品图片</el-divider>
+		<el-upload
+		  action="http://localhost:8080/p/file/uploadFile"
+		  ref="upload1"
+		  name="files"
+		  list-type="picture-card"
+		  :data="{fileType: '1'}"
+		  :on-error="uploadError"
+		  :auto-upload="true">
+		    <i slot="default" class="el-icon-plus"></i>
+		    <div slot="file" slot-scope="{file}">
+		      <img
+		        class="el-upload-list__item-thumbnail"
+		        :src="file.url" alt=""
+		      >
+		      <span class="el-upload-list__item-actions">
+		        <span
+		          class="el-upload-list__item-preview"
+		          @click="handlePictureCardPreview(file)"
+		        >
+		          <i class="el-icon-zoom-in"></i>
+		        </span>
+		        <span
+		          v-if="!disabled"
+		          class="el-upload-list__item-delete"
+		          @click="handleRemove(file)"
+		        >
+		          <i class="el-icon-delete"></i>
+		        </span>
+		      </span>
+		    </div>
+		</el-upload>
+		<el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">日志打印上传的文件信息</el-button>
+		<el-dialog :visible.sync="dialogVisible">
+		  <img width="100%" :src="dialogImageUrl" alt="">
+		</el-dialog>
+		
+		
+		
 	</div>
 </template>
 
 <script>
 	import UpdateForm from "@/components/common/UpdateForm";
+	import RichText from "@/components/common/RichText";
 	import util from "@/components/utils/util";
+	import SkuIntro from "@/components/commodity/sku/SkuIntro";
+	import SpecificationPackaging from "@/components/commodity/sku/SpecificationPackaging";
+	import AfterSalesGuarantee from "@/components/commodity/sku/AfterSalesGuarantee";
+	
 	
 	import * as CommInterface from '@/components/utils/commInterface';
 	import * as SystemConstant from '@/components/constant/systemConstant';
@@ -38,218 +163,151 @@
 		name: "Add",
 		components: {
 			"update-form": UpdateForm,
+			"sku-intro": SkuIntro,
+			"specification-packaging": SpecificationPackaging,
+			"after-sales-guarantee": AfterSalesGuarantee,
+			"rich-text": RichText
 		},
 		data() {
-			const validateSpuCode = (rule, value, callback) => {
-			  	CommInterface.sendPost(SystemConstant.consSpuManage.QUERY_BY_CODE, {code: value}, function(data){
-					if(data){
-						return callback(new Error("产品编码不能重复"));
-					}
-					callback();
-			  	});
-			};
+			
 			return {
-				formData: {
-					name: "",/** 产品名称 **/ 
-					code: "",/** 产品编码 **/
-					price: 1.00,/** 产品价格 **/
-					skuNumber: 1,/** 产品数量 **/
-					spuId: "",/** 产品所属品牌 **/
-					spuIdName: "",/** 产品所属品牌 **/
-					proOptId: [],/** 产品属性值ID **/
-					proOptIdName: "",/** 产品属性值ID **/
-					specOptiIdArr: [],/** 规格选项值ID **/
-					specOptiIdName: "",/** 规格选项值ID **/
-					remark: "",/** 备注 **/
-				},
-				formFieldList: {
-					name: {
-					    type: "Input",
-					    label: "产品名称",
-					    prop: "name",
-					    width: "180px",
-					    placeholder: "请输入产品名称...",
-					    size: ""
+				activeName: "first",
+				baseInfo: {
+					name: "",
+					spuNo: "",
+					number: "1",
+					price: "0.01",
+					skuAfterSales:{/* 上平售后 */
+						afterSales: "123",
 					},
-					code: {
-					    type: "Input",
-					    label: "产品编码",
-					    prop: "code",
-					    width: "180px",
-					    placeholder: "请输入产品编码...",
-					    size: ""
-					},
-					price: {
-					    type: "Number",
-					    label: "产品价格",
-					    prop: "price",
-					    width: "180px",
-						step: 1,
-					    min: 0.01,
-					    max: 100000,
-						precision: 2,/** 小数点后面小数的精度 **/
-						change: function(v) {
-							console.log("当前值",v)
+					domains: [{/* 商品重要属性 */
+						name: "",/* 属性名 */
+						value: "",/* 属性值 */
+						index: 1,/* 序号 */
+					}],
+					specificationPackage:[/* 商品规格组 */
+						{
+							name: "",/* 组名 */
+							index: 1,/* 序号 */
+							componentArr: [/* 零部件 */
+								{
+									name: "",/* 部件名 */
+									value: "",/*, 部件值 */
+									index: 1,/* 序号 */
+								}
+							]
 						}
-					    
-					},
-					skuNumber: {
-					    type: "Number",
-					    label: "产品数量",
-					    prop: "skuNumber",
-					    width: "180px",
-						step: 1,
-					    min: 1,
-					    max: 100,
-						change: function(v) {
-							console.log("当前值",v)
-						}
-					    
-					},
-					spuIdName: {
-					    type: "Input",
-					    label: "货品",
-					    prop: "spuIdName",
-					    width: "180px",
-						readonly: true,
-					    placeholder: "请选择货品...",
-					    size: "",
-						btnArr: [
-							{
-								label: "选择货品",
-								id: "selectSpuIdName",
-								type: "primary",
-								ref: "selectSpuIdNameBtn",
-								size: "50px",
-								disable: false,
-								handle: (me) => {
-									let the = this;
-									CommInterface.goToPage(SystemConstant.consComponentPath.ADD_SKU_SELECT_SINGLE_SPU,SystemConstant.consComponentName.ADD_SKU_SELECT_SINGLE_SPU,{});
-								}
-							}
-						],
-						// iconArr: {// 图标信息
-						// 	slot: "prefix",
-						// 	class: "el-icon-search",
-						// }
-					},
-					proOptIdName: {
-					    type: "Input",
-					    label: "产品属性",
-					    prop: "proOptIdName",
-					    width: "180px",
-						readonly: true,
-					    placeholder: "请选择产品属性...",
-					    size: "",
-						btnArr: [
-							{
-								label: "选择产品属性",
-								id: "selectProOptIdName",
-								type: "primary",
-								ref: "selectProOptIdNameBtn",
-								size: "50px",
-								disable: false,
-								handle: (me) => {
-									let the = this;
-									CommInterface.goToPage(SystemConstant.consComponentPath.ADD_SKU_SELECT_PROPERTY_OPTION,SystemConstant.consComponentName.ADD_SKU_SELECT_PROPERTY_OPTION,{});
-								}
-							}
-						],
-						// iconArr: {// 图标信息
-						// 	slot: "prefix",
-						// 	class: "el-icon-search",
-						// }
-					},
-					specOptiIdName: {
-					    type: "Input",
-					    label: "产品规格",
-					    prop: "specOptiIdName",
-					    width: "180px",
-						readonly: true,
-					    placeholder: "请选择产品规格...",
-					    size: "",
-						btnArr: [
-							{
-								label: "选择产品规格",
-								id: "selectSpecOptiIdName",
-								type: "primary",
-								ref: "selectSpecOptiIdName",
-								size: "50px",
-								disable: false,
-								handle: (me) => {
-									let the = this;
-									CommInterface.goToPage(SystemConstant.consComponentPath.ADD_SKU_SELECT_MULTIPLE_SPECIFICATION, SystemConstant.consComponentName.ADD_SKU_SELECT_MULTIPLE_SPECIFICATION,{});
-								}
-							}
-						],
-						// iconArr: {// 图标信息
-						// 	slot: "prefix",
-						// 	class: "el-icon-search",
-						// }
-					},
-					remark: {
-					    type: "Textarea",
-					    label: "备注",
-					    prop: "remark",
-					    width: "180px",
-					    placeholder: "请输入备注...",
-					    size: ""
-					}
+					],
+					imageAddDtoList:[],/* 产品图像信息 */
 				},
-				formSize: "",
-				rules:{
-					name:[
-						{ required: true, message: "请输入产品名称", trigger: "blur" },
-						// { required: true, validator: validateSpuCode, trigger: "blur" },
-					],
-					code:[
-						{ required: true, message: "请输入产品编码", trigger: "blur" }
-					],
-					price:[
-						{ required: true, message: "请输入产品价格", trigger: "blur" }
-					],
-					skuNumber:[
-						{ required: true, message: "请输入产品数量", trigger: "blur" }
-					],
-					spuIdName:[
-						{ required: true, message: "请选择产品品牌", trigger: "blur" }
-					],
-					proOptIdName:[
-						{ required: true, message: "请选择产品属性", trigger: "blur" }
-					],
-					specOptiIdName:[
-						{ required: true, message: "请选择产品规格", trigger: "blur" }
-					],
-				},
-				btnHandle:[
-					{
-					    label:"新增",
-					    type:"primary",
-					    size: "",
-					    handle:()=>{
-					        let _this = this;
-							_this.add();
-					    }
-					},
-					{
-					    label:"重置",
-					    type:"primary",
-					    size: "",
-					    handle:()=>{
-					        let _this = this;
-					        _this.$refs.addForm.$refs.baseForm.$refs.defaultMyForm.resetFields();
-					    }
-					}
-				],
+				dialogImageUrl: "",
+				dialogVisible: false,
+				disabled: false,
+				fileList:[],
+				spuIdOption: [],/* SPU下拉选项 */
 			};
 		},
 		methods: {
-			add(){
+			uploadError(err){/* 文件上传失败时的回调函数 */
 				let _this = this;
-				_this.$refs.addForm.$refs.baseForm.$refs.defaultMyForm.validate((volid)=>{
-					if(volid){
-						CommInterface.sendPost(SystemConstant.consSkuManage.ADD, _this.formData, function(num){
-							if(num>0){
+				console.log("_this",_this);
+				console.log("err",err);
+				// console.log("file",file);
+				// console.log("fileList",fileList);
+				
+			},
+			selectSpuIdOption(){/* 查询SPU下拉选项 */
+				let _this = this;
+				CommInterface.sendPost(
+				    "/spu/searchSpuCodeName",
+				    {code: ""},
+				    function (res) {
+				        console.log("新增结果 ",res);
+				        _this.spuIdOption = res;
+				    }
+				);
+			},
+			addComponent(index){/* 新增组件信息 */
+				let _this = this;
+				_this.baseInfo.specificationPackage[index].componentArr.push({
+					name: "",/* 部件名 */
+					value: ""/* 部件值 */
+				});
+			},
+			removeComponent(i, compo){/* 移除组件信息 */
+				let _this = this;
+				let index = _this.baseInfo.specificationPackage[i].componentArr.indexOf(compo)
+				if (index !== -1) {
+					_this.baseInfo.specificationPackage[i].componentArr.splice(index, 1)
+				}
+			},
+			addSpePac(){/* 新增规格组 */
+				let _this = this;
+				_this.baseInfo.specificationPackage.push({
+					name: "",/* 组名 */
+					componentArr: [/* 零部件 */
+						{
+							name: "",/* 部件名 */
+							value: ""/* 部件值 */
+						}
+					]
+				});
+			},
+			removeSpePac(spePac){/* 移除规格组 */
+				let _this = this;
+				let index = _this.baseInfo.specificationPackage.indexOf(spePac)
+				if (index !== -1) {
+					_this.baseInfo.specificationPackage.splice(index, 1)
+				}
+			},
+			submitUpload(){
+				console.log("11",this.$refs.upload1.uploadFiles);
+			},
+			handleRemove(file) {
+				console.log("11",file);
+				let index = this.$refs.upload1.uploadFiles.indexOf(file)
+				if (index !== -1) {
+				  this.$refs.upload1.uploadFiles.splice(index, 1)
+				}
+			},
+			handlePictureCardPreview(file) {
+				console.log("11",file);
+				this.dialogImageUrl = file.url;
+				this.dialogVisible = true;
+			},
+			handleClick(tab, event) {
+				console.log(tab, event);
+			},
+			submitForm(formName) {
+				this.$refs[formName].validate((valid) => {
+					if (valid) {
+						alert('submit!');
+					} else {
+						console.log('error submit!!');
+						return false;
+					}
+				});
+			},
+			addSku(formName){/* 添加商品 */
+				let _this = this;
+				let imageList = _this.$refs.upload1.uploadFiles;
+				for(let i=0;i<imageList.length;i++){
+					if("000000"==imageList[i].response.code){
+						let item = {
+							name: imageList[i].name,
+							path: imageList[i].response.data
+						};
+						_this.baseInfo.imageAddDtoList.push(item);
+					}
+				}
+				_this.$refs[formName].validate((valid) => {
+					if (!valid) {
+						console.log('error submit!!');
+						return false;
+					} else {
+						console.log('验证通过',_this.baseInfo);
+						CommInterface.sendPost(SystemConstant.consSkuManage.ADD, _this.baseInfo, function(r){
+							if(r){
 								util.showMsg(MsgConstant.msgCommon.SUCCESS_ADD, ComponentConstant.MessageProperties.SUCCESS);
 								CommInterface.goToPage(SystemConstant.consComponentPath.LIST_SKU, SystemConstant.consComponentName.LIST_SKU, {});
 							} else {
@@ -259,51 +317,30 @@
 					}
 				});
 			},
-			setPropertyValues(dataArr){
-				let _this = this;
-				// let proOptIdTemp = "";
-				let proOptIdNameTemp = "";
-				_this.formData.proOptId = [];/* 上一次选中的清空 */
-				let arrLength = dataArr.length;
-				for(let i=0;i<arrLength;i++){
-					if(i!=arrLength-1){
-						proOptIdNameTemp += dataArr[i].propertyName + ";"
-					} else {
-						proOptIdNameTemp += dataArr[i].propertyName
-					}
-					_this.formData.proOptId.push(dataArr[i].id);
+			resetForm(formName) {
+				// console.log(this.$refs.child.getVal());
+				console.log(this.baseInfo.afterSales);
+				this.$refs[formName].resetFields();
+			},
+			removeDomain(item) {
+				let index = this.baseInfo.domains.indexOf(item)
+				if (index !== -1) {
+					this.baseInfo.domains.splice(index, 1)
 				}
-				// _this.formData.proOptId = proOptId;
-				console.log(_this.formData.proOptId);
-				_this.formData.proOptIdName = proOptIdNameTemp;
 			},
-			setSpu(spuId, spuName){/* 设置SPU */
-				let _this = this;
-				_this.formData.spuId = spuId;
-				_this.formData.spuIdName = spuId + "-" + spuName;
-			},
-			setMultipleSpecification(dataArr){/* 设置产品规格 */
-				let _this = this;				
-				let specOptiIdNameTemp = "";
-				_this.formData.specOptiIdArr = [];/* 把上一次选中的清空 */
-				let arrLength = dataArr.length;
-				for(let i=0;i<arrLength;i++){
-					if(i!=arrLength-1){
-						specOptiIdNameTemp += dataArr[i].name + ";"
-					} else {
-						specOptiIdNameTemp += dataArr[i].name
-					}
-					_this.formData.specOptiIdArr.push(dataArr[i].id);
-				}
-				_this.formData.specOptiIdName = specOptiIdNameTemp;
-			},
-			
+			addDomain() {
+				this.baseInfo.domains.push({
+					value: "",
+					name: ""
+				});
+			}
 		},
 		created() {
 			let _this = this;
 		},
 		mounted() {
 			let _this = this;
+			_this.selectSpuIdOption();
 		}
 	}
 </script>

@@ -1,4 +1,5 @@
 'use strict'
+const webpack = require('webpack')
 const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
@@ -11,6 +12,13 @@ function resolve (dir) {
 
 
 module.exports = {
+	plugins: [
+		new webpack.ProvidePlugin({
+			// 在这儿添加下面两行
+		   'window.Quill': 'quill/dist/quill.js',
+		   'Quill': 'quill/dist/quill.js'
+	   })
+   ],
   context: path.resolve(__dirname, '../'),
   entry: {
     app: './src/main.js'
