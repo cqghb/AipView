@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<bread-crumbs></bread-crumbs>
 		<el-divider content-position="left">商品基础信息配置(配置与商品价格直接相关的属性)</el-divider>
 		<el-form :model="baseInfo" ref="dynamicValidateForm" label-width="100px" class="demo-dynamic">
 			<el-form-item label="名称" prop="name">
@@ -104,6 +105,7 @@
 			</el-form-item>
 		</el-form>
 		<el-divider content-position="left">上传商品图片</el-divider>
+		<!-- 这里上传文件时，先上传到临时目录，商品添加后，审批通过后将文件移动到正式目录，可方式恶意删除生效商品的文件 -->
 		<el-upload
 		  action="http://localhost:8080/p/file/uploadFile"
 		  ref="upload1"
@@ -111,6 +113,7 @@
 		  list-type="picture-card"
 		  :data="{fileType: '1'}"
 		  :on-error="uploadError"
+		  :on-success="uploadSucess"
 		  :auto-upload="true">
 		    <i slot="default" class="el-icon-plus"></i>
 		    <div slot="file" slot-scope="{file}">
@@ -146,12 +149,13 @@
 </template>
 
 <script>
+	import BreadCrumbs from "@/components/common/BreadCrumbs";
 	import UpdateForm from "@/components/common/UpdateForm";
 	import RichText from "@/components/common/RichText";
 	import util from "@/components/utils/util";
-	import SkuIntro from "@/components/commodity/sku/SkuIntro";
-	import SpecificationPackaging from "@/components/commodity/sku/SpecificationPackaging";
-	import AfterSalesGuarantee from "@/components/commodity/sku/AfterSalesGuarantee";
+	// import SkuIntro from "@/components/commodity/sku/SkuIntro";
+	// import SpecificationPackaging from "@/components/commodity/sku/SpecificationPackaging";
+	// import AfterSalesGuarantee from "@/components/commodity/sku/AfterSalesGuarantee";
 	
 	
 	import * as CommInterface from '@/components/utils/commInterface';
@@ -163,10 +167,11 @@
 		name: "Add",
 		components: {
 			"update-form": UpdateForm,
-			"sku-intro": SkuIntro,
-			"specification-packaging": SpecificationPackaging,
-			"after-sales-guarantee": AfterSalesGuarantee,
-			"rich-text": RichText
+			// "sku-intro": SkuIntro,
+			// "specification-packaging": SpecificationPackaging,
+			// "after-sales-guarantee": AfterSalesGuarantee,
+			"rich-text": RichText,
+			"bread-crumbs": BreadCrumbs
 		},
 		data() {
 			
@@ -208,12 +213,21 @@
 			};
 		},
 		methods: {
-			uploadError(err){/* 文件上传失败时的回调函数 */
+			uploadSucess(response,file,fileList){/* 上传成功钩子中检查后台是否将文件处理成功 */
+				console.log("response",response);
+				console.log("file",file);
+				console.log("fileList",fileList);
+				if("000000"!=response.code){
+					let index = fileList.indexOf(file);
+					fileList.splice(index, 1);
+					util.showMsg(MsgConstant.msgCommon.FAIL_UPLOAD, response.msg);
+				}
+			},
+			uploadError(err,file,fileList){/* 文件上传失败时的回调函数 */
 				let _this = this;
 				console.log("_this",_this);
 				console.log("err",err);
-				// console.log("file",file);
-				// console.log("fileList",fileList);
+				util.showMsg(MsgConstant.msgCommon.FAIL_UPLOAD, err);
 				
 			},
 			selectSpuIdOption(){/* 查询SPU下拉选项 */
@@ -222,7 +236,6 @@
 				    "/spu/searchSpuCodeName",
 				    {code: ""},
 				    function (res) {
-				        console.log("新增结果 ",res);
 				        _this.spuIdOption = res;
 				    }
 				);
@@ -263,11 +276,13 @@
 			submitUpload(){
 				console.log("11",this.$refs.upload1.uploadFiles);
 			},
-			handleRemove(file) {
-				console.log("11",file);
-				let index = this.$refs.upload1.uploadFiles.indexOf(file)
+			handleRemove(file) {/* 删除文件时触发的函数 */
+				let index = this.$refs.upload1.uploadFiles.indexOf(file);
+				let filePath = file.response.data;
+				console.log(filePath);
 				if (index !== -1) {
-				  this.$refs.upload1.uploadFiles.splice(index, 1)
+				  this.$refs.upload1.uploadFiles.splice(index, 1);
+				  //TODO 调用文件删除接口将文件删除
 				}
 			},
 			handlePictureCardPreview(file) {
@@ -292,6 +307,7 @@
 				let _this = this;
 				let imageList = _this.$refs.upload1.uploadFiles;
 				for(let i=0;i<imageList.length;i++){
+					/* 只要上传成功的 */
 					if("000000"==imageList[i].response.code){
 						let item = {
 							name: imageList[i].name,

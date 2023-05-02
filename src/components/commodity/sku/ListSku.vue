@@ -1,7 +1,235 @@
 <template>
+	<!-- 产品管理 -->
 	<div>
-		<!-- 产品管理 -->
-		<base-table :uri="uri"
+		<bread-crumbs></bread-crumbs>
+		<base-form
+					:formData="searchData"
+					ref="searchSkuForm"
+					:formFieldList="searchForm"
+					:baseFromModel="searchData"
+					:size="formSize"
+					:myInline="true"
+					:buttonArr="searchHandle"></base-form>
+		<!-- 操作按钮 start -->
+		<el-row class="row">
+		    <el-col :span="24">
+		        <el-button v-for="(item, index) in operationButtonList"
+		                   :key="index"
+		                   :icon="item.icon"
+		                   :type="item.type"
+		                   @click="item.handle()">
+		            {{ item.text }}
+		        </el-button>
+		    </el-col>
+		</el-row>
+		<!-- 操作按钮 end -->
+		<!-- 商品列表展示区域 start -->
+		<!-- 
+			展示的商品信息有：
+			第一张图片，名称、数量、价格，商品编号
+		
+		-->
+		<!-- 鼠标移动上去的样式案例 -->
+		<!-- <div class="a1">
+			<div class="abc1">wew</div>
+		</div> -->
+		
+		<el-row :gutter="4">
+			<el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
+				<div class="sku">
+					<el-card shadow="hover" :body-style="{ padding: '0px' }">
+						<!-- <el-image :src="require('@/assets/logo.png')" class="image"/> -->
+						<el-image :src="require('/Users/wangsheng/headPortrai/311CDA7EC75E4893A8AD0F1930B93975.jpg')" class="image"/>
+						<div style="padding: 14px;">
+							<div>
+								<span>商品编号</span>
+							</div>
+							<div>
+								<span>名称</span>
+							</div>
+							<div>
+								<div class="skuPrice">
+									<span class="priceIcon">¥</span>
+									<strong class="price">69.90</strong>
+								</div>
+								<div class="skuNumber">数量</div>
+							</div>
+						</div>
+					</el-card>
+				</div>
+			</el-col>
+			<el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
+				<div class="sku">
+					<el-card shadow="hover" :body-style="{ padding: '0px' }">
+						<el-image :src="require('/Users/wangsheng/headPortrai/311CDA7EC75E4893A8AD0F1930B93975.jpg')" class="image"/>
+						<div style="padding: 14px;">
+							<div>
+								<span>商品编号</span>
+							</div>
+							<div>
+								<span>名称</span>
+							</div>
+							<div>
+								<div class="skuPrice">
+									<span class="priceIcon">¥</span>
+									<strong class="price">69.90</strong>
+								</div>
+								<div class="skuNumber">数量</div>
+							</div>
+						</div>
+					</el-card>
+				</div>
+			</el-col>
+			<el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
+				<div class="sku">
+					<el-card shadow="hover" :body-style="{ padding: '0px' }">
+						<el-image :src="require('/Users/wangsheng/headPortrai/311CDA7EC75E4893A8AD0F1930B93975.jpg')" class="image"/>
+						<div style="padding: 14px;">
+							<div>
+								<span>商品编号</span>
+							</div>
+							<div>
+								<span>名称</span>
+							</div>
+							<div>
+								<div class="skuPrice">
+									<span class="priceIcon">¥</span>
+									<strong class="price">69.90</strong>
+								</div>
+								<div class="skuNumber">数量</div>
+							</div>
+						</div>
+					</el-card>
+				</div>
+			</el-col>
+			<el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
+				<div class="sku">
+					<el-card shadow="hover" :body-style="{ padding: '0px' }">
+						<el-image :src="require('/Users/wangsheng/headPortrai/311CDA7EC75E4893A8AD0F1930B93975.jpg')" class="image"/>
+						<div style="padding: 14px;">
+							<div>
+								<span>商品编号</span>
+							</div>
+							<div>
+								<span>名称</span>
+							</div>
+							<div>
+								<div class="skuPrice">
+									<span class="priceIcon">¥</span>
+									<strong class="price">69.90</strong>
+								</div>
+								<div class="skuNumber">数量</div>
+							</div>
+						</div>
+					</el-card>
+				</div>
+			</el-col>
+		</el-row>
+		<el-row :gutter="4">
+			<el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
+				<div class="sku">
+					<el-card shadow="hover" :body-style="{ padding: '0px' }">
+						<!-- <el-image :src="require('@/assets/logo.png')" class="image"/> -->
+						<el-image :src="require('/Users/wangsheng/headPortrai/311CDA7EC75E4893A8AD0F1930B93975.jpg')" class="image"/>
+						<div style="padding: 14px;">
+							<div>
+								<span>商品编号</span>
+							</div>
+							<div>
+								<span>名称</span>
+							</div>
+							<div>
+								<div class="skuPrice">
+									<span class="priceIcon">¥</span>
+									<strong class="price">69.90</strong>
+								</div>
+								<div class="skuNumber">数量</div>
+							</div>
+						</div>
+					</el-card>
+				</div>
+			</el-col>
+			<el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
+				<div class="sku">
+					<el-card shadow="hover" :body-style="{ padding: '0px' }">
+						<el-image :src="require('/Users/wangsheng/headPortrai/311CDA7EC75E4893A8AD0F1930B93975.jpg')" class="image"/>
+						<div style="padding: 14px;">
+							<div>
+								<span>商品编号</span>
+							</div>
+							<div>
+								<span>名称</span>
+							</div>
+							<div>
+								<div class="skuPrice">
+									<span class="priceIcon">¥</span>
+									<strong class="price">69.90</strong>
+								</div>
+								<div class="skuNumber">数量</div>
+							</div>
+						</div>
+					</el-card>
+				</div>
+			</el-col>
+			<el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
+				<div class="sku">
+					<el-card shadow="hover" :body-style="{ padding: '0px' }">
+						<el-image :src="require('/Users/wangsheng/headPortrai/311CDA7EC75E4893A8AD0F1930B93975.jpg')" class="image"/>
+						<div style="padding: 14px;">
+							<div>
+								<span>商品编号</span>
+							</div>
+							<div>
+								<span>名称</span>
+							</div>
+							<div>
+								<div class="skuPrice">
+									<span class="priceIcon">¥</span>
+									<strong class="price">69.90</strong>
+								</div>
+								<div class="skuNumber">数量</div>
+							</div>
+						</div>
+					</el-card>
+				</div>
+			</el-col>
+			<el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6">
+				<div class="sku">
+					<el-card shadow="hover" :body-style="{ padding: '0px' }">
+						<el-image :src="require('/Users/wangsheng/headPortrai/311CDA7EC75E4893A8AD0F1930B93975.jpg')" class="image"/>
+						<div style="padding: 14px;">
+							<div>
+								<span>商品编号</span>
+							</div>
+							<div>
+								<span>名称</span>
+							</div>
+							<div>
+								<div class="skuPrice">
+									<span class="priceIcon">¥</span>
+									<strong class="price">69.90</strong>
+								</div>
+								<div class="skuNumber">数量</div>
+							</div>
+						</div>
+					</el-card>
+				</div>
+			</el-col>
+		</el-row>
+		<!-- 商品列表展示区域 end -->
+		<!-- 分页组件 start -->
+		<!-- <el-pagination
+		        @size-change="handleSizeChange"
+		        @current-change="handleCurrentChange"
+		        :current-page.sync="page.currentPage"
+		        :page-sizes="page.pageSizeArr"
+		        :page-size="page.pageSize"
+		        layout="total, sizes, prev, pager, next, jumper"
+		        :total="page.totalSize">
+		</el-pagination> -->
+		<!-- 分页组件 end -->
+		
+		<!-- <base-table :uri="uri"
 		            ref="tableSku"
 		            :operationButtonList="operationButtonList"
 		            :tableColumnList="tableColumnList"
@@ -11,12 +239,14 @@
 					searchFormRef="searchSkuForm"
 					:multiSelect="false"
 		            :searchHandle="searchHandle" 
-					@searchDelTagOptions="searchDelTagOptions"></base-table>
+					@searchDelTagOptions="searchDelTagOptions"></base-table> -->
 	</div>
 </template>
 
 <script>
-	import BaseTable from "@/components/common/BaseTable";
+	import BreadCrumbs from "@/components/common/BreadCrumbs";
+	import BaseForm from "@/components/common/BaseForm";
+	// import BaseTable from "@/components/common/BaseTable";
 	
 	import * as SystemConstant from '@/components/constant/systemConstant';
 	import * as CommInterface from '@/components/utils/commInterface';
@@ -30,10 +260,19 @@
 	export default {
 		name: "Specification",
 		components: {
-			"base-table": BaseTable,
+			// "base-table": BaseTable,
+			"bread-crumbs": BreadCrumbs,
+			"base-form": BaseForm,
 		},
 		data() {
 			return {
+				testImage: 'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',
+				page:{
+					currentPage: 1,
+					pageSizeArr: 1,
+					pageSize: 1,
+					totalSize: 1,
+				},
 				uri: SystemConstant.consSkuManage.FIND_PAGE,
 				searchData:{
 					id: "",// 产品主键
@@ -183,9 +422,33 @@
 			};
 		},
 		methods: {
-			searchDelTagOptions(data){/* 获取删除标志的数据源 */
+			handleCurrentChange(val){// 分页组件当前页发生变化触发事件
+			    let the = this;
+			    // the.loading = true;
+			    // the.currentPage = val;
+			    // the.queryList();
+			},
+			handleSizeChange(val){// 分页组件每页数据条数改变触发事件
+			    let the = this;
+			    // the.loading = true;
+			    // the.page.pageSize = val;
+			    // the.queryList();
+			},
+			searchDelTagOptions(codeType){/* 获取删除标志的数据源 */
 				let _this = this;
-				_this.searchForm.delTag.options = data;
+				CommInterface.getCodeType(
+				    codeType,
+					[],
+				    function (res) {
+						let retCode = res.code;
+						let retMsg = res.msg;
+				        if(SystemConstant.common.RET_CODE == retCode){
+							_this.searchForm.delTag.options = res.data;
+				        } else {
+				            util.showMsg("删除标记备选项查询失败", ComponentConstant.MessageProperties.ERROR);
+				        }
+				    }
+				);
 			},
 			searchSpuType(){/* 查询货品类型 */
 				let _this = this;
@@ -207,7 +470,8 @@
 			},
 			add(){/* 新增 */
 				let _this = this;
-				_this.$refs.tableSku.toPage(SystemConstant.consComponentPath.ADD_SKU, SystemConstant.consComponentName.ADD_SKU, {});
+				CommInterface.goToPage(SystemConstant.consComponentPath.ADD_SKU, SystemConstant.consComponentName.ADD_SKU, {});
+				// _this.$refs.tableSku.toPage(SystemConstant.consComponentPath.ADD_SKU, SystemConstant.consComponentName.ADD_SKU, {});
 			},
 			update(){/* 维护 */
 				let _this = this;
@@ -230,10 +494,33 @@
 			let _this = this;
 			_this.searchSpuType();
 			_this.searchSpuBrand();
+			_this.searchDelTagOptions(businessConstant.CODE_TYPE.YES_OR_NO);
 		}
 	}
 </script>
 
 <style scoped="scoped">
-
+	.skuPrice {
+		float: left;
+	}
+	.skuNumber {
+		float: right;
+	}
+	.priceIcon {
+		color: #F40;
+	}
+	.price {
+		color: #F40;
+		font-weight:700;
+	}
+	/* .a1{width:100px; height:100px; margin:200px auto;}
+	.abc1{width:100px; height:100px;background:#f00;position:relative; transition:.5s}
+	.abc1:hover{width:120px;background:#f00; height:120px;margin:-10px 0 0 -10px} */
+	.sku {
+		position:relative; 
+		transition:.5s
+	}
+	.sku:hover {
+		margin:-10px 0 0 -10px;
+	}
 </style>

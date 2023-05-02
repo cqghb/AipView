@@ -10,7 +10,9 @@ export const msgCommon = {
 	FAIL_UPDATE: "修改失败",//修改失败
 	SUCCESS_DELETE: "删除成功",// 删除成功
 	FAIL_DELETE: "删除失败",//删除失败
-    URL_NOT_NULL: "请求地址不能为空"
+    URL_NOT_NULL: "请求地址不能为空",
+	SUCCESS_UPLOAD: "文件上传成功",// 文件上传成功
+	FAIL_UPLOAD: "文件上传失败",//文件上传失败
 };
 /**
  * 用户管理模块消息配置
