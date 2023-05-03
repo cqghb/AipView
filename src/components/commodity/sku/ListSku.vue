@@ -45,7 +45,15 @@
 								<span>{{ item.no }}</span>
 							</div>
 							<div>
-								<span>{{ item.name }}</span>
+								<span v-if="item.name.length<8">{{ item.name }}</span>
+								<el-popover
+									v-else
+								    placement="top-start"
+								    width="200"
+								    trigger="hover"
+								    :content="item.name">
+									<span slot="reference">{{ item.name | filterTextFormat }}</span>
+								</el-popover>
 							</div>
 							<div>
 								<div class="skuPrice">

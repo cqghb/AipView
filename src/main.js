@@ -57,6 +57,18 @@ Vue.filter('dataFormatFilter', function (value, type, name, format){
 	}
 	return tableDataFormatStrateg.tableDataFormat.prototype.format(row, item);
 });
+/**
+ * 将字符串长度超过8的格式化为前8个字符加上......
+ * 例如: "1234567890123" => 12345678......
+ * @param {Object} value 要格式化的字符串
+ */
+Vue.filter('filterTextFormat', function (value){
+	let formatValue = value;
+	if(value.length>8){
+		formatValue = value.substr(0,7) + "......";
+	}
+	return formatValue;
+});
 
 
 
